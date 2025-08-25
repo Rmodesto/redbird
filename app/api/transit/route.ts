@@ -44,6 +44,9 @@ export async function POST(req: Request) {
       new Uint8Array(buffer)
     );
 
+    // Log the entire feed structure
+    console.log("Raw GTFS Feed:", JSON.stringify(feed, null, 2));
+
     console.log("5. Transforming feed data to JSON");
     const updates: TransitUpdate[] = feed.entity
       .filter(
