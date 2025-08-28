@@ -60,27 +60,15 @@
       {
         "stopId": "624N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       },
       {
         "stopId": "624S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "4",
-      "5",
-      "6"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -155,8 +143,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       },
       {
@@ -164,15 +151,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
-      "E"
+      "C"
     ],
     "amenities": []
   },
@@ -221,27 +206,15 @@
       {
         "stopId": "623N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       },
       {
         "stopId": "623S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "4",
-      "5",
-      "6"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -319,8 +292,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       },
       {
@@ -328,15 +300,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
-      "E"
+      "C"
     ],
     "amenities": []
   },
@@ -419,27 +389,15 @@
       {
         "stopId": "622N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       },
       {
         "stopId": "622S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "4",
-      "5",
-      "6"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -580,27 +538,15 @@
       {
         "stopId": "225N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       },
       {
         "stopId": "225S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "1",
-      "2",
-      "3"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -614,27 +560,15 @@
       {
         "stopId": "621N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       },
       {
         "stopId": "621S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "4",
-      "5",
-      "6"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -682,27 +616,15 @@
       {
         "stopId": "224N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       },
       {
         "stopId": "224S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "1",
-      "2",
-      "3"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -718,7 +640,6 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
           "E"
         ]
       },
@@ -727,14 +648,12 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
           "E"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
       "E"
     ],
     "amenities": []
@@ -784,27 +703,15 @@
       {
         "stopId": "416N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       },
       {
         "stopId": "416S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "4",
-      "5",
-      "6"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -1053,27 +960,15 @@
       {
         "stopId": "302N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       },
       {
         "stopId": "302S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "1",
-      "2",
-      "3"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -1089,7 +984,6 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
           "E"
         ]
       },
@@ -1098,14 +992,12 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
           "E"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
       "E"
     ],
     "amenities": []
@@ -1122,8 +1014,6 @@
         "stopId": "D13N",
         "direction": "Uptown/Queens",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
@@ -1132,16 +1022,12 @@
         "stopId": "D13S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
       }
     ],
     "lines": [
-      "B",
-      "D",
       "F",
       "M"
     ],
@@ -1158,27 +1044,15 @@
       {
         "stopId": "222N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       },
       {
         "stopId": "222S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "1",
-      "2",
-      "3"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -1192,27 +1066,15 @@
       {
         "stopId": "415N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       },
       {
         "stopId": "415S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "4",
-      "5",
-      "6"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -1265,7 +1127,6 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
           "E"
         ]
       },
@@ -1274,14 +1135,12 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
           "E"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
       "E"
     ],
     "amenities": []
@@ -1298,8 +1157,6 @@
         "stopId": "D12N",
         "direction": "Uptown/Queens",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
@@ -1308,16 +1165,12 @@
         "stopId": "D12S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
       }
     ],
     "lines": [
-      "B",
-      "D",
       "F",
       "M"
     ],
@@ -1334,27 +1187,15 @@
       {
         "stopId": "113N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       },
       {
         "stopId": "113S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "1",
-      "2",
-      "3"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -1368,27 +1209,15 @@
       {
         "stopId": "414N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       },
       {
         "stopId": "414S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "4",
-      "5",
-      "6"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -1403,8 +1232,6 @@
         "stopId": "D11N",
         "direction": "Uptown/Queens",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
@@ -1413,16 +1240,12 @@
         "stopId": "D11S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
       }
     ],
     "lines": [
-      "B",
-      "D",
       "F",
       "M"
     ],
@@ -1441,7 +1264,6 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
           "E"
         ]
       },
@@ -1450,14 +1272,12 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
           "E"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
       "E"
     ],
     "amenities": []
@@ -1473,27 +1293,15 @@
       {
         "stopId": "413N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       },
       {
         "stopId": "413S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "4",
-      "5",
-      "6"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -1508,8 +1316,6 @@
         "stopId": "D10N",
         "direction": "Uptown/Queens",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
@@ -1518,16 +1324,12 @@
         "stopId": "D10S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
       }
     ],
     "lines": [
-      "B",
-      "D",
       "F",
       "M"
     ],
@@ -1546,7 +1348,6 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
           "E"
         ]
       },
@@ -1555,14 +1356,12 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
           "E"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
       "E"
     ],
     "amenities": []
@@ -1578,27 +1377,15 @@
       {
         "stopId": "112N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       },
       {
         "stopId": "112S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "1",
-      "2",
-      "3"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -1613,8 +1400,6 @@
         "stopId": "F02N",
         "direction": "Uptown/Queens",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
@@ -1623,16 +1408,12 @@
         "stopId": "F02S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
       }
     ],
     "lines": [
-      "B",
-      "D",
       "F",
       "M"
     ],
@@ -1649,27 +1430,15 @@
       {
         "stopId": "412N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       },
       {
         "stopId": "412S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "4",
-      "5",
-      "6"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -1684,8 +1453,6 @@
         "stopId": "D09N",
         "direction": "Uptown/Queens",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
@@ -1694,16 +1461,12 @@
         "stopId": "D09S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
       }
     ],
     "lines": [
-      "B",
-      "D",
       "F",
       "M"
     ],
@@ -1722,8 +1485,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       },
       {
@@ -1731,15 +1493,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       }
     ],
     "lines": [
       "1",
-      "2",
-      "3"
+      "2"
     ],
     "amenities": []
   },
@@ -1755,8 +1515,6 @@
         "stopId": "D08N",
         "direction": "Uptown/Queens",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
@@ -1765,16 +1523,12 @@
         "stopId": "D08S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
       }
     ],
     "lines": [
-      "B",
-      "D",
       "F",
       "M"
     ],
@@ -1793,7 +1547,6 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
           "E"
         ]
       },
@@ -1802,14 +1555,12 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
           "E"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
       "E"
     ],
     "amenities": []
@@ -1825,27 +1576,15 @@
       {
         "stopId": "410N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       },
       {
         "stopId": "410S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "4",
-      "5",
-      "6"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -1998,27 +1737,15 @@
       {
         "stopId": "111N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       },
       {
         "stopId": "111S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "1",
-      "2",
-      "3"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -2034,7 +1761,6 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
           "E"
         ]
       },
@@ -2043,14 +1769,12 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
           "E"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
       "E"
     ],
     "amenities": []
@@ -2067,8 +1791,6 @@
         "stopId": "D06N",
         "direction": "Uptown/Queens",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
@@ -2077,16 +1799,12 @@
         "stopId": "D06S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
       }
     ],
     "lines": [
-      "B",
-      "D",
       "F",
       "M"
     ],
@@ -2103,27 +1821,15 @@
       {
         "stopId": "408N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       },
       {
         "stopId": "408S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "4",
-      "5",
-      "6"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -2139,7 +1845,6 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
           "E"
         ]
       },
@@ -2148,14 +1853,12 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
           "E"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
       "E"
     ],
     "amenities": []
@@ -2171,27 +1874,15 @@
       {
         "stopId": "110N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       },
       {
         "stopId": "110S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "1",
-      "2",
-      "3"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -2316,27 +2007,15 @@
       {
         "stopId": "108N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       },
       {
         "stopId": "108S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "1",
-      "2",
-      "3"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -2373,8 +2052,6 @@
         "stopId": "B04N",
         "direction": "Uptown/Queens",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
@@ -2383,16 +2060,12 @@
         "stopId": "B04S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
       }
     ],
     "lines": [
-      "B",
-      "D",
       "F",
       "M"
     ],
@@ -2409,27 +2082,15 @@
       {
         "stopId": "107N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       },
       {
         "stopId": "107S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "1",
-      "2",
-      "3"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -2445,8 +2106,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       },
       {
@@ -2454,15 +2114,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       }
     ],
     "lines": [
       "1",
-      "2",
-      "3"
+      "2"
     ],
     "amenities": []
   },
@@ -2479,8 +2137,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       },
       {
@@ -2488,15 +2145,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       }
     ],
     "lines": [
       "1",
-      "2",
-      "3"
+      "2"
     ],
     "amenities": []
   },
@@ -2672,27 +2327,15 @@
       {
         "stopId": "104N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       },
       {
         "stopId": "104S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "1",
-      "2",
-      "3"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -2708,8 +2351,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       },
       {
@@ -2717,15 +2359,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       }
     ],
     "lines": [
       "1",
-      "2",
-      "3"
+      "2"
     ],
     "amenities": []
   },
@@ -2740,27 +2380,15 @@
       {
         "stopId": "103N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       },
       {
         "stopId": "103S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "1",
-      "2",
-      "3"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -2963,27 +2591,15 @@
       {
         "stopId": "619N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       },
       {
         "stopId": "619S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "4",
-      "5",
-      "6"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -2997,27 +2613,15 @@
       {
         "stopId": "221N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       },
       {
         "stopId": "221S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "1",
-      "2",
-      "3"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -3033,7 +2637,6 @@
         "direction": "Uptown/Queens",
         "lines": [
           "N",
-          "Q",
           "R",
           "W"
         ]
@@ -3043,7 +2646,6 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "N",
-          "Q",
           "R",
           "W"
         ]
@@ -3051,7 +2653,6 @@
     ],
     "lines": [
       "N",
-      "Q",
       "R",
       "W"
     ],
@@ -3198,21 +2799,15 @@
       {
         "stopId": "726N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "7"
-        ]
+        "lines": []
       },
       {
         "stopId": "726S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "7"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "7"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -3296,7 +2891,6 @@
         "direction": "Uptown/Queens",
         "lines": [
           "N",
-          "Q",
           "R",
           "W"
         ]
@@ -3306,7 +2900,6 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "N",
-          "Q",
           "R",
           "W"
         ]
@@ -3314,7 +2907,6 @@
     ],
     "lines": [
       "N",
-      "Q",
       "R",
       "W"
     ],
@@ -3392,7 +2984,6 @@
         "direction": "Uptown/Queens",
         "lines": [
           "N",
-          "Q",
           "R",
           "W"
         ]
@@ -3402,7 +2993,6 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "N",
-          "Q",
           "R",
           "W"
         ]
@@ -3410,7 +3000,6 @@
     ],
     "lines": [
       "N",
-      "Q",
       "R",
       "W"
     ],
@@ -4818,8 +4407,6 @@
         "stopId": "F07N",
         "direction": "Uptown/Queens",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
@@ -4828,16 +4415,12 @@
         "stopId": "F07S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
       }
     ],
     "lines": [
-      "B",
-      "D",
       "F",
       "M"
     ],
@@ -5116,8 +4699,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       },
       {
@@ -5125,15 +4707,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
-      "E"
+      "C"
     ],
     "amenities": []
   },
@@ -5447,8 +5027,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       },
       {
@@ -5456,15 +5035,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
-      "E"
+      "C"
     ],
     "amenities": []
   },
@@ -5645,7 +5222,6 @@
         "direction": "Uptown/Queens",
         "lines": [
           "N",
-          "Q",
           "R",
           "W"
         ]
@@ -5655,7 +5231,6 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "N",
-          "Q",
           "R",
           "W"
         ]
@@ -5663,7 +5238,6 @@
     ],
     "lines": [
       "N",
-      "Q",
       "R",
       "W"
     ],
@@ -5716,8 +5290,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       },
       {
@@ -5725,15 +5298,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       }
     ],
     "lines": [
       "1",
-      "2",
-      "3"
+      "2"
     ],
     "amenities": []
   },
@@ -5866,7 +5437,6 @@
         "direction": "Uptown/Queens",
         "lines": [
           "N",
-          "Q",
           "R",
           "W"
         ]
@@ -5876,7 +5446,6 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "N",
-          "Q",
           "R",
           "W"
         ]
@@ -5884,7 +5453,6 @@
     ],
     "lines": [
       "N",
-      "Q",
       "R",
       "W"
     ],
@@ -5903,7 +5471,6 @@
         "direction": "Uptown/Queens",
         "lines": [
           "N",
-          "Q",
           "R",
           "W"
         ]
@@ -5913,7 +5480,6 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "N",
-          "Q",
           "R",
           "W"
         ]
@@ -5921,7 +5487,6 @@
     ],
     "lines": [
       "N",
-      "Q",
       "R",
       "W"
     ],
@@ -5961,7 +5526,6 @@
         "stopId": "235N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -5970,14 +5534,12 @@
         "stopId": "235S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
@@ -6915,28 +6477,19 @@
         "stopId": "D03N",
         "direction": "Uptown/Queens",
         "lines": [
-          "B",
-          "D",
-          "F",
-          "M"
+          "D"
         ]
       },
       {
         "stopId": "D03S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "B",
-          "D",
-          "F",
-          "M"
+          "D"
         ]
       }
     ],
     "lines": [
-      "B",
-      "D",
-      "F",
-      "M"
+      "D"
     ],
     "amenities": []
   },
@@ -7008,7 +6561,6 @@
         "stopId": "236N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -7017,14 +6569,12 @@
         "stopId": "236S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
@@ -7116,7 +6666,6 @@
         "stopId": "245N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -7125,14 +6674,12 @@
         "stopId": "245S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
@@ -7184,7 +6731,6 @@
         "stopId": "232N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -7193,14 +6739,12 @@
         "stopId": "232S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
@@ -7219,8 +6763,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "4",
-          "5",
-          "6"
+          "5"
         ]
       },
       {
@@ -7228,15 +6771,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "4",
-          "5",
-          "6"
+          "5"
         ]
       }
     ],
     "lines": [
       "4",
-      "5",
-      "6"
+      "5"
     ],
     "amenities": []
   },
@@ -7342,8 +6883,6 @@
         "stopId": "F05N",
         "direction": "Uptown/Queens",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
@@ -7352,16 +6891,12 @@
         "stopId": "F05S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
       }
     ],
     "lines": [
-      "B",
-      "D",
       "F",
       "M"
     ],
@@ -7517,7 +7052,6 @@
         "direction": "Uptown/Queens",
         "lines": [
           "N",
-          "Q",
           "R",
           "W"
         ]
@@ -7527,7 +7061,6 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "N",
-          "Q",
           "R",
           "W"
         ]
@@ -7535,7 +7068,6 @@
     ],
     "lines": [
       "N",
-      "Q",
       "R",
       "W"
     ],
@@ -7554,8 +7086,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       },
       {
@@ -7563,15 +7094,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
-      "E"
+      "C"
     ],
     "amenities": []
   },
@@ -7681,8 +7210,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       },
       {
@@ -7690,15 +7218,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       }
     ],
     "lines": [
       "1",
-      "2",
-      "3"
+      "2"
     ],
     "amenities": []
   },
@@ -7713,27 +7239,15 @@
       {
         "stopId": "618N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       },
       {
         "stopId": "618S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "4",
-      "5",
-      "6"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -7817,8 +7331,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       },
       {
@@ -7826,15 +7339,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       }
     ],
     "lines": [
       "1",
-      "2",
-      "3"
+      "2"
     ],
     "amenities": []
   },
@@ -7849,27 +7360,15 @@
       {
         "stopId": "409N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       },
       {
         "stopId": "409S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "4",
-      "5",
-      "6"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -8460,7 +7959,6 @@
         "stopId": "244N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -8469,14 +7967,12 @@
         "stopId": "244S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
@@ -8605,7 +8101,6 @@
         "stopId": "231N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -8614,14 +8109,12 @@
         "stopId": "231S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
@@ -8718,8 +8211,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       },
       {
@@ -8727,15 +8219,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
-      "E"
+      "C"
     ],
     "amenities": []
   },
@@ -8934,8 +8424,6 @@
         "stopId": "F09N",
         "direction": "Uptown/Queens",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
@@ -8944,16 +8432,12 @@
         "stopId": "F09S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
       }
     ],
     "lines": [
-      "B",
-      "D",
       "F",
       "M"
     ],
@@ -9042,7 +8526,6 @@
         "stopId": "250N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -9051,14 +8534,12 @@
         "stopId": "250S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
@@ -9075,27 +8556,15 @@
       {
         "stopId": "617N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       },
       {
         "stopId": "617S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "4",
-      "5",
-      "6"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -9332,27 +8801,15 @@
       {
         "stopId": "109N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       },
       {
         "stopId": "109S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "1",
-      "2",
-      "3"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -9368,7 +8825,6 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
           "E"
         ]
       },
@@ -9377,14 +8833,12 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
           "E"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
       "E"
     ],
     "amenities": []
@@ -9400,27 +8854,15 @@
       {
         "stopId": "616N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       },
       {
         "stopId": "616S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "4",
-      "5",
-      "6"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -9434,27 +8876,15 @@
       {
         "stopId": "615N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       },
       {
         "stopId": "615S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "4",
-      "5",
-      "6"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -9470,8 +8900,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       },
       {
@@ -9479,15 +8908,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       }
     ],
     "lines": [
       "1",
-      "2",
-      "3"
+      "2"
     ],
     "amenities": []
   },
@@ -9596,7 +9023,6 @@
         "stopId": "238N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -9605,14 +9031,12 @@
         "stopId": "238S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
@@ -9709,8 +9133,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       },
       {
@@ -9718,15 +9141,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
-      "E"
+      "C"
     ],
     "amenities": []
   },
@@ -9764,7 +9185,6 @@
         "stopId": "247N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -9773,14 +9193,12 @@
         "stopId": "247S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
@@ -9881,27 +9299,15 @@
       {
         "stopId": "407N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       },
       {
         "stopId": "407S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "4",
-      "5",
-      "6"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -9916,28 +9322,19 @@
         "stopId": "D05N",
         "direction": "Uptown/Queens",
         "lines": [
-          "B",
-          "D",
-          "F",
-          "M"
+          "D"
         ]
       },
       {
         "stopId": "D05S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "B",
-          "D",
-          "F",
-          "M"
+          "D"
         ]
       }
     ],
     "lines": [
-      "B",
-      "D",
-      "F",
-      "M"
+      "D"
     ],
     "amenities": []
   },
@@ -10121,8 +9518,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       },
       {
@@ -10130,15 +9526,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
-      "E"
+      "C"
     ],
     "amenities": []
   },
@@ -10176,7 +9570,6 @@
         "stopId": "239N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -10185,14 +9578,12 @@
         "stopId": "239S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
@@ -10239,8 +9630,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       },
       {
@@ -10248,15 +9638,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       }
     ],
     "lines": [
       "1",
-      "2",
-      "3"
+      "2"
     ],
     "amenities": []
   },
@@ -10520,7 +9908,6 @@
         "stopId": "237N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -10529,14 +9916,12 @@
         "stopId": "237S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
@@ -10723,8 +10108,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       },
       {
@@ -10732,15 +10116,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
-      "E"
+      "C"
     ],
     "amenities": []
   },
@@ -10845,8 +10227,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       },
       {
@@ -10854,15 +10235,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       }
     ],
     "lines": [
       "1",
-      "2",
-      "3"
+      "2"
     ],
     "amenities": []
   },
@@ -10967,27 +10346,15 @@
       {
         "stopId": "301N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       },
       {
         "stopId": "301S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "1",
-      "2",
-      "3"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -11037,8 +10404,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       },
       {
@@ -11046,15 +10412,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
-      "E"
+      "C"
     ],
     "amenities": []
   },
@@ -11120,7 +10484,6 @@
         "stopId": "233N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -11129,14 +10492,12 @@
         "stopId": "233S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
@@ -11155,8 +10516,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       },
       {
@@ -11164,15 +10524,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
-      "E"
+      "C"
     ],
     "amenities": []
   },
@@ -11273,8 +10631,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       },
       {
@@ -11282,15 +10639,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       }
     ],
     "lines": [
       "1",
-      "2",
-      "3"
+      "2"
     ],
     "amenities": []
   },
@@ -11307,7 +10662,6 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
           "E"
         ]
       },
@@ -11316,14 +10670,12 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
           "E"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
       "E"
     ],
     "amenities": []
@@ -11339,27 +10691,15 @@
       {
         "stopId": "220N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       },
       {
         "stopId": "220S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "1",
-      "2",
-      "3"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -11418,8 +10758,6 @@
         "stopId": "F01N",
         "direction": "Uptown/Queens",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
@@ -11428,16 +10766,12 @@
         "stopId": "F01S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
       }
     ],
     "lines": [
-      "B",
-      "D",
       "F",
       "M"
     ],
@@ -11478,8 +10812,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       },
       {
@@ -11487,15 +10820,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
-      "E"
+      "C"
     ],
     "amenities": []
   },
@@ -11620,7 +10951,6 @@
         "stopId": "254N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -11629,14 +10959,12 @@
         "stopId": "254S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
@@ -11654,8 +10982,6 @@
         "stopId": "F06N",
         "direction": "Uptown/Queens",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
@@ -11664,16 +10990,12 @@
         "stopId": "F06S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
       }
     ],
     "lines": [
-      "B",
-      "D",
       "F",
       "M"
     ],
@@ -11836,28 +11158,19 @@
         "stopId": "D04N",
         "direction": "Uptown/Queens",
         "lines": [
-          "B",
-          "D",
-          "F",
-          "M"
+          "D"
         ]
       },
       {
         "stopId": "D04S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "B",
-          "D",
-          "F",
-          "M"
+          "D"
         ]
       }
     ],
     "lines": [
-      "B",
-      "D",
-      "F",
-      "M"
+      "D"
     ],
     "amenities": []
   },
@@ -11873,7 +11186,6 @@
         "stopId": "249N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -11882,14 +11194,12 @@
         "stopId": "249S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
@@ -11908,8 +11218,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       },
       {
@@ -11917,15 +11226,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
-      "E"
+      "C"
     ],
     "amenities": []
   },
@@ -12010,8 +11317,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       },
       {
@@ -12019,15 +11325,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
-      "E"
+      "C"
     ],
     "amenities": []
   },
@@ -12155,8 +11459,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       },
       {
@@ -12164,15 +11467,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
-      "E"
+      "C"
     ],
     "amenities": []
   },
@@ -12299,27 +11600,15 @@
       {
         "stopId": "106N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       },
       {
         "stopId": "106S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "1",
-      "2",
-      "3"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -12631,27 +11920,15 @@
       {
         "stopId": "411N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       },
       {
         "stopId": "411S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "4",
-          "5",
-          "6"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "4",
-      "5",
-      "6"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -12875,8 +12152,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       },
       {
@@ -12884,15 +12160,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       }
     ],
     "lines": [
       "1",
-      "2",
-      "3"
+      "2"
     ],
     "amenities": []
   },
@@ -12908,7 +12182,6 @@
         "stopId": "234N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -12917,14 +12190,12 @@
         "stopId": "234S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
@@ -12964,7 +12235,6 @@
         "stopId": "257N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -12973,14 +12243,12 @@
         "stopId": "257S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
@@ -13057,7 +12325,6 @@
         "stopId": "246N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -13066,14 +12333,12 @@
         "stopId": "246S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
@@ -13184,28 +12449,19 @@
         "stopId": "D01N",
         "direction": "Uptown/Queens",
         "lines": [
-          "B",
-          "D",
-          "F",
-          "M"
+          "D"
         ]
       },
       {
         "stopId": "D01S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "B",
-          "D",
-          "F",
-          "M"
+          "D"
         ]
       }
     ],
     "lines": [
-      "B",
-      "D",
-      "F",
-      "M"
+      "D"
     ],
     "amenities": []
   },
@@ -13221,7 +12477,6 @@
         "stopId": "248N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -13230,14 +12485,12 @@
         "stopId": "248S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
@@ -13256,8 +12509,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       },
       {
@@ -13265,15 +12517,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
-      "E"
+      "C"
     ],
     "amenities": []
   },
@@ -13371,8 +12621,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       },
       {
@@ -13380,15 +12629,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
-      "E"
+      "C"
     ],
     "amenities": []
   },
@@ -13531,8 +12778,6 @@
         "stopId": "F03N",
         "direction": "Uptown/Queens",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
@@ -13541,16 +12786,12 @@
         "stopId": "F03S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
       }
     ],
     "lines": [
-      "B",
-      "D",
       "F",
       "M"
     ],
@@ -13603,8 +12844,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       },
       {
@@ -13612,15 +12852,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       }
     ],
     "lines": [
       "1",
-      "2",
-      "3"
+      "2"
     ],
     "amenities": []
   },
@@ -13670,7 +12908,6 @@
         "stopId": "255N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -13679,14 +12916,12 @@
         "stopId": "255S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
@@ -13726,7 +12961,6 @@
         "stopId": "241N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -13735,14 +12969,12 @@
         "stopId": "241S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
@@ -13818,27 +13050,15 @@
       {
         "stopId": "219N",
         "direction": "Uptown/Queens",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       },
       {
         "stopId": "219S",
         "direction": "Downtown/Brooklyn",
-        "lines": [
-          "1",
-          "2",
-          "3"
-        ]
+        "lines": []
       }
     ],
-    "lines": [
-      "1",
-      "2",
-      "3"
-    ],
+    "lines": [],
     "amenities": []
   },
   {
@@ -13978,7 +13198,6 @@
         "direction": "Uptown/Queens",
         "lines": [
           "N",
-          "Q",
           "R",
           "W"
         ]
@@ -13988,7 +13207,6 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "N",
-          "Q",
           "R",
           "W"
         ]
@@ -13996,7 +13214,6 @@
     ],
     "lines": [
       "N",
-      "Q",
       "R",
       "W"
     ],
@@ -14015,8 +13232,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       },
       {
@@ -14024,15 +13240,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
-      "E"
+      "C"
     ],
     "amenities": []
   },
@@ -14141,7 +13355,6 @@
         "stopId": "253N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -14150,14 +13363,12 @@
         "stopId": "253S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
@@ -14176,8 +13387,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       },
       {
@@ -14185,15 +13395,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
-      "E"
+      "C"
     ],
     "amenities": []
   },
@@ -14210,8 +13418,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       },
       {
@@ -14219,15 +13426,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
-      "E"
+      "C"
     ],
     "amenities": []
   },
@@ -14339,7 +13544,6 @@
         "stopId": "252N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -14348,14 +13552,12 @@
         "stopId": "252S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
@@ -14445,8 +13647,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       },
       {
@@ -14454,15 +13655,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
-      "E"
+      "C"
     ],
     "amenities": []
   },
@@ -14479,8 +13678,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       },
       {
@@ -14488,15 +13686,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       }
     ],
     "lines": [
       "1",
-      "2",
-      "3"
+      "2"
     ],
     "amenities": []
   },
@@ -14782,7 +13978,6 @@
         "stopId": "242N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -14791,14 +13986,12 @@
         "stopId": "242S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
@@ -14816,8 +14009,6 @@
         "stopId": "F04N",
         "direction": "Uptown/Queens",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
@@ -14826,16 +14017,12 @@
         "stopId": "F04S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
       }
     ],
     "lines": [
-      "B",
-      "D",
       "F",
       "M"
     ],
@@ -14897,7 +14084,6 @@
         "stopId": "251N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -14906,14 +14092,12 @@
         "stopId": "251S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
@@ -15114,8 +14298,6 @@
         "stopId": "D07N",
         "direction": "Uptown/Queens",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
@@ -15124,16 +14306,12 @@
         "stopId": "D07S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "B",
-          "D",
           "F",
           "M"
         ]
       }
     ],
     "lines": [
-      "B",
-      "D",
       "F",
       "M"
     ],
@@ -15189,8 +14367,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       },
       {
@@ -15198,15 +14375,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
-      "E"
+      "C"
     ],
     "amenities": []
   },
@@ -15223,8 +14398,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       },
       {
@@ -15232,15 +14406,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       }
     ],
     "lines": [
       "1",
-      "2",
-      "3"
+      "2"
     ],
     "amenities": []
   },
@@ -15256,7 +14428,6 @@
         "stopId": "256N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -15265,14 +14436,12 @@
         "stopId": "256S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
@@ -15291,8 +14460,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       },
       {
@@ -15300,15 +14468,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "A",
-          "C",
-          "E"
+          "C"
         ]
       }
     ],
     "lines": [
       "A",
-      "C",
-      "E"
+      "C"
     ],
     "amenities": []
   },
@@ -15507,8 +14673,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       },
       {
@@ -15516,15 +14681,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       }
     ],
     "lines": [
       "1",
-      "2",
-      "3"
+      "2"
     ],
     "amenities": []
   },
@@ -15609,8 +14772,7 @@
         "direction": "Uptown/Queens",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       },
       {
@@ -15618,15 +14780,13 @@
         "direction": "Downtown/Brooklyn",
         "lines": [
           "1",
-          "2",
-          "3"
+          "2"
         ]
       }
     ],
     "lines": [
       "1",
-      "2",
-      "3"
+      "2"
     ],
     "amenities": []
   },
@@ -15769,7 +14929,6 @@
         "stopId": "243N",
         "direction": "Uptown/Queens",
         "lines": [
-          "1",
           "2",
           "3"
         ]
@@ -15778,14 +14937,12 @@
         "stopId": "243S",
         "direction": "Downtown/Brooklyn",
         "lines": [
-          "1",
           "2",
           "3"
         ]
       }
     ],
     "lines": [
-      "1",
       "2",
       "3"
     ],
