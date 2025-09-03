@@ -60,7 +60,7 @@ function determineRelevantFeeds(lines: string[]): string[] {
     else if (['7'].includes(line)) feeds.push('7');
   }
   
-  return [...new Set(feeds)]; // Remove duplicates
+  return Array.from(new Set(feeds)); // Remove duplicates
 }
 
 function getDestinationFromTrip(tripId: string, routeId: string, direction: string): string {
