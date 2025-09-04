@@ -2,6 +2,24 @@ import { Metadata } from "next";
 import { generatePageMetadata } from "@/lib/seo";
 import { generateMapSchema, generateBreadcrumbSchema, generateStructuredDataScript } from "@/lib/structured-data";
 import Navigation from "@/components/Navigation";
+import dynamic from 'next/dynamic';
+
+// Dynamically import the map component to avoid SSR issues
+const SubwayMap = dynamic(
+  () => import('@/components/SubwayMap'),
+  { 
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full flex items-center justify-center bg-gray-900">
+        <div className="text-center text-white">
+          <div className="text-4xl mb-4 animate-pulse">🗽</div>
+          <div className="text-xl font-bold mb-2">Loading NYC Subway Map...</div>
+          <div className="text-sm text-gray-400">Initializing real-time data</div>
+        </div>
+      </div>
+    )
+  }
+);
 
 export const metadata: Metadata = generatePageMetadata(
   "NYC Subway Map - Interactive Real-Time Transit Map | Subway Sounds",
@@ -89,16 +107,27 @@ export default function SubwayMapPage() {
         {/* Interactive Map Container */}
         <section className="py-8">
           <div className="max-w-7xl mx-auto px-4">
-            <div className="bg-gray-100 rounded-lg overflow-hidden shadow-lg" style={{ height: '600px' }}>
-              {/* Map will be integrated here */}
-              <div className="w-full h-full flex items-center justify-center bg-gray-200">
-                <div className="text-center">
-                  <svg className="w-16 h-16 mx-auto mb-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-                  </svg>
-                  <h2 className="text-2xl font-bold text-gray-700 mb-2">Interactive Subway Map</h2>
-                  <p className="text-gray-600 mb-4">Real-time NYC subway map with live train tracking</p>
-                  <p className="text-sm text-gray-500">Map integration coming soon</p>
+            <div className="bg-gray-900 rounded-lg overflow-hidden shadow-lg" style={{ height: '600px' }}>
+              <div className="h-full relative">
+                <SubwayMap className="w-full h-full" />
+                
+                {/* Map Overlay Info */}
+                <div className="absolute top-4 left-4 bg-black/80 text-white p-3 rounded-lg text-sm">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                    <span className="font-semibold">Live NYC Subway Map</span>
+                  </div>
+                  <div className="text-xs text-gray-300">
+                    Click stations for details • Drag to explore • Scroll to zoom
+                  </div>
+                </div>
+                
+                {/* Map Controls Info */}
+                <div className="absolute bottom-4 right-4 bg-black/80 text-white p-3 rounded-lg text-xs">
+                  <div className="font-semibold mb-1">Controls</div>
+                  <div>🖱️ Click & drag to pan</div>
+                  <div>🔍 Scroll to zoom</div>
+                  <div>📍 Click stations for info</div>
                 </div>
               </div>
             </div>

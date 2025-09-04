@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MapLibre GL Test</title>
+    <link href='https://unpkg.com/maplibre-gl@5.7.0/dist/maplibre-gl.css' rel='stylesheet' />
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+        #status { position: absolute; top: 10px; left: 10px; z-index: 1; background: white; padding: 10px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div id="status">Loading map...</div>
+    <div id="map"></div>
+    
+    <script src='https://unpkg.com/maplibre-gl@5.7.0/dist/maplibre-gl.js'></script>
+    <script>
+        try {
+            console.log('Creating map...');
+            const map = new maplibregl.Map({
+                container: 'map',
+                style: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
+                center: [-73.9857, 40.7589],
+                zoom: 12
+            });
+            
+            map.on('load', () => {
+                console.log('Map loaded!');
+                document.getElementById('status').innerHTML = '✅ Map loaded successfully!';
+                
+                // Add a marker
+                new maplibregl.Marker({ color: '#FF0000' })
+                    .setLngLat([-73.9873, 40.7550])
+                    .setPopup(new maplibregl.Popup().setHTML('<h3>Times Square</h3>'))
+                    .addTo(map);
+            });
+            
+            map.on('error', (e) => {
+                console.error('Map error:', e);
+                document.getElementById('status').innerHTML = '❌ Map error: ' + e.message;
+            });
+            
+            // Add navigation control
+            map.addControl(new maplibregl.NavigationControl());
+            
+        } catch (error) {
+            console.error('Failed to create map:', error);
+            document.getElementById('status').innerHTML = '❌ Failed to create map: ' + error.message;
+        }
+    </script>
+</body>
+</html>

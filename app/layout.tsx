@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import Script from "next/script";
 import "./globals.css";
@@ -32,6 +32,13 @@ export const metadata: Metadata = generateSEOMetadata({
     "train service alerts NYC",
   ],
 });
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+};
 
 const websiteSchema = generateWebsiteSchema();
 

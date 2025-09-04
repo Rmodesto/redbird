@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* MapLibre GL CSS - Required for map controls */
+@import 'maplibre-gl/dist/maplibre-gl.css';
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

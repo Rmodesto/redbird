@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaflet Map Test</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body { margin: 0; padding: 20px; font-family: Arial, sans-serif; }
+        #map { height: 400px; border: 2px solid #333; }
+        #status { margin-bottom: 20px; padding: 10px; background: #f0f0f0; }
+    </style>
+</head>
+<body>
+    <div id="status">Loading Leaflet map...</div>
+    <div id="map"></div>
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        try {
+            document.getElementById('status').innerHTML = '✅ Leaflet loaded. Creating map...';
+            
+            // Create map centered on NYC
+            const map = L.map('map').setView([40.7589, -73.9857], 12);
+            
+            // Add OpenStreetMap tiles
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+            
+            // Add some NYC subway stations
+            const stations = [
+                {name: 'Times Square', lat: 40.7550, lng: -73.9873},
+                {name: 'Grand Central', lat: 40.7527, lng: -73.9772},
+                {name: 'Union Square', lat: 40.7359, lng: -73.9897},
+                {name: 'Penn Station', lat: 40.7506, lng: -73.9934}
+            ];
+            
+            stations.forEach(station => {
+                L.marker([station.lat, station.lng])
+                    .addTo(map)
+                    .bindPopup(`<b>${station.name}</b><br>NYC Subway Station`);
+            });
+            
+            document.getElementById('status').innerHTML = '✅ Map loaded successfully with subway stations!';
+            
+        } catch (error) {
+            document.getElementById('status').innerHTML = '❌ Error: ' + error.message;
+            console.error('Map error:', error);
+        }
+    </script>
+</body>
+</html>

@@ -91,12 +91,7 @@ export function generateSEOMetadata(config: SEOConfig): Metadata {
       creator: '@subwaysoundsnyc',
       site: '@subwaysoundsnyc',
     },
-    viewport: {
-      width: 'device-width',
-      initialScale: 1,
-      maximumScale: 5,
-      userScalable: true,
-    },
+// viewport removed - should be exported separately in layout.tsx
     manifest: '/manifest.json',
     icons: {
       icon: [

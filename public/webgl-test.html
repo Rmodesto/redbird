@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebGL Test</title>
+</head>
+<body>
+    <h1>WebGL Support Test</h1>
+    <canvas id="glcanvas" width="200" height="200" style="border: 1px solid black;"></canvas>
+    <div id="result"></div>
+    
+    <script>
+        function testWebGL() {
+            const canvas = document.getElementById('glcanvas');
+            const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+            
+            if (gl) {
+                document.getElementById('result').innerHTML = '✅ WebGL is supported! MapLibre should work.';
+                gl.clearColor(0.0, 1.0, 0.0, 1.0);
+                gl.clear(gl.COLOR_BUFFER_BIT);
+            } else {
+                document.getElementById('result').innerHTML = '❌ WebGL is NOT supported. MapLibre will not work.';
+            }
+        }
+        
+        testWebGL();
+    </script>
+</body>
+</html>

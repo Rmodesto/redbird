@@ -94,9 +94,14 @@ const nextConfig = {
     NEXT_PUBLIC_SITE_DESCRIPTION: 'Your comprehensive guide to NYC subway with real-time arrivals, subway sounds, interactive maps, and station information',
   },
   
+  // Static export configuration for AWS deployment
+  output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
+  trailingSlash: true,
+  distDir: 'out',
+  
   // Experimental features for better performance
   experimental: {
-    optimizeCss: true,
+    // optimizeCss: true, // Disabled - causing critters dependency issues
   },
 };
 
