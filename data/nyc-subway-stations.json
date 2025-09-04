@@ -1,0 +1,2895 @@
+{
+  "stations": [
+    {
+      "id": "times-square",
+      "name": "Times Square-42 St",
+      "lines": ["N", "Q", "R", "W", "S", "1", "2", "3", "7"],
+      "coordinates": [-73.987495, 40.755983],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "grand-central",
+      "name": "Grand Central-42 St",
+      "lines": ["4", "5", "6", "7", "S"],
+      "coordinates": [-73.977229, 40.752769],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "union-square",
+      "name": "14 St-Union Sq",
+      "lines": ["4", "5", "6", "L", "N", "Q", "R", "W"],
+      "coordinates": [-73.989951, 40.735736],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "herald-square",
+      "name": "34 St-Herald Sq",
+      "lines": ["B", "D", "F", "M", "N", "Q", "R", "W"],
+      "coordinates": [-73.987823, 40.749719],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "penn-station",
+      "name": "34 St-Penn Station",
+      "lines": ["1", "2", "3", "A", "C", "E"],
+      "coordinates": [-73.993391, 40.750373],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "columbus-circle",
+      "name": "59 St-Columbus Circle",
+      "lines": ["1", "A", "B", "C", "D"],
+      "coordinates": [-73.981929, 40.768247],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "fulton-street",
+      "name": "Fulton St",
+      "lines": ["2", "3", "4", "5", "A", "C", "J", "Z"],
+      "coordinates": [-74.009509, 40.710374],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "canal-street",
+      "name": "Canal St",
+      "lines": ["4", "6", "J", "N", "Q", "R", "W", "Z"],
+      "coordinates": [-74.001775, 40.718803],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "chambers-street",
+      "name": "Chambers St",
+      "lines": ["1", "2", "3", "A", "C", "E"],
+      "coordinates": [-74.009266, 40.715478],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "wall-street",
+      "name": "Wall St",
+      "lines": ["4", "5"],
+      "coordinates": [-74.011862, 40.707557],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "bowling-green",
+      "name": "Bowling Green",
+      "lines": ["4", "5"],
+      "coordinates": [-74.014065, 40.704817],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "south-ferry",
+      "name": "South Ferry",
+      "lines": ["1"],
+      "coordinates": [-74.013205, 40.701411],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "whitehall",
+      "name": "Whitehall St",
+      "lines": ["R", "W"],
+      "coordinates": [-74.013205, 40.703087],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "rector-street",
+      "name": "Rector St",
+      "lines": ["1"],
+      "coordinates": [-74.013205, 40.707513],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "cortlandt",
+      "name": "Cortlandt St",
+      "lines": ["R", "W"],
+      "coordinates": [-74.011516, 40.710700],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "city-hall",
+      "name": "City Hall",
+      "lines": ["R", "W"],
+      "coordinates": [-74.007078, 40.713282],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "brooklyn-bridge",
+      "name": "Brooklyn Bridge-City Hall",
+      "lines": ["4", "5", "6"],
+      "coordinates": [-74.004131, 40.713065],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "park-place",
+      "name": "Park Place",
+      "lines": ["2", "3", "A", "C", "E"],
+      "coordinates": [-74.008811, 40.713051],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "w-4th",
+      "name": "W 4 St-Washington Sq",
+      "lines": ["A", "B", "C", "D", "E", "F", "M"],
+      "coordinates": [-74.000495, 40.732338],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "christopher",
+      "name": "Christopher St-Sheridan Sq",
+      "lines": ["1"],
+      "coordinates": [-74.002906, 40.733422],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "14th-8av",
+      "name": "14 St-8 Av",
+      "lines": ["A", "C", "E", "L"],
+      "coordinates": [-74.001585, 40.740149],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "18th-street",
+      "name": "18 St",
+      "lines": ["1"],
+      "coordinates": [-73.997871, 40.741040],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "23rd-street",
+      "name": "23 St",
+      "lines": ["1", "C", "E", "F", "M", "N", "R", "W"],
+      "coordinates": [-73.995657, 40.742878],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "28th-street",
+      "name": "28 St",
+      "lines": ["1", "N", "R", "W"],
+      "coordinates": [-73.993365, 40.745494],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "42nd-8av",
+      "name": "42 St-Port Authority",
+      "lines": ["A", "C", "E", "N", "Q", "R", "S", "W", "1", "2", "3", "7"],
+      "coordinates": [-73.989735, 40.757308],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "50th-street",
+      "name": "50 St",
+      "lines": ["1", "C", "E"],
+      "coordinates": [-73.986384, 40.761728],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "66th-lincoln",
+      "name": "66 St-Lincoln Center",
+      "lines": ["1"],
+      "coordinates": [-73.982209, 40.773453],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "72nd-street",
+      "name": "72 St",
+      "lines": ["1", "2", "3", "B", "C"],
+      "coordinates": [-73.976218, 40.775594],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "79th-street",
+      "name": "79 St",
+      "lines": ["1"],
+      "coordinates": [-73.979917, 40.783934],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "86th-street",
+      "name": "86 St",
+      "lines": ["1", "4", "5", "6", "B", "C", "Q"],
+      "coordinates": [-73.976218, 40.779492],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "96th-street",
+      "name": "96 St",
+      "lines": ["1", "2", "3", "6", "B", "C", "Q"],
+      "coordinates": [-73.972323, 40.793919],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "103rd-street",
+      "name": "103 St",
+      "lines": ["1", "6", "B", "C"],
+      "coordinates": [-73.968379, 40.799446],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "110th-street",
+      "name": "110 St-Cathedral Pkwy",
+      "lines": ["1", "B", "C"],
+      "coordinates": [-73.966847, 40.803967],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "116th-columbia",
+      "name": "116 St-Columbia University",
+      "lines": ["1"],
+      "coordinates": [-73.963631, 40.807722],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "125th-street",
+      "name": "125 St",
+      "lines": ["1", "2", "3", "4", "5", "6", "A", "B", "C", "D"],
+      "coordinates": [-73.952485, 40.815581],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "137th-city-college",
+      "name": "137 St-City College",
+      "lines": ["1"],
+      "coordinates": [-73.953676, 40.821423],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "145th-street",
+      "name": "145 St",
+      "lines": ["1", "3", "A", "B", "C", "D"],
+      "coordinates": [-73.950495, 40.824783],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "157th-street",
+      "name": "157 St",
+      "lines": ["1"],
+      "coordinates": [-73.945495, 40.830135],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "168th-street",
+      "name": "168 St",
+      "lines": ["1", "A", "C"],
+      "coordinates": [-73.940133, 40.840719],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "181st-street",
+      "name": "181 St",
+      "lines": ["1", "A"],
+      "coordinates": [-73.937969, 40.849505],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "191st-street",
+      "name": "191 St",
+      "lines": ["1"],
+      "coordinates": [-73.929419, 40.855225],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "dyckman-street",
+      "name": "Dyckman St",
+      "lines": ["1", "A"],
+      "coordinates": [-73.927271, 40.860531],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "207th-street",
+      "name": "207 St",
+      "lines": ["1", "A"],
+      "coordinates": [-73.918822, 40.864621],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "215th-street",
+      "name": "215 St",
+      "lines": ["1"],
+      "coordinates": [-73.915279, 40.869444],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "marble-hill",
+      "name": "Marble Hill-225 St",
+      "lines": ["1"],
+      "coordinates": [-73.909831, 40.874561],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "231st-street",
+      "name": "231 St",
+      "lines": ["1"],
+      "coordinates": [-73.905037, 40.878267],
+      "borough": "Bronx"
+    },
+    {
+      "id": "238th-street",
+      "name": "238 St",
+      "lines": ["1"],
+      "coordinates": [-73.900869, 40.882655],
+      "borough": "Bronx"
+    },
+    {
+      "id": "van-cortlandt",
+      "name": "Van Cortlandt Park-242 St",
+      "lines": ["1"],
+      "coordinates": [-73.898583, 40.889248],
+      "borough": "Bronx"
+    },
+    {
+      "id": "wakefield",
+      "name": "Wakefield-241 St",
+      "lines": ["2"],
+      "coordinates": [-73.850625, 40.903125],
+      "borough": "Bronx"
+    },
+    {
+      "id": "nereid",
+      "name": "Nereid Av",
+      "lines": ["2"],
+      "coordinates": [-73.854361, 40.898379],
+      "borough": "Bronx"
+    },
+    {
+      "id": "233rd-street",
+      "name": "233 St",
+      "lines": ["2"],
+      "coordinates": [-73.857352, 40.893193],
+      "borough": "Bronx"
+    },
+    {
+      "id": "225th-street",
+      "name": "225 St",
+      "lines": ["2"],
+      "coordinates": [-73.860161, 40.888022],
+      "borough": "Bronx"
+    },
+    {
+      "id": "219th-street",
+      "name": "219 St",
+      "lines": ["2"],
+      "coordinates": [-73.862633, 40.883895],
+      "borough": "Bronx"
+    },
+    {
+      "id": "gun-hill",
+      "name": "Gun Hill Rd",
+      "lines": ["2", "5"],
+      "coordinates": [-73.866256, 40.877848],
+      "borough": "Bronx"
+    },
+    {
+      "id": "burke",
+      "name": "Burke Av",
+      "lines": ["2"],
+      "coordinates": [-73.867164, 40.871356],
+      "borough": "Bronx"
+    },
+    {
+      "id": "allerton",
+      "name": "Allerton Av",
+      "lines": ["2"],
+      "coordinates": [-73.867352, 40.865462],
+      "borough": "Bronx"
+    },
+    {
+      "id": "pelham-parkway",
+      "name": "Pelham Pkwy",
+      "lines": ["2", "5"],
+      "coordinates": [-73.867615, 40.857192],
+      "borough": "Bronx"
+    },
+    {
+      "id": "bronx-park-east",
+      "name": "Bronx Park East",
+      "lines": ["2"],
+      "coordinates": [-73.868457, 40.848828],
+      "borough": "Bronx"
+    },
+    {
+      "id": "e-180th",
+      "name": "E 180 St",
+      "lines": ["2", "5"],
+      "coordinates": [-73.873488, 40.841894],
+      "borough": "Bronx"
+    },
+    {
+      "id": "west-farms",
+      "name": "West Farms Sq-E Tremont Av",
+      "lines": ["2", "5"],
+      "coordinates": [-73.879775, 40.840295],
+      "borough": "Bronx"
+    },
+    {
+      "id": "174th-street",
+      "name": "174 St",
+      "lines": ["2", "5"],
+      "coordinates": [-73.887734, 40.837288],
+      "borough": "Bronx"
+    },
+    {
+      "id": "freeman",
+      "name": "Freeman St",
+      "lines": ["2", "5"],
+      "coordinates": [-73.891865, 40.829993],
+      "borough": "Bronx"
+    },
+    {
+      "id": "simpson",
+      "name": "Simpson St",
+      "lines": ["2", "5"],
+      "coordinates": [-73.893064, 40.824073],
+      "borough": "Bronx"
+    },
+    {
+      "id": "intervale",
+      "name": "Intervale Av",
+      "lines": ["2", "5"],
+      "coordinates": [-73.896736, 40.822181],
+      "borough": "Bronx"
+    },
+    {
+      "id": "prospect",
+      "name": "Prospect Av",
+      "lines": ["2", "5"],
+      "coordinates": [-73.901879, 40.819585],
+      "borough": "Bronx"
+    },
+    {
+      "id": "jackson",
+      "name": "Jackson Av",
+      "lines": ["2", "5"],
+      "coordinates": [-73.907807, 40.816104],
+      "borough": "Bronx"
+    },
+    {
+      "id": "3rd-149",
+      "name": "3 Av-149 St",
+      "lines": ["2", "5"],
+      "coordinates": [-73.917042, 40.816029],
+      "borough": "Bronx"
+    },
+    {
+      "id": "149-grand-concourse",
+      "name": "149 St-Grand Concourse",
+      "lines": ["2", "4", "5"],
+      "coordinates": [-73.927351, 40.818388],
+      "borough": "Bronx"
+    },
+    {
+      "id": "135th-street",
+      "name": "135 St",
+      "lines": ["2", "3"],
+      "coordinates": [-73.940772, 40.814229],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "harlem-148",
+      "name": "Harlem-148 St",
+      "lines": ["3"],
+      "coordinates": [-73.936245, 40.823884],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "woodlawn",
+      "name": "Woodlawn",
+      "lines": ["4"],
+      "coordinates": [-73.878751, 40.886037],
+      "borough": "Bronx"
+    },
+    {
+      "id": "mosholu",
+      "name": "Mosholu Pkwy",
+      "lines": ["4"],
+      "coordinates": [-73.884655, 40.879696],
+      "borough": "Bronx"
+    },
+    {
+      "id": "bedford-park",
+      "name": "Bedford Park Blvd",
+      "lines": ["B", "D"],
+      "coordinates": [-73.887138, 40.873244],
+      "borough": "Bronx"
+    },
+    {
+      "id": "kingsbridge",
+      "name": "Kingsbridge Rd",
+      "lines": ["4", "D"],
+      "coordinates": [-73.893509, 40.866978],
+      "borough": "Bronx"
+    },
+    {
+      "id": "fordham",
+      "name": "Fordham Rd",
+      "lines": ["4", "B", "D"],
+      "coordinates": [-73.897749, 40.862803],
+      "borough": "Bronx"
+    },
+    {
+      "id": "183rd-street",
+      "name": "183 St",
+      "lines": ["4", "D"],
+      "coordinates": [-73.903879, 40.858407],
+      "borough": "Bronx"
+    },
+    {
+      "id": "burnside",
+      "name": "Burnside Av",
+      "lines": ["4"],
+      "coordinates": [-73.907684, 40.853453],
+      "borough": "Bronx"
+    },
+    {
+      "id": "176th-street",
+      "name": "176 St",
+      "lines": ["4"],
+      "coordinates": [-73.911794, 40.848439],
+      "borough": "Bronx"
+    },
+    {
+      "id": "mt-eden",
+      "name": "Mt Eden Av",
+      "lines": ["4"],
+      "coordinates": [-73.914685, 40.844434],
+      "borough": "Bronx"
+    },
+    {
+      "id": "170th-street",
+      "name": "170 St",
+      "lines": ["4", "B", "D"],
+      "coordinates": [-73.917759, 40.839306],
+      "borough": "Bronx"
+    },
+    {
+      "id": "167th-street",
+      "name": "167 St",
+      "lines": ["4", "B", "D"],
+      "coordinates": [-73.920138, 40.835537],
+      "borough": "Bronx"
+    },
+    {
+      "id": "161st-yankee",
+      "name": "161 St-Yankee Stadium",
+      "lines": ["4", "B", "D"],
+      "coordinates": [-73.925831, 40.827994],
+      "borough": "Bronx"
+    },
+    {
+      "id": "eastchester",
+      "name": "Eastchester-Dyre Av",
+      "lines": ["5"],
+      "coordinates": [-73.830834, 40.885461],
+      "borough": "Bronx"
+    },
+    {
+      "id": "baychester",
+      "name": "Baychester Av",
+      "lines": ["5"],
+      "coordinates": [-73.838591, 40.878663],
+      "borough": "Bronx"
+    },
+    {
+      "id": "morris-park",
+      "name": "Morris Park",
+      "lines": ["5"],
+      "coordinates": [-73.860495, 40.854364],
+      "borough": "Bronx"
+    },
+    {
+      "id": "pelham-bay",
+      "name": "Pelham Bay Park",
+      "lines": ["6"],
+      "coordinates": [-73.828121, 40.852462],
+      "borough": "Bronx"
+    },
+    {
+      "id": "buhre",
+      "name": "Buhre Av",
+      "lines": ["6"],
+      "coordinates": [-73.832569, 40.846807],
+      "borough": "Bronx"
+    },
+    {
+      "id": "middletown",
+      "name": "Middletown Rd",
+      "lines": ["6"],
+      "coordinates": [-73.836322, 40.843863],
+      "borough": "Bronx"
+    },
+    {
+      "id": "westchester-square",
+      "name": "Westchester Sq-E Tremont Av",
+      "lines": ["6"],
+      "coordinates": [-73.842952, 40.839892],
+      "borough": "Bronx"
+    },
+    {
+      "id": "zerega",
+      "name": "Zerega Av",
+      "lines": ["6"],
+      "coordinates": [-73.847036, 40.836488],
+      "borough": "Bronx"
+    },
+    {
+      "id": "castle-hill",
+      "name": "Castle Hill Av",
+      "lines": ["6"],
+      "coordinates": [-73.851222, 40.834255],
+      "borough": "Bronx"
+    },
+    {
+      "id": "parkchester",
+      "name": "Parkchester",
+      "lines": ["6"],
+      "coordinates": [-73.860816, 40.833226],
+      "borough": "Bronx"
+    },
+    {
+      "id": "st-lawrence",
+      "name": "St Lawrence Av",
+      "lines": ["6"],
+      "coordinates": [-73.867618, 40.831509],
+      "borough": "Bronx"
+    },
+    {
+      "id": "morrison",
+      "name": "Morrison Av-Soundview",
+      "lines": ["6"],
+      "coordinates": [-73.874516, 40.829521],
+      "borough": "Bronx"
+    },
+    {
+      "id": "elder",
+      "name": "Elder Av",
+      "lines": ["6"],
+      "coordinates": [-73.879159, 40.828584],
+      "borough": "Bronx"
+    },
+    {
+      "id": "whitlock",
+      "name": "Whitlock Av",
+      "lines": ["6"],
+      "coordinates": [-73.886283, 40.826525],
+      "borough": "Bronx"
+    },
+    {
+      "id": "hunts-point",
+      "name": "Hunts Point Av",
+      "lines": ["6"],
+      "coordinates": [-73.890549, 40.820948],
+      "borough": "Bronx"
+    },
+    {
+      "id": "longwood",
+      "name": "Longwood Av",
+      "lines": ["6"],
+      "coordinates": [-73.896435, 40.816104],
+      "borough": "Bronx"
+    },
+    {
+      "id": "e-149th",
+      "name": "E 149 St",
+      "lines": ["6"],
+      "coordinates": [-73.904098, 40.812118],
+      "borough": "Bronx"
+    },
+    {
+      "id": "e-143rd",
+      "name": "E 143 St-St Mary's St",
+      "lines": ["6"],
+      "coordinates": [-73.907657, 40.808719],
+      "borough": "Bronx"
+    },
+    {
+      "id": "cypress",
+      "name": "Cypress Av",
+      "lines": ["6"],
+      "coordinates": [-73.914042, 40.805368],
+      "borough": "Bronx"
+    },
+    {
+      "id": "brook",
+      "name": "Brook Av",
+      "lines": ["6"],
+      "coordinates": [-73.919240, 40.807566],
+      "borough": "Bronx"
+    },
+    {
+      "id": "3rd-138",
+      "name": "3 Av-138 St",
+      "lines": ["6"],
+      "coordinates": [-73.926138, 40.810476],
+      "borough": "Bronx"
+    },
+    {
+      "id": "norwood",
+      "name": "Norwood-205 St",
+      "lines": ["D"],
+      "coordinates": [-73.878855, 40.874811],
+      "borough": "Bronx"
+    },
+    {
+      "id": "tremont",
+      "name": "Tremont Av",
+      "lines": ["B", "D"],
+      "coordinates": [-73.905227, 40.850409],
+      "borough": "Bronx"
+    },
+    {
+      "id": "182-183",
+      "name": "182-183 Sts",
+      "lines": ["B", "D"],
+      "coordinates": [-73.900741, 40.856093],
+      "borough": "Bronx"
+    },
+    {
+      "id": "jamaica-179",
+      "name": "Jamaica-179 St",
+      "lines": ["F"],
+      "coordinates": [-73.783817, 40.712646],
+      "borough": "Queens"
+    },
+    {
+      "id": "169th-street",
+      "name": "169 St",
+      "lines": ["F"],
+      "coordinates": [-73.793604, 40.710507],
+      "borough": "Queens"
+    },
+    {
+      "id": "parsons",
+      "name": "Parsons Blvd",
+      "lines": ["F"],
+      "coordinates": [-73.803326, 40.707564],
+      "borough": "Queens"
+    },
+    {
+      "id": "sutphin",
+      "name": "Sutphin Blvd",
+      "lines": ["F"],
+      "coordinates": [-73.810708, 40.705630],
+      "borough": "Queens"
+    },
+    {
+      "id": "briarwood",
+      "name": "Briarwood",
+      "lines": ["E", "F"],
+      "coordinates": [-73.820574, 40.709179],
+      "borough": "Queens"
+    },
+    {
+      "id": "kew-gardens",
+      "name": "Kew Gardens-Union Tpke",
+      "lines": ["E", "F"],
+      "coordinates": [-73.831008, 40.714441],
+      "borough": "Queens"
+    },
+    {
+      "id": "75th-avenue",
+      "name": "75 Av",
+      "lines": ["E", "F"],
+      "coordinates": [-73.837324, 40.718331],
+      "borough": "Queens"
+    },
+    {
+      "id": "forest-hills",
+      "name": "Forest Hills-71 Av",
+      "lines": ["E", "F", "M", "R"],
+      "coordinates": [-73.844521, 40.721691],
+      "borough": "Queens"
+    },
+    {
+      "id": "jackson-heights",
+      "name": "Jackson Hts-Roosevelt Av",
+      "lines": ["E", "F", "M", "R", "7"],
+      "coordinates": [-73.891338, 40.746644],
+      "borough": "Queens"
+    },
+    {
+      "id": "elmhurst",
+      "name": "Elmhurst Av",
+      "lines": ["M", "R"],
+      "coordinates": [-73.882017, 40.742454],
+      "borough": "Queens"
+    },
+    {
+      "id": "grand-newtown",
+      "name": "Grand Av-Newtown",
+      "lines": ["M", "R"],
+      "coordinates": [-73.877223, 40.736813],
+      "borough": "Queens"
+    },
+    {
+      "id": "woodhaven",
+      "name": "Woodhaven Blvd",
+      "lines": ["M", "R"],
+      "coordinates": [-73.869527, 40.733106],
+      "borough": "Queens"
+    },
+    {
+      "id": "63rd-drive",
+      "name": "63 Dr-Rego Park",
+      "lines": ["M", "R"],
+      "coordinates": [-73.861604, 40.729846],
+      "borough": "Queens"
+    },
+    {
+      "id": "67th-avenue",
+      "name": "67 Av",
+      "lines": ["M", "R"],
+      "coordinates": [-73.852719, 40.726523],
+      "borough": "Queens"
+    },
+    {
+      "id": "forest-avenue",
+      "name": "Forest Av",
+      "lines": ["M"],
+      "coordinates": [-73.903077, 40.718267],
+      "borough": "Queens"
+    },
+    {
+      "id": "fresh-pond",
+      "name": "Fresh Pond Rd",
+      "lines": ["M"],
+      "coordinates": [-73.895924, 40.706186],
+      "borough": "Queens"
+    },
+    {
+      "id": "middle-village",
+      "name": "Middle Village-Metropolitan Av",
+      "lines": ["M"],
+      "coordinates": [-73.889601, 40.711396],
+      "borough": "Queens"
+    },
+    {
+      "id": "flushing-main",
+      "name": "Flushing-Main St",
+      "lines": ["7"],
+      "coordinates": [-73.830031, 40.759522],
+      "borough": "Queens"
+    },
+    {
+      "id": "mets-willets",
+      "name": "Mets-Willets Point",
+      "lines": ["7"],
+      "coordinates": [-73.845625, 40.754622],
+      "borough": "Queens"
+    },
+    {
+      "id": "111th-street",
+      "name": "111 St",
+      "lines": ["7"],
+      "coordinates": [-73.855334, 40.751711],
+      "borough": "Queens"
+    },
+    {
+      "id": "103rd-corona",
+      "name": "103 St-Corona Plaza",
+      "lines": ["7"],
+      "coordinates": [-73.862327, 40.749865],
+      "borough": "Queens"
+    },
+    {
+      "id": "junction",
+      "name": "Junction Blvd",
+      "lines": ["7"],
+      "coordinates": [-73.869527, 40.749145],
+      "borough": "Queens"
+    },
+    {
+      "id": "90th-street",
+      "name": "90 St-Elmhurst Av",
+      "lines": ["7"],
+      "coordinates": [-73.876613, 40.748408],
+      "borough": "Queens"
+    },
+    {
+      "id": "82nd-street",
+      "name": "82 St-Jackson Hts",
+      "lines": ["7"],
+      "coordinates": [-73.883697, 40.747659],
+      "borough": "Queens"
+    },
+    {
+      "id": "74th-broadway",
+      "name": "74 St-Broadway",
+      "lines": ["7"],
+      "coordinates": [-73.891394, 40.746848],
+      "borough": "Queens"
+    },
+    {
+      "id": "69th-street",
+      "name": "69 St",
+      "lines": ["7"],
+      "coordinates": [-73.896403, 40.746325],
+      "borough": "Queens"
+    },
+    {
+      "id": "61st-woodside",
+      "name": "61 St-Woodside",
+      "lines": ["7"],
+      "coordinates": [-73.902984, 40.745625],
+      "borough": "Queens"
+    },
+    {
+      "id": "52nd-street",
+      "name": "52 St",
+      "lines": ["7"],
+      "coordinates": [-73.912549, 40.744149],
+      "borough": "Queens"
+    },
+    {
+      "id": "46th-street",
+      "name": "46 St-Bliss St",
+      "lines": ["7"],
+      "coordinates": [-73.918435, 40.743132],
+      "borough": "Queens"
+    },
+    {
+      "id": "40th-street",
+      "name": "40 St-Lowery St",
+      "lines": ["7"],
+      "coordinates": [-73.924016, 40.743781],
+      "borough": "Queens"
+    },
+    {
+      "id": "33rd-street",
+      "name": "33 St-Rawson St",
+      "lines": ["7"],
+      "coordinates": [-73.930997, 40.744587],
+      "borough": "Queens"
+    },
+    {
+      "id": "queensboro",
+      "name": "Queensboro Plaza",
+      "lines": ["7", "N", "W"],
+      "coordinates": [-73.940202, 40.750582],
+      "borough": "Queens"
+    },
+    {
+      "id": "court-square",
+      "name": "Court Sq",
+      "lines": ["7", "E", "M", "G"],
+      "coordinates": [-73.945264, 40.747023],
+      "borough": "Queens"
+    },
+    {
+      "id": "hunters-point",
+      "name": "Hunters Point Av",
+      "lines": ["7"],
+      "coordinates": [-73.948916, 40.742216],
+      "borough": "Queens"
+    },
+    {
+      "id": "vernon-jackson",
+      "name": "Vernon Blvd-Jackson Av",
+      "lines": ["7"],
+      "coordinates": [-73.952958, 40.742626],
+      "borough": "Queens"
+    },
+    {
+      "id": "21st-queensbridge",
+      "name": "21 St-Queensbridge",
+      "lines": ["F"],
+      "coordinates": [-73.941928, 40.753821],
+      "borough": "Queens"
+    },
+    {
+      "id": "roosevelt-island",
+      "name": "Roosevelt Island",
+      "lines": ["F"],
+      "coordinates": [-73.953140, 40.759145],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "lexington-63",
+      "name": "Lexington Av-63 St",
+      "lines": ["F", "N", "Q", "R", "W"],
+      "coordinates": [-73.966113, 40.764629],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "57th-street",
+      "name": "57 St",
+      "lines": ["F", "N", "Q", "R", "W"],
+      "coordinates": [-73.976987, 40.764074],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "47-50-rockefeller",
+      "name": "47-50 Sts-Rockefeller Ctr",
+      "lines": ["B", "D", "F", "M"],
+      "coordinates": [-73.981329, 40.758663],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "42nd-bryant",
+      "name": "42 St-Bryant Park",
+      "lines": ["B", "D", "F", "M", "7"],
+      "coordinates": [-73.984569, 40.754222],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "34th-6av",
+      "name": "34 St-Herald Sq",
+      "lines": ["B", "D", "F", "M", "N", "Q", "R", "W"],
+      "coordinates": [-73.987823, 40.749567],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "14th-6av",
+      "name": "14 St",
+      "lines": ["F", "M", "1", "2", "3"],
+      "coordinates": [-73.996209, 40.738228],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "broadway-lafayette",
+      "name": "Broadway-Lafayette St",
+      "lines": ["B", "D", "F", "M", "6"],
+      "coordinates": [-73.996204, 40.725297],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "lower-east-side",
+      "name": "2 Av",
+      "lines": ["F"],
+      "coordinates": [-73.989938, 40.723402],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "delancey-essex",
+      "name": "Delancey St-Essex St",
+      "lines": ["F", "J", "M", "Z"],
+      "coordinates": [-73.987437, 40.718315],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "east-broadway",
+      "name": "East Broadway",
+      "lines": ["F"],
+      "coordinates": [-73.990173, 40.713715],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "york-street",
+      "name": "York St",
+      "lines": ["F"],
+      "coordinates": [-73.986751, 40.701397],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "jay-metrotech",
+      "name": "Jay St-MetroTech",
+      "lines": ["A", "C", "F", "N", "R", "W"],
+      "coordinates": [-73.985065, 40.692338],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "bergen",
+      "name": "Bergen St",
+      "lines": ["F", "G"],
+      "coordinates": [-73.975098, 40.686145],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "carroll",
+      "name": "Carroll St",
+      "lines": ["F", "G"],
+      "coordinates": [-73.973946, 40.680303],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "smith-9th",
+      "name": "Smith-9 Sts",
+      "lines": ["F", "G"],
+      "coordinates": [-73.973946, 40.674317],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "4th-avenue",
+      "name": "4 Av-9 St",
+      "lines": ["F", "G", "M", "R"],
+      "coordinates": [-73.988302, 40.670847],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "7th-avenue",
+      "name": "7 Av",
+      "lines": ["F", "G", "Q"],
+      "coordinates": [-73.972880, 40.662948],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "15th-prospect",
+      "name": "15 St-Prospect Park",
+      "lines": ["F", "G"],
+      "coordinates": [-73.979493, 40.660365],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "fort-hamilton",
+      "name": "Fort Hamilton Pkwy",
+      "lines": ["F", "G"],
+      "coordinates": [-73.976013, 40.650782],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "church-avenue",
+      "name": "Church Av",
+      "lines": ["F", "G", "B", "Q"],
+      "coordinates": [-73.962246, 40.644041],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "ditmas",
+      "name": "Ditmas Av",
+      "lines": ["F"],
+      "coordinates": [-73.978172, 40.636119],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "18th-avenue",
+      "name": "18 Av",
+      "lines": ["F"],
+      "coordinates": [-73.976971, 40.629755],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "avenue-i",
+      "name": "Avenue I",
+      "lines": ["F"],
+      "coordinates": [-73.976127, 40.625322],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "bay-parkway",
+      "name": "Bay Pkwy",
+      "lines": ["F", "D", "N"],
+      "coordinates": [-73.975264, 40.620769],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "avenue-n",
+      "name": "Avenue N",
+      "lines": ["F"],
+      "coordinates": [-73.974197, 40.614956],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "avenue-p",
+      "name": "Avenue P",
+      "lines": ["F"],
+      "coordinates": [-73.973022, 40.608842],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "kings-highway",
+      "name": "Kings Hwy",
+      "lines": ["F", "B", "Q"],
+      "coordinates": [-73.972361, 40.603217],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "avenue-u",
+      "name": "Avenue U",
+      "lines": ["F", "N"],
+      "coordinates": [-73.973357, 40.597235],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "avenue-x",
+      "name": "Avenue X",
+      "lines": ["F"],
+      "coordinates": [-73.974283, 40.589449],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "neptune",
+      "name": "Neptune Av",
+      "lines": ["F"],
+      "coordinates": [-73.974574, 40.580738],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "west-8th",
+      "name": "W 8 St-NY Aquarium",
+      "lines": ["F", "Q"],
+      "coordinates": [-73.975939, 40.576033],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "coney-island",
+      "name": "Coney Island-Stillwell Av",
+      "lines": ["D", "F", "N", "Q"],
+      "coordinates": [-73.981233, 40.577437],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "jamaica-center",
+      "name": "Jamaica Center-Parsons/Archer",
+      "lines": ["E", "J", "Z"],
+      "coordinates": [-73.801109, 40.702147],
+      "borough": "Queens"
+    },
+    {
+      "id": "sutphin-archer",
+      "name": "Sutphin Blvd-Archer Av-JFK",
+      "lines": ["E", "J", "Z"],
+      "coordinates": [-73.807969, 40.700486],
+      "borough": "Queens"
+    },
+    {
+      "id": "jamaica-van-wyck",
+      "name": "Jamaica-Van Wyck",
+      "lines": ["E"],
+      "coordinates": [-73.816859, 40.702566],
+      "borough": "Queens"
+    },
+    {
+      "id": "queens-blvd",
+      "name": "Queens Blvd",
+      "lines": ["E", "M", "R"],
+      "coordinates": [-73.936245, 40.735711],
+      "borough": "Queens"
+    },
+    {
+      "id": "36th-street",
+      "name": "36 St",
+      "lines": ["M", "R", "D", "N"],
+      "coordinates": [-74.003549, 40.655144],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "45th-street",
+      "name": "45 St",
+      "lines": ["R"],
+      "coordinates": [-74.010006, 40.648939],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "53rd-street",
+      "name": "53 St",
+      "lines": ["R"],
+      "coordinates": [-74.014034, 40.645069],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "59th-street",
+      "name": "59 St",
+      "lines": ["N", "R", "W"],
+      "coordinates": [-74.017881, 40.641362],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "bay-ridge",
+      "name": "Bay Ridge Av",
+      "lines": ["R"],
+      "coordinates": [-74.023377, 40.634967],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "77th-street",
+      "name": "77 St",
+      "lines": ["R"],
+      "coordinates": [-74.025870, 40.629741],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "86th-street-brooklyn",
+      "name": "86 St",
+      "lines": ["R"],
+      "coordinates": [-74.028398, 40.622687],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "bay-ridge-95",
+      "name": "Bay Ridge-95 St",
+      "lines": ["R"],
+      "coordinates": [-74.030876, 40.616622],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "8th-avenue-brooklyn",
+      "name": "8 Av",
+      "lines": ["N"],
+      "coordinates": [-74.011585, 40.634971],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "fort-hamilton-brooklyn",
+      "name": "Fort Hamilton Pkwy",
+      "lines": ["N"],
+      "coordinates": [-74.005351, 40.631435],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "new-utrecht",
+      "name": "New Utrecht Av",
+      "lines": ["N", "D"],
+      "coordinates": [-73.996353, 40.625561],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "18th-avenue-brooklyn",
+      "name": "18 Av",
+      "lines": ["N"],
+      "coordinates": [-73.990414, 40.620671],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "20th-avenue",
+      "name": "20 Av",
+      "lines": ["N"],
+      "coordinates": [-73.985026, 40.617109],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "bay-parkway-brooklyn",
+      "name": "Bay Pkwy",
+      "lines": ["N"],
+      "coordinates": [-73.981479, 40.611815],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "kings-highway-brooklyn",
+      "name": "Kings Hwy",
+      "lines": ["N"],
+      "coordinates": [-73.973347, 40.603923],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "avenue-u-brooklyn",
+      "name": "Avenue U",
+      "lines": ["N"],
+      "coordinates": [-73.961644, 40.597235],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "86th-street-brooklyn-n",
+      "name": "86 St",
+      "lines": ["N"],
+      "coordinates": [-73.955929, 40.592465],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "astoria-ditmars",
+      "name": "Astoria-Ditmars Blvd",
+      "lines": ["N", "W"],
+      "coordinates": [-73.912034, 40.775036],
+      "borough": "Queens"
+    },
+    {
+      "id": "astoria",
+      "name": "Astoria Blvd",
+      "lines": ["N", "W"],
+      "coordinates": [-73.917843, 40.770258],
+      "borough": "Queens"
+    },
+    {
+      "id": "30th-avenue",
+      "name": "30 Av",
+      "lines": ["N", "W"],
+      "coordinates": [-73.921479, 40.766779],
+      "borough": "Queens"
+    },
+    {
+      "id": "broadway-astoria",
+      "name": "Broadway",
+      "lines": ["N", "W"],
+      "coordinates": [-73.925508, 40.761820],
+      "borough": "Queens"
+    },
+    {
+      "id": "36th-avenue",
+      "name": "36 Av",
+      "lines": ["N", "W"],
+      "coordinates": [-73.929575, 40.756804],
+      "borough": "Queens"
+    },
+    {
+      "id": "39th-avenue",
+      "name": "39 Av-Dutch Kills",
+      "lines": ["N", "W"],
+      "coordinates": [-73.932568, 40.752882],
+      "borough": "Queens"
+    },
+    {
+      "id": "court-square-23",
+      "name": "Court Sq-23 St",
+      "lines": ["E", "M", "G"],
+      "coordinates": [-73.946000, 40.747846],
+      "borough": "Queens"
+    },
+    {
+      "id": "lexington-59",
+      "name": "Lexington Av-59 St",
+      "lines": ["N", "R", "W", "4", "5", "6"],
+      "coordinates": [-73.967967, 40.762526],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "5th-avenue-59",
+      "name": "5 Av-59 St",
+      "lines": ["N", "R", "W"],
+      "coordinates": [-73.973347, 40.764811],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "57th-7av",
+      "name": "57 St-7 Av",
+      "lines": ["N", "Q", "R", "W"],
+      "coordinates": [-73.980658, 40.764664],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "49th-street",
+      "name": "49 St",
+      "lines": ["N", "R", "W"],
+      "coordinates": [-73.984139, 40.759901],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "times-square-42",
+      "name": "Times Square-42 St",
+      "lines": ["N", "Q", "R", "W", "S", "1", "2", "3", "7"],
+      "coordinates": [-73.986768, 40.755477],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "28th-street-broadway",
+      "name": "28 St",
+      "lines": ["N", "R", "W"],
+      "coordinates": [-73.988691, 40.745494],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "23rd-street-broadway",
+      "name": "23 St",
+      "lines": ["N", "R", "W"],
+      "coordinates": [-73.989344, 40.741303],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "8th-street-nyu",
+      "name": "8 St-NYU",
+      "lines": ["N", "R", "W"],
+      "coordinates": [-73.992629, 40.730328],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "prince-street",
+      "name": "Prince St",
+      "lines": ["N", "R", "W"],
+      "coordinates": [-73.997702, 40.724329],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "canal-broadway",
+      "name": "Canal St",
+      "lines": ["N", "Q", "R", "W", "6", "J", "Z"],
+      "coordinates": [-74.001775, 40.718803],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "cortlandt-street",
+      "name": "Cortlandt St",
+      "lines": ["N", "R", "W"],
+      "coordinates": [-74.011516, 40.710668],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "rector-street-rw",
+      "name": "Rector St",
+      "lines": ["N", "R", "W"],
+      "coordinates": [-74.013205, 40.707513],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "whitehall-street",
+      "name": "Whitehall St-South Ferry",
+      "lines": ["R", "W"],
+      "coordinates": [-74.012188, 40.703142],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "court-street",
+      "name": "Court St",
+      "lines": ["N", "R", "W"],
+      "coordinates": [-73.991777, 40.694196],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "atlantic-barclays",
+      "name": "Atlantic Av-Barclays Ctr",
+      "lines": ["2", "3", "4", "5", "B", "D", "N", "Q", "R", "W"],
+      "coordinates": [-73.977666, 40.684488],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "union-street",
+      "name": "Union St",
+      "lines": ["R"],
+      "coordinates": [-73.983147, 40.677316],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "9th-street",
+      "name": "9 St",
+      "lines": ["R"],
+      "coordinates": [-73.988302, 40.670847],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "prospect-avenue-r",
+      "name": "Prospect Av",
+      "lines": ["R"],
+      "coordinates": [-73.992872, 40.665414],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "25th-street",
+      "name": "25 St",
+      "lines": ["R"],
+      "coordinates": [-73.998091, 40.660397],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "canarsie",
+      "name": "Canarsie-Rockaway Pkwy",
+      "lines": ["L"],
+      "coordinates": [-73.902633, 40.646654],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "east-105",
+      "name": "East 105 St",
+      "lines": ["L"],
+      "coordinates": [-73.899232, 40.650573],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "new-lots",
+      "name": "New Lots Av",
+      "lines": ["L", "3", "4"],
+      "coordinates": [-73.884079, 40.666235],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "livonia",
+      "name": "Livonia Av",
+      "lines": ["L"],
+      "coordinates": [-73.900571, 40.664038],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "sutter",
+      "name": "Sutter Av",
+      "lines": ["L"],
+      "coordinates": [-73.901975, 40.669367],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "atlantic-avenue",
+      "name": "Atlantic Av",
+      "lines": ["L"],
+      "coordinates": [-73.903097, 40.675345],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "broadway-junction",
+      "name": "Broadway Junction",
+      "lines": ["A", "C", "L", "J", "Z"],
+      "coordinates": [-73.905316, 40.678856],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "bushwick",
+      "name": "Bushwick Av-Aberdeen St",
+      "lines": ["L"],
+      "coordinates": [-73.905249, 40.682829],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "wilson",
+      "name": "Wilson Av",
+      "lines": ["L"],
+      "coordinates": [-73.904046, 40.688764],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "halsey",
+      "name": "Halsey St",
+      "lines": ["L"],
+      "coordinates": [-73.904084, 40.695362],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "myrtle-wyckoff",
+      "name": "Myrtle-Wyckoff Avs",
+      "lines": ["L", "M"],
+      "coordinates": [-73.912385, 40.699814],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "dekalb",
+      "name": "DeKalb Av",
+      "lines": ["L"],
+      "coordinates": [-73.918425, 40.703811],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "jefferson",
+      "name": "Jefferson St",
+      "lines": ["L"],
+      "coordinates": [-73.922913, 40.706607],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "morgan",
+      "name": "Morgan Av",
+      "lines": ["L"],
+      "coordinates": [-73.933147, 40.706152],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "montrose",
+      "name": "Montrose Av",
+      "lines": ["L"],
+      "coordinates": [-73.939757, 40.707739],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "grand-street",
+      "name": "Grand St",
+      "lines": ["L"],
+      "coordinates": [-73.940704, 40.711926],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "graham",
+      "name": "Graham Av",
+      "lines": ["L"],
+      "coordinates": [-73.944216, 40.714565],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "lorimer",
+      "name": "Lorimer St",
+      "lines": ["L", "G"],
+      "coordinates": [-73.950275, 40.714063],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "bedford",
+      "name": "Bedford Av",
+      "lines": ["L"],
+      "coordinates": [-73.956872, 40.717304],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "first-avenue",
+      "name": "1 Av",
+      "lines": ["L"],
+      "coordinates": [-73.981628, 40.730953],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "third-avenue",
+      "name": "3 Av",
+      "lines": ["L"],
+      "coordinates": [-73.985956, 40.732849],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "6th-avenue",
+      "name": "6 Av",
+      "lines": ["L"],
+      "coordinates": [-73.996784, 40.737335],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "8th-avenue",
+      "name": "8 Av",
+      "lines": ["L"],
+      "coordinates": [-74.002578, 40.739777],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "high-street",
+      "name": "High St",
+      "lines": ["A", "C"],
+      "coordinates": [-73.990531, 40.699337],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "hoyt-schermerhorn",
+      "name": "Hoyt-Schermerhorn Sts",
+      "lines": ["A", "C", "G"],
+      "coordinates": [-73.985001, 40.688484],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "lafayette",
+      "name": "Lafayette Av",
+      "lines": ["C"],
+      "coordinates": [-73.973946, 40.686113],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "clinton-washington",
+      "name": "Clinton-Washington Avs",
+      "lines": ["C", "G"],
+      "coordinates": [-73.965838, 40.688089],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "franklin",
+      "name": "Franklin Av",
+      "lines": ["A", "C", "S"],
+      "coordinates": [-73.956848, 40.680596],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "nostrand",
+      "name": "Nostrand Av",
+      "lines": ["A", "C"],
+      "coordinates": [-73.950426, 40.680438],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "kingston-throop",
+      "name": "Kingston-Throop Avs",
+      "lines": ["C"],
+      "coordinates": [-73.940858, 40.679921],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "utica",
+      "name": "Utica Av",
+      "lines": ["A", "C"],
+      "coordinates": [-73.930729, 40.679364],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "ralph",
+      "name": "Ralph Av",
+      "lines": ["C"],
+      "coordinates": [-73.920786, 40.678822],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "rockaway",
+      "name": "Rockaway Av",
+      "lines": ["C"],
+      "coordinates": [-73.910136, 40.678339],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "liberty",
+      "name": "Liberty Av",
+      "lines": ["C"],
+      "coordinates": [-73.896548, 40.674542],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "van-siclen",
+      "name": "Van Siclen Av",
+      "lines": ["C", "J", "Z"],
+      "coordinates": [-73.891688, 40.672990],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "shepherd",
+      "name": "Shepherd Av",
+      "lines": ["C"],
+      "coordinates": [-73.880439, 40.674177],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "euclid",
+      "name": "Euclid Av",
+      "lines": ["A", "C"],
+      "coordinates": [-73.872106, 40.675377],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "grant",
+      "name": "Grant Av",
+      "lines": ["A"],
+      "coordinates": [-73.866161, 40.677044],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "80th-street",
+      "name": "80 St",
+      "lines": ["A"],
+      "coordinates": [-73.858992, 40.679371],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "88th-street",
+      "name": "88 St",
+      "lines": ["A"],
+      "coordinates": [-73.850700, 40.679843],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "rockaway-blvd",
+      "name": "Rockaway Blvd",
+      "lines": ["A"],
+      "coordinates": [-73.843853, 40.680429],
+      "borough": "Queens"
+    },
+    {
+      "id": "104th-street",
+      "name": "104 St",
+      "lines": ["A"],
+      "coordinates": [-73.837683, 40.681711],
+      "borough": "Queens"
+    },
+    {
+      "id": "111th-street-a",
+      "name": "111 St",
+      "lines": ["A"],
+      "coordinates": [-73.832163, 40.684331],
+      "borough": "Queens"
+    },
+    {
+      "id": "ozone-park",
+      "name": "Ozone Park-Lefferts Blvd",
+      "lines": ["A"],
+      "coordinates": [-73.825798, 40.685951],
+      "borough": "Queens"
+    },
+    {
+      "id": "aqueduct",
+      "name": "Aqueduct-North Conduit Av",
+      "lines": ["A"],
+      "coordinates": [-73.832013, 40.668234],
+      "borough": "Queens"
+    },
+    {
+      "id": "aqueduct-racetrack",
+      "name": "Aqueduct Racetrack",
+      "lines": ["A"],
+      "coordinates": [-73.835592, 40.672614],
+      "borough": "Queens"
+    },
+    {
+      "id": "howard-beach",
+      "name": "Howard Beach-JFK Airport",
+      "lines": ["A"],
+      "coordinates": [-73.830301, 40.660476],
+      "borough": "Queens"
+    },
+    {
+      "id": "broad-channel",
+      "name": "Broad Channel",
+      "lines": ["A", "S"],
+      "coordinates": [-73.815925, 40.608382],
+      "borough": "Queens"
+    },
+    {
+      "id": "beach-67",
+      "name": "Beach 67 St",
+      "lines": ["A"],
+      "coordinates": [-73.796924, 40.590927],
+      "borough": "Queens"
+    },
+    {
+      "id": "beach-60",
+      "name": "Beach 60 St",
+      "lines": ["A"],
+      "coordinates": [-73.788522, 40.592374],
+      "borough": "Queens"
+    },
+    {
+      "id": "beach-44",
+      "name": "Beach 44 St",
+      "lines": ["A"],
+      "coordinates": [-73.776013, 40.592834],
+      "borough": "Queens"
+    },
+    {
+      "id": "beach-36",
+      "name": "Beach 36 St",
+      "lines": ["A"],
+      "coordinates": [-73.768175, 40.595398],
+      "borough": "Queens"
+    },
+    {
+      "id": "beach-25",
+      "name": "Beach 25 St",
+      "lines": ["A"],
+      "coordinates": [-73.761353, 40.600066],
+      "borough": "Queens"
+    },
+    {
+      "id": "far-rockaway",
+      "name": "Far Rockaway-Mott Av",
+      "lines": ["A"],
+      "coordinates": [-73.755405, 40.603995],
+      "borough": "Queens"
+    },
+    {
+      "id": "beach-90",
+      "name": "Beach 90 St",
+      "lines": ["A", "S"],
+      "coordinates": [-73.813641, 40.588034],
+      "borough": "Queens"
+    },
+    {
+      "id": "beach-98",
+      "name": "Beach 98 St",
+      "lines": ["A", "S"],
+      "coordinates": [-73.820558, 40.585307],
+      "borough": "Queens"
+    },
+    {
+      "id": "beach-105",
+      "name": "Beach 105 St",
+      "lines": ["A", "S"],
+      "coordinates": [-73.827559, 40.583209],
+      "borough": "Queens"
+    },
+    {
+      "id": "rockaway-park",
+      "name": "Rockaway Park-Beach 116 St",
+      "lines": ["A", "S"],
+      "coordinates": [-73.835592, 40.580903],
+      "borough": "Queens"
+    },
+    {
+      "id": "prospect-park",
+      "name": "Prospect Park",
+      "lines": ["B", "Q", "S"],
+      "coordinates": [-73.961639, 40.661614],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "parkside",
+      "name": "Parkside Av",
+      "lines": ["Q"],
+      "coordinates": [-73.961495, 40.655292],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "church-avenue-bq",
+      "name": "Church Av",
+      "lines": ["B", "Q"],
+      "coordinates": [-73.962836, 40.650527],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "beverley",
+      "name": "Beverley Rd",
+      "lines": ["Q"],
+      "coordinates": [-73.964492, 40.644031],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "cortelyou",
+      "name": "Cortelyou Rd",
+      "lines": ["Q"],
+      "coordinates": [-73.963891, 40.640927],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "newkirk-plaza",
+      "name": "Newkirk Plaza",
+      "lines": ["B", "Q"],
+      "coordinates": [-73.962793, 40.635082],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "avenue-h",
+      "name": "Avenue H",
+      "lines": ["Q"],
+      "coordinates": [-73.961639, 40.629037],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "avenue-j",
+      "name": "Avenue J",
+      "lines": ["Q"],
+      "coordinates": [-73.960803, 40.625039],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "avenue-m",
+      "name": "Avenue M",
+      "lines": ["Q"],
+      "coordinates": [-73.959775, 40.617398],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "kings-highway-q",
+      "name": "Kings Hwy",
+      "lines": ["B", "Q"],
+      "coordinates": [-73.957734, 40.608842],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "avenue-u-q",
+      "name": "Avenue U",
+      "lines": ["Q"],
+      "coordinates": [-73.955929, 40.597804],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "neck-road",
+      "name": "Neck Rd",
+      "lines": ["Q"],
+      "coordinates": [-73.955161, 40.595246],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "sheepshead",
+      "name": "Sheepshead Bay",
+      "lines": ["B", "Q"],
+      "coordinates": [-73.954155, 40.586896],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "brighton-beach",
+      "name": "Brighton Beach",
+      "lines": ["B", "Q"],
+      "coordinates": [-73.961376, 40.577621],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "ocean-parkway",
+      "name": "Ocean Pkwy",
+      "lines": ["Q"],
+      "coordinates": [-73.968501, 40.576312],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "west-8",
+      "name": "W 8 St-NY Aquarium",
+      "lines": ["F", "Q"],
+      "coordinates": [-73.975939, 40.576127],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "dekalb-avenue",
+      "name": "DeKalb Av",
+      "lines": ["B", "D", "N", "Q", "R"],
+      "coordinates": [-73.981824, 40.690635],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "125th-street-456",
+      "name": "125 St",
+      "lines": ["4", "5", "6"],
+      "coordinates": [-73.937540, 40.804138],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "116th-street-456",
+      "name": "116 St",
+      "lines": ["4", "5", "6"],
+      "coordinates": [-73.941617, 40.798629],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "110th-street-456",
+      "name": "110 St",
+      "lines": ["4", "5", "6"],
+      "coordinates": [-73.944425, 40.795078],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "103rd-street-456",
+      "name": "103 St",
+      "lines": ["4", "5", "6"],
+      "coordinates": [-73.947478, 40.790600],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "96th-street-456",
+      "name": "96 St",
+      "lines": ["4", "5", "6"],
+      "coordinates": [-73.950961, 40.785672],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "86th-street-456",
+      "name": "86 St",
+      "lines": ["4", "5", "6"],
+      "coordinates": [-73.955589, 40.779492],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "77th-street-456",
+      "name": "77 St",
+      "lines": ["4", "5", "6"],
+      "coordinates": [-73.959874, 40.773618],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "68th-hunter",
+      "name": "68 St-Hunter College",
+      "lines": ["4", "5", "6"],
+      "coordinates": [-73.963757, 40.768141],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "59th-street-456",
+      "name": "59 St",
+      "lines": ["4", "5", "6"],
+      "coordinates": [-73.967967, 40.762526],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "51st-street",
+      "name": "51 St",
+      "lines": ["4", "5", "6"],
+      "coordinates": [-73.971953, 40.757107],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "grand-central-456",
+      "name": "Grand Central-42 St",
+      "lines": ["4", "5", "6", "7", "S"],
+      "coordinates": [-73.976041, 40.751776],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "33rd-street-456",
+      "name": "33 St",
+      "lines": ["4", "5", "6"],
+      "coordinates": [-73.982076, 40.746081],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "28th-street-456",
+      "name": "28 St",
+      "lines": ["4", "5", "6"],
+      "coordinates": [-73.984264, 40.743070],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "23rd-street-456",
+      "name": "23 St",
+      "lines": ["4", "5", "6"],
+      "coordinates": [-73.986599, 40.739864],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "14th-union-456",
+      "name": "14 St-Union Sq",
+      "lines": ["4", "5", "6", "L", "N", "Q", "R", "W"],
+      "coordinates": [-73.989951, 40.734673],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "astor-place",
+      "name": "Astor Pl",
+      "lines": ["4", "5", "6"],
+      "coordinates": [-73.991066, 40.730054],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "bleecker",
+      "name": "Bleecker St",
+      "lines": ["4", "5", "6"],
+      "coordinates": [-73.992663, 40.725915],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "spring",
+      "name": "Spring St",
+      "lines": ["4", "5", "6"],
+      "coordinates": [-73.997141, 40.722301],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "canal-456",
+      "name": "Canal St",
+      "lines": ["4", "5", "6", "J", "N", "Q", "R", "W", "Z"],
+      "coordinates": [-74.000193, 40.718803],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "brooklyn-bridge-456",
+      "name": "Brooklyn Bridge-City Hall",
+      "lines": ["4", "5", "6"],
+      "coordinates": [-74.004131, 40.713065],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "fulton-456",
+      "name": "Fulton St",
+      "lines": ["4", "5"],
+      "coordinates": [-74.009582, 40.710368],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "wall-456",
+      "name": "Wall St",
+      "lines": ["4", "5"],
+      "coordinates": [-74.011862, 40.707557],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "bowling-green-456",
+      "name": "Bowling Green",
+      "lines": ["4", "5"],
+      "coordinates": [-74.014065, 40.704817],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "borough-hall",
+      "name": "Borough Hall",
+      "lines": ["2", "3", "4", "5"],
+      "coordinates": [-73.989998, 40.692404],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "hoyt",
+      "name": "Hoyt St",
+      "lines": ["2", "3"],
+      "coordinates": [-73.985065, 40.690545],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "nevins",
+      "name": "Nevins St",
+      "lines": ["2", "3", "4", "5"],
+      "coordinates": [-73.980492, 40.688246],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "atlantic-avenue-barclays",
+      "name": "Atlantic Av-Barclays Ctr",
+      "lines": ["2", "3", "4", "5", "B", "D", "N", "Q", "R"],
+      "coordinates": [-73.977666, 40.684359],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "bergen-street-23",
+      "name": "Bergen St",
+      "lines": ["2", "3"],
+      "coordinates": [-73.975098, 40.680829],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "grand-army",
+      "name": "Grand Army Plaza",
+      "lines": ["2", "3"],
+      "coordinates": [-73.970803, 40.675235],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "eastern-parkway",
+      "name": "Eastern Pkwy-Brooklyn Museum",
+      "lines": ["2", "3"],
+      "coordinates": [-73.964375, 40.671987],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "franklin-23",
+      "name": "Franklin Av",
+      "lines": ["2", "3", "4", "5"],
+      "coordinates": [-73.957757, 40.670682],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "president",
+      "name": "President St",
+      "lines": ["2", "5"],
+      "coordinates": [-73.950683, 40.667883],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "sterling",
+      "name": "Sterling St",
+      "lines": ["2", "5"],
+      "coordinates": [-73.950866, 40.662742],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "winthrop",
+      "name": "Winthrop St",
+      "lines": ["2", "5"],
+      "coordinates": [-73.950324, 40.656652],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "church-25",
+      "name": "Church Av",
+      "lines": ["2", "5"],
+      "coordinates": [-73.949575, 40.650843],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "beverly",
+      "name": "Beverly Rd",
+      "lines": ["2", "5"],
+      "coordinates": [-73.948959, 40.645098],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "newkirk",
+      "name": "Newkirk Av",
+      "lines": ["2", "5"],
+      "coordinates": [-73.948411, 40.639967],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "flatbush",
+      "name": "Flatbush Av-Brooklyn College",
+      "lines": ["2", "5"],
+      "coordinates": [-73.947642, 40.632836],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "nostrand-3",
+      "name": "Nostrand Av",
+      "lines": ["3"],
+      "coordinates": [-73.950466, 40.669847],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "kingston",
+      "name": "Kingston Av",
+      "lines": ["3"],
+      "coordinates": [-73.942161, 40.669399],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "crown-heights",
+      "name": "Crown Hts-Utica Av",
+      "lines": ["3", "4"],
+      "coordinates": [-73.932942, 40.668897],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "sutter-rutland",
+      "name": "Sutter Av-Rutland Rd",
+      "lines": ["3"],
+      "coordinates": [-73.922479, 40.664717],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "saratoga",
+      "name": "Saratoga Av",
+      "lines": ["3"],
+      "coordinates": [-73.916327, 40.661453],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "rockaway-avenue-3",
+      "name": "Rockaway Av",
+      "lines": ["3"],
+      "coordinates": [-73.908946, 40.662549],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "junius",
+      "name": "Junius St",
+      "lines": ["3"],
+      "coordinates": [-73.902447, 40.663515],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "pennsylvania",
+      "name": "Pennsylvania Av",
+      "lines": ["3"],
+      "coordinates": [-73.894895, 40.664635],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "van-siclen-3",
+      "name": "Van Siclen Av",
+      "lines": ["3"],
+      "coordinates": [-73.889395, 40.665449],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "new-lots-3",
+      "name": "New Lots Av",
+      "lines": ["3"],
+      "coordinates": [-73.884079, 40.666235],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "brooklyn-college",
+      "name": "Flatbush Av-Brooklyn College",
+      "lines": ["2", "5"],
+      "coordinates": [-73.947642, 40.632836],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "classon",
+      "name": "Classon Av",
+      "lines": ["G"],
+      "coordinates": [-73.958939, 40.688873],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "clinton-washington-g",
+      "name": "Clinton-Washington Avs",
+      "lines": ["G"],
+      "coordinates": [-73.966839, 40.688089],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "fulton-g",
+      "name": "Fulton St",
+      "lines": ["G"],
+      "coordinates": [-73.975375, 40.687119],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "flushing-avenue",
+      "name": "Flushing Av",
+      "lines": ["G", "J", "M"],
+      "coordinates": [-73.950234, 40.700377],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "broadway-g",
+      "name": "Broadway",
+      "lines": ["G"],
+      "coordinates": [-73.950308, 40.706092],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "metropolitan",
+      "name": "Metropolitan Av",
+      "lines": ["G", "L"],
+      "coordinates": [-73.951277, 40.712792],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "nassau",
+      "name": "Nassau Av",
+      "lines": ["G"],
+      "coordinates": [-73.951277, 40.724635],
+      "borough": "Queens"
+    },
+    {
+      "id": "greenpoint",
+      "name": "Greenpoint Av",
+      "lines": ["G"],
+      "coordinates": [-73.954449, 40.731352],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "21st-street",
+      "name": "21 St",
+      "lines": ["G"],
+      "coordinates": [-73.949724, 40.744065],
+      "borough": "Queens"
+    },
+    {
+      "id": "court-square-g",
+      "name": "Court Sq",
+      "lines": ["E", "G", "M", "7"],
+      "coordinates": [-73.945264, 40.747023],
+      "borough": "Queens"
+    },
+    {
+      "id": "broad-street",
+      "name": "Broad St",
+      "lines": ["J", "Z"],
+      "coordinates": [-74.011056, 40.706476],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "fulton-street-jz",
+      "name": "Fulton St",
+      "lines": ["2", "3", "4", "5", "A", "C", "J", "Z"],
+      "coordinates": [-74.007582, 40.710374],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "chambers-jz",
+      "name": "Chambers St",
+      "lines": ["J", "Z", "4", "5", "6"],
+      "coordinates": [-74.003401, 40.713243],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "canal-jz",
+      "name": "Canal St",
+      "lines": ["J", "Z", "N", "Q", "R", "W", "6"],
+      "coordinates": [-73.999892, 40.718092],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "bowery",
+      "name": "Bowery",
+      "lines": ["J", "Z"],
+      "coordinates": [-73.993915, 40.720246],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "essex",
+      "name": "Essex St",
+      "lines": ["F", "J", "M", "Z"],
+      "coordinates": [-73.987437, 40.718315],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "marcy",
+      "name": "Marcy Av",
+      "lines": ["J", "M", "Z"],
+      "coordinates": [-73.957757, 40.708359],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "hewes",
+      "name": "Hewes St",
+      "lines": ["J", "M"],
+      "coordinates": [-73.953431, 40.706889],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "lorimer-jm",
+      "name": "Lorimer St",
+      "lines": ["J", "M"],
+      "coordinates": [-73.947408, 40.703869],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "flushing-jm",
+      "name": "Flushing Av",
+      "lines": ["J", "M"],
+      "coordinates": [-73.941126, 40.700482],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "myrtle-jmz",
+      "name": "Myrtle Av",
+      "lines": ["J", "M", "Z"],
+      "coordinates": [-73.935657, 40.697207],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "kosciuszko",
+      "name": "Kosciuszko St",
+      "lines": ["J"],
+      "coordinates": [-73.928814, 40.693342],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "gates",
+      "name": "Gates Av",
+      "lines": ["J", "Z"],
+      "coordinates": [-73.922030, 40.689627],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "halsey-jz",
+      "name": "Halsey St",
+      "lines": ["J"],
+      "coordinates": [-73.916559, 40.686415],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "chauncey",
+      "name": "Chauncey St",
+      "lines": ["J", "Z"],
+      "coordinates": [-73.910456, 40.682893],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "alabama",
+      "name": "Alabama Av",
+      "lines": ["J"],
+      "coordinates": [-73.901404, 40.676992],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "van-siclen-jz",
+      "name": "Van Siclen Av",
+      "lines": ["J", "Z"],
+      "coordinates": [-73.891688, 40.678024],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "cleveland",
+      "name": "Cleveland St",
+      "lines": ["J"],
+      "coordinates": [-73.884778, 40.679778],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "norwood-avenue",
+      "name": "Norwood Av",
+      "lines": ["J", "Z"],
+      "coordinates": [-73.879532, 40.681058],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "crescent",
+      "name": "Crescent St",
+      "lines": ["J", "Z"],
+      "coordinates": [-73.873785, 40.683194],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "cypress-hills",
+      "name": "Cypress Hills",
+      "lines": ["J"],
+      "coordinates": [-73.873269, 40.689941],
+      "borough": "Brooklyn"
+    },
+    {
+      "id": "75th-elderts",
+      "name": "75 St-Elderts Ln",
+      "lines": ["J", "Z"],
+      "coordinates": [-73.867135, 40.691290],
+      "borough": "Queens"
+    },
+    {
+      "id": "85th-forest",
+      "name": "85 St-Forest Pkwy",
+      "lines": ["J"],
+      "coordinates": [-73.860764, 40.692435],
+      "borough": "Queens"
+    },
+    {
+      "id": "woodhaven-blvd-jz",
+      "name": "Woodhaven Blvd",
+      "lines": ["J", "Z"],
+      "coordinates": [-73.851576, 40.693879],
+      "borough": "Queens"
+    },
+    {
+      "id": "104-102",
+      "name": "104 St",
+      "lines": ["J", "Z"],
+      "coordinates": [-73.844330, 40.695178],
+      "borough": "Queens"
+    },
+    {
+      "id": "111th-street-jz",
+      "name": "111 St",
+      "lines": ["J"],
+      "coordinates": [-73.836345, 40.697480],
+      "borough": "Queens"
+    },
+    {
+      "id": "121st-street",
+      "name": "121 St",
+      "lines": ["J", "Z"],
+      "coordinates": [-73.828354, 40.700481],
+      "borough": "Queens"
+    },
+    {
+      "id": "inwood",
+      "name": "Inwood-207 St",
+      "lines": ["A"],
+      "coordinates": [-73.919899, 40.868072],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "175th-street",
+      "name": "175 St",
+      "lines": ["A"],
+      "coordinates": [-73.939704, 40.847391],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "190th-street",
+      "name": "190 St",
+      "lines": ["A"],
+      "coordinates": [-73.933596, 40.859022],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "155th-street",
+      "name": "155 St",
+      "lines": ["A", "C"],
+      "coordinates": [-73.941514, 40.830518],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "163rd-amsterdam",
+      "name": "163 St-Amsterdam Av",
+      "lines": ["C"],
+      "coordinates": [-73.939888, 40.836013],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "135th-street-bc",
+      "name": "135 St",
+      "lines": ["B", "C"],
+      "coordinates": [-73.947649, 40.817894],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "116th-street-bc",
+      "name": "116 St",
+      "lines": ["B", "C"],
+      "coordinates": [-73.954479, 40.805085],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "cathedral-110",
+      "name": "Cathedral Pkwy-110 St",
+      "lines": ["B", "C"],
+      "coordinates": [-73.958161, 40.800603],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "103rd-street-bc",
+      "name": "103 St",
+      "lines": ["B", "C"],
+      "coordinates": [-73.961454, 40.796092],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "96th-street-bc",
+      "name": "96 St",
+      "lines": ["B", "C"],
+      "coordinates": [-73.964696, 40.791642],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "86th-street-bc",
+      "name": "86 St",
+      "lines": ["B", "C"],
+      "coordinates": [-73.968916, 40.785868],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "81st-museum",
+      "name": "81 St-Museum of Natural History",
+      "lines": ["B", "C"],
+      "coordinates": [-73.972143, 40.781433],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "72nd-street-bc",
+      "name": "72 St",
+      "lines": ["B", "C"],
+      "coordinates": [-73.976336, 40.775594],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "59th-columbus",
+      "name": "59 St-Columbus Circle",
+      "lines": ["A", "B", "C", "D", "1"],
+      "coordinates": [-73.981736, 40.768296],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "7th-avenue-bde",
+      "name": "7 Av",
+      "lines": ["B", "D", "E"],
+      "coordinates": [-73.981637, 40.762862],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "47-50-rock",
+      "name": "47-50 Sts-Rockefeller Ctr",
+      "lines": ["B", "D", "F", "M"],
+      "coordinates": [-73.981329, 40.758663],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "5th-53",
+      "name": "5 Av-53 St",
+      "lines": ["E", "M"],
+      "coordinates": [-73.975275, 40.760167],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "lex-53",
+      "name": "Lexington Av-53 St",
+      "lines": ["E", "M", "6"],
+      "coordinates": [-73.969055, 40.757552],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "court-square-em",
+      "name": "Court Sq-23 St",
+      "lines": ["E", "M"],
+      "coordinates": [-73.946000, 40.747846],
+      "borough": "Queens"
+    },
+    {
+      "id": "queens-plaza",
+      "name": "Queens Plaza",
+      "lines": ["E", "M", "R"],
+      "coordinates": [-73.937243, 40.748973],
+      "borough": "Queens"
+    },
+    {
+      "id": "36th-street-queens",
+      "name": "36 Av",
+      "lines": ["M", "R"],
+      "coordinates": [-73.929575, 40.756804],
+      "borough": "Queens"
+    },
+    {
+      "id": "steinway",
+      "name": "Steinway St",
+      "lines": ["M", "R"],
+      "coordinates": [-73.905851, 40.756879],
+      "borough": "Queens"
+    },
+    {
+      "id": "46th-street-queens",
+      "name": "46 St",
+      "lines": ["M", "R"],
+      "coordinates": [-73.913333, 40.756312],
+      "borough": "Queens"
+    },
+    {
+      "id": "northern-blvd",
+      "name": "Northern Blvd",
+      "lines": ["M", "R"],
+      "coordinates": [-73.906006, 40.752885],
+      "borough": "Queens"
+    },
+    {
+      "id": "65th-street",
+      "name": "65 St",
+      "lines": ["M", "R"],
+      "coordinates": [-73.898453, 40.749669],
+      "borough": "Queens"
+    },
+    {
+      "id": "roosevelt-avenue",
+      "name": "Roosevelt Island",
+      "lines": ["F"],
+      "coordinates": [-73.953140, 40.759145],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "72nd-street-q",
+      "name": "72 St",
+      "lines": ["Q"],
+      "coordinates": [-73.958741, 40.768799],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "86th-street-q",
+      "name": "86 St",
+      "lines": ["Q"],
+      "coordinates": [-73.951787, 40.777891],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "96th-street-q",
+      "name": "96 St",
+      "lines": ["Q"],
+      "coordinates": [-73.947152, 40.784318],
+      "borough": "Manhattan"
+    },
+    {
+      "id": "116th-street-q",
+      "name": "116 St",
+      "lines": ["Q"],
+      "coordinates": [-73.936611, 40.795078],
+      "borough": "Manhattan"
+    }
+  ]
+}

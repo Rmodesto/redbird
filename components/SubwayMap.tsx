@@ -151,18 +151,19 @@ export default function SubwayMap({ className = '' }: SubwayMapProps) {
   const updateMapLayers = useCallback(() => {
     if (!map.current || !mapLoaded) return;
 
-    // Filter stations by selected lines
-    const filteredStations = stations.filter(station =>
-      station.lines.some(line => selectedLines.includes(line))
-    );
+    try {
+      // Filter stations by selected lines
+      const filteredStations = stations.filter(station =>
+        station.lines.some(line => selectedLines.includes(line))
+      );
 
-    // Filter trains by selected lines
-    const filteredTrains = trains.filter(train =>
-      selectedLines.includes(train.line)
-    );
+      // Filter trains by selected lines
+      const filteredTrains = trains.filter(train =>
+        selectedLines.includes(train.line)
+      );
 
-    // Update stations layer
-    if (showStations && filteredStations.length > 0) {
+      // Update stations layer
+      if (showStations && filteredStations.length > 0) {
       const stationGeoJSON = {
         type: 'FeatureCollection' as const,
         features: filteredStations.map(station => ({
@@ -181,9 +182,11 @@ export default function SubwayMap({ className = '' }: SubwayMapProps) {
         })),
       };
 
-      // Remove existing stations source if it exists
-      if (map.current.getSource('stations')) {
+      // Remove existing stations layer and source if they exist
+      if (map.current.getLayer('stations-layer')) {
         map.current.removeLayer('stations-layer');
+      }
+      if (map.current.getSource('stations')) {
         map.current.removeSource('stations');
       }
 
@@ -197,7 +200,33 @@ export default function SubwayMap({ className = '' }: SubwayMapProps) {
         type: 'circle',
         source: 'stations',
         paint: {
-          'circle-color': '#ffffff',
+          'circle-color': [
+            'case',
+            ['in', '1', ['get', 'lines']], MTA_COLORS['1'],
+            ['in', '2', ['get', 'lines']], MTA_COLORS['2'],
+            ['in', '3', ['get', 'lines']], MTA_COLORS['3'],
+            ['in', '4', ['get', 'lines']], MTA_COLORS['4'],
+            ['in', '5', ['get', 'lines']], MTA_COLORS['5'],
+            ['in', '6', ['get', 'lines']], MTA_COLORS['6'],
+            ['in', '7', ['get', 'lines']], MTA_COLORS['7'],
+            ['in', 'A', ['get', 'lines']], MTA_COLORS['A'],
+            ['in', 'B', ['get', 'lines']], MTA_COLORS['B'],
+            ['in', 'C', ['get', 'lines']], MTA_COLORS['C'],
+            ['in', 'D', ['get', 'lines']], MTA_COLORS['D'],
+            ['in', 'E', ['get', 'lines']], MTA_COLORS['E'],
+            ['in', 'F', ['get', 'lines']], MTA_COLORS['F'],
+            ['in', 'G', ['get', 'lines']], MTA_COLORS['G'],
+            ['in', 'J', ['get', 'lines']], MTA_COLORS['J'],
+            ['in', 'L', ['get', 'lines']], MTA_COLORS['L'],
+            ['in', 'M', ['get', 'lines']], MTA_COLORS['M'],
+            ['in', 'N', ['get', 'lines']], MTA_COLORS['N'],
+            ['in', 'Q', ['get', 'lines']], MTA_COLORS['Q'],
+            ['in', 'R', ['get', 'lines']], MTA_COLORS['R'],
+            ['in', 'W', ['get', 'lines']], MTA_COLORS['W'],
+            ['in', 'Z', ['get', 'lines']], MTA_COLORS['Z'],
+            ['in', 'S', ['get', 'lines']], MTA_COLORS['S'],
+            '#ffffff' // fallback for stations without recognized lines
+          ],
           'circle-radius': [
             'interpolate',
             ['linear'],
@@ -207,12 +236,16 @@ export default function SubwayMap({ className = '' }: SubwayMapProps) {
             18, 12
           ],
           'circle-stroke-width': 2,
-          'circle-stroke-color': '#333333',
+          'circle-stroke-color': '#ffffff',
           'circle-opacity': 0.9,
         },
       });
 
-      // Add station labels
+      // Add station labels - always recreate to ensure they're properly styled
+      if (map.current.getLayer('stations-labels')) {
+        map.current.removeLayer('stations-labels');
+      }
+      
       map.current.addLayer({
         id: 'stations-labels',
         type: 'symbol',
@@ -232,10 +265,14 @@ export default function SubwayMap({ className = '' }: SubwayMapProps) {
         minzoom: 13,
       });
     } else {
-      // Remove stations layers
+      // Remove stations layers if they exist
       if (map.current.getLayer('stations-layer')) {
         map.current.removeLayer('stations-layer');
+      }
+      if (map.current.getLayer('stations-labels')) {
         map.current.removeLayer('stations-labels');
+      }
+      if (map.current.getSource('stations')) {
         map.current.removeSource('stations');
       }
     }
@@ -263,10 +300,14 @@ export default function SubwayMap({ className = '' }: SubwayMapProps) {
         })),
       };
 
-      // Remove existing trains source if it exists
-      if (map.current.getSource('trains')) {
+      // Remove existing trains layers and source if they exist
+      if (map.current.getLayer('trains-layer')) {
         map.current.removeLayer('trains-layer');
+      }
+      if (map.current.getLayer('trains-labels')) {
         map.current.removeLayer('trains-labels');
+      }
+      if (map.current.getSource('trains')) {
         map.current.removeSource('trains');
       }
 
@@ -317,28 +358,35 @@ export default function SubwayMap({ className = '' }: SubwayMapProps) {
       // Remove trains layers
       if (map.current.getLayer('trains-layer')) {
         map.current.removeLayer('trains-layer');
+      }
+      if (map.current.getLayer('trains-labels')) {
         map.current.removeLayer('trains-labels');
+      }
+      if (map.current.getSource('trains')) {
         map.current.removeSource('trains');
       }
     }
 
-    // Add 3D buildings in 3D mode
-    if (is3D && !map.current.getLayer('3d-buildings')) {
-      map.current.addLayer({
-        id: '3d-buildings',
-        source: 'openmaptiles',
-        'source-layer': 'building',
-        type: 'fill-extrusion',
-        minzoom: 14,
-        paint: {
-          'fill-extrusion-color': '#aaa',
-          'fill-extrusion-height': ['get', 'render_height'],
-          'fill-extrusion-base': ['get', 'render_min_height'],
-          'fill-extrusion-opacity': 0.6,
-        },
-      });
-    } else if (!is3D && map.current.getLayer('3d-buildings')) {
-      map.current.removeLayer('3d-buildings');
+      // Add 3D buildings in 3D mode
+      if (is3D && !map.current.getLayer('3d-buildings')) {
+        map.current.addLayer({
+          id: '3d-buildings',
+          source: 'openmaptiles',
+          'source-layer': 'building',
+          type: 'fill-extrusion',
+          minzoom: 14,
+          paint: {
+            'fill-extrusion-color': '#aaa',
+            'fill-extrusion-height': ['get', 'render_height'],
+            'fill-extrusion-base': ['get', 'render_min_height'],
+            'fill-extrusion-opacity': 0.6,
+          },
+        });
+      } else if (!is3D && map.current.getLayer('3d-buildings')) {
+        map.current.removeLayer('3d-buildings');
+      }
+    } catch (error) {
+      console.warn('Error updating map layers:', error);
     }
   }, [stations, trains, selectedLines, showStations, showTrains, is3D, mapLoaded]);
 
@@ -368,7 +416,7 @@ export default function SubwayMap({ className = '' }: SubwayMapProps) {
             <div class="p-3">
               <h3 class="font-bold text-lg mb-2">${station.name}</h3>
               <p class="text-sm text-gray-600 mb-2">${station.borough}</p>
-              <div class="flex flex-wrap gap-1">
+              <div class="flex flex-wrap gap-1 mb-3">
                 ${station.lines.split(',').map((line: string) => `
                   <span class="px-2 py-1 rounded text-white text-xs font-bold" 
                         style="background-color: ${MTA_COLORS[line.trim() as keyof typeof MTA_COLORS] || '#808183'}">
@@ -376,6 +424,10 @@ export default function SubwayMap({ className = '' }: SubwayMapProps) {
                   </span>
                 `).join('')}
               </div>
+              <a href="/station/${station.id}" 
+                 class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-2 px-3 rounded text-sm font-medium transition-colors">
+                View Station Details →
+              </a>
             </div>
           `)
             .addTo(map.current!);
