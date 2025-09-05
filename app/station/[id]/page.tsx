@@ -1,8 +1,11 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import stationsData from '@/data/nyc-subway-stations-official.json';
-import type { SubwayStation } from '@/app/api/subway-stations/route';
+import { Suspense } from 'react';
+import stationsData from '@/data/stations.json';
+
+// Station metadata component
+import StationOverviewCard from '@/components/StationOverviewCard';
 
 // MTA Line Colors
 const MTA_COLORS = {
@@ -22,12 +25,9 @@ interface Props {
   params: { id: string }
 }
 
-async function getStation(id: string): Promise<SubwayStation | null> {
-  const station = stationsData.stations.find(s => s.id === id);
-  return station ? {
-    ...station,
-    coordinates: station.coordinates as [number, number]
-  } : null;
+async function getStation(slug: string) {
+  const station = stationsData.find(s => s.slug === slug);
+  return station;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -40,33 +40,78 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const title = `${station.name} Station - NYC Subway Sounds`;
-  const description = `Listen to real subway sounds from ${station.name} station in ${station.borough}. Serving ${station.lines.join(', ')} lines.`;
+  const title = `${station.name} Station - Crime Stats, Safety, & NYC Subway Info`;
+  const description = `Complete ${station.name} station guide: crime statistics, safety scores, rat reports, ADA accessibility, amenities & current NYC subway fare ($2.90). Serving ${station.lines.join(', ')} lines in ${station.borough}.`;
+  const keywords = [
+    `${station.name} station`,
+    `${station.borough} subway`,
+    'NYC subway crime statistics',
+    'subway safety',
+    'rat sightings NYC',
+    'ADA accessible stations',
+    'NYC subway fare',
+    'OMNY',
+    ...station.lines.map(line => `${line} train`),
+    'MTA',
+    'subway sounds'
+  ];
 
   return {
     title,
     description,
+    keywords: keywords.join(', '),
+    authors: [{ name: 'NYC Subway Sounds' }],
+    creator: 'NYC Subway Sounds',
+    publisher: 'NYC Subway Sounds',
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
     openGraph: {
       title,
       description,
       type: 'website',
       locale: 'en_US',
+      url: `/station/${params.id}`,
+      siteName: 'NYC Subway Sounds',
+      images: [
+        {
+          url: `/api/og?station=${encodeURIComponent(station.name)}&borough=${station.borough}&lines=${station.lines.join(',')}`,
+          width: 1200,
+          height: 630,
+          alt: `${station.name} Station - NYC Subway`,
+        },
+      ],
     },
     twitter: {
-      card: 'summary',
+      card: 'summary_large_image',
       title,
       description,
+      images: [`/api/og?station=${encodeURIComponent(station.name)}&borough=${station.borough}&lines=${station.lines.join(',')}`],
     },
     alternates: {
       canonical: `/station/${params.id}`,
+    },
+    other: {
+      'geo.position': `${station.latitude};${station.longitude}`,
+      'geo.placename': station.name,
+      'geo.region': 'US-NY',
+      'ICBM': `${station.latitude}, ${station.longitude}`,
     },
   };
 }
 
 export async function generateStaticParams() {
   // Generate static params for all stations
-  return stationsData.stations.map((station) => ({
-    id: station.id,
+  return stationsData.map((station) => ({
+    id: station.slug,
   }));
 }
 
@@ -96,7 +141,7 @@ export default async function StationPage({ params }: Props) {
                   {station.name}
                 </h1>
                 <p className="text-lg text-gray-600 mb-4">
-                  {station.borough} • {station.coordinates[1].toFixed(6)}, {station.coordinates[0].toFixed(6)}
+                  {station.borough} • {station.latitude.toFixed(6)}, {station.longitude.toFixed(6)}
                 </p>
                 
                 {/* Subway Lines */}
@@ -162,8 +207,8 @@ export default async function StationPage({ params }: Props) {
                   <h3 className="font-semibold text-gray-900 mb-2">Location</h3>
                   <p className="text-gray-600">{station.borough}</p>
                   <p className="text-sm text-gray-500">
-                    Lat: {station.coordinates[1].toFixed(6)}<br/>
-                    Lng: {station.coordinates[0].toFixed(6)}
+                    Lat: {station.latitude.toFixed(6)}<br/>
+                    Lng: {station.longitude.toFixed(6)}
                   </p>
                 </div>
                 <div>
@@ -189,6 +234,27 @@ export default async function StationPage({ params }: Props) {
 
           {/* Sidebar */}
           <div className="space-y-6">
+            {/* Station Overview Card */}
+            <Suspense fallback={
+              <div className="bg-white rounded-lg shadow-lg p-6">
+                <div className="animate-pulse">
+                  <div className="h-6 bg-gray-300 rounded w-3/4 mb-4"></div>
+                  <div className="space-y-3">
+                    <div className="h-4 bg-gray-300 rounded"></div>
+                    <div className="h-4 bg-gray-300 rounded w-5/6"></div>
+                    <div className="h-4 bg-gray-300 rounded w-2/3"></div>
+                  </div>
+                </div>
+              </div>
+            }>
+              <StationOverviewCard
+                stationId={station.id}
+                stationName={station.name}
+                borough={station.borough}
+                lines={station.lines}
+              />
+            </Suspense>
+
             {/* Map Preview */}
             <section className="bg-white rounded-lg shadow-lg p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">📍 Location</h3>
@@ -204,25 +270,6 @@ export default async function StationPage({ params }: Props) {
               >
                 View on Map
               </Link>
-            </section>
-
-            {/* Quick Stats */}
-            <section className="bg-white rounded-lg shadow-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">📊 Quick Stats</h3>
-              <div className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Borough:</span>
-                  <span className="font-medium">{station.borough}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Lines:</span>
-                  <span className="font-medium">{station.lines.length}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Complex:</span>
-                  <span className="font-medium">{station.complex ? 'Yes' : 'No'}</span>
-                </div>
-              </div>
             </section>
 
             {/* Related Stations */}
