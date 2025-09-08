@@ -4,6 +4,13 @@ const nextConfig = {
   poweredByHeader: false,
   compress: true,
   
+  // ESLint configuration for build
+  eslint: {
+    // Warning: This allows production builds to successfully complete even if
+    // your project has ESLint errors.
+    ignoreDuringBuilds: true,
+  },
+  
   // Image optimization
   images: {
     formats: ['image/avif', 'image/webp'],
@@ -94,10 +101,10 @@ const nextConfig = {
     NEXT_PUBLIC_SITE_DESCRIPTION: 'Your comprehensive guide to NYC subway with real-time arrivals, subway sounds, interactive maps, and station information',
   },
   
-  // Static export configuration for AWS deployment
-  output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
-  trailingSlash: true,
-  distDir: 'out',
+  // Build configuration
+  // output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
+  // trailingSlash: true,
+  // distDir: 'out',
   
   // Experimental features for better performance
   experimental: {

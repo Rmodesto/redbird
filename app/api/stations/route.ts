@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import fs from 'fs';
 import path from 'path';
 
+export const dynamic = 'force-dynamic';
+
 interface Platform {
   stopId: string;
   direction: string;
@@ -37,7 +39,7 @@ function loadStationData() {
       slugLookup = JSON.parse(fs.readFileSync(slugLookupPath, 'utf8'));
       stopIdLookup = JSON.parse(fs.readFileSync(stopIdLookupPath, 'utf8'));
       
-      console.log(`Loaded ${stationsData.length} stations`);
+      console.log(`Loaded ${stationsData?.length || 0} stations`);
     } catch (error) {
       console.error('Error loading station data:', error);
       throw error;

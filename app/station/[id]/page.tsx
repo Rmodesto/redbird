@@ -2,31 +2,23 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import stationsData from '@/data/stations.json';
+import { mtaDataService } from '@/lib/services/mta-data-service';
 
 // Station metadata component
 import StationOverviewCard from '@/components/StationOverviewCard';
+import TrainArrivals from '@/components/TrainArrivals';
+import SubwayLinesBadges from '@/components/subway/SubwayLinesBadges';
 
-// MTA Line Colors
-const MTA_COLORS = {
-  '1': '#EE352E', '2': '#EE352E', '3': '#EE352E',
-  '4': '#00933C', '5': '#00933C', '6': '#00933C',
-  '7': '#B933AD',
-  'A': '#0039A6', 'C': '#0039A6', 'E': '#0039A6',
-  'B': '#FF6319', 'D': '#FF6319', 'F': '#FF6319', 'M': '#FF6319',
-  'G': '#6CBE45',
-  'J': '#996633', 'Z': '#996633',
-  'L': '#A7A9AC',
-  'N': '#FCCC0A', 'Q': '#FCCC0A', 'R': '#FCCC0A', 'W': '#FCCC0A',
-  'S': '#808183',
-} as const;
 
 interface Props {
   params: { id: string }
 }
 
-async function getStation(slug: string) {
-  const station = stationsData.find(s => s.slug === slug);
+async function getStation(id: string) {
+  // Use the MTA data service to get station data
+  const station = mtaDataService.getStationById(id) || 
+                 mtaDataService.getStationBySlug(id);
+  
   return station;
 }
 
@@ -110,7 +102,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export async function generateStaticParams() {
   // Generate static params for all stations
-  return stationsData.map((station) => ({
+  const stations = mtaDataService.getAllStations();
+  return stations.map((station) => ({
     id: station.slug,
   }));
 }
@@ -145,16 +138,12 @@ export default async function StationPage({ params }: Props) {
                 </p>
                 
                 {/* Subway Lines */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {station.lines.map((line) => (
-                    <span
-                      key={line}
-                      className="inline-flex items-center justify-center w-8 h-8 rounded-full text-white font-bold text-sm"
-                      style={{ backgroundColor: MTA_COLORS[line as keyof typeof MTA_COLORS] || '#808183' }}
-                    >
-                      {line}
-                    </span>
-                  ))}
+                <div className="mb-6">
+                  <SubwayLinesBadges 
+                    lines={station.lines} 
+                    size="md" 
+                    showCount={true}
+                  />
                 </div>
               </div>
               
@@ -172,6 +161,20 @@ export default async function StationPage({ params }: Props) {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
+            {/* Live Train Arrivals */}
+            <Suspense fallback={
+              <div className="bg-white rounded-lg shadow-lg p-6">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">🚇 Live Train Arrivals</h2>
+                <div className="animate-pulse space-y-3">
+                  {[1, 2, 3].map(i => (
+                    <div key={i} className="bg-gray-100 rounded-lg p-4 h-20"></div>
+                  ))}
+                </div>
+              </div>
+            }>
+              <TrainArrivals stationId={station.id} stationName={station.name} />
+            </Suspense>
+
             {/* Subway Sounds Section */}
             <section className="bg-white rounded-lg shadow-lg p-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
@@ -216,16 +219,12 @@ export default async function StationPage({ params }: Props) {
                   <p className="text-gray-600">
                     {station.lines.length} line{station.lines.length !== 1 ? 's' : ''} serving this station
                   </p>
-                  <div className="flex flex-wrap gap-1 mt-2">
-                    {station.lines.map((line) => (
-                      <span
-                        key={line}
-                        className="text-xs px-2 py-1 rounded text-white font-medium"
-                        style={{ backgroundColor: MTA_COLORS[line as keyof typeof MTA_COLORS] || '#808183' }}
-                      >
-                        {line} Line
-                      </span>
-                    ))}
+                  <div className="mt-2">
+                    <SubwayLinesBadges 
+                      lines={station.lines} 
+                      size="sm" 
+                      variant="compact"
+                    />
                   </div>
                 </div>
               </div>

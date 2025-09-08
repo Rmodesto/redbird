@@ -46,7 +46,7 @@ export function generateSEOMetadata(config: SEOConfig): Metadata {
     'public transportation NYC',
   ];
   
-  const allKeywords = [...new Set([...defaultKeywords, ...keywords])];
+  const allKeywords = Array.from(new Set([...defaultKeywords, ...keywords]));
   
   const metadata: Metadata = {
     title: {

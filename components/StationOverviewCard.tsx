@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useStationLinesFromStation } from '@/hooks/useStationLines';
+import { Station } from '@/lib/subway-lines';
 
 interface StationStats {
   safetyScore: number;
@@ -35,15 +37,22 @@ interface Props {
   stationName: string;
   borough: string;
   lines: string[];
+  station?: Station;
 }
 
 const NYC_SUBWAY_FARE = 2.90; // Current NYC subway fare as of 2024
 const OMNY_WEEKLY_CAP = 34; // OMNY weekly fare cap
 
-const StationOverviewCard = ({ stationId, stationName, borough, lines }: Props) => {
+const StationOverviewCard = ({ stationId, stationName, borough, lines, station }: Props) => {
   const [stats, setStats] = useState<StationStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  
+  // Use the hook to get validated lines from station data
+  const { lines: validatedLines, validation } = useStationLinesFromStation(station || null);
+  
+  // Use validated lines if available, otherwise fall back to prop lines
+  const displayLines = validatedLines.length > 0 ? validatedLines : lines;
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -67,25 +76,32 @@ const StationOverviewCard = ({ stationId, stationName, borough, lines }: Props) 
   }, [stationId]);
 
   // Station amenities data (placeholder - would come from MTA API in production)
+  // Use deterministic values based on station ID to avoid hydration mismatches
+  const hashCode = stationId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  const pseudoRandom = (seed: number) => ((hashCode + seed) % 100) / 100;
+  
   const stationAmenities = {
-    adaAccessible: Math.random() > 0.77, // 23% of stations are ADA accessible
-    hasRestroom: Math.random() > 0.85,   // Few stations have public restrooms
+    adaAccessible: pseudoRandom(1) > 0.77, // 23% of stations are ADA accessible
+    hasRestroom: pseudoRandom(2) > 0.85,   // Few stations have public restrooms
     hasPolice: ['times-square-42', 'union-square', 'grand-central', 'atlantic-ave-barclays'].includes(stationId),
-    yearBuilt: getEstimatedYearBuilt(stationName, lines[0]),
-    hasElevator: Math.random() > 0.77,
-    hasWiFi: Math.random() > 0.5,
+    yearBuilt: getEstimatedYearBuilt(stationName, displayLines[0], hashCode),
+    hasElevator: pseudoRandom(3) > 0.77,
+    hasWiFi: pseudoRandom(4) > 0.5,
     isUnderground: !['coney-island-stillwell', 'yankee-stadium', 'astoria-ditmars'].includes(stationId),
   };
 
-  function getEstimatedYearBuilt(name: string, primaryLine: string): number {
+  function getEstimatedYearBuilt(name: string, primaryLine: string, seed: number): number {
     // Rough estimates based on historical subway construction
-    if (['1', '2', '3'].includes(primaryLine)) return Math.floor(Math.random() * 15) + 1904; // Original IRT
-    if (['4', '5', '6'].includes(primaryLine)) return Math.floor(Math.random() * 20) + 1918; // IRT Lexington
-    if (['N', 'Q', 'R', 'W'].includes(primaryLine)) return Math.floor(Math.random() * 25) + 1915; // BMT
-    if (['A', 'B', 'C', 'D', 'E', 'F'].includes(primaryLine)) return Math.floor(Math.random() * 30) + 1932; // IND
-    if (primaryLine === 'L') return Math.floor(Math.random() * 20) + 1928; // Canarsie Line
-    if (primaryLine === '7') return Math.floor(Math.random() * 25) + 1915; // Flushing Line
-    return Math.floor(Math.random() * 50) + 1920; // Default
+    // Use deterministic pseudo-random based on seed to avoid hydration issues
+    const pseudoRand = (max: number, offset: number) => Math.floor((seed % max) + offset);
+    
+    if (['1', '2', '3'].includes(primaryLine)) return pseudoRand(15, 1904); // Original IRT
+    if (['4', '5', '6'].includes(primaryLine)) return pseudoRand(20, 1918); // IRT Lexington
+    if (['N', 'Q', 'R', 'W'].includes(primaryLine)) return pseudoRand(25, 1915); // BMT
+    if (['A', 'B', 'C', 'D', 'E', 'F'].includes(primaryLine)) return pseudoRand(30, 1932); // IND
+    if (primaryLine === 'L') return pseudoRand(20, 1928); // Canarsie Line
+    if (primaryLine === '7') return pseudoRand(25, 1915); // Flushing Line
+    return pseudoRand(50, 1920); // Default
   }
 
   const getRiskColor = (riskLevel: string) => {
@@ -261,9 +277,19 @@ const StationOverviewCard = ({ stationId, stationName, borough, lines }: Props) 
             </div>
             <div className="flex justify-between">
               <span className="text-gray-600">Lines Served:</span>
-              <span className="text-gray-900">{lines.length}</span>
+              <span className="text-gray-900">{displayLines.length}</span>
             </div>
           </div>
+
+          {/* Line Validation Warnings */}
+          {validation && validation.warnings.length > 0 && (
+            <div className="mt-3 p-2 bg-yellow-50 border border-yellow-200 rounded text-xs">
+              <div className="font-semibold text-yellow-700">⚠️ Line Data Notice:</div>
+              {validation.warnings.map((warning, index) => (
+                <div key={index} className="text-yellow-600 mt-1">• {warning}</div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

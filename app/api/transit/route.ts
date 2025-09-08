@@ -2,6 +2,8 @@
 import { NextResponse } from "next/server";
 import GtfsRealtimeBindings from "gtfs-realtime-bindings";
 
+export const dynamic = 'force-dynamic';
+
 // Define TypeScript interfaces for our data structures
 interface StopTimeUpdate {
   stopId: string;
@@ -64,8 +66,8 @@ export async function POST(req: Request) {
         stopTimeUpdates:
           entity.tripUpdate.stopTimeUpdate?.map((update) => ({
             stopId: update.stopId || "",
-            arrival: update.arrival?.time?.low || null,
-            departure: update.departure?.time?.low || null,
+            arrival: update.arrival?.time ? (typeof update.arrival.time === 'number' ? update.arrival.time : update.arrival.time.low) : null,
+            departure: update.departure?.time ? (typeof update.departure.time === 'number' ? update.departure.time : update.departure.time.low) : null,
           })) || [],
       }));
 

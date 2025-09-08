@@ -42,7 +42,7 @@ export default function TestSimplePage() {
         },
         center: [-73.9857, 40.7589], // NYC
         zoom: 12,
-        attributionControl: true
+        attributionControl: false
       });
 
       // Add navigation controls

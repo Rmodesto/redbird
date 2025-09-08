@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
-import stationsData from '@/data/nyc-subway-stations-official.json';
+import { mtaDataService } from '@/lib/services/mta-data-service';
+
+export const dynamic = 'force-dynamic';
 
 // Haversine formula to calculate distance between two points
 function calculateDistance(
@@ -77,8 +79,9 @@ async function fetchNearbyData(lat: number, lon: number, radiusMiles: number = 0
 
   const [crimeData, ratData] = await Promise.all(promises);
   
-  // Filter data within radius
-  const nearbyCrimes = (crimeData as CrimeData[]).filter(crime => {
+  // Ensure data is arrays and filter within radius
+  const crimeArray = Array.isArray(crimeData) ? crimeData as CrimeData[] : [];
+  const nearbyCrimes = crimeArray.filter(crime => {
     const crimeLat = parseFloat(crime.latitude);
     const crimeLon = parseFloat(crime.longitude);
     if (!crimeLat || !crimeLon || crimeLat === 0 || crimeLon === 0) return false;
@@ -87,7 +90,8 @@ async function fetchNearbyData(lat: number, lon: number, radiusMiles: number = 0
     return distance <= radiusMiles;
   });
 
-  const nearbyRats = (ratData as RatData[]).filter(rat => {
+  const ratArray = Array.isArray(ratData) ? ratData as RatData[] : [];
+  const nearbyRats = ratArray.filter(rat => {
     const ratLat = parseFloat(rat.latitude);
     const ratLon = parseFloat(rat.longitude);
     if (!ratLat || !ratLon) return false;
@@ -111,8 +115,8 @@ export async function GET(request: Request) {
     );
   }
 
-  // Find the station
-  const station = stationsData.stations.find(s => s.id === stationId);
+  // Find the station using MTA data service
+  const station = mtaDataService.getStationById(stationId);
   
   if (!station) {
     return NextResponse.json(
@@ -122,7 +126,8 @@ export async function GET(request: Request) {
   }
 
   try {
-    const [stationLon, stationLat] = station.coordinates;
+    const stationLat = station.latitude;
+    const stationLon = station.longitude;
     const { crimes, rats } = await fetchNearbyData(stationLat, stationLon, radius);
     
     // Analyze crime types
@@ -172,7 +177,7 @@ export async function GET(request: Request) {
         id: station.id,
         name: station.name,
         borough: station.borough,
-        coordinates: station.coordinates
+        coordinates: [station.longitude, station.latitude]
       },
       searchRadius: radius,
       timestamp: new Date().toISOString(),
@@ -213,11 +218,12 @@ export async function POST(request: Request) {
 
     const results = await Promise.all(
       stationIds.map(async (stationId: string) => {
-        const station = stationsData.stations.find(s => s.id === stationId);
+        const station = mtaDataService.getStationById(stationId);
         if (!station) return null;
 
         try {
-          const [stationLon, stationLat] = station.coordinates;
+          const stationLat = station.latitude;
+          const stationLon = station.longitude;
           const { crimes, rats } = await fetchNearbyData(stationLat, stationLon, radius);
           
           const crimeWeight = crimes.length * 2;

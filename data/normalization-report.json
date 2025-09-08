@@ -1,0 +1,458 @@
+{
+  "created": "2025-09-06T01:34:45.681Z",
+  "source": "NY Open Data - MTA Subway Stations",
+  "normalization_method": "complex_id grouping",
+  "statistics": {
+    "total_complexes": 445,
+    "total_platforms": 496,
+    "by_borough": {
+      "Manhattan": 121,
+      "Queens": 79,
+      "Bronx": 68,
+      "Brooklyn": 156,
+      "Staten Island": 21
+    },
+    "by_lines": {
+      "1": 38,
+      "2": 49,
+      "3": 34,
+      "4": 28,
+      "5": 45,
+      "6": 38,
+      "7": 22,
+      "L": 24,
+      "B": 37,
+      "C": 40,
+      "J": 30,
+      "Z": 21,
+      "A": 44,
+      "D": 36,
+      "N": 28,
+      "Q": 29,
+      "R": 45,
+      "W": 23,
+      "F": 45,
+      "G": 21,
+      "E": 22,
+      "M": 36,
+      "S": 11
+    },
+    "multi_division_stations": [
+      {
+        "name": "14 St-Union Sq",
+        "divisions": [
+          "BMT",
+          "IRT"
+        ],
+        "lines": [
+          "4",
+          "5",
+          "6",
+          "L",
+          "N",
+          "Q",
+          "R",
+          "W"
+        ]
+      },
+      {
+        "name": "161 St-Yankee Stadium",
+        "divisions": [
+          "IND",
+          "IRT"
+        ],
+        "lines": [
+          "4",
+          "B",
+          "D"
+        ]
+      },
+      {
+        "name": "168 St",
+        "divisions": [
+          "IND",
+          "IRT"
+        ],
+        "lines": [
+          "1",
+          "A",
+          "C"
+        ]
+      },
+      {
+        "name": "34 St-Herald Sq",
+        "divisions": [
+          "BMT",
+          "IND"
+        ],
+        "lines": [
+          "B",
+          "D",
+          "F",
+          "M",
+          "N",
+          "Q",
+          "R",
+          "W"
+        ]
+      },
+      {
+        "name": "4 Av-9 St",
+        "divisions": [
+          "BMT",
+          "IND"
+        ],
+        "lines": [
+          "F",
+          "G",
+          "R"
+        ]
+      },
+      {
+        "name": "42 St-Bryant Pk",
+        "divisions": [
+          "IND",
+          "IRT"
+        ],
+        "lines": [
+          "7",
+          "B",
+          "D",
+          "F",
+          "M"
+        ]
+      },
+      {
+        "name": "59 St-Columbus Circle",
+        "divisions": [
+          "IND",
+          "IRT"
+        ],
+        "lines": [
+          "1",
+          "A",
+          "B",
+          "C",
+          "D"
+        ]
+      },
+      {
+        "name": "6 Av",
+        "divisions": [
+          "BMT",
+          "IND",
+          "IRT"
+        ],
+        "lines": [
+          "1",
+          "2",
+          "3",
+          "F",
+          "L",
+          "M"
+        ]
+      },
+      {
+        "name": "8 Av",
+        "divisions": [
+          "BMT",
+          "IND"
+        ],
+        "lines": [
+          "A",
+          "C",
+          "E",
+          "L"
+        ]
+      },
+      {
+        "name": "Atlantic Av-Barclays Ctr",
+        "divisions": [
+          "BMT",
+          "IRT"
+        ],
+        "lines": [
+          "2",
+          "3",
+          "4",
+          "5",
+          "B",
+          "D",
+          "N",
+          "Q",
+          "R"
+        ]
+      },
+      {
+        "name": "Botanic Garden",
+        "divisions": [
+          "BMT",
+          "IRT"
+        ],
+        "lines": [
+          "2",
+          "3",
+          "4",
+          "5",
+          "S"
+        ]
+      },
+      {
+        "name": "Broadway Junction",
+        "divisions": [
+          "BMT",
+          "IND"
+        ],
+        "lines": [
+          "A",
+          "C",
+          "J",
+          "L",
+          "Z"
+        ]
+      },
+      {
+        "name": "Broadway-Lafayette St",
+        "divisions": [
+          "IND",
+          "IRT"
+        ],
+        "lines": [
+          "6",
+          "B",
+          "D",
+          "F",
+          "M"
+        ]
+      },
+      {
+        "name": "Canal St",
+        "divisions": [
+          "BMT",
+          "IRT"
+        ],
+        "lines": [
+          "6",
+          "J",
+          "N",
+          "Q",
+          "R",
+          "W",
+          "Z"
+        ]
+      },
+      {
+        "name": "Chambers St",
+        "divisions": [
+          "BMT",
+          "IRT"
+        ],
+        "lines": [
+          "4",
+          "5",
+          "6",
+          "J",
+          "Z"
+        ]
+      },
+      {
+        "name": "Cortlandt St",
+        "divisions": [
+          "BMT",
+          "IND",
+          "IRT"
+        ],
+        "lines": [
+          "2",
+          "3",
+          "A",
+          "C",
+          "E",
+          "R",
+          "W"
+        ]
+      },
+      {
+        "name": "Court Sq-23 St",
+        "divisions": [
+          "IND",
+          "IRT"
+        ],
+        "lines": [
+          "7",
+          "E",
+          "G",
+          "M"
+        ]
+      },
+      {
+        "name": "Court St",
+        "divisions": [
+          "BMT",
+          "IRT"
+        ],
+        "lines": [
+          "2",
+          "3",
+          "4",
+          "5",
+          "R"
+        ]
+      },
+      {
+        "name": "Delancey St-Essex St",
+        "divisions": [
+          "BMT",
+          "IND"
+        ],
+        "lines": [
+          "F",
+          "J",
+          "M",
+          "Z"
+        ]
+      },
+      {
+        "name": "Franklin Av",
+        "divisions": [
+          "BMT",
+          "IND"
+        ],
+        "lines": [
+          "C",
+          "S"
+        ]
+      },
+      {
+        "name": "Fulton St",
+        "divisions": [
+          "BMT",
+          "IND",
+          "IRT"
+        ],
+        "lines": [
+          "2",
+          "3",
+          "4",
+          "5",
+          "A",
+          "C",
+          "J",
+          "Z"
+        ]
+      },
+      {
+        "name": "Jackson Hts-Roosevelt Av",
+        "divisions": [
+          "IND",
+          "IRT"
+        ],
+        "lines": [
+          "7",
+          "E",
+          "F",
+          "M",
+          "R"
+        ]
+      },
+      {
+        "name": "Jay St-MetroTech",
+        "divisions": [
+          "BMT",
+          "IND"
+        ],
+        "lines": [
+          "A",
+          "C",
+          "F",
+          "R"
+        ]
+      },
+      {
+        "name": "Lexington Av/53 St",
+        "divisions": [
+          "IND",
+          "IRT"
+        ],
+        "lines": [
+          "6",
+          "E",
+          "M"
+        ]
+      },
+      {
+        "name": "Lexington Av/59 St",
+        "divisions": [
+          "BMT",
+          "IRT"
+        ],
+        "lines": [
+          "4",
+          "5",
+          "6",
+          "N",
+          "R",
+          "W"
+        ]
+      },
+      {
+        "name": "Lorimer St",
+        "divisions": [
+          "BMT",
+          "IND"
+        ],
+        "lines": [
+          "G",
+          "L"
+        ]
+      },
+      {
+        "name": "Queensboro Plaza",
+        "divisions": [
+          "BMT",
+          "IRT"
+        ],
+        "lines": [
+          "7",
+          "N",
+          "W"
+        ]
+      },
+      {
+        "name": "Times Sq-42 St",
+        "divisions": [
+          "BMT",
+          "IND",
+          "IRT"
+        ],
+        "lines": [
+          "1",
+          "2",
+          "3",
+          "7",
+          "A",
+          "C",
+          "E",
+          "N",
+          "Q",
+          "R",
+          "S",
+          "W"
+        ]
+      },
+      {
+        "name": "Whitehall St-South Ferry",
+        "divisions": [
+          "BMT",
+          "IRT"
+        ],
+        "lines": [
+          "1",
+          "R",
+          "W"
+        ]
+      }
+    ],
+    "ada_accessible": 124
+  }
+}

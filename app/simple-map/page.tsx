@@ -21,8 +21,7 @@ export default function SimpleMapPage() {
         // Dynamically import MapLibre GL JS
         const maplibregl = await import('maplibre-gl');
         
-        // Import CSS dynamically too
-        await import('maplibre-gl/dist/maplibre-gl.css');
+        // CSS is already imported at the component level
         
         if (!mounted || !mapContainer.current) return;
 

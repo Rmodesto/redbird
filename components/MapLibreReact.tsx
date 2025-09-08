@@ -8,7 +8,7 @@ import Map, {
   Popup,
   Source,
   Layer
-} from 'react-map-gl';
+} from 'react-map-gl/maplibre';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 

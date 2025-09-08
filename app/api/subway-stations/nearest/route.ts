@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import stationsData from '@/data/nyc-subway-stations-official.json';
 import type { SubwayStation } from '@/app/api/subway-stations/route';
 
+export const dynamic = 'force-dynamic';
+
 // Haversine formula to calculate distance between two points
 function calculateDistance(
   lat1: number,

@@ -3,6 +3,8 @@ import GtfsRealtimeBindings from "gtfs-realtime-bindings";
 import fs from 'fs';
 import path from 'path';
 
+export const dynamic = 'force-dynamic';
+
 // MTA feed URLs for different subway lines
 const MTA_FEEDS = {
   'ACE': 'https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-ace',
@@ -361,7 +363,7 @@ export async function GET(
       const mockArrivals: Arrival[] = [];
       const baseTime = now;
       
-      stationLines.forEach((line, lineIndex) => {
+      stationLines.forEach((line: string, lineIndex: number) => {
         // Uptown trains
         mockArrivals.push({
           line: line,

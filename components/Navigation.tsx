@@ -5,7 +5,6 @@ import Link from "next/link";
 import StationSearch from "./StationSearch";
 
 export default function Navigation() {
-  const [searchQuery, setSearchQuery] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -17,7 +16,7 @@ export default function Navigation() {
             <div className="bg-black text-white p-2 rounded">
               <span className="text-sm font-bold">🚇</span>
             </div>
-            <span className="font-bold text-lg">NYC "SUBWAY" HUB</span>
+            <span className="font-bold text-lg">NYC &quot;SUBWAY&quot; HUB</span>
           </Link>
 
           {/* Desktop Navigation */}

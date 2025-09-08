@@ -1,10 +1,13 @@
 import { Metadata } from "next";
 import { generatePageMetadata } from "@/lib/seo";
 import { generateMapSchema, generateBreadcrumbSchema, generateStructuredDataScript } from "@/lib/structured-data";
-import dynamic from 'next/dynamic';
+import dynamicImport from 'next/dynamic';
+
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 // Dynamically import the map component to avoid SSR issues
-const SubwayMap = dynamic(
+const SubwayMap = dynamicImport(
   () => import('@/components/SubwayMap'),
   { 
     ssr: false,

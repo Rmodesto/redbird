@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 export interface SubwayTrain {
   id: string;
   line: string;
@@ -82,7 +84,7 @@ function generateTrainPosition(line: string, direction: 'N' | 'S' | 'E' | 'W'): 
     'S': { lat: 40.7550, lng: -73.9850 },
   };
 
-  const base = baseCoords[line] || baseCoords['1'];
+  const base = baseCoords[line as keyof typeof baseCoords] || baseCoords['1'];
   
   // Add some randomness and directional movement
   const latOffset = (Math.random() - 0.5) * 0.02; // ~1 mile variance
@@ -122,7 +124,7 @@ function getNextStop(line: string, direction: 'N' | 'S' | 'E' | 'W'): string {
     'W': { N: '42 St-Times Sq', S: 'Canal St' },
   };
 
-  return nextStops[line]?.[direction] || 'Next Station';
+  return nextStops[line as keyof typeof nextStops]?.[direction as keyof typeof nextStops[keyof typeof nextStops]] || 'Next Station';
 }
 
 // Cache for trains to simulate movement

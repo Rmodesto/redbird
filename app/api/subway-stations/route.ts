@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import stationsData from '@/data/nyc-subway-stations-official.json';
 
+export const dynamic = 'force-dynamic';
+
 export interface SubwayStation {
   id: string;
   name: string;

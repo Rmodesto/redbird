@@ -119,8 +119,8 @@ export default function SubwaySoundsPage() {
               NYC Subway Sounds Archive
             </h1>
             <p className="text-xl text-gray-300 mb-6">
-              Listen to authentic New York subway sounds - from iconic "stand clear" announcements 
-              to the unique ambiance of NYC's underground transit system.
+              Listen to authentic New York subway sounds - from iconic &quot;stand clear&quot; announcements 
+              to the unique ambiance of NYC&apos;s underground transit system.
             </p>
             <div className="flex flex-wrap gap-4">
               <button className="bg-white text-black px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition flex items-center gap-2">
@@ -247,13 +247,13 @@ export default function SubwaySoundsPage() {
             <h2 className="text-3xl font-bold mb-6">The Iconic Sounds of NYC Subway</h2>
             <p className="text-gray-700 mb-4">
               The New York City Subway has a unique acoustic signature that millions recognize instantly. 
-              From the distinctive "stand clear of the closing doors please" announcement to the rumble of 
-              trains arriving at platforms, these sounds are an integral part of NYC's cultural identity.
+              From the distinctive &quot;stand clear of the closing doors please&quot; announcement to the rumble of 
+              trains arriving at platforms, these sounds are an integral part of NYC&apos;s cultural identity.
             </p>
             
             <h3 className="text-2xl font-bold mt-8 mb-4">What Makes Subway Sounds Unique?</h3>
             <p className="text-gray-700 mb-4">
-              Each element of the subway's soundscape serves a purpose. The door chimes alert passengers, 
+              Each element of the subway&apos;s soundscape serves a purpose. The door chimes alert passengers, 
               conductor announcements provide crucial information, and even the sound of trains on tracks 
               tells experienced riders about speed and track conditions.
             </p>
@@ -282,14 +282,14 @@ export default function SubwaySoundsPage() {
               </div>
               <div className="bg-gray-50 p-4 rounded-lg">
                 <h4 className="font-semibold mb-2">Nostalgia & Memory</h4>
-                <p className="text-gray-700 text-sm">Preserve the evolving sounds of NYC's transit system</p>
+                <p className="text-gray-700 text-sm">Preserve the evolving sounds of NYC&apos;s transit system</p>
               </div>
             </div>
 
             <h3 className="text-2xl font-bold mt-8 mb-4">Evolution of Subway Sounds</h3>
             <p className="text-gray-700 mb-4">
               NYC subway sounds have evolved significantly over the decades. From the mechanical clicking of 
-              token turnstiles to today's electronic OMNY beeps, each era has its distinctive audio signature. 
+              token turnstiles to today&apos;s electronic OMNY beeps, each era has its distinctive audio signature. 
               Our archive preserves both historical recordings and contemporary sounds, creating a comprehensive 
               audio timeline of NYC transit.
             </p>

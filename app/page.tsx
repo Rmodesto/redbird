@@ -263,7 +263,7 @@ export default function HomePage() {
               <p>
                 Navigate the New York City Subway system with confidence using our comprehensive directory. 
                 With <strong>472 stations</strong> across <strong>27 lines</strong> spanning Manhattan, Brooklyn, 
-                Queens, and the Bronx, the NYC subway is one of the world's largest rapid transit systems.
+                Queens, and the Bronx, the NYC subway is one of the world&apos;s largest rapid transit systems.
               </p>
               
               <h3 className="text-2xl font-bold mt-6 mb-3">Real-Time Train Tracking</h3>
@@ -274,16 +274,16 @@ export default function HomePage() {
               
               <h3 className="text-2xl font-bold mt-6 mb-3">Authentic Subway Sounds</h3>
               <p>
-                Experience the unique acoustic signature of NYC's underground with our extensive subway sounds archive. 
-                From the iconic "stand clear of the closing doors" announcement to the rumble of approaching trains, 
-                we've captured the authentic sounds that define New York's transit experience.
+                Experience the unique acoustic signature of NYC&apos;s underground with our extensive subway sounds archive. 
+                From the iconic &quot;stand clear of the closing doors&quot; announcement to the rumble of approaching trains, 
+                we&apos;ve captured the authentic sounds that define New York&apos;s transit experience.
               </p>
               
               <h3 className="text-2xl font-bold mt-6 mb-3">Interactive Subway Map</h3>
               <p>
                 Our interactive map makes journey planning simple. Click any station for detailed information, 
                 view real-time train positions, check accessibility features, and discover nearby attractions. 
-                Whether you're a daily commuter or first-time visitor, our map helps you navigate NYC like a local.
+                Whether you&apos;re a daily commuter or first-time visitor, our map helps you navigate NYC like a local.
               </p>
             </div>
           </div>
