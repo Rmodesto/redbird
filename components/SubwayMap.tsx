@@ -5,6 +5,9 @@ import { SubwayStation } from '@/app/api/subway-stations/route';
 import { SubwayTrain } from '@/app/api/subway-trains/route';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
+import { SubwayLineAnimator } from '@/lib/map/lineAnimator';
+import { StationTooltipManager } from '@/lib/map/stationTooltip';
+import { SUBWAY_LINE_ROUTES, getLineRoute } from '@/lib/map/subwayLineRoutes';
 
 // MTA Line Colors
 const MTA_COLORS = {
@@ -18,9 +21,10 @@ const MTA_COLORS = {
   'L': '#A7A9AC',
   'N': '#FCCC0A', 'Q': '#FCCC0A', 'R': '#FCCC0A', 'W': '#FCCC0A',
   'S': '#808183',
+  'TEST': '#FF0000',
 };
 
-const SUBWAY_LINES = Object.keys(MTA_COLORS);
+const SUBWAY_LINES = [...Object.keys(MTA_COLORS), 'TEST'];
 
 // Map Styles
 const MAP_STYLES = [
@@ -48,15 +52,20 @@ interface SubwayMapProps {
 export default function SubwayMap({ className = '' }: SubwayMapProps) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<maplibregl.Map | null>(null);
+  const lineAnimator = useRef<SubwayLineAnimator | null>(null);
+  const tooltipManager = useRef<StationTooltipManager | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
   const [stations, setStations] = useState<SubwayStation[]>([]);
   const [trains, setTrains] = useState<SubwayTrain[]>([]);
   const [selectedLines, setSelectedLines] = useState<string[]>(SUBWAY_LINES);
+  const [animatedLines, setAnimatedLines] = useState<string[]>([]);
   const [is3D, setIs3D] = useState(false);
   const [currentStyle, setCurrentStyle] = useState(MAP_STYLES[1]); // Start with dark
   const [showStations, setShowStations] = useState(true);
   const [showTrains, setShowTrains] = useState(true);
+  const [enableAnimation, setEnableAnimation] = useState(true);
   const [lastUpdate, setLastUpdate] = useState(new Date());
+  const stationsData = useRef<Map<string, SubwayStation>>(new Map());
 
   // Initialize map
   useEffect(() => {
@@ -83,6 +92,11 @@ export default function SubwayMap({ className = '' }: SubwayMapProps) {
       map.current.on('load', () => {
         console.log('Map loaded successfully');
         setMapLoaded(true);
+        
+        // Initialize animation and tooltip managers
+        lineAnimator.current = new SubwayLineAnimator(map.current!);
+        tooltipManager.current = new StationTooltipManager(map.current!);
+        
         loadStations();
         loadTrains();
       });
@@ -107,30 +121,121 @@ export default function SubwayMap({ className = '' }: SubwayMapProps) {
     try {
       const response = await fetch('/api/subway-stations');
       const data = await response.json();
-      setStations(data.stations);
+      
+      // Use stations data directly (coordinates already included)
+      const transformedStations = (data.stations || data);
+      
+      setStations(transformedStations);
+      
+      // Store stations in a map for quick lookup by id
+      const stationMap = new Map<string, any>();
+      transformedStations.forEach((station: any) => {
+        stationMap.set(station.id, station);
+      });
+      stationsData.current = stationMap;
+      console.log('Loaded', transformedStations.length, 'stations. Sample IDs:', Array.from(stationMap.keys()).slice(0, 10));
     } catch (error) {
       console.error('Failed to load stations:', error);
     }
   }, []);
 
-  // Load trains data
+  // Load trains data - DISABLED to fix redirect errors
   const loadTrains = useCallback(async () => {
     try {
-      const response = await fetch('/api/subway-trains');
-      const data = await response.json();
-      setTrains(data.trains);
+      console.log('Trains loading disabled - focusing on line animation');
+      // Skip trains loading for now to fix the redirect loop
+      setTrains([]);
       setLastUpdate(new Date());
     } catch (error) {
       console.error('Failed to load trains:', error);
     }
   }, []);
 
+  // Handle line selection/deselection
+  const toggleLine = useCallback((lineId: string) => {
+    if (!map.current || !lineAnimator.current || !mapLoaded) {
+      console.log('Animation blocked:', { map: !!map.current, lineAnimator: !!lineAnimator.current, mapLoaded });
+      return;
+    }
+    
+    if (animatedLines.includes(lineId)) {
+      // Remove the line
+      console.log('Removing line:', lineId);
+      lineAnimator.current.removeLine(lineId);
+      setAnimatedLines(prev => prev.filter(id => id !== lineId));
+      setSelectedLines(prev => prev.filter(id => id !== lineId));
+    } else {
+      // Animate the line
+      const lineRoute = getLineRoute(lineId);
+      if (!lineRoute) {
+        console.log('No route found for line:', lineId);
+        return;
+      }
+      console.log('Animating line:', lineId, 'Route:', lineRoute);
+      
+      // Get coordinates for all stations in the line
+      const coordinates: [number, number][] = [];
+      const stationPoints: Array<{id: string; name: string; coordinates: [number, number]}> = [];
+      
+      lineRoute.stations.forEach(stationId => {
+        const station = stationsData.current.get(stationId);
+        if (station) {
+          coordinates.push(station.coordinates);
+          stationPoints.push({
+            id: station.id,
+            name: station.name,
+            coordinates: station.coordinates
+          });
+        } else {
+          console.log('Station not found:', stationId, 'Available stations:', Array.from(stationsData.current.keys()).slice(0, 5));
+        }
+      });
+      
+      console.log('Found coordinates:', coordinates.length, 'out of', lineRoute.stations.length, 'stations');
+      
+      if (coordinates.length > 0) {
+        // Animate the line drawing
+        if (enableAnimation) {
+          console.log('Starting animation for line', lineId);
+          lineAnimator.current.animateLine(
+            lineId,
+            coordinates,
+            lineRoute.color,
+            3000,
+            () => {
+              console.log('Animation complete for line', lineId);
+              // Add stations after line animation completes
+              lineAnimator.current?.addStationMarkers(lineId, stationPoints);
+            }
+          );
+        } else {
+          // Draw line instantly without animation
+          lineAnimator.current.animateLine(lineId, coordinates, lineRoute.color, 0);
+          lineAnimator.current.addStationMarkers(lineId, stationPoints);
+        }
+        
+        setAnimatedLines(prev => [...prev, lineId]);
+        setSelectedLines(prev => [...prev, lineId]);
+      } else {
+        console.log('No coordinates found for line', lineId);
+      }
+    }
+  }, [mapLoaded, animatedLines, enableAnimation]);
+  
   // Update map style
   useEffect(() => {
     if (!map.current || !mapLoaded) return;
     
     map.current.setStyle(currentStyle.url);
     map.current.once('styledata', () => {
+      // Re-draw animated lines after style change
+      animatedLines.forEach(lineId => {
+        if (lineAnimator.current) {
+          lineAnimator.current.removeLine(lineId);
+        }
+      });
+      setAnimatedLines([]);
+      setSelectedLines([]);
       updateMapLayers();
     });
   }, [currentStyle]);
@@ -494,27 +599,30 @@ export default function SubwayMap({ className = '' }: SubwayMapProps) {
     };
   }, [mapLoaded]);
 
-  // Auto-update trains every 30 seconds
+  // Auto-update trains every 30 seconds - DISABLED 
   useEffect(() => {
-    const interval = setInterval(loadTrains, 30000);
-    return () => clearInterval(interval);
+    // Disabled to prevent API redirect errors
+    console.log('Auto-trains update disabled');
+    // const interval = setInterval(loadTrains, 30000);
+    // return () => clearInterval(interval);
   }, [loadTrains]);
-
-  // Toggle line visibility
-  const toggleLine = useCallback((line: string) => {
-    setSelectedLines(prev => 
-      prev.includes(line) 
-        ? prev.filter(l => l !== line)
-        : [...prev, line]
-    );
-  }, []);
 
   // Toggle all lines
   const toggleAllLines = useCallback(() => {
-    setSelectedLines(prev => 
-      prev.length === SUBWAY_LINES.length ? [] : [...SUBWAY_LINES]
-    );
-  }, []);
+    if (!lineAnimator.current) return;
+    
+    if (animatedLines.length > 0) {
+      // Clear all lines
+      lineAnimator.current.clearAllLines();
+      setAnimatedLines([]);
+      setSelectedLines([]);
+    } else {
+      // Note: Adding all lines at once might be performance heavy
+      // For now, we'll just clear all
+      setAnimatedLines([]);
+      setSelectedLines([]);
+    }
+  }, [animatedLines]);
 
   // Quick tour function
   const startTour = useCallback(() => {
@@ -634,7 +742,7 @@ export default function SubwayMap({ className = '' }: SubwayMapProps) {
             onClick={toggleAllLines}
             className="text-sm px-2 py-1 bg-gray-200 hover:bg-gray-300 rounded transition"
           >
-            {selectedLines.length === SUBWAY_LINES.length ? 'None' : 'All'}
+            {animatedLines.length > 0 ? 'Clear' : 'None'}
           </button>
         </div>
         
@@ -644,20 +752,34 @@ export default function SubwayMap({ className = '' }: SubwayMapProps) {
               key={line}
               onClick={() => toggleLine(line)}
               className={`w-8 h-8 rounded font-bold text-sm transition-all duration-200 ${
-                selectedLines.includes(line)
+                animatedLines.includes(line)
                   ? 'text-white shadow-lg scale-110'
                   : 'text-gray-400 bg-gray-100 opacity-50 hover:opacity-75'
               }`}
               style={{
-                backgroundColor: selectedLines.includes(line) 
+                backgroundColor: animatedLines.includes(line) 
                   ? MTA_COLORS[line as keyof typeof MTA_COLORS]
                   : undefined
               }}
-              title={`${line} Line`}
+              title={`${line} Line - Click to ${animatedLines.includes(line) ? 'hide' : 'show'}`}
             >
               {line}
             </button>
           ))}
+        </div>
+        
+        {/* Animation Toggle */}
+        <div className="pt-3 border-t">
+          <button
+            onClick={() => setEnableAnimation(!enableAnimation)}
+            className={`w-full px-3 py-2 rounded text-sm font-semibold transition ${
+              enableAnimation
+                ? 'bg-green-600 text-white'
+                : 'bg-gray-200 text-gray-600'
+            }`}
+          >
+            {enableAnimation ? '✨ Animation ON' : 'Animation OFF'}
+          </button>
         </div>
       </div>
 

@@ -73,9 +73,6 @@ export default function SubwayMapPage() {
               <button className="bg-white text-black px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
                 View Full Screen Map
               </button>
-              <button className="border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-black transition">
-                Download PDF Map
-              </button>
             </div>
           </div>
         </section>
