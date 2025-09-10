@@ -2876,13 +2876,14 @@
       "id": "grand-central-42nd-st",
       "name": "Grand Central - 42nd St",
       "lines": [
-        "S"
+        "S",
+        "7"
       ],
       "coordinates": [
         -73.97918900000727,
         40.75276899923941
       ],
-      "borough": "Queens"
+      "borough": "Manhattan"
     },
     {
       "id": "grand-st",
@@ -2982,7 +2983,19 @@
         -73.98793683324297,
         40.74964489214577
       ],
-      "borough": "Queens"
+      "borough": "Manhattan"
+    },
+    {
+      "id": "34th-st-hudson-yards",
+      "name": "34th St - Hudson Yards",
+      "lines": [
+        "7"
+      ],
+      "coordinates": [
+        -74.00263500000001,
+        40.75532800000000
+      ],
+      "borough": "Manhattan"
     },
     {
       "id": "hewes-st",
@@ -4244,13 +4257,14 @@
       "id": "times-sq-42nd-st",
       "name": "Times Sq - 42nd St",
       "lines": [
-        "S"
+        "S",
+        "7"
       ],
       "coordinates": [
         -73.98622899993683,
         40.75598333254976
       ],
-      "borough": "Queens"
+      "borough": "Manhattan"
     },
     {
       "id": "tremont-ave",

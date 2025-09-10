@@ -182,10 +182,10 @@ export const LINE_STATION_ORDER: Record<string, string[]> = {
     'Brooklyn Bridge - City Hall'
   ],
   
-  // 7 Line - Flushing Express/Local (Queens to Manhattan)
+  // 7 Line - Flushing Express/Local (Queens to Manhattan) - Complete route with Hudson Yards
   '7': [
     'Flushing - Main St',
-    'Mets - Willets Point',
+    'Mets - Willets Point', 
     '111th St',
     '103rd St - Corona Plaza',
     'Junction Blvd',
@@ -195,12 +195,15 @@ export const LINE_STATION_ORDER: Record<string, string[]> = {
     '69th St',
     'Woodside - 61st St',
     '52nd St',
-    '45th Rd - Court House Sq',
     '40th St',
+    '45th Rd - Court House Sq',
     'Queensboro Plz',
     'Hunters Point Ave',
     'Vernon Blvd - Jackson Ave',
-    '5th Ave - Bryant Pk'
+    'Grand Central - 42nd St',
+    '5th Ave - Bryant Pk',
+    'Times Sq - 42nd St',
+    '34th St - Hudson Yards'
   ],
   
   // L Line - 14th Street-Canarsie Local (Manhattan to Brooklyn)

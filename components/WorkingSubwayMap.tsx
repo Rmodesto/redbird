@@ -57,6 +57,17 @@ export default function WorkingSubwayMap() {
   const [is3D, setIs3D] = useState(false);
   const [currentStyle, setCurrentStyle] = useState(MAP_STYLES[0]);
   const [showStations, setShowStations] = useState(true);
+  const [tooltip, setTooltip] = useState<{
+    visible: boolean;
+    x: number;
+    y: number;
+    content: { name: string; lines: string[] };
+  }>({
+    visible: false,
+    x: 0,
+    y: 0,
+    content: { name: '', lines: [] }
+  });
   
   // Use the imported station data directly
   const stations: SubwayStation[] = stationsData.stations as SubwayStation[];
@@ -88,6 +99,74 @@ export default function WorkingSubwayMap() {
       addStationsToMap();
     });
 
+    const setupStationTooltips = () => {
+      if (!map.current) return;
+      
+      let hoveredStateId: any = null;
+
+      // Change cursor on hover
+      map.current.on('mouseenter', 'station-circles', (e) => {
+        map.current!.getCanvas().style.cursor = 'pointer';
+        
+        if (e.features && e.features.length > 0) {
+          if (hoveredStateId !== null) {
+            map.current!.setFeatureState(
+              { source: 'all-stations', id: hoveredStateId },
+              { hover: false }
+            );
+          }
+          hoveredStateId = e.features[0].id;
+          map.current!.setFeatureState(
+            { source: 'all-stations', id: hoveredStateId },
+            { hover: true }
+          );
+          
+          const feature = e.features[0];
+          const properties = feature.properties;
+          
+          if (properties) {
+            const lines = properties.lines ? properties.lines.split(', ') : [];
+            
+            setTooltip({
+              visible: true,
+              x: e.point.x,
+              y: e.point.y,
+              content: {
+                name: properties.name || '',
+                lines: lines
+              }
+            });
+          }
+        }
+      });
+
+      map.current.on('mouseleave', 'station-circles', () => {
+        map.current!.getCanvas().style.cursor = '';
+        
+        if (hoveredStateId !== null) {
+          map.current!.setFeatureState(
+            { source: 'all-stations', id: hoveredStateId },
+            { hover: false }
+          );
+        }
+        hoveredStateId = null;
+        setTooltip(prev => ({ ...prev, visible: false }));
+      });
+
+      // Update position on mouse move
+      map.current.on('mousemove', 'station-circles', (e) => {
+        if (tooltip.visible && e.point) {
+          setTooltip(prev => ({
+            ...prev,
+            x: e.point.x,
+            y: e.point.y
+          }));
+        }
+      });
+
+      console.log('✅ Station tooltips setup complete');
+    };
+
     const addStationsToMap = () => {
       if (!map.current) return;
       
@@ -96,8 +175,9 @@ export default function WorkingSubwayMap() {
       // Create GeoJSON for all stations
       const stationsGeoJSON = {
         type: 'FeatureCollection' as const,
-        features: stations.map(station => ({
+        features: stations.map((station, index) => ({
           type: 'Feature' as const,
+          id: index,
           properties: {
             name: station.name,
             lines: station.lines.join(', '),
@@ -121,12 +201,20 @@ export default function WorkingSubwayMap() {
         type: 'circle',
         source: 'all-stations',
         paint: {
-          'circle-radius': 4,
+          'circle-radius': [
+            'case',
+            ['boolean', ['feature-state', 'hover'], false],
+            8,
+            4
+          ],
           'circle-color': '#ffffff',
           'circle-stroke-color': '#333333',
           'circle-stroke-width': 1,
         },
       });
+
+      // Add hover effects and tooltip functionality
+      setupStationTooltips();
 
       console.log('✅ Stations added to map');
     };
@@ -255,8 +343,40 @@ export default function WorkingSubwayMap() {
         },
       });
 
+      // Add hover events for this line's stations
+      map.current!.on('mouseenter', stationsLayerId, () => {
+        map.current!.getCanvas().style.cursor = 'pointer';
+      });
+
+      map.current!.on('mouseleave', stationsLayerId, () => {
+        map.current!.getCanvas().style.cursor = '';
+        setTooltip(prev => ({ ...prev, visible: false }));
+      });
+
+      map.current!.on('mousemove', stationsLayerId, (e) => {
+        if (e.features && e.features.length > 0) {
+          const feature = e.features[0];
+          const properties = feature.properties;
+          
+          if (properties) {
+            const station = stations.find(s => s.name === properties.name);
+            const lines = station ? station.lines : [lineId];
+            
+            setTooltip({
+              visible: true,
+              x: e.point.x,
+              y: e.point.y,
+              content: {
+                name: properties.name || '',
+                lines: lines
+              }
+            });
+          }
+        }
+      });
+
       setActiveLines(prev => [...prev, lineId]);
-      console.log(`✅ Line ${lineId} added`);
+      console.log(`✅ Line ${lineId} added with tooltips`);
     }
   };
 
@@ -457,6 +577,38 @@ export default function WorkingSubwayMap() {
           <span>Live Updates Active</span>
         </div>
       </div>
+
+      {/* Glassmorphic Tooltip */}
+      {tooltip.visible && (
+        <div
+          className="absolute pointer-events-none z-50 transition-all duration-100"
+          style={{
+            left: `${tooltip.x + 15}px`,
+            top: `${tooltip.y - 40}px`,
+          }}
+        >
+          <div className="glassmorphic-tooltip">
+            <div className="glassmorphic-tooltip-content">
+              <div className="font-semibold text-sm text-white mb-2">
+                {tooltip.content.name}
+              </div>
+              {tooltip.content.lines && tooltip.content.lines.length > 0 && (
+                <div className="flex gap-1 flex-wrap">
+                  {tooltip.content.lines.map((line, index) => (
+                    <span
+                      key={`${line}-${index}`}
+                      className="inline-block w-6 h-6 rounded-full text-xs font-bold text-white text-center leading-6 bg-opacity-80"
+                      style={{ backgroundColor: MTA_COLORS[line] || '#808183' }}
+                    >
+                      {line}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
