@@ -28,86 +28,116 @@ export class SubwayLineAnimator {
     duration: number = 3000,
     onComplete?: () => void
   ) {
+    console.log(`🎬 Starting animation for line ${lineId} with ${coordinates.length} coordinates`);
+    
     // Remove existing line if it exists
     this.removeLine(lineId);
 
-    // Create line source with initial empty coordinates
-    this.map.addSource(`line-${lineId}`, {
-      type: 'geojson',
-      data: {
-        type: 'Feature',
-        properties: {},
-        geometry: {
-          type: 'LineString',
-          coordinates: []
-        }
-      }
-    });
+    // Wait for map style to be fully loaded
+    if (!this.map.isStyleLoaded()) {
+      console.log('Map style not loaded, waiting...');
+      this.map.once('idle', () => {
+        this.animateLine(lineId, coordinates, color, duration, onComplete);
+      });
+      return;
+    }
 
-    // Add line layer with the subway line color
-    this.map.addLayer({
-      id: `line-${lineId}`,
-      type: 'line',
-      source: `line-${lineId}`,
-      layout: {
-        'line-join': 'round',
-        'line-cap': 'round'
-      },
-      paint: {
-        'line-color': color,
-        'line-width': [
-          'interpolate',
-          ['linear'],
-          ['zoom'],
-          10, 2,
-          15, 4,
-          20, 6
-        ],
-        'line-opacity': 0.8
-      }
-    });
+    try {
+      // Create line source with initial empty coordinates
+      console.log(`📍 Adding source line-${lineId}`);
+      this.map.addSource(`line-${lineId}`, {
+        type: 'geojson',
+        data: {
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'LineString',
+            coordinates: []
+          }
+        }
+      });
+
+      // Add line layer with the subway line color
+      console.log(`🎨 Adding layer line-${lineId} with color ${color}`);
+      this.map.addLayer({
+        id: `line-${lineId}`,
+        type: 'line',
+        source: `line-${lineId}`,
+        layout: {
+          'line-join': 'round',
+          'line-cap': 'round'
+        },
+        paint: {
+          'line-color': color,
+          'line-width': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            10, 2,
+            15, 4,
+            20, 6
+          ],
+          'line-opacity': 0.8
+        }
+      });
+    } catch (error) {
+      console.error(`❌ Error setting up line ${lineId}:`, error);
+      return;
+    }
 
     // Start animation
     const startTime = Date.now();
     const totalPoints = coordinates.length;
 
     const animate = () => {
-      const elapsed = Date.now() - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      
-      // Ease-in-out animation
-      const easedProgress = this.easeInOutCubic(progress);
-      
-      // Calculate how many points to show
-      const pointsToShow = Math.floor(easedProgress * totalPoints);
-      const animatedCoords = coordinates.slice(0, pointsToShow + 1);
+      try {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Ease-in-out animation
+        const easedProgress = this.easeInOutCubic(progress);
+        
+        // Calculate how many points to show
+        const pointsToShow = Math.floor(easedProgress * totalPoints);
+        const animatedCoords = coordinates.slice(0, pointsToShow + 1);
 
-      // Update the line on the map
-      const source = this.map.getSource(`line-${lineId}`) as maplibregl.GeoJSONSource;
-      if (source) {
-        source.setData({
-          type: 'Feature',
-          properties: {},
-          geometry: {
-            type: 'LineString',
-            coordinates: animatedCoords
+        // Update the line on the map
+        const source = this.map.getSource(`line-${lineId}`) as maplibregl.GeoJSONSource;
+        if (source) {
+          source.setData({
+            type: 'Feature',
+            properties: {},
+            geometry: {
+              type: 'LineString',
+              coordinates: animatedCoords
+            }
+          });
+          
+          if (pointsToShow % 10 === 0) { // Log progress every 10 points
+            console.log(`🚇 Line ${lineId} progress: ${Math.round(progress * 100)}% (${pointsToShow}/${totalPoints} points)`);
           }
-        });
-      }
+        } else {
+          console.error(`❌ Source line-${lineId} not found during animation`);
+          return;
+        }
 
-      if (progress < 1) {
-        const animationId = requestAnimationFrame(animate);
-        this.animations.set(lineId, {
-          lineId,
-          color,
-          coordinates,
-          progress: easedProgress,
-          animationId,
-          speed: duration
-        });
-      } else {
-        this.animations.delete(lineId);
-        if (onComplete) onComplete();
+        if (progress < 1) {
+          const animationId = requestAnimationFrame(animate);
+          this.animations.set(lineId, {
+            lineId,
+            color,
+            coordinates,
+            progress: easedProgress,
+            animationId,
+            speed: duration
+          });
+        } else {
+          console.log(`✅ Animation complete for line ${lineId}`);
+          this.animations.delete(lineId);
+          if (onComplete) onComplete();
+        }
+      } catch (error) {
+        console.error(`❌ Animation error for line ${lineId}:`, error);
       }
     };
 
@@ -195,6 +225,8 @@ export class SubwayLineAnimator {
    * Remove a line and its stations from the map
    */
   removeLine(lineId: string) {
+    console.log(`🗑️ Removing line ${lineId}`);
+    
     // Cancel any ongoing animation
     const animation = this.animations.get(lineId);
     if (animation?.animationId) {
@@ -202,30 +234,44 @@ export class SubwayLineAnimator {
     }
     this.animations.delete(lineId);
 
-    // Remove layers
-    const layersToRemove = [
-      `line-${lineId}`,
-      `stations-${lineId}`,
-      `station-labels-${lineId}`
-    ];
+    try {
+      // Remove layers (check existence first)
+      const layersToRemove = [
+        `line-${lineId}`,
+        `stations-${lineId}`,
+        `station-labels-${lineId}`
+      ];
 
-    layersToRemove.forEach(layerId => {
-      if (this.map.getLayer(layerId)) {
-        this.map.removeLayer(layerId);
-      }
-    });
+      layersToRemove.forEach(layerId => {
+        try {
+          if (this.map.getLayer(layerId)) {
+            console.log(`🗑️ Removing layer ${layerId}`);
+            this.map.removeLayer(layerId);
+          }
+        } catch (error) {
+          console.warn(`Warning: Could not remove layer ${layerId}:`, error);
+        }
+      });
 
-    // Remove sources
-    const sourcesToRemove = [
-      `line-${lineId}`,
-      `stations-${lineId}`
-    ];
+      // Remove sources (check existence first)
+      const sourcesToRemove = [
+        `line-${lineId}`,
+        `stations-${lineId}`
+      ];
 
-    sourcesToRemove.forEach(sourceId => {
-      if (this.map.getSource(sourceId)) {
-        this.map.removeSource(sourceId);
-      }
-    });
+      sourcesToRemove.forEach(sourceId => {
+        try {
+          if (this.map.getSource(sourceId)) {
+            console.log(`🗑️ Removing source ${sourceId}`);
+            this.map.removeSource(sourceId);
+          }
+        } catch (error) {
+          console.warn(`Warning: Could not remove source ${sourceId}:`, error);
+        }
+      });
+    } catch (error) {
+      console.error(`❌ Error removing line ${lineId}:`, error);
+    }
   }
 
   /**

@@ -4,9 +4,9 @@ import { generateMapSchema, generateBreadcrumbSchema, generateStructuredDataScri
 import Navigation from "@/components/Navigation";
 import dynamic from 'next/dynamic';
 
-// Dynamically import the map component to avoid SSR issues
+// Dynamically import the working map component to avoid SSR issues
 const SubwayMap = dynamic(
-  () => import('@/components/SubwayMap'),
+  () => import('@/components/WorkingSubwayMap'),
   { 
     ssr: false,
     loading: () => (

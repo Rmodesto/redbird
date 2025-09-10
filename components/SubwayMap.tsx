@@ -173,22 +173,18 @@ export default function SubwayMap({ className = '' }: SubwayMapProps) {
       }
       console.log('Animating line:', lineId, 'Route:', lineRoute);
       
-      // Get coordinates for all stations in the line
+      // Get coordinates for all stations that serve this line from our MTA data
       const coordinates: [number, number][] = [];
       const stationPoints: Array<{id: string; name: string; coordinates: [number, number]}> = [];
       
-      lineRoute.stations.forEach(stationId => {
-        const station = stationsData.current.get(stationId);
-        if (station) {
-          coordinates.push(station.coordinates);
-          stationPoints.push({
-            id: station.id,
-            name: station.name,
-            coordinates: station.coordinates
-          });
-        } else {
-          console.log('Station not found:', stationId, 'Available stations:', Array.from(stationsData.current.keys()).slice(0, 5));
-        }
+      // Find all stations that serve this line from our loaded stations data
+      stations.filter(station => station.lines.includes(lineId)).forEach(station => {
+        coordinates.push(station.coordinates);
+        stationPoints.push({
+          id: station.id,
+          name: station.name,
+          coordinates: station.coordinates
+        });
       });
       
       console.log('Found coordinates:', coordinates.length, 'out of', lineRoute.stations.length, 'stations');

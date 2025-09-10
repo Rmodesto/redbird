@@ -6,9 +6,9 @@ import dynamicImport from 'next/dynamic';
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-// Dynamically import the map component to avoid SSR issues
+// Dynamically import the fixed map component to avoid SSR issues
 const SubwayMap = dynamicImport(
-  () => import('@/components/SubwayMap'),
+  () => import('@/components/SubwayMapFixed'),
   { 
     ssr: false,
     loading: () => (
