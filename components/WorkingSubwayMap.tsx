@@ -5,7 +5,7 @@ import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
 // Import the station data directly
-import stationsData from '@/data/nyc-subway-stations-official.json';
+import stationsData from '@/data/stations-normalized.json';
 import { orderStationsByRoute } from '@/lib/map/stationRouteOrder';
 
 // MTA Line Colors
@@ -69,8 +69,11 @@ export default function WorkingSubwayMap() {
     content: { name: '', lines: [] }
   });
   
-  // Use the imported station data directly
-  const stations: SubwayStation[] = stationsData.stations as SubwayStation[];
+  // Use the imported station data directly and transform coordinates format
+  const stations: SubwayStation[] = (stationsData as any[]).map(station => ({
+    ...station,
+    coordinates: [station.longitude, station.latitude]
+  }));
 
   // Initialize map
   useEffect(() => {
@@ -436,11 +439,11 @@ export default function WorkingSubwayMap() {
     if (!map.current) return;
     
     const tourStops = [
-      { center: [-73.9857, 40.7589], zoom: 12, pitch: 0 }, // Overview
-      { center: [-73.9851, 40.7589], zoom: 14, pitch: 45 }, // Midtown
-      { center: [-73.9891, 40.7143], zoom: 15, pitch: 60 }, // Downtown
-      { center: [-73.9442, 40.6782], zoom: 14, pitch: 45 }, // Brooklyn
-      { center: [-73.8603, 40.7489], zoom: 13, pitch: 30 }, // Queens
+      { center: [-73.9857, 40.7589] as [number, number], zoom: 12, pitch: 0 }, // Overview
+      { center: [-73.9851, 40.7589] as [number, number], zoom: 14, pitch: 45 }, // Midtown
+      { center: [-73.9891, 40.7143] as [number, number], zoom: 15, pitch: 60 }, // Downtown
+      { center: [-73.9442, 40.6782] as [number, number], zoom: 14, pitch: 45 }, // Brooklyn
+      { center: [-73.8603, 40.7489] as [number, number], zoom: 13, pitch: 30 }, // Queens
     ];
     
     let currentStop = 0;

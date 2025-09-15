@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
+import { orderStationsByRoute } from '@/lib/map/stationRouteOrder';
 
 // MTA Line Colors
 const MTA_COLORS = {
@@ -98,10 +99,12 @@ export default function SubwayMapFixed() {
         setStations(data.stations);
       } catch (error) {
         console.error('❌ Failed to load stations:', error);
-        console.error('Error details:', {
-          message: error.message,
-          stack: error.stack,
-        });
+        if (error instanceof Error) {
+          console.error('Error details:', {
+            message: error.message,
+            stack: error.stack,
+          });
+        }
       }
     };
 
@@ -229,13 +232,17 @@ export default function SubwayMapFixed() {
 
       console.log(`📍 Found ${lineStations.length} stations for line ${lineId}`);
 
+      // Order stations according to route
+      const orderedStations = orderStationsByRoute(lineStations, lineId);
+      console.log(`🗺️ Ordered ${orderedStations.length} stations for line ${lineId}`);
+
       // Create GeoJSON for the line
       const lineGeoJSON = {
         type: 'Feature' as const,
         properties: { line: lineId },
         geometry: {
           type: 'LineString' as const,
-          coordinates: lineStations.map(station => station.coordinates),
+          coordinates: orderedStations.map(station => station.coordinates),
         },
       };
 

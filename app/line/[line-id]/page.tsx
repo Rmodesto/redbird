@@ -6,67 +6,91 @@ import Navigation from "../../../components/Navigation";
 import SubwayBadge from "../../../components/SubwayBadge";
 import CultureCard from "../../../components/CultureCard";
 import AdSlot from "../../../components/AdSlot";
+import { SUBWAY_LINE_ROUTES } from "../../../lib/map/subwayLineRoutes";
 
-// Sample data for subway lines
-const lineData = {
-  "a": {
-    id: "A",
-    name: "A",
-    color: "bg-blue-600",
-    textColor: "text-white",
-    fullName: "8th Avenue Express",
-    description: "Express service between northern Manhattan and far Rockaway/Lefferts Boulevard in Queens and Brooklyn.",
-    stations: [
-      { name: "Inwood-207 St", borough: "Manhattan", transfers: [], slug: "inwood-207" },
-      { name: "Dyckman St", borough: "Manhattan", transfers: [], slug: "dyckman" },
-      { name: "190 St", borough: "Manhattan", transfers: [], slug: "190-st" },
-      { name: "181 St", borough: "Manhattan", transfers: [], slug: "181-st" },
-      { name: "175 St", borough: "Manhattan", transfers: [], slug: "175-st" },
-      { name: "168 St", borough: "Manhattan", transfers: ["1"], slug: "168-st" },
-      { name: "145 St", borough: "Manhattan", transfers: ["B", "C", "D"], slug: "145-st" },
-      { name: "125 St", borough: "Manhattan", transfers: ["B", "C", "D"], slug: "125-st-bcd" },
-      { name: "59 St-Columbus Circle", borough: "Manhattan", transfers: ["B", "C", "D", "1"], slug: "59-columbus-circle" },
-      { name: "42 St-Port Authority", borough: "Manhattan", transfers: ["N", "Q", "R", "W", "1", "2", "3", "7"], slug: "42-port-authority" },
-      { name: "34 St-Penn Station", borough: "Manhattan", transfers: ["1", "2", "3"], slug: "34-penn-station" },
-      { name: "14 St", borough: "Manhattan", transfers: ["L"], slug: "14-st-8-ave" },
-      { name: "W 4 St", borough: "Manhattan", transfers: ["B", "C", "D", "E", "F", "M"], slug: "w-4-st" },
-      { name: "Spring St", borough: "Manhattan", transfers: ["C", "E"], slug: "spring-st" },
-      { name: "Canal St", borough: "Manhattan", transfers: ["C", "E"], slug: "canal-st-8-ave" },
-      { name: "Chambers St", borough: "Manhattan", transfers: ["C"], slug: "chambers-st" },
-      { name: "Fulton St", borough: "Manhattan", transfers: ["2", "3", "4", "5", "J", "Z"], slug: "fulton-st" },
-      { name: "High St", borough: "Brooklyn", transfers: [], slug: "high-st" },
-      { name: "Jay St-MetroTech", borough: "Brooklyn", transfers: ["F", "R"], slug: "jay-st-metrotech" },
-      { name: "Hoyt-Schermerhorn", borough: "Brooklyn", transfers: ["G"], slug: "hoyt-schermerhorn" },
-    ],
-    culturalSpots: [
-      {
-        category: "LANDMARK",
-        title: "One World Trade Center",
-        description: "The tallest building in NYC, accessible from Fulton St station",
-        image: "🏢"
-      },
-      {
-        category: "CULTURE",
-        title: "Brooklyn Bridge Views", 
-        description: "Walk across the iconic bridge from High St station",
-        image: "🌉"
-      },
-      {
-        category: "FOOD",
-        title: "Smorgasburg Weekend Market",
-        description: "Famous food market near Brooklyn Bridge-City Hall area",
-        image: "🍕"
-      }
-    ]
+// Helper function to format station names
+const formatStationName = (slug: string): string => {
+  return slug
+    .split('-')
+    .map(word => {
+      // Handle special cases
+      if (word === 'st') return 'St';
+      if (word === 'av') return 'Ave';
+      if (word === 'ave') return 'Ave';
+      if (word === 'blvd') return 'Blvd';
+      if (word === 'pkwy') return 'Pkwy';
+      if (word === 'sq') return 'Sq';
+      if (word === 'pl') return 'Pl';
+      if (word === 'rd') return 'Rd';
+      if (word === 'hts') return 'Heights';
+      if (word === 'jfk') return 'JFK';
+      // Capitalize first letter
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join(' ');
+};
+
+// Helper function to determine borough from station slug
+const getBoroughFromStation = (slug: string): string => {
+  // This is a simplified mapping - in production, you'd use actual station data
+  if (slug.includes('bronx') || slug.includes('woodlawn') || slug.includes('pelham') || 
+      slug.includes('fordham') || slug.includes('138') || slug.includes('149') || 
+      slug.includes('161') || slug.includes('167') || slug.includes('170') || 
+      slug.includes('176') || slug.includes('183')) {
+    return 'Bronx';
   }
+  if (slug.includes('queens') || slug.includes('jamaica') || slug.includes('flushing') || 
+      slug.includes('astoria') || slug.includes('forest') || slug.includes('jackson') ||
+      slug.includes('corona') || slug.includes('elmhurst') || slug.includes('woodside')) {
+    return 'Queens';
+  }
+  if (slug.includes('brooklyn') || slug.includes('atlantic') || slug.includes('jay') || 
+      slug.includes('hoyt') || slug.includes('nevins') || slug.includes('bergen') ||
+      slug.includes('prospect') || slug.includes('coney') || slug.includes('brighton')) {
+    return 'Brooklyn';
+  }
+  if (slug.includes('staten')) {
+    return 'Staten Island';
+  }
+  // Default to Manhattan for most stations
+  return 'Manhattan';
+};
+
+// Map line colors
+const lineColors: Record<string, { bg: string; text: string }> = {
+  '1': { bg: 'bg-red-600', text: 'text-white' },
+  '2': { bg: 'bg-red-600', text: 'text-white' },
+  '3': { bg: 'bg-red-600', text: 'text-white' },
+  '4': { bg: 'bg-green-600', text: 'text-white' },
+  '5': { bg: 'bg-green-600', text: 'text-white' },
+  '6': { bg: 'bg-green-600', text: 'text-white' },
+  '7': { bg: 'bg-purple-600', text: 'text-white' },
+  'A': { bg: 'bg-blue-600', text: 'text-white' },
+  'C': { bg: 'bg-blue-600', text: 'text-white' },
+  'E': { bg: 'bg-blue-600', text: 'text-white' },
+  'B': { bg: 'bg-orange-500', text: 'text-white' },
+  'D': { bg: 'bg-orange-500', text: 'text-white' },
+  'F': { bg: 'bg-orange-500', text: 'text-white' },
+  'M': { bg: 'bg-orange-500', text: 'text-white' },
+  'G': { bg: 'bg-green-500', text: 'text-white' },
+  'J': { bg: 'bg-amber-600', text: 'text-white' },
+  'Z': { bg: 'bg-amber-600', text: 'text-white' },
+  'L': { bg: 'bg-gray-500', text: 'text-white' },
+  'N': { bg: 'bg-yellow-500', text: 'text-black' },
+  'Q': { bg: 'bg-yellow-500', text: 'text-black' },
+  'R': { bg: 'bg-yellow-500', text: 'text-black' },
+  'W': { bg: 'bg-yellow-500', text: 'text-black' },
+  'S': { bg: 'bg-gray-600', text: 'text-white' },
 };
 
 export default function LinePage() {
   const params = useParams();
-  const lineId = params['line-id'] as string;
-  const line = lineData[lineId as keyof typeof lineData];
-
-  if (!line) {
+  const lineId = (params['line-id'] as string).toUpperCase();
+  
+  // Get line data from SUBWAY_LINE_ROUTES
+  const lineRoute = SUBWAY_LINE_ROUTES[lineId];
+  
+  if (!lineRoute) {
     return (
       <div className="min-h-screen bg-white">
         <Navigation />
@@ -77,6 +101,51 @@ export default function LinePage() {
       </div>
     );
   }
+
+  // Transform line route data to match component structure
+  const line = {
+    id: lineRoute.id,
+    name: lineRoute.id,
+    color: lineColors[lineRoute.id]?.bg || 'bg-gray-600',
+    textColor: lineColors[lineRoute.id]?.text || 'text-white',
+    fullName: lineRoute.name.split(' - ')[1] || lineRoute.name,
+    description: `Service from ${formatStationName(lineRoute.terminals.north || lineRoute.terminals.west || '')} to ${formatStationName(lineRoute.terminals.south || lineRoute.terminals.east || '')}`,
+    stations: lineRoute.stations.map(slug => ({
+      name: formatStationName(slug),
+      borough: getBoroughFromStation(slug),
+      transfers: [], // We don't have transfer data in the route file
+      slug: slug
+    })),
+    culturalSpots: [
+      {
+        category: "LANDMARK",
+        title: "Explore NYC",
+        description: `Discover landmarks along the ${lineRoute.id} line`,
+        image: "🏢"
+      },
+      {
+        category: "CULTURE",
+        title: "Local Culture", 
+        description: `Experience the neighborhoods of the ${lineRoute.id} train`,
+        image: "🎭"
+      },
+      {
+        category: "FOOD",
+        title: "Food & Dining",
+        description: `Find great eats near ${lineRoute.id} train stations`,
+        image: "🍕"
+      }
+    ]
+  };
+
+  // Console log all stops for this line
+  console.log(`🚇 LINE ${line.name.toUpperCase()} - ${line.fullName}`);
+  console.log(`📊 Total Stops: ${line.stations.length}`);
+  console.log(`🗺️ All Stops:`);
+  line.stations.forEach((station, index) => {
+    console.log(`  ${index + 1}. ${station.name} (${station.borough})`);
+  });
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 
   return (
     <div className="min-h-screen bg-white pb-20 md:pb-0">
@@ -103,12 +172,12 @@ export default function LinePage() {
             <div className="relative">
               {/* Vertical line representing the route */}
               <div 
-                className={`absolute left-6 top-0 bottom-0 w-1 ${line.color}`}
-                style={{height: `${line.stations.length * 60 - 20}px`}}
+                className={`absolute left-6 top-2 w-1 ${line.color}`}
+                style={{height: `calc(100% - 16px)`}}
               ></div>
               
               {/* Station stops */}
-              <div className="space-y-4">
+              <div className="space-y-4 relative">
                 {line.stations.map((station, index) => (
                   <div key={index} className="flex items-center space-x-4 relative">
                     {/* Station dot */}
@@ -118,7 +187,7 @@ export default function LinePage() {
                     <div className="flex-1">
                       <Link 
                         href={`/station/${station.slug}`}
-                        className="block hover:bg-gray-50 rounded p-2 -m-2 transition-colors"
+                        className="block hover:bg-gray-50/50 rounded-r p-2 pl-4 -my-2 transition-colors"
                       >
                         <div className="flex justify-between items-center">
                           <div>

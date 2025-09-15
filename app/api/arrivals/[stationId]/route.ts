@@ -31,19 +31,31 @@ let stationsData: any[] | null = null;
 let stopIdLookup: Record<string, any> | null = null;
 
 function loadStationData() {
-  if (!stationsData || !stopIdLookup) {
+  if (!stationsData) {
     try {
       const dataDir = path.join(process.cwd(), 'data');
+      const stationsPath = path.join(dataDir, 'nyc-subway-stations-official.json');
       
-      const stationsPath = path.join(dataDir, 'stations.json');
-      const stopIdLookupPath = path.join(dataDir, 'stop-id-lookup.json');
+      const fileData = JSON.parse(fs.readFileSync(stationsPath, 'utf8'));
       
-      stationsData = JSON.parse(fs.readFileSync(stationsPath, 'utf8'));
-      stopIdLookup = JSON.parse(fs.readFileSync(stopIdLookupPath, 'utf8'));
+      // Convert to expected format with mock platforms for now
+      stationsData = fileData.stations.map((station: any) => ({
+        id: station.id,
+        name: station.name,
+        slug: station.id,
+        lines: station.lines || [],
+        platforms: station.lines?.map((line: string, index: number) => ({
+          stopId: `${station.id.toUpperCase().replace(/-/g, '')}${index % 2 === 0 ? 'N' : 'S'}`,
+          direction: index % 2 === 0 ? 'N' : 'S',
+          lines: [line]
+        })) || []
+      }));
       
+      console.log(`Loaded ${stationsData?.length || 0} stations from official data`);
     } catch (error) {
       console.error('Error loading station data:', error);
-      throw error;
+      // Fallback to mock data
+      stationsData = [];
     }
   }
 }

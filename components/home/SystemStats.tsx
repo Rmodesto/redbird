@@ -23,8 +23,8 @@ export function SystemStats({
             <StatCard
               key={index}
               value={stat.value}
-              label={stat.label}
-              description={stat.description}
+              title={stat.label}
+              subtitle={stat.description}
               className="text-center"
             />
           ))}

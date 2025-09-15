@@ -72,11 +72,16 @@ export default async function StationPageRefactored({ params }: Props) {
   }
 
   // Generate mock data using our hooks/utilities
-  const stationScore = useStationScore(station);
+  // Ensure amenities is an array for type compatibility
+  const stationWithAmenities = {
+    ...station,
+    amenities: station.amenities || []
+  };
+  const stationScore = useStationScore(stationWithAmenities);
   const crimeStats = generateMockCrimeStats();
   const rodentReports = generateMockRodentReports();
-  const amenities = generateMockAmenities(station);
-  const liveArrivals = generateMockLiveArrivals(station);
+  const amenities = generateMockAmenities(stationWithAmenities);
+  const liveArrivals = generateMockLiveArrivals(stationWithAmenities);
 
   return (
     <>
@@ -84,7 +89,7 @@ export default async function StationPageRefactored({ params }: Props) {
       
       <main className="min-h-screen bg-gray-50">
         {/* Clean, reusable header component */}
-        <StationHeader station={station} serviceStatus="good" />
+        <StationHeader station={stationWithAmenities} serviceStatus="good" />
 
         <div className="max-w-7xl mx-auto px-6 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -98,7 +103,7 @@ export default async function StationPageRefactored({ params }: Props) {
               </Suspense>
 
               {/* Subway Sounds - Reusable component */}
-              <SubwaySoundsCard station={station} />
+              <SubwaySoundsCard station={stationWithAmenities} />
 
               {/* Station Information - Could be further broken down */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -144,7 +149,7 @@ export default async function StationPageRefactored({ params }: Props) {
               <AmenitiesCard amenities={amenities} />
               
               {/* Station Details Component */}
-              <StationDetailsCard station={station} amenities={amenities} />
+              <StationDetailsCard station={stationWithAmenities} amenities={amenities} />
               
             </div>
           </div>

@@ -94,7 +94,9 @@ export default function RealTimeMapPage() {
 
         {/* Map Container */}
         <main className="flex-1 relative">
-          <SubwayMap className="w-full h-full" />
+          <div className="w-full h-full">
+            <SubwayMap />
+          </div>
           
           {/* Mobile Info Banner */}
           <div className="md:hidden absolute top-2 left-2 right-2 bg-black/80 text-white p-2 rounded text-center text-sm">

@@ -66,7 +66,7 @@ npm run typecheck    # Run TypeScript type checking
 - Implemented SEO optimization with structured data
 
 ## Environment Variables
-- `NEXT_PUBLIC_SITE_URL`: Production URL (default: https://subwaysounds.nyc)
+- `NEXT_PUBLIC_SITE_URL`: Production URL (default: https://subwaysounds.net)
 - `NEXT_PUBLIC_SITE_NAME`: Site name for SEO
 - `NEXT_PUBLIC_SITE_DESCRIPTION`: Site description for meta tags
 

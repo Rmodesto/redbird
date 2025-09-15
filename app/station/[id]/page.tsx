@@ -5,6 +5,7 @@ import { Suspense } from 'react';
 import { mtaDataService } from '@/lib/services/mta-data-service';
 import SubwayLinesBadges from '@/components/subway/SubwayLinesBadges';
 import Navigation from '@/components/Navigation';
+import StationMap from '@/components/maps/StationMap';
 
 interface Props {
   params: { id: string }
@@ -94,12 +95,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export async function generateStaticParams() {
-  const stations = mtaDataService.getAllStations();
-  return stations.map((station) => ({
-    id: station.slug,
-  }));
-}
+export const dynamic = 'force-dynamic';
 
 // Station score calculation (mock for now, can be enhanced with real data)
 function calculateStationScore(station: any) {
@@ -477,16 +473,22 @@ export default async function StationPage({ params }: Props) {
             <span className="text-3xl">📍</span>
             &quot;LOCATION&quot;
           </h2>
-          <div className="bg-gray-100 rounded-lg h-64 flex items-center justify-center border border-gray-200">
-            <div className="text-center text-gray-500">
-              <span className="text-6xl mb-4 block">📍</span>
-              <p className="text-lg">Interactive map preview</p>
-              <p>coming soon</p>
+          <Suspense fallback={
+            <div className="bg-gray-100 rounded-lg h-64 flex items-center justify-center border border-gray-200">
+              <div className="text-center text-gray-500">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600 mx-auto mb-4"></div>
+                <p className="text-lg">Loading interactive map...</p>
+              </div>
             </div>
-          </div>
-          <p className="text-sm text-gray-500 mt-4 text-right">
-            Map data: OpenStreetMap
-          </p>
+          }>
+            <StationMap
+              stationName={station.name}
+              latitude={station.latitude}
+              longitude={station.longitude}
+              lines={station.lines}
+              borough={station.borough}
+            />
+          </Suspense>
         </section>
 
         {/* Data Sources Footer */}

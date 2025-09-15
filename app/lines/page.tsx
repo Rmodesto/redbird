@@ -371,6 +371,17 @@ const lineGroups = [
 ];
 
 export default function LinesPage() {
+  // Console log all subway lines overview
+  console.log('🚇 NYC SUBWAY LINES OVERVIEW');
+  console.log(`📊 Total Lines: ${subwayLinesData.length}`);
+  console.log('🗺️ All Lines:');
+  subwayLinesData.forEach((line, index) => {
+    console.log(`  ${index + 1}. Line ${line.name} - ${line.fullName}`);
+    console.log(`      📍 Stations: ${line.stationCount} | 🏘️ Boroughs: ${line.boroughs.join(', ')}`);
+    console.log(`      🚉 Terminals: ${line.terminals.join(' ↔ ')}`);
+  });
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+
   const [selectedGroup, setSelectedGroup] = useState<string | null>(null);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 

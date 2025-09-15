@@ -27,6 +27,7 @@ export const LINE_STATION_ORDER: Record<string, string[]> = {
     'Lexington Ave - 53rd St',
     '5th Ave - 53rd St',
     '42nd St - Port Authority Bus Term',
+    '34th St - Penn Station',
     'W 4th St - Washington Sq (Upper)',
     'Spring St',
     'Canal St - Holland Tunnel',
@@ -42,6 +43,7 @@ export const LINE_STATION_ORDER: Record<string, string[]> = {
     'Cathedral Pkwy (110th St)',
     '81st St',
     '42nd St - Port Authority Bus Term',
+    '34th St - Penn Station',
     'W 4th St - Washington Sq (Upper)',
     'Canal St - Holland Tunnel',
     'Chambers St',
@@ -67,6 +69,21 @@ export const LINE_STATION_ORDER: Record<string, string[]> = {
     'Rockaway Park - Beach 116 St'
   ],
   
+  // C Line - 8th Avenue Local (Manhattan to Brooklyn) - Basic route with Penn Station
+  'C': [
+    '163rd St - Amsterdam Av',
+    'Cathedral Pkwy (110th St)',
+    '81st St',
+    '42nd St - Port Authority Bus Term',
+    '34th St - Penn Station',
+    'W 4th St - Washington Sq (Upper)',
+    'Canal St - Holland Tunnel',
+    'Chambers St',
+    'High St',
+    'Jay St - Borough Hall',
+    'Hoyt - Schermerhorn Sts'
+  ],
+  
   // 1 Line - Broadway-7th Avenue Local
   '1': [
     'Van Cortlandt Park - 242 St',
@@ -80,13 +97,13 @@ export const LINE_STATION_ORDER: Record<string, string[]> = {
     '181 St',
     '168 St - Washington Hts',
     '157 St',
-    '145 St',
+    '145th St - Broadway',
     '137 St - City College',
-    '125 St',
+    '125th St - Broadway',
     '116 St - Columbia University',
-    '103 St',
-    '96 St',
-    '86 St',
+    '103rd St - Broadway',
+    '96th St - Broadway',
+    '86th St - Broadway',
     '79 St',
     '72 St',
     '66 St - Lincoln Center',
@@ -97,7 +114,7 @@ export const LINE_STATION_ORDER: Record<string, string[]> = {
     '28 St',
     '23 St',
     '18 St',
-    '14 St',
+    '14th St - 6th Ave',
     'Christopher St - Sheridan Sq',
     'Houston St',
     'Canal St',
@@ -108,7 +125,7 @@ export const LINE_STATION_ORDER: Record<string, string[]> = {
     'South Ferry'
   ],
   
-  // 4 Line - Lexington Avenue Express (Bronx to Manhattan to Brooklyn)
+  // 4 Line - Lexington Avenue Express (Bronx to Manhattan to Brooklyn) - Using exact station names
   '4': [
     'Woodlawn',
     'Mosholu Pkwy',
@@ -122,6 +139,10 @@ export const LINE_STATION_ORDER: Record<string, string[]> = {
     '161st St - Yankee Stadium',
     '149th St - Grand Concourse',
     '138th St - Grand Concourse',
+    '110th St',
+    '96th St - Lexington Ave',
+    '77th St',
+    '68th St - Hunter College',
     'Lexington Ave - 59th St',
     '51st St',
     '33rd St',
@@ -140,6 +161,7 @@ export const LINE_STATION_ORDER: Record<string, string[]> = {
     'Eastern Pkwy - Bklyn Museum',
     'Franklin Ave',
     'Crown Hts - Utica Ave',
+    'Kingston Ave',
     'Sutter Ave - Rutland Road',
     'Saratoga Ave',
     'Junius St',
@@ -169,7 +191,7 @@ export const LINE_STATION_ORDER: Record<string, string[]> = {
     'Brook Ave',
     '3rd Ave - 138th St',
     '110th St',
-    '96th St',
+    '96th St - Lexington Ave',
     '77th St',
     '68th St - Hunter College',
     'Lexington Ave - 59th St',
@@ -343,18 +365,48 @@ export const LINE_STATION_ORDER: Record<string, string[]> = {
     'Broad St'
   ],
   
+  // W Line - Broadway Local (Astoria to Manhattan)
+  'W': [
+    'Astoria - Ditmars Blvd',
+    'Astoria Blvd',
+    '30th Ave',
+    '36th Ave',
+    '39th Ave',
+    'Queensboro Plz',
+    '5th Ave - 59th St',
+    '49th St',
+    'Herald Sq - 34th St',
+    '28th St',
+    '8th St - NYU',
+    'Prince St',
+    'City Hall',
+    'Cortlandt St (NB only)',
+    'Rector St',
+    'Whitehall St'
+  ],
+  
   // Additional lines with basic ordering to prevent zigzag
   // B Line - 6th Avenue Express (Bronx to Brooklyn)
   'B': [
     'Bedford Park Blvd',
     '182nd-183rd Sts',
+    'Fordham Rd',
     'Tremont Ave',
     '174th-175th Sts',
     '170th St',
-    'Fordham Rd',
+    '167th St',
+    '161st St - Yankee Stadium',
     '155th St',
+    '145th St - St Nicholas Ave',
+    '135th St - St Nicholas Ave',
+    '125th St - St Nicholas Ave',
     'Cathedral Pkwy (110th St)',
+    '103rd St - Central Park West',
+    '96th St - Central Park West',
+    '86th St - Central Park West',
     '81st St',
+    '72nd St',
+    '59th St - Columbus Circle',
     '47th-50th Sts - Rockefeller Ctr',
     '42nd St - Bryant Pk',
     'W 4th St - Washington Sq (Lower)',
@@ -373,17 +425,19 @@ export const LINE_STATION_ORDER: Record<string, string[]> = {
     'Brighton Beach'
   ],
   
-  // Q Line - Broadway Express (Astoria to Coney Island)
+  // Q Line - 2nd Avenue/Broadway Express (Manhattan to Brooklyn)
   'Q': [
-    'Astoria - Ditmars Blvd',
-    'Astoria Blvd',
-    '30th Ave',
-    '36th Ave',
-    '39th Ave',
-    '5th Ave - 59th St',
-    '49th St',
+    '96th St - 2nd Ave',
+    '86th St - 2nd Ave',
+    '72nd St - 2nd Ave',
+    '57th St - 7th Ave',
+    'Times Sq - 42nd St',
     'Herald Sq - 34th St',
+    'Union Sq - 14th St',
+    'Canal St',
     'DeKalb Ave',
+    'Atlantic Av - Pacific St',
+    '7th Ave',
     'Prospect Park',
     'Parkside Ave',
     'Beverly Rd',
@@ -415,6 +469,7 @@ export const LINE_STATION_ORDER: Record<string, string[]> = {
     '46th St',
     '36th St',
     'Queens Plz',
+    'Roosevelt Island - Main St',
     '5th Ave - 59th St',
     '49th St',
     'Herald Sq - 34th St',
@@ -438,6 +493,61 @@ export const LINE_STATION_ORDER: Record<string, string[]> = {
     '8th Ave',
     'Bay Ridge Ave',
     'Bay Ridge - 95th St'
+  ],
+
+  // F Line - 6th Avenue Local (Brooklyn to Queens)
+  'F': [
+    'Jamaica - 179th St',
+    'Parsons Blvd',
+    'Briarwood - Van Wyck Blvd',
+    '75th Ave',
+    'Kew Gardens - Union Tpke',
+    'Jackson Hts - Roosevelt Av',
+    'Elmhurst Ave',
+    'Grand Ave - Newtown',
+    'Woodside - 61st St',
+    '39th Ave',
+    '36th St',
+    'Northern Blvd',
+    'Queens Plz',
+    '21st St - Queensbridge',
+    'Roosevelt Island - Main St',
+    'Lexington Ave - 63rd St',
+    '57th St',
+    '47th-50th Sts - Rockefeller Ctr',
+    '42nd St - Bryant Pk',
+    '34th St - Herald Sq',
+    '23rd St',
+    '14th St',
+    'W 4th St - Washington Sq',
+    'Broadway - Lafayette St',
+    '2nd Ave',
+    'Delancey St - Essex St',
+    'E Broadway',
+    'York St',
+    'High St - Brooklyn Bridge',
+    'Jay St - MetroTech',
+    'Bergen St',
+    'Carroll St',
+    'Smith - 9th Sts',
+    '4th Ave - 9th St',
+    '7th Ave',
+    '15th St - Prospect Park',
+    'Fort Hamilton Pkwy',
+    '62nd St',
+    'New Utrecht Ave',
+    '86th St',
+    'Ave X',
+    'Ave N',
+    'Ave I',
+    'Bay Pkwy',
+    'Kings Hwy',
+    'Ave U',
+    'Ditmas Ave',
+    '18th Ave',
+    'Ave P',
+    'W 8th St - NY Aquarium',
+    'Coney Island - Stillwell Av'
   ]
 };
 
@@ -471,7 +581,7 @@ export function orderStationsByRoute(stations: any[], lineId: string): any[] {
     
     // If not found, try more flexible matching
     if (!station) {
-      for (const [name, s] of stationMap.entries()) {
+      for (const [name, s] of Array.from(stationMap.entries())) {
         // Try different matching strategies
         if (
           name === stationName ||
@@ -499,11 +609,14 @@ export function orderStationsByRoute(stations: any[], lineId: string): any[] {
     }
   }
   
-  // Add any remaining stations that weren't in the route order
+  // Don't add unmatched stations - they create disconnected line segments
+  // Only use stations that are in the predefined route order
+  console.log(`Excluded ${stations.length - orderedStations.length} stations not in route order`);
+  
+  // Log excluded stations for debugging
   for (const station of stations) {
     if (!orderedStations.includes(station)) {
-      console.log(`Adding unmatched station: ${station.name}`);
-      orderedStations.push(station);
+      console.log(`Excluded station not in route: ${station.name}`);
     }
   }
   

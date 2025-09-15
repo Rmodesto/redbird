@@ -30,16 +30,11 @@ function loadStationData() {
   if (!stationsData) {
     try {
       const dataDir = path.join(process.cwd(), 'data');
-      
-      const stationsPath = path.join(dataDir, 'stations.json');
-      const slugLookupPath = path.join(dataDir, 'station-slug-lookup.json');
-      const stopIdLookupPath = path.join(dataDir, 'stop-id-lookup.json');
+      const stationsPath = path.join(dataDir, 'stations-normalized.json');
       
       stationsData = JSON.parse(fs.readFileSync(stationsPath, 'utf8'));
-      slugLookup = JSON.parse(fs.readFileSync(slugLookupPath, 'utf8'));
-      stopIdLookup = JSON.parse(fs.readFileSync(stopIdLookupPath, 'utf8'));
       
-      console.log(`Loaded ${stationsData?.length || 0} stations`);
+      console.log(`Loaded ${stationsData?.length || 0} stations from normalized complexes (445 total)`);
     } catch (error) {
       console.error('Error loading station data:', error);
       throw error;

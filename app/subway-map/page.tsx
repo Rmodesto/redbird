@@ -106,7 +106,9 @@ export default function SubwayMapPage() {
           <div className="max-w-7xl mx-auto px-4">
             <div className="bg-gray-900 rounded-lg overflow-hidden shadow-lg" style={{ height: '600px' }}>
               <div className="h-full relative">
-                <SubwayMap className="w-full h-full" />
+                <div className="w-full h-full">
+                  <SubwayMap />
+                </div>
                 
                 {/* Map Overlay Info */}
                 <div className="absolute top-4 left-4 bg-black/80 text-white p-3 rounded-lg text-sm">

@@ -1,0 +1,4596 @@
+{
+  "generated": "2025-09-14T20:43:32.809Z",
+  "lines": {
+    "1": {
+      "stations": [
+        {
+          "id": "309",
+          "name": "103 St",
+          "slug": "103-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "307",
+          "name": "116 St-Columbia University",
+          "slug": "116-st-columbia-university",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "306",
+          "name": "125 St",
+          "slug": "125-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "305",
+          "name": "137 St-City College",
+          "slug": "137-st-city-college",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "304",
+          "name": "145 St",
+          "slug": "145-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "303",
+          "name": "157 St",
+          "slug": "157-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "605",
+          "name": "168 St",
+          "slug": "168-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "321",
+          "name": "18 St",
+          "slug": "18-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "301",
+          "name": "181 St",
+          "slug": "181-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "300",
+          "name": "191 St",
+          "slug": "191-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "298",
+          "name": "207 St",
+          "slug": "207-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "297",
+          "name": "215 St",
+          "slug": "215-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "320",
+          "name": "23 St",
+          "slug": "23-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "295",
+          "name": "231 St",
+          "slug": "231-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "294",
+          "name": "238 St",
+          "slug": "238-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "319",
+          "name": "28 St",
+          "slug": "28-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "318",
+          "name": "34 St-Penn Station",
+          "slug": "34-st-penn-station",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "316",
+          "name": "50 St",
+          "slug": "50-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "614",
+          "name": "59 St-Columbus Circle",
+          "slug": "59-st-columbus-circle",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "601",
+          "name": "6 Av",
+          "slug": "6-av",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "314",
+          "name": "66 St-Lincoln Center",
+          "slug": "66-st-lincoln-center",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "313",
+          "name": "72 St",
+          "slug": "72-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "312",
+          "name": "79 St",
+          "slug": "79-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "311",
+          "name": "86 St",
+          "slug": "86-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "310",
+          "name": "96 St",
+          "slug": "96-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "325",
+          "name": "Canal St",
+          "slug": "canal-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "308",
+          "name": "Cathedral Pkwy (110 St)",
+          "slug": "cathedral-pkwy-110-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "327",
+          "name": "Chambers St",
+          "slug": "chambers-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "323",
+          "name": "Christopher St-Stonewall",
+          "slug": "christopher-st-stonewall",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "299",
+          "name": "Dyckman St",
+          "slug": "dyckman-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "326",
+          "name": "Franklin St",
+          "slug": "franklin-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "324",
+          "name": "Houston St",
+          "slug": "houston-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "296",
+          "name": "Marble Hill-225 St",
+          "slug": "marble-hill-225-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "329",
+          "name": "Rector St",
+          "slug": "rector-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "611",
+          "name": "Times Sq-42 St",
+          "slug": "times-sq-42-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "293",
+          "name": "Van Cortlandt Park-242 St",
+          "slug": "van-cortlandt-park-242-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "635",
+          "name": "Whitehall St-South Ferry",
+          "slug": "whitehall-st-south-ferry",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "328",
+          "name": "WTC Cortlandt",
+          "slug": "wtc-cortlandt",
+          "borough": "Manhattan"
+        }
+      ],
+      "count": 38
+    },
+    "2": {
+      "stations": [
+        {
+          "id": "441",
+          "name": "110 St-Malcolm X Plaza",
+          "slug": "110-st-malcolm-x-plaza",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "440",
+          "name": "116 St",
+          "slug": "116-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "439",
+          "name": "125 St",
+          "slug": "125-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "438",
+          "name": "135 St",
+          "slug": "135-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "603",
+          "name": "149 St-Grand Concourse",
+          "slug": "149-st-grand-concourse",
+          "borough": "Bronx"
+        },
+        {
+          "id": "428",
+          "name": "174 St",
+          "slug": "174-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "420",
+          "name": "219 St",
+          "slug": "219-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "419",
+          "name": "225 St",
+          "slug": "225-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "418",
+          "name": "233 St",
+          "slug": "233-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "434",
+          "name": "3 Av-149 St",
+          "slug": "3-av-149-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "318",
+          "name": "34 St-Penn Station",
+          "slug": "34-st-penn-station",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "601",
+          "name": "6 Av",
+          "slug": "6-av",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "313",
+          "name": "72 St",
+          "slug": "72-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "310",
+          "name": "96 St",
+          "slug": "96-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "423",
+          "name": "Allerton Av",
+          "slug": "allerton-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "617",
+          "name": "Atlantic Av-Barclays Ctr",
+          "slug": "atlantic-av-barclays-ctr",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "339",
+          "name": "Bergen St",
+          "slug": "bergen-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "357",
+          "name": "Beverly Rd",
+          "slug": "beverly-rd",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "626",
+          "name": "Botanic Garden",
+          "slug": "botanic-garden",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "425",
+          "name": "Bronx Park East",
+          "slug": "bronx-park-east",
+          "borough": "Bronx"
+        },
+        {
+          "id": "422",
+          "name": "Burke Av",
+          "slug": "burke-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "327",
+          "name": "Chambers St",
+          "slug": "chambers-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "356",
+          "name": "Church Av",
+          "slug": "church-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "334",
+          "name": "Clark St",
+          "slug": "clark-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "624",
+          "name": "Cortlandt St",
+          "slug": "cortlandt-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "620",
+          "name": "Court St",
+          "slug": "court-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "426",
+          "name": "E 180 St",
+          "slug": "e-180-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "341",
+          "name": "Eastern Pkwy-Brooklyn Museum",
+          "slug": "eastern-pkwy-brooklyn-museum",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "359",
+          "name": "Flatbush Av-Brooklyn College",
+          "slug": "flatbush-av-brooklyn-college",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "429",
+          "name": "Freeman St",
+          "slug": "freeman-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "628",
+          "name": "Fulton St",
+          "slug": "fulton-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "340",
+          "name": "Grand Army Plaza",
+          "slug": "grand-army-plaza",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "421",
+          "name": "Gun Hill Rd",
+          "slug": "gun-hill-rd",
+          "borough": "Bronx"
+        },
+        {
+          "id": "336",
+          "name": "Hoyt St",
+          "slug": "hoyt-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "431",
+          "name": "Intervale Av",
+          "slug": "intervale-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "433",
+          "name": "Jackson Av",
+          "slug": "jackson-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "417",
+          "name": "Nereid Av",
+          "slug": "nereid-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "337",
+          "name": "Nevins St",
+          "slug": "nevins-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "358",
+          "name": "Newkirk Av-Little Haiti",
+          "slug": "newkirk-av-little-haiti",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "424",
+          "name": "Pelham Pkwy",
+          "slug": "pelham-pkwy",
+          "borough": "Bronx"
+        },
+        {
+          "id": "353",
+          "name": "President St-Medgar Evers College",
+          "slug": "president-st-medgar-evers-college",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "432",
+          "name": "Prospect Av",
+          "slug": "prospect-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "430",
+          "name": "Simpson St",
+          "slug": "simpson-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "354",
+          "name": "Sterling St",
+          "slug": "sterling-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "611",
+          "name": "Times Sq-42 St",
+          "slug": "times-sq-42-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "416",
+          "name": "Wakefield-241 St",
+          "slug": "wakefield-241-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "333",
+          "name": "Wall St",
+          "slug": "wall-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "427",
+          "name": "West Farms Sq-E Tremont Av",
+          "slug": "west-farms-sq-e-tremont-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "355",
+          "name": "Winthrop St",
+          "slug": "winthrop-st",
+          "borough": "Brooklyn"
+        }
+      ],
+      "count": 49
+    },
+    "3": {
+      "stations": [
+        {
+          "id": "441",
+          "name": "110 St-Malcolm X Plaza",
+          "slug": "110-st-malcolm-x-plaza",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "440",
+          "name": "116 St",
+          "slug": "116-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "439",
+          "name": "125 St",
+          "slug": "125-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "438",
+          "name": "135 St",
+          "slug": "135-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "437",
+          "name": "145 St",
+          "slug": "145-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "318",
+          "name": "34 St-Penn Station",
+          "slug": "34-st-penn-station",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "601",
+          "name": "6 Av",
+          "slug": "6-av",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "313",
+          "name": "72 St",
+          "slug": "72-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "310",
+          "name": "96 St",
+          "slug": "96-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "617",
+          "name": "Atlantic Av-Barclays Ctr",
+          "slug": "atlantic-av-barclays-ctr",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "339",
+          "name": "Bergen St",
+          "slug": "bergen-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "626",
+          "name": "Botanic Garden",
+          "slug": "botanic-garden",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "327",
+          "name": "Chambers St",
+          "slug": "chambers-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "334",
+          "name": "Clark St",
+          "slug": "clark-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "624",
+          "name": "Cortlandt St",
+          "slug": "cortlandt-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "620",
+          "name": "Court St",
+          "slug": "court-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "345",
+          "name": "Crown Hts-Utica Av",
+          "slug": "crown-hts-utica-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "341",
+          "name": "Eastern Pkwy-Brooklyn Museum",
+          "slug": "eastern-pkwy-brooklyn-museum",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "628",
+          "name": "Fulton St",
+          "slug": "fulton-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "340",
+          "name": "Grand Army Plaza",
+          "slug": "grand-army-plaza",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "436",
+          "name": "Harlem-148 St",
+          "slug": "harlem-148-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "336",
+          "name": "Hoyt St",
+          "slug": "hoyt-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "349",
+          "name": "Junius St",
+          "slug": "junius-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "344",
+          "name": "Kingston Av",
+          "slug": "kingston-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "337",
+          "name": "Nevins St",
+          "slug": "nevins-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "352",
+          "name": "New Lots Av",
+          "slug": "new-lots-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "343",
+          "name": "Nostrand Av",
+          "slug": "nostrand-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "350",
+          "name": "Pennsylvania Av",
+          "slug": "pennsylvania-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "348",
+          "name": "Rockaway Av",
+          "slug": "rockaway-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "347",
+          "name": "Saratoga Av",
+          "slug": "saratoga-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "346",
+          "name": "Sutter Av-Rutland Rd",
+          "slug": "sutter-av-rutland-rd",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "611",
+          "name": "Times Sq-42 St",
+          "slug": "times-sq-42-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "351",
+          "name": "Van Siclen Av",
+          "slug": "van-siclen-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "333",
+          "name": "Wall St",
+          "slug": "wall-st",
+          "borough": "Manhattan"
+        }
+      ],
+      "count": 34
+    },
+    "4": {
+      "stations": [
+        {
+          "id": "392",
+          "name": "125 St",
+          "slug": "125-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "391",
+          "name": "138 St-Grand Concourse",
+          "slug": "138-st-grand-concourse",
+          "borough": "Bronx"
+        },
+        {
+          "id": "602",
+          "name": "14 St-Union Sq",
+          "slug": "14-st-union-sq",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "603",
+          "name": "149 St-Grand Concourse",
+          "slug": "149-st-grand-concourse",
+          "borough": "Bronx"
+        },
+        {
+          "id": "604",
+          "name": "161 St-Yankee Stadium",
+          "slug": "161-st-yankee-stadium",
+          "borough": "Bronx"
+        },
+        {
+          "id": "388",
+          "name": "167 St",
+          "slug": "167-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "387",
+          "name": "170 St",
+          "slug": "170-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "385",
+          "name": "176 St",
+          "slug": "176-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "383",
+          "name": "183 St",
+          "slug": "183-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "397",
+          "name": "86 St",
+          "slug": "86-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "617",
+          "name": "Atlantic Av-Barclays Ctr",
+          "slug": "atlantic-av-barclays-ctr",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "380",
+          "name": "Bedford Park Blvd-Lehman College",
+          "slug": "bedford-park-blvd-lehman-college",
+          "borough": "Bronx"
+        },
+        {
+          "id": "626",
+          "name": "Botanic Garden",
+          "slug": "botanic-garden",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "414",
+          "name": "Bowling Green",
+          "slug": "bowling-green",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "384",
+          "name": "Burnside Av",
+          "slug": "burnside-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "622",
+          "name": "Chambers St",
+          "slug": "chambers-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "620",
+          "name": "Court St",
+          "slug": "court-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "345",
+          "name": "Crown Hts-Utica Av",
+          "slug": "crown-hts-utica-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "382",
+          "name": "Fordham Rd",
+          "slug": "fordham-rd",
+          "borough": "Bronx"
+        },
+        {
+          "id": "628",
+          "name": "Fulton St",
+          "slug": "fulton-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "610",
+          "name": "Grand Central-42 St",
+          "slug": "grand-central-42-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "381",
+          "name": "Kingsbridge Rd",
+          "slug": "kingsbridge-rd",
+          "borough": "Bronx"
+        },
+        {
+          "id": "613",
+          "name": "Lexington Av/59 St",
+          "slug": "lexington-av59-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "379",
+          "name": "Mosholu Pkwy",
+          "slug": "mosholu-pkwy",
+          "borough": "Bronx"
+        },
+        {
+          "id": "386",
+          "name": "Mt Eden Av",
+          "slug": "mt-eden-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "337",
+          "name": "Nevins St",
+          "slug": "nevins-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "413",
+          "name": "Wall St",
+          "slug": "wall-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "378",
+          "name": "Woodlawn",
+          "slug": "woodlawn",
+          "borough": "Bronx"
+        }
+      ],
+      "count": 28
+    },
+    "5": {
+      "stations": [
+        {
+          "id": "392",
+          "name": "125 St",
+          "slug": "125-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "391",
+          "name": "138 St-Grand Concourse",
+          "slug": "138-st-grand-concourse",
+          "borough": "Bronx"
+        },
+        {
+          "id": "602",
+          "name": "14 St-Union Sq",
+          "slug": "14-st-union-sq",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "603",
+          "name": "149 St-Grand Concourse",
+          "slug": "149-st-grand-concourse",
+          "borough": "Bronx"
+        },
+        {
+          "id": "428",
+          "name": "174 St",
+          "slug": "174-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "420",
+          "name": "219 St",
+          "slug": "219-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "419",
+          "name": "225 St",
+          "slug": "225-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "418",
+          "name": "233 St",
+          "slug": "233-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "434",
+          "name": "3 Av-149 St",
+          "slug": "3-av-149-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "397",
+          "name": "86 St",
+          "slug": "86-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "423",
+          "name": "Allerton Av",
+          "slug": "allerton-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "617",
+          "name": "Atlantic Av-Barclays Ctr",
+          "slug": "atlantic-av-barclays-ctr",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "443",
+          "name": "Baychester Av",
+          "slug": "baychester-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "357",
+          "name": "Beverly Rd",
+          "slug": "beverly-rd",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "626",
+          "name": "Botanic Garden",
+          "slug": "botanic-garden",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "414",
+          "name": "Bowling Green",
+          "slug": "bowling-green",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "425",
+          "name": "Bronx Park East",
+          "slug": "bronx-park-east",
+          "borough": "Bronx"
+        },
+        {
+          "id": "422",
+          "name": "Burke Av",
+          "slug": "burke-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "622",
+          "name": "Chambers St",
+          "slug": "chambers-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "356",
+          "name": "Church Av",
+          "slug": "church-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "620",
+          "name": "Court St",
+          "slug": "court-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "426",
+          "name": "E 180 St",
+          "slug": "e-180-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "442",
+          "name": "Eastchester-Dyre Av",
+          "slug": "eastchester-dyre-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "359",
+          "name": "Flatbush Av-Brooklyn College",
+          "slug": "flatbush-av-brooklyn-college",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "429",
+          "name": "Freeman St",
+          "slug": "freeman-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "628",
+          "name": "Fulton St",
+          "slug": "fulton-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "610",
+          "name": "Grand Central-42 St",
+          "slug": "grand-central-42-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "421",
+          "name": "Gun Hill Rd",
+          "slug": "gun-hill-rd",
+          "borough": "Bronx"
+        },
+        {
+          "id": "444",
+          "name": "Gun Hill Rd",
+          "slug": "gun-hill-rd",
+          "borough": "Bronx"
+        },
+        {
+          "id": "431",
+          "name": "Intervale Av",
+          "slug": "intervale-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "433",
+          "name": "Jackson Av",
+          "slug": "jackson-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "613",
+          "name": "Lexington Av/59 St",
+          "slug": "lexington-av59-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "446",
+          "name": "Morris Park",
+          "slug": "morris-park",
+          "borough": "Bronx"
+        },
+        {
+          "id": "417",
+          "name": "Nereid Av",
+          "slug": "nereid-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "337",
+          "name": "Nevins St",
+          "slug": "nevins-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "358",
+          "name": "Newkirk Av-Little Haiti",
+          "slug": "newkirk-av-little-haiti",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "424",
+          "name": "Pelham Pkwy",
+          "slug": "pelham-pkwy",
+          "borough": "Bronx"
+        },
+        {
+          "id": "445",
+          "name": "Pelham Pkwy",
+          "slug": "pelham-pkwy",
+          "borough": "Bronx"
+        },
+        {
+          "id": "353",
+          "name": "President St-Medgar Evers College",
+          "slug": "president-st-medgar-evers-college",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "432",
+          "name": "Prospect Av",
+          "slug": "prospect-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "430",
+          "name": "Simpson St",
+          "slug": "simpson-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "354",
+          "name": "Sterling St",
+          "slug": "sterling-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "413",
+          "name": "Wall St",
+          "slug": "wall-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "427",
+          "name": "West Farms Sq-E Tremont Av",
+          "slug": "west-farms-sq-e-tremont-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "355",
+          "name": "Winthrop St",
+          "slug": "winthrop-st",
+          "borough": "Brooklyn"
+        }
+      ],
+      "count": 45
+    },
+    "6": {
+      "stations": [
+        {
+          "id": "395",
+          "name": "103 St",
+          "slug": "103-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "394",
+          "name": "110 St",
+          "slug": "110-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "393",
+          "name": "116 St",
+          "slug": "116-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "392",
+          "name": "125 St",
+          "slug": "125-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "602",
+          "name": "14 St-Union Sq",
+          "slug": "14-st-union-sq",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "405",
+          "name": "23 St",
+          "slug": "23-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "404",
+          "name": "28 St",
+          "slug": "28-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "377",
+          "name": "3 Av-138 St",
+          "slug": "3-av-138-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "403",
+          "name": "33 St",
+          "slug": "33-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "399",
+          "name": "68 St-Hunter College",
+          "slug": "68-st-hunter-college",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "398",
+          "name": "77 St",
+          "slug": "77-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "397",
+          "name": "86 St",
+          "slug": "86-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "396",
+          "name": "96 St",
+          "slug": "96-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "407",
+          "name": "Astor Pl",
+          "slug": "astor-pl",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "619",
+          "name": "Broadway-Lafayette St",
+          "slug": "broadway-lafayette-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "376",
+          "name": "Brook Av",
+          "slug": "brook-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "361",
+          "name": "Buhre Av",
+          "slug": "buhre-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "623",
+          "name": "Canal St",
+          "slug": "canal-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "365",
+          "name": "Castle Hill Av",
+          "slug": "castle-hill-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "622",
+          "name": "Chambers St",
+          "slug": "chambers-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "375",
+          "name": "Cypress Av",
+          "slug": "cypress-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "374",
+          "name": "E 143 St-St Mary's St",
+          "slug": "e-143-st-st-marys-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "373",
+          "name": "E 149 St",
+          "slug": "e-149-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "369",
+          "name": "Elder Av",
+          "slug": "elder-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "610",
+          "name": "Grand Central-42 St",
+          "slug": "grand-central-42-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "371",
+          "name": "Hunts Point Av",
+          "slug": "hunts-point-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "612",
+          "name": "Lexington Av/53 St",
+          "slug": "lexington-av53-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "613",
+          "name": "Lexington Av/59 St",
+          "slug": "lexington-av59-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "372",
+          "name": "Longwood Av",
+          "slug": "longwood-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "362",
+          "name": "Middletown Rd",
+          "slug": "middletown-rd",
+          "borough": "Bronx"
+        },
+        {
+          "id": "368",
+          "name": "Morrison Av-Soundview",
+          "slug": "morrison-av-soundview",
+          "borough": "Bronx"
+        },
+        {
+          "id": "366",
+          "name": "Parkchester",
+          "slug": "parkchester",
+          "borough": "Bronx"
+        },
+        {
+          "id": "360",
+          "name": "Pelham Bay Park",
+          "slug": "pelham-bay-park",
+          "borough": "Bronx"
+        },
+        {
+          "id": "409",
+          "name": "Spring St",
+          "slug": "spring-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "367",
+          "name": "St Lawrence Av",
+          "slug": "st-lawrence-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "363",
+          "name": "Westchester Sq-E Tremont Av",
+          "slug": "westchester-sq-e-tremont-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "370",
+          "name": "Whitlock Av",
+          "slug": "whitlock-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "364",
+          "name": "Zerega Av",
+          "slug": "zerega-av",
+          "borough": "Bronx"
+        }
+      ],
+      "count": 38
+    },
+    "7": {
+      "stations": [
+        {
+          "id": "450",
+          "name": "103 St-Corona Plaza",
+          "slug": "103-st-corona-plaza",
+          "borough": "Queens"
+        },
+        {
+          "id": "449",
+          "name": "111 St",
+          "slug": "111-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "460",
+          "name": "33 St-Rawson St",
+          "slug": "33-st-rawson-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "471",
+          "name": "34 St-Hudson Yards",
+          "slug": "34-st-hudson-yards",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "459",
+          "name": "40 St-Lowery St",
+          "slug": "40-st-lowery-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "609",
+          "name": "42 St-Bryant Pk",
+          "slug": "42-st-bryant-pk",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "458",
+          "name": "46 St-Bliss St",
+          "slug": "46-st-bliss-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "457",
+          "name": "52 St",
+          "slug": "52-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "456",
+          "name": "61 St-Woodside",
+          "slug": "61-st-woodside",
+          "borough": "Queens"
+        },
+        {
+          "id": "455",
+          "name": "69 St",
+          "slug": "69-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "453",
+          "name": "82 St-Jackson Hts",
+          "slug": "82-st-jackson-hts",
+          "borough": "Queens"
+        },
+        {
+          "id": "452",
+          "name": "90 St-Elmhurst Av",
+          "slug": "90-st-elmhurst-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "606",
+          "name": "Court Sq-23 St",
+          "slug": "court-sq-23-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "447",
+          "name": "Flushing-Main St",
+          "slug": "flushing-main-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "610",
+          "name": "Grand Central-42 St",
+          "slug": "grand-central-42-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "463",
+          "name": "Hunters Point Av",
+          "slug": "hunters-point-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "616",
+          "name": "Jackson Hts-Roosevelt Av",
+          "slug": "jackson-hts-roosevelt-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "451",
+          "name": "Junction Blvd",
+          "slug": "junction-blvd",
+          "borough": "Queens"
+        },
+        {
+          "id": "448",
+          "name": "Mets-Willets Point",
+          "slug": "mets-willets-point",
+          "borough": "Queens"
+        },
+        {
+          "id": "461",
+          "name": "Queensboro Plaza",
+          "slug": "queensboro-plaza",
+          "borough": "Queens"
+        },
+        {
+          "id": "611",
+          "name": "Times Sq-42 St",
+          "slug": "times-sq-42-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "464",
+          "name": "Vernon Blvd-Jackson Av",
+          "slug": "vernon-blvd-jackson-av",
+          "borough": "Queens"
+        }
+      ],
+      "count": 22
+    },
+    "A": {
+      "stations": [
+        {
+          "id": "193",
+          "name": "104 St",
+          "slug": "104-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "194",
+          "name": "111 St",
+          "slug": "111-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "153",
+          "name": "125 St",
+          "slug": "125-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "151",
+          "name": "145 St",
+          "slug": "145-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "605",
+          "name": "168 St",
+          "slug": "168-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "147",
+          "name": "175 St",
+          "slug": "175-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "146",
+          "name": "181 St",
+          "slug": "181-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "145",
+          "name": "190 St",
+          "slug": "190-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "164",
+          "name": "34 St-Penn Station",
+          "slug": "34-st-penn-station",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "614",
+          "name": "59 St-Columbus Circle",
+          "slug": "59-st-columbus-circle",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "618",
+          "name": "8 Av",
+          "slug": "8-av",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "190",
+          "name": "80 St",
+          "slug": "80-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "191",
+          "name": "88 St",
+          "slug": "88-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "196",
+          "name": "Aqueduct Racetrack",
+          "slug": "aqueduct-racetrack",
+          "borough": "Queens"
+        },
+        {
+          "id": "197",
+          "name": "Aqueduct-N Conduit Av",
+          "slug": "aqueduct-n-conduit-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "202",
+          "name": "Beach 105 St",
+          "slug": "beach-105-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "208",
+          "name": "Beach 25 St",
+          "slug": "beach-25-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "207",
+          "name": "Beach 36 St",
+          "slug": "beach-36-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "206",
+          "name": "Beach 44 St",
+          "slug": "beach-44-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "205",
+          "name": "Beach 60 St",
+          "slug": "beach-60-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "204",
+          "name": "Beach 67 St",
+          "slug": "beach-67-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "200",
+          "name": "Beach 90 St",
+          "slug": "beach-90-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "201",
+          "name": "Beach 98 St",
+          "slug": "beach-98-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "199",
+          "name": "Broad Channel",
+          "slug": "broad-channel",
+          "borough": "Queens"
+        },
+        {
+          "id": "621",
+          "name": "Broadway Junction",
+          "slug": "broadway-junction",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "169",
+          "name": "Canal St",
+          "slug": "canal-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "624",
+          "name": "Cortlandt St",
+          "slug": "cortlandt-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "144",
+          "name": "Dyckman St",
+          "slug": "dyckman-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "188",
+          "name": "Euclid Av",
+          "slug": "euclid-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "209",
+          "name": "Far Rockaway-Mott Av",
+          "slug": "far-rockaway-mott-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "628",
+          "name": "Fulton St",
+          "slug": "fulton-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "189",
+          "name": "Grant Av",
+          "slug": "grant-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "173",
+          "name": "High St",
+          "slug": "high-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "198",
+          "name": "Howard Beach-JFK Airport",
+          "slug": "howard-beach-jfk-airport",
+          "borough": "Queens"
+        },
+        {
+          "id": "175",
+          "name": "Hoyt-Schermerhorn Sts",
+          "slug": "hoyt-schermerhorn-sts",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "143",
+          "name": "Inwood-207 St",
+          "slug": "inwood-207-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "636",
+          "name": "Jay St-MetroTech",
+          "slug": "jay-st-metrotech",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "179",
+          "name": "Nostrand Av",
+          "slug": "nostrand-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "195",
+          "name": "Ozone Park-Lefferts Blvd",
+          "slug": "ozone-park-lefferts-blvd",
+          "borough": "Queens"
+        },
+        {
+          "id": "192",
+          "name": "Rockaway Blvd",
+          "slug": "rockaway-blvd",
+          "borough": "Queens"
+        },
+        {
+          "id": "203",
+          "name": "Rockaway Park-Beach 116 St",
+          "slug": "rockaway-park-beach-116-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "611",
+          "name": "Times Sq-42 St",
+          "slug": "times-sq-42-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "181",
+          "name": "Utica Av",
+          "slug": "utica-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "167",
+          "name": "W 4 St-Wash Sq",
+          "slug": "w-4-st-wash-sq",
+          "borough": "Manhattan"
+        }
+      ],
+      "count": 44
+    },
+    "B": {
+      "stations": [
+        {
+          "id": "156",
+          "name": "103 St",
+          "slug": "103-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "154",
+          "name": "116 St",
+          "slug": "116-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "153",
+          "name": "125 St",
+          "slug": "125-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "152",
+          "name": "135 St",
+          "slug": "135-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "151",
+          "name": "145 St",
+          "slug": "145-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "220",
+          "name": "155 St",
+          "slug": "155-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "604",
+          "name": "161 St-Yankee Stadium",
+          "slug": "161-st-yankee-stadium",
+          "borough": "Bronx"
+        },
+        {
+          "id": "218",
+          "name": "167 St",
+          "slug": "167-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "217",
+          "name": "170 St",
+          "slug": "170-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "216",
+          "name": "174-175 Sts",
+          "slug": "174-175-sts",
+          "borough": "Bronx"
+        },
+        {
+          "id": "214",
+          "name": "182-183 Sts",
+          "slug": "182-183-sts",
+          "borough": "Bronx"
+        },
+        {
+          "id": "607",
+          "name": "34 St-Herald Sq",
+          "slug": "34-st-herald-sq",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "609",
+          "name": "42 St-Bryant Pk",
+          "slug": "42-st-bryant-pk",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "225",
+          "name": "47-50 Sts-Rockefeller Ctr",
+          "slug": "47-50-sts-rockefeller-ctr",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "614",
+          "name": "59 St-Columbus Circle",
+          "slug": "59-st-columbus-circle",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "41",
+          "name": "7 Av",
+          "slug": "7-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "277",
+          "name": "7 Av",
+          "slug": "7-av",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "160",
+          "name": "72 St",
+          "slug": "72-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "159",
+          "name": "81 St-Museum of Natural History",
+          "slug": "81-st-museum-of-natural-history",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "158",
+          "name": "86 St",
+          "slug": "86-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "157",
+          "name": "96 St",
+          "slug": "96-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "617",
+          "name": "Atlantic Av-Barclays Ctr",
+          "slug": "atlantic-av-barclays-ctr",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "211",
+          "name": "Bedford Park Blvd",
+          "slug": "bedford-park-blvd",
+          "borough": "Bronx"
+        },
+        {
+          "id": "55",
+          "name": "Brighton Beach",
+          "slug": "brighton-beach",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "619",
+          "name": "Broadway-Lafayette St",
+          "slug": "broadway-lafayette-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "155",
+          "name": "Cathedral Pkwy (110 St)",
+          "slug": "cathedral-pkwy-110-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "44",
+          "name": "Church Av",
+          "slug": "church-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "26",
+          "name": "DeKalb Av",
+          "slug": "dekalb-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "213",
+          "name": "Fordham Rd",
+          "slug": "fordham-rd",
+          "borough": "Bronx"
+        },
+        {
+          "id": "231",
+          "name": "Grand St",
+          "slug": "grand-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "51",
+          "name": "Kings Hwy",
+          "slug": "kings-hwy",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "212",
+          "name": "Kingsbridge Rd",
+          "slug": "kingsbridge-rd",
+          "borough": "Bronx"
+        },
+        {
+          "id": "47",
+          "name": "Newkirk Plaza",
+          "slug": "newkirk-plaza",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "42",
+          "name": "Prospect Park",
+          "slug": "prospect-park",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "54",
+          "name": "Sheepshead Bay",
+          "slug": "sheepshead-bay",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "215",
+          "name": "Tremont Av",
+          "slug": "tremont-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "167",
+          "name": "W 4 St-Wash Sq",
+          "slug": "w-4-st-wash-sq",
+          "borough": "Manhattan"
+        }
+      ],
+      "count": 37
+    },
+    "C": {
+      "stations": [
+        {
+          "id": "156",
+          "name": "103 St",
+          "slug": "103-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "154",
+          "name": "116 St",
+          "slug": "116-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "153",
+          "name": "125 St",
+          "slug": "125-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "152",
+          "name": "135 St",
+          "slug": "135-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "151",
+          "name": "145 St",
+          "slug": "145-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "150",
+          "name": "155 St",
+          "slug": "155-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "149",
+          "name": "163 St-Amsterdam Av",
+          "slug": "163-st-amsterdam-av",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "605",
+          "name": "168 St",
+          "slug": "168-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "165",
+          "name": "23 St",
+          "slug": "23-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "164",
+          "name": "34 St-Penn Station",
+          "slug": "34-st-penn-station",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "162",
+          "name": "50 St",
+          "slug": "50-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "614",
+          "name": "59 St-Columbus Circle",
+          "slug": "59-st-columbus-circle",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "160",
+          "name": "72 St",
+          "slug": "72-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "618",
+          "name": "8 Av",
+          "slug": "8-av",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "159",
+          "name": "81 St-Museum of Natural History",
+          "slug": "81-st-museum-of-natural-history",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "158",
+          "name": "86 St",
+          "slug": "86-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "157",
+          "name": "96 St",
+          "slug": "96-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "621",
+          "name": "Broadway Junction",
+          "slug": "broadway-junction",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "169",
+          "name": "Canal St",
+          "slug": "canal-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "155",
+          "name": "Cathedral Pkwy (110 St)",
+          "slug": "cathedral-pkwy-110-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "177",
+          "name": "Clinton-Washington Avs",
+          "slug": "clinton-washington-avs",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "624",
+          "name": "Cortlandt St",
+          "slug": "cortlandt-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "188",
+          "name": "Euclid Av",
+          "slug": "euclid-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "627",
+          "name": "Franklin Av",
+          "slug": "franklin-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "628",
+          "name": "Fulton St",
+          "slug": "fulton-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "173",
+          "name": "High St",
+          "slug": "high-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "175",
+          "name": "Hoyt-Schermerhorn Sts",
+          "slug": "hoyt-schermerhorn-sts",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "636",
+          "name": "Jay St-MetroTech",
+          "slug": "jay-st-metrotech",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "180",
+          "name": "Kingston-Throop Avs",
+          "slug": "kingston-throop-avs",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "176",
+          "name": "Lafayette Av",
+          "slug": "lafayette-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "185",
+          "name": "Liberty Av",
+          "slug": "liberty-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "179",
+          "name": "Nostrand Av",
+          "slug": "nostrand-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "182",
+          "name": "Ralph Av",
+          "slug": "ralph-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "183",
+          "name": "Rockaway Av",
+          "slug": "rockaway-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "187",
+          "name": "Shepherd Av",
+          "slug": "shepherd-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "168",
+          "name": "Spring St",
+          "slug": "spring-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "611",
+          "name": "Times Sq-42 St",
+          "slug": "times-sq-42-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "181",
+          "name": "Utica Av",
+          "slug": "utica-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "186",
+          "name": "Van Siclen Av",
+          "slug": "van-siclen-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "167",
+          "name": "W 4 St-Wash Sq",
+          "slug": "w-4-st-wash-sq",
+          "borough": "Manhattan"
+        }
+      ],
+      "count": 40
+    },
+    "D": {
+      "stations": [
+        {
+          "id": "153",
+          "name": "125 St",
+          "slug": "125-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "151",
+          "name": "145 St",
+          "slug": "145-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "220",
+          "name": "155 St",
+          "slug": "155-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "604",
+          "name": "161 St-Yankee Stadium",
+          "slug": "161-st-yankee-stadium",
+          "borough": "Bronx"
+        },
+        {
+          "id": "218",
+          "name": "167 St",
+          "slug": "167-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "217",
+          "name": "170 St",
+          "slug": "170-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "216",
+          "name": "174-175 Sts",
+          "slug": "174-175-sts",
+          "borough": "Bronx"
+        },
+        {
+          "id": "66",
+          "name": "18 Av",
+          "slug": "18-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "214",
+          "name": "182-183 Sts",
+          "slug": "182-183-sts",
+          "borough": "Bronx"
+        },
+        {
+          "id": "67",
+          "name": "20 Av",
+          "slug": "20-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "69",
+          "name": "25 Av",
+          "slug": "25-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "607",
+          "name": "34 St-Herald Sq",
+          "slug": "34-st-herald-sq",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "32",
+          "name": "36 St",
+          "slug": "36-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "609",
+          "name": "42 St-Bryant Pk",
+          "slug": "42-st-bryant-pk",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "225",
+          "name": "47-50 Sts-Rockefeller Ctr",
+          "slug": "47-50-sts-rockefeller-ctr",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "61",
+          "name": "50 St",
+          "slug": "50-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "62",
+          "name": "55 St",
+          "slug": "55-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "614",
+          "name": "59 St-Columbus Circle",
+          "slug": "59-st-columbus-circle",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "615",
+          "name": "62 St",
+          "slug": "62-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "277",
+          "name": "7 Av",
+          "slug": "7-av",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "64",
+          "name": "71 St",
+          "slug": "71-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "65",
+          "name": "79 St",
+          "slug": "79-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "59",
+          "name": "9 Av",
+          "slug": "9-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "617",
+          "name": "Atlantic Av-Barclays Ctr",
+          "slug": "atlantic-av-barclays-ctr",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "70",
+          "name": "Bay 50 St",
+          "slug": "bay-50-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "68",
+          "name": "Bay Pkwy",
+          "slug": "bay-pkwy",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "211",
+          "name": "Bedford Park Blvd",
+          "slug": "bedford-park-blvd",
+          "borough": "Bronx"
+        },
+        {
+          "id": "619",
+          "name": "Broadway-Lafayette St",
+          "slug": "broadway-lafayette-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "58",
+          "name": "Coney Island-Stillwell Av",
+          "slug": "coney-island-stillwell-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "213",
+          "name": "Fordham Rd",
+          "slug": "fordham-rd",
+          "borough": "Bronx"
+        },
+        {
+          "id": "60",
+          "name": "Fort Hamilton Pkwy",
+          "slug": "fort-hamilton-pkwy",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "231",
+          "name": "Grand St",
+          "slug": "grand-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "212",
+          "name": "Kingsbridge Rd",
+          "slug": "kingsbridge-rd",
+          "borough": "Bronx"
+        },
+        {
+          "id": "210",
+          "name": "Norwood-205 St",
+          "slug": "norwood-205-st",
+          "borough": "Bronx"
+        },
+        {
+          "id": "215",
+          "name": "Tremont Av",
+          "slug": "tremont-av",
+          "borough": "Bronx"
+        },
+        {
+          "id": "167",
+          "name": "W 4 St-Wash Sq",
+          "slug": "w-4-st-wash-sq",
+          "borough": "Manhattan"
+        }
+      ],
+      "count": 36
+    },
+    "E": {
+      "stations": [
+        {
+          "id": "165",
+          "name": "23 St",
+          "slug": "23-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "164",
+          "name": "34 St-Penn Station",
+          "slug": "34-st-penn-station",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "276",
+          "name": "5 Av/53 St",
+          "slug": "5-av53-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "162",
+          "name": "50 St",
+          "slug": "50-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "277",
+          "name": "7 Av",
+          "slug": "7-av",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "260",
+          "name": "75 Av",
+          "slug": "75-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "618",
+          "name": "8 Av",
+          "slug": "8-av",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "258",
+          "name": "Briarwood",
+          "slug": "briarwood",
+          "borough": "Queens"
+        },
+        {
+          "id": "169",
+          "name": "Canal St",
+          "slug": "canal-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "624",
+          "name": "Cortlandt St",
+          "slug": "cortlandt-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "606",
+          "name": "Court Sq-23 St",
+          "slug": "court-sq-23-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "261",
+          "name": "Forest Hills-71 Av",
+          "slug": "forest-hills-71-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "616",
+          "name": "Jackson Hts-Roosevelt Av",
+          "slug": "jackson-hts-roosevelt-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "278",
+          "name": "Jamaica Center-Parsons/Archer",
+          "slug": "jamaica-center-parsonsarcher",
+          "borough": "Queens"
+        },
+        {
+          "id": "280",
+          "name": "Jamaica-Van Wyck",
+          "slug": "jamaica-van-wyck",
+          "borough": "Queens"
+        },
+        {
+          "id": "259",
+          "name": "Kew Gardens-Union Tpke",
+          "slug": "kew-gardens-union-tpke",
+          "borough": "Queens"
+        },
+        {
+          "id": "612",
+          "name": "Lexington Av/53 St",
+          "slug": "lexington-av53-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "273",
+          "name": "Queens Plaza",
+          "slug": "queens-plaza",
+          "borough": "Queens"
+        },
+        {
+          "id": "168",
+          "name": "Spring St",
+          "slug": "spring-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "279",
+          "name": "Sutphin Blvd-Archer Av-JFK Airport",
+          "slug": "sutphin-blvd-archer-av-jfk-airport",
+          "borough": "Queens"
+        },
+        {
+          "id": "611",
+          "name": "Times Sq-42 St",
+          "slug": "times-sq-42-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "167",
+          "name": "W 4 St-Wash Sq",
+          "slug": "w-4-st-wash-sq",
+          "borough": "Manhattan"
+        }
+      ],
+      "count": 22
+    },
+    "F": {
+      "stations": [
+        {
+          "id": "241",
+          "name": "15 St-Prospect Park",
+          "slug": "15-st-prospect-park",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "255",
+          "name": "169 St",
+          "slug": "169-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "245",
+          "name": "18 Av",
+          "slug": "18-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "232",
+          "name": "2 Av",
+          "slug": "2-av",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "221",
+          "name": "21 St-Queensbridge",
+          "slug": "21-st-queensbridge",
+          "borough": "Queens"
+        },
+        {
+          "id": "228",
+          "name": "23 St",
+          "slug": "23-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "607",
+          "name": "34 St-Herald Sq",
+          "slug": "34-st-herald-sq",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "608",
+          "name": "4 Av-9 St",
+          "slug": "4-av-9-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "609",
+          "name": "42 St-Bryant Pk",
+          "slug": "42-st-bryant-pk",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "225",
+          "name": "47-50 Sts-Rockefeller Ctr",
+          "slug": "47-50-sts-rockefeller-ctr",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "224",
+          "name": "57 St",
+          "slug": "57-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "601",
+          "name": "6 Av",
+          "slug": "6-av",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "240",
+          "name": "7 Av",
+          "slug": "7-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "260",
+          "name": "75 Av",
+          "slug": "75-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "246",
+          "name": "Avenue I",
+          "slug": "avenue-i",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "248",
+          "name": "Avenue N",
+          "slug": "avenue-n",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "249",
+          "name": "Avenue P",
+          "slug": "avenue-p",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "251",
+          "name": "Avenue U",
+          "slug": "avenue-u",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "252",
+          "name": "Avenue X",
+          "slug": "avenue-x",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "247",
+          "name": "Bay Pkwy",
+          "slug": "bay-pkwy",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "236",
+          "name": "Bergen St",
+          "slug": "bergen-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "258",
+          "name": "Briarwood",
+          "slug": "briarwood",
+          "borough": "Queens"
+        },
+        {
+          "id": "619",
+          "name": "Broadway-Lafayette St",
+          "slug": "broadway-lafayette-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "237",
+          "name": "Carroll St",
+          "slug": "carroll-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "243",
+          "name": "Church Av",
+          "slug": "church-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "58",
+          "name": "Coney Island-Stillwell Av",
+          "slug": "coney-island-stillwell-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "625",
+          "name": "Delancey St-Essex St",
+          "slug": "delancey-st-essex-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "244",
+          "name": "Ditmas Av",
+          "slug": "ditmas-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "234",
+          "name": "East Broadway",
+          "slug": "east-broadway",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "261",
+          "name": "Forest Hills-71 Av",
+          "slug": "forest-hills-71-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "242",
+          "name": "Fort Hamilton Pkwy",
+          "slug": "fort-hamilton-pkwy",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "616",
+          "name": "Jackson Hts-Roosevelt Av",
+          "slug": "jackson-hts-roosevelt-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "254",
+          "name": "Jamaica-179 St",
+          "slug": "jamaica-179-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "636",
+          "name": "Jay St-MetroTech",
+          "slug": "jay-st-metrotech",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "259",
+          "name": "Kew Gardens-Union Tpke",
+          "slug": "kew-gardens-union-tpke",
+          "borough": "Queens"
+        },
+        {
+          "id": "250",
+          "name": "Kings Hwy",
+          "slug": "kings-hwy",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "223",
+          "name": "Lexington Av/63 St",
+          "slug": "lexington-av63-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "253",
+          "name": "Neptune Av",
+          "slug": "neptune-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "256",
+          "name": "Parsons Blvd",
+          "slug": "parsons-blvd",
+          "borough": "Queens"
+        },
+        {
+          "id": "222",
+          "name": "Roosevelt Island",
+          "slug": "roosevelt-island",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "238",
+          "name": "Smith-9 Sts",
+          "slug": "smith-9-sts",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "257",
+          "name": "Sutphin Blvd",
+          "slug": "sutphin-blvd",
+          "borough": "Queens"
+        },
+        {
+          "id": "167",
+          "name": "W 4 St-Wash Sq",
+          "slug": "w-4-st-wash-sq",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "57",
+          "name": "W 8 St-NY Aquarium",
+          "slug": "w-8-st-ny-aquarium",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "235",
+          "name": "York St",
+          "slug": "york-st",
+          "borough": "Brooklyn"
+        }
+      ],
+      "count": 45
+    },
+    "G": {
+      "stations": [
+        {
+          "id": "241",
+          "name": "15 St-Prospect Park",
+          "slug": "15-st-prospect-park",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "282",
+          "name": "21 St",
+          "slug": "21-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "608",
+          "name": "4 Av-9 St",
+          "slug": "4-av-9-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "240",
+          "name": "7 Av",
+          "slug": "7-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "289",
+          "name": "Bedford-Nostrand Avs",
+          "slug": "bedford-nostrand-avs",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "236",
+          "name": "Bergen St",
+          "slug": "bergen-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "286",
+          "name": "Broadway",
+          "slug": "broadway",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "237",
+          "name": "Carroll St",
+          "slug": "carroll-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "243",
+          "name": "Church Av",
+          "slug": "church-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "290",
+          "name": "Classon Av",
+          "slug": "classon-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "291",
+          "name": "Clinton-Washington Avs",
+          "slug": "clinton-washington-avs",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "606",
+          "name": "Court Sq-23 St",
+          "slug": "court-sq-23-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "287",
+          "name": "Flushing Av",
+          "slug": "flushing-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "242",
+          "name": "Fort Hamilton Pkwy",
+          "slug": "fort-hamilton-pkwy",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "292",
+          "name": "Fulton St",
+          "slug": "fulton-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "283",
+          "name": "Greenpoint Av",
+          "slug": "greenpoint-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "175",
+          "name": "Hoyt-Schermerhorn Sts",
+          "slug": "hoyt-schermerhorn-sts",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "629",
+          "name": "Lorimer St",
+          "slug": "lorimer-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "288",
+          "name": "Myrtle-Willoughby Avs",
+          "slug": "myrtle-willoughby-avs",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "284",
+          "name": "Nassau Av",
+          "slug": "nassau-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "238",
+          "name": "Smith-9 Sts",
+          "slug": "smith-9-sts",
+          "borough": "Brooklyn"
+        }
+      ],
+      "count": 21
+    },
+    "J": {
+      "stations": [
+        {
+          "id": "82",
+          "name": "104 St",
+          "slug": "104-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "81",
+          "name": "111 St",
+          "slug": "111-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "80",
+          "name": "121 St",
+          "slug": "121-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "85",
+          "name": "75 St-Elderts Ln",
+          "slug": "75-st-elderts-ln",
+          "borough": "Queens"
+        },
+        {
+          "id": "84",
+          "name": "85 St-Forest Pkwy",
+          "slug": "85-st-forest-pkwy",
+          "borough": "Queens"
+        },
+        {
+          "id": "91",
+          "name": "Alabama Av",
+          "slug": "alabama-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "103",
+          "name": "Bowery",
+          "slug": "bowery",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "107",
+          "name": "Broad St",
+          "slug": "broad-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "621",
+          "name": "Broadway Junction",
+          "slug": "broadway-junction",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "623",
+          "name": "Canal St",
+          "slug": "canal-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "622",
+          "name": "Chambers St",
+          "slug": "chambers-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "93",
+          "name": "Chauncey St",
+          "slug": "chauncey-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "89",
+          "name": "Cleveland St",
+          "slug": "cleveland-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "87",
+          "name": "Crescent St",
+          "slug": "crescent-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "86",
+          "name": "Cypress Hills",
+          "slug": "cypress-hills",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "625",
+          "name": "Delancey St-Essex St",
+          "slug": "delancey-st-essex-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "98",
+          "name": "Flushing Av",
+          "slug": "flushing-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "628",
+          "name": "Fulton St",
+          "slug": "fulton-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "95",
+          "name": "Gates Av",
+          "slug": "gates-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "94",
+          "name": "Halsey St",
+          "slug": "halsey-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "100",
+          "name": "Hewes St",
+          "slug": "hewes-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "278",
+          "name": "Jamaica Center-Parsons/Archer",
+          "slug": "jamaica-center-parsonsarcher",
+          "borough": "Queens"
+        },
+        {
+          "id": "96",
+          "name": "Kosciuszko St",
+          "slug": "kosciuszko-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "99",
+          "name": "Lorimer St",
+          "slug": "lorimer-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "101",
+          "name": "Marcy Av",
+          "slug": "marcy-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "97",
+          "name": "Myrtle Av",
+          "slug": "myrtle-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "88",
+          "name": "Norwood Av",
+          "slug": "norwood-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "279",
+          "name": "Sutphin Blvd-Archer Av-JFK Airport",
+          "slug": "sutphin-blvd-archer-av-jfk-airport",
+          "borough": "Queens"
+        },
+        {
+          "id": "90",
+          "name": "Van Siclen Av",
+          "slug": "van-siclen-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "83",
+          "name": "Woodhaven Blvd",
+          "slug": "woodhaven-blvd",
+          "borough": "Queens"
+        }
+      ],
+      "count": 30
+    },
+    "L": {
+      "stations": [
+        {
+          "id": "119",
+          "name": "1 Av",
+          "slug": "1-av",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "602",
+          "name": "14 St-Union Sq",
+          "slug": "14-st-union-sq",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "118",
+          "name": "3 Av",
+          "slug": "3-av",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "601",
+          "name": "6 Av",
+          "slug": "6-av",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "618",
+          "name": "8 Av",
+          "slug": "8-av",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "133",
+          "name": "Atlantic Av",
+          "slug": "atlantic-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "120",
+          "name": "Bedford Av",
+          "slug": "bedford-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "621",
+          "name": "Broadway Junction",
+          "slug": "broadway-junction",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "131",
+          "name": "Bushwick Av-Aberdeen St",
+          "slug": "bushwick-av-aberdeen-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "138",
+          "name": "Canarsie-Rockaway Pkwy",
+          "slug": "canarsie-rockaway-pkwy",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "127",
+          "name": "DeKalb Av",
+          "slug": "dekalb-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "137",
+          "name": "East 105 St",
+          "slug": "east-105-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "122",
+          "name": "Graham Av",
+          "slug": "graham-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "123",
+          "name": "Grand St",
+          "slug": "grand-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "129",
+          "name": "Halsey St",
+          "slug": "halsey-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "126",
+          "name": "Jefferson St",
+          "slug": "jefferson-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "135",
+          "name": "Livonia Av",
+          "slug": "livonia-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "629",
+          "name": "Lorimer St",
+          "slug": "lorimer-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "124",
+          "name": "Montrose Av",
+          "slug": "montrose-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "125",
+          "name": "Morgan Av",
+          "slug": "morgan-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "630",
+          "name": "Myrtle-Wyckoff Avs",
+          "slug": "myrtle-wyckoff-avs",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "136",
+          "name": "New Lots Av",
+          "slug": "new-lots-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "134",
+          "name": "Sutter Av",
+          "slug": "sutter-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "130",
+          "name": "Wilson Av",
+          "slug": "wilson-av",
+          "borough": "Brooklyn"
+        }
+      ],
+      "count": 24
+    },
+    "M": {
+      "stations": [
+        {
+          "id": "228",
+          "name": "23 St",
+          "slug": "23-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "607",
+          "name": "34 St-Herald Sq",
+          "slug": "34-st-herald-sq",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "272",
+          "name": "36 St",
+          "slug": "36-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "609",
+          "name": "42 St-Bryant Pk",
+          "slug": "42-st-bryant-pk",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "270",
+          "name": "46 St",
+          "slug": "46-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "225",
+          "name": "47-50 Sts-Rockefeller Ctr",
+          "slug": "47-50-sts-rockefeller-ctr",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "276",
+          "name": "5 Av/53 St",
+          "slug": "5-av53-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "601",
+          "name": "6 Av",
+          "slug": "6-av",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "263",
+          "name": "63 Dr-Rego Park",
+          "slug": "63-dr-rego-park",
+          "borough": "Queens"
+        },
+        {
+          "id": "268",
+          "name": "65 St",
+          "slug": "65-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "262",
+          "name": "67 Av",
+          "slug": "67-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "619",
+          "name": "Broadway-Lafayette St",
+          "slug": "broadway-lafayette-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "114",
+          "name": "Central Av",
+          "slug": "central-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "606",
+          "name": "Court Sq-23 St",
+          "slug": "court-sq-23-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "625",
+          "name": "Delancey St-Essex St",
+          "slug": "delancey-st-essex-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "266",
+          "name": "Elmhurst Av",
+          "slug": "elmhurst-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "98",
+          "name": "Flushing Av",
+          "slug": "flushing-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "110",
+          "name": "Forest Av",
+          "slug": "forest-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "261",
+          "name": "Forest Hills-71 Av",
+          "slug": "forest-hills-71-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "109",
+          "name": "Fresh Pond Rd",
+          "slug": "fresh-pond-rd",
+          "borough": "Queens"
+        },
+        {
+          "id": "265",
+          "name": "Grand Av-Newtown",
+          "slug": "grand-av-newtown",
+          "borough": "Queens"
+        },
+        {
+          "id": "100",
+          "name": "Hewes St",
+          "slug": "hewes-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "616",
+          "name": "Jackson Hts-Roosevelt Av",
+          "slug": "jackson-hts-roosevelt-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "113",
+          "name": "Knickerbocker Av",
+          "slug": "knickerbocker-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "612",
+          "name": "Lexington Av/53 St",
+          "slug": "lexington-av53-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "99",
+          "name": "Lorimer St",
+          "slug": "lorimer-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "101",
+          "name": "Marcy Av",
+          "slug": "marcy-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "108",
+          "name": "Middle Village-Metropolitan Av",
+          "slug": "middle-village-metropolitan-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "97",
+          "name": "Myrtle Av",
+          "slug": "myrtle-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "630",
+          "name": "Myrtle-Wyckoff Avs",
+          "slug": "myrtle-wyckoff-avs",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "269",
+          "name": "Northern Blvd",
+          "slug": "northern-blvd",
+          "borough": "Queens"
+        },
+        {
+          "id": "273",
+          "name": "Queens Plaza",
+          "slug": "queens-plaza",
+          "borough": "Queens"
+        },
+        {
+          "id": "111",
+          "name": "Seneca Av",
+          "slug": "seneca-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "271",
+          "name": "Steinway St",
+          "slug": "steinway-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "167",
+          "name": "W 4 St-Wash Sq",
+          "slug": "w-4-st-wash-sq",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "264",
+          "name": "Woodhaven Blvd",
+          "slug": "woodhaven-blvd",
+          "borough": "Queens"
+        }
+      ],
+      "count": 36
+    },
+    "N": {
+      "stations": [
+        {
+          "id": "602",
+          "name": "14 St-Union Sq",
+          "slug": "14-st-union-sq",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "74",
+          "name": "18 Av",
+          "slug": "18-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "75",
+          "name": "20 Av",
+          "slug": "20-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "3",
+          "name": "30 Av",
+          "slug": "30-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "607",
+          "name": "34 St-Herald Sq",
+          "slug": "34-st-herald-sq",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "5",
+          "name": "36 Av",
+          "slug": "36-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "32",
+          "name": "36 St",
+          "slug": "36-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "6",
+          "name": "39 Av-Dutch Kills",
+          "slug": "39-av-dutch-kills",
+          "borough": "Queens"
+        },
+        {
+          "id": "10",
+          "name": "49 St",
+          "slug": "49-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "8",
+          "name": "5 Av/59 St",
+          "slug": "5-av59-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "9",
+          "name": "57 St-7 Av",
+          "slug": "57-st-7-av",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "35",
+          "name": "59 St",
+          "slug": "59-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "615",
+          "name": "62 St",
+          "slug": "62-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "71",
+          "name": "8 Av",
+          "slug": "8-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "79",
+          "name": "86 St",
+          "slug": "86-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "2",
+          "name": "Astoria Blvd",
+          "slug": "astoria-blvd",
+          "borough": "Queens"
+        },
+        {
+          "id": "1",
+          "name": "Astoria-Ditmars Blvd",
+          "slug": "astoria-ditmars-blvd",
+          "borough": "Queens"
+        },
+        {
+          "id": "617",
+          "name": "Atlantic Av-Barclays Ctr",
+          "slug": "atlantic-av-barclays-ctr",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "78",
+          "name": "Avenue U",
+          "slug": "avenue-u",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "76",
+          "name": "Bay Pkwy",
+          "slug": "bay-pkwy",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "4",
+          "name": "Broadway",
+          "slug": "broadway",
+          "borough": "Queens"
+        },
+        {
+          "id": "623",
+          "name": "Canal St",
+          "slug": "canal-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "58",
+          "name": "Coney Island-Stillwell Av",
+          "slug": "coney-island-stillwell-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "72",
+          "name": "Fort Hamilton Pkwy",
+          "slug": "fort-hamilton-pkwy",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "77",
+          "name": "Kings Hwy",
+          "slug": "kings-hwy",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "613",
+          "name": "Lexington Av/59 St",
+          "slug": "lexington-av59-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "461",
+          "name": "Queensboro Plaza",
+          "slug": "queensboro-plaza",
+          "borough": "Queens"
+        },
+        {
+          "id": "611",
+          "name": "Times Sq-42 St",
+          "slug": "times-sq-42-st",
+          "borough": "Manhattan"
+        }
+      ],
+      "count": 28
+    },
+    "Q": {
+      "stations": [
+        {
+          "id": "602",
+          "name": "14 St-Union Sq",
+          "slug": "14-st-union-sq",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "607",
+          "name": "34 St-Herald Sq",
+          "slug": "34-st-herald-sq",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "9",
+          "name": "57 St-7 Av",
+          "slug": "57-st-7-av",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "41",
+          "name": "7 Av",
+          "slug": "7-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "477",
+          "name": "72 St",
+          "slug": "72-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "476",
+          "name": "86 St",
+          "slug": "86-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "475",
+          "name": "96 St",
+          "slug": "96-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "617",
+          "name": "Atlantic Av-Barclays Ctr",
+          "slug": "atlantic-av-barclays-ctr",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "48",
+          "name": "Avenue H",
+          "slug": "avenue-h",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "49",
+          "name": "Avenue J",
+          "slug": "avenue-j",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "50",
+          "name": "Avenue M",
+          "slug": "avenue-m",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "52",
+          "name": "Avenue U",
+          "slug": "avenue-u",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "45",
+          "name": "Beverley Rd",
+          "slug": "beverley-rd",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "55",
+          "name": "Brighton Beach",
+          "slug": "brighton-beach",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "623",
+          "name": "Canal St",
+          "slug": "canal-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "44",
+          "name": "Church Av",
+          "slug": "church-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "58",
+          "name": "Coney Island-Stillwell Av",
+          "slug": "coney-island-stillwell-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "46",
+          "name": "Cortelyou Rd",
+          "slug": "cortelyou-rd",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "26",
+          "name": "DeKalb Av",
+          "slug": "dekalb-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "51",
+          "name": "Kings Hwy",
+          "slug": "kings-hwy",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "223",
+          "name": "Lexington Av/63 St",
+          "slug": "lexington-av63-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "53",
+          "name": "Neck Rd",
+          "slug": "neck-rd",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "47",
+          "name": "Newkirk Plaza",
+          "slug": "newkirk-plaza",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "56",
+          "name": "Ocean Pkwy",
+          "slug": "ocean-pkwy",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "43",
+          "name": "Parkside Av",
+          "slug": "parkside-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "42",
+          "name": "Prospect Park",
+          "slug": "prospect-park",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "54",
+          "name": "Sheepshead Bay",
+          "slug": "sheepshead-bay",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "611",
+          "name": "Times Sq-42 St",
+          "slug": "times-sq-42-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "57",
+          "name": "W 8 St-NY Aquarium",
+          "slug": "w-8-st-ny-aquarium",
+          "borough": "Brooklyn"
+        }
+      ],
+      "count": 29
+    },
+    "R": {
+      "stations": [
+        {
+          "id": "602",
+          "name": "14 St-Union Sq",
+          "slug": "14-st-union-sq",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "14",
+          "name": "23 St",
+          "slug": "23-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "31",
+          "name": "25 St",
+          "slug": "25-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "13",
+          "name": "28 St",
+          "slug": "28-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "607",
+          "name": "34 St-Herald Sq",
+          "slug": "34-st-herald-sq",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "32",
+          "name": "36 St",
+          "slug": "36-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "272",
+          "name": "36 St",
+          "slug": "36-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "608",
+          "name": "4 Av-9 St",
+          "slug": "4-av-9-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "33",
+          "name": "45 St",
+          "slug": "45-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "270",
+          "name": "46 St",
+          "slug": "46-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "10",
+          "name": "49 St",
+          "slug": "49-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "8",
+          "name": "5 Av/59 St",
+          "slug": "5-av59-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "34",
+          "name": "53 St",
+          "slug": "53-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "9",
+          "name": "57 St-7 Av",
+          "slug": "57-st-7-av",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "35",
+          "name": "59 St",
+          "slug": "59-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "263",
+          "name": "63 Dr-Rego Park",
+          "slug": "63-dr-rego-park",
+          "borough": "Queens"
+        },
+        {
+          "id": "268",
+          "name": "65 St",
+          "slug": "65-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "262",
+          "name": "67 Av",
+          "slug": "67-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "37",
+          "name": "77 St",
+          "slug": "77-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "16",
+          "name": "8 St-NYU",
+          "slug": "8-st-nyu",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "38",
+          "name": "86 St",
+          "slug": "86-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "617",
+          "name": "Atlantic Av-Barclays Ctr",
+          "slug": "atlantic-av-barclays-ctr",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "36",
+          "name": "Bay Ridge Av",
+          "slug": "bay-ridge-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "39",
+          "name": "Bay Ridge-95 St",
+          "slug": "bay-ridge-95-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "623",
+          "name": "Canal St",
+          "slug": "canal-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "20",
+          "name": "City Hall",
+          "slug": "city-hall",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "624",
+          "name": "Cortlandt St",
+          "slug": "cortlandt-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "620",
+          "name": "Court St",
+          "slug": "court-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "26",
+          "name": "DeKalb Av",
+          "slug": "dekalb-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "266",
+          "name": "Elmhurst Av",
+          "slug": "elmhurst-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "261",
+          "name": "Forest Hills-71 Av",
+          "slug": "forest-hills-71-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "265",
+          "name": "Grand Av-Newtown",
+          "slug": "grand-av-newtown",
+          "borough": "Queens"
+        },
+        {
+          "id": "616",
+          "name": "Jackson Hts-Roosevelt Av",
+          "slug": "jackson-hts-roosevelt-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "636",
+          "name": "Jay St-MetroTech",
+          "slug": "jay-st-metrotech",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "613",
+          "name": "Lexington Av/59 St",
+          "slug": "lexington-av59-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "269",
+          "name": "Northern Blvd",
+          "slug": "northern-blvd",
+          "borough": "Queens"
+        },
+        {
+          "id": "17",
+          "name": "Prince St",
+          "slug": "prince-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "30",
+          "name": "Prospect Av",
+          "slug": "prospect-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "273",
+          "name": "Queens Plaza",
+          "slug": "queens-plaza",
+          "borough": "Queens"
+        },
+        {
+          "id": "22",
+          "name": "Rector St",
+          "slug": "rector-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "271",
+          "name": "Steinway St",
+          "slug": "steinway-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "611",
+          "name": "Times Sq-42 St",
+          "slug": "times-sq-42-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "28",
+          "name": "Union St",
+          "slug": "union-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "635",
+          "name": "Whitehall St-South Ferry",
+          "slug": "whitehall-st-south-ferry",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "264",
+          "name": "Woodhaven Blvd",
+          "slug": "woodhaven-blvd",
+          "borough": "Queens"
+        }
+      ],
+      "count": 45
+    },
+    "S": {
+      "stations": [
+        {
+          "id": "202",
+          "name": "Beach 105 St",
+          "slug": "beach-105-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "200",
+          "name": "Beach 90 St",
+          "slug": "beach-90-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "201",
+          "name": "Beach 98 St",
+          "slug": "beach-98-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "626",
+          "name": "Botanic Garden",
+          "slug": "botanic-garden",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "199",
+          "name": "Broad Channel",
+          "slug": "broad-channel",
+          "borough": "Queens"
+        },
+        {
+          "id": "627",
+          "name": "Franklin Av",
+          "slug": "franklin-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "610",
+          "name": "Grand Central-42 St",
+          "slug": "grand-central-42-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "141",
+          "name": "Park Pl",
+          "slug": "park-pl",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "42",
+          "name": "Prospect Park",
+          "slug": "prospect-park",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "203",
+          "name": "Rockaway Park-Beach 116 St",
+          "slug": "rockaway-park-beach-116-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "611",
+          "name": "Times Sq-42 St",
+          "slug": "times-sq-42-st",
+          "borough": "Manhattan"
+        }
+      ],
+      "count": 11
+    },
+    "W": {
+      "stations": [
+        {
+          "id": "602",
+          "name": "14 St-Union Sq",
+          "slug": "14-st-union-sq",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "14",
+          "name": "23 St",
+          "slug": "23-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "13",
+          "name": "28 St",
+          "slug": "28-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "3",
+          "name": "30 Av",
+          "slug": "30-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "607",
+          "name": "34 St-Herald Sq",
+          "slug": "34-st-herald-sq",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "5",
+          "name": "36 Av",
+          "slug": "36-av",
+          "borough": "Queens"
+        },
+        {
+          "id": "6",
+          "name": "39 Av-Dutch Kills",
+          "slug": "39-av-dutch-kills",
+          "borough": "Queens"
+        },
+        {
+          "id": "10",
+          "name": "49 St",
+          "slug": "49-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "8",
+          "name": "5 Av/59 St",
+          "slug": "5-av59-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "9",
+          "name": "57 St-7 Av",
+          "slug": "57-st-7-av",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "16",
+          "name": "8 St-NYU",
+          "slug": "8-st-nyu",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "2",
+          "name": "Astoria Blvd",
+          "slug": "astoria-blvd",
+          "borough": "Queens"
+        },
+        {
+          "id": "1",
+          "name": "Astoria-Ditmars Blvd",
+          "slug": "astoria-ditmars-blvd",
+          "borough": "Queens"
+        },
+        {
+          "id": "4",
+          "name": "Broadway",
+          "slug": "broadway",
+          "borough": "Queens"
+        },
+        {
+          "id": "623",
+          "name": "Canal St",
+          "slug": "canal-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "20",
+          "name": "City Hall",
+          "slug": "city-hall",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "624",
+          "name": "Cortlandt St",
+          "slug": "cortlandt-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "613",
+          "name": "Lexington Av/59 St",
+          "slug": "lexington-av59-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "17",
+          "name": "Prince St",
+          "slug": "prince-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "461",
+          "name": "Queensboro Plaza",
+          "slug": "queensboro-plaza",
+          "borough": "Queens"
+        },
+        {
+          "id": "22",
+          "name": "Rector St",
+          "slug": "rector-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "611",
+          "name": "Times Sq-42 St",
+          "slug": "times-sq-42-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "635",
+          "name": "Whitehall St-South Ferry",
+          "slug": "whitehall-st-south-ferry",
+          "borough": "Manhattan"
+        }
+      ],
+      "count": 23
+    },
+    "Z": {
+      "stations": [
+        {
+          "id": "82",
+          "name": "104 St",
+          "slug": "104-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "80",
+          "name": "121 St",
+          "slug": "121-st",
+          "borough": "Queens"
+        },
+        {
+          "id": "85",
+          "name": "75 St-Elderts Ln",
+          "slug": "75-st-elderts-ln",
+          "borough": "Queens"
+        },
+        {
+          "id": "91",
+          "name": "Alabama Av",
+          "slug": "alabama-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "103",
+          "name": "Bowery",
+          "slug": "bowery",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "107",
+          "name": "Broad St",
+          "slug": "broad-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "621",
+          "name": "Broadway Junction",
+          "slug": "broadway-junction",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "623",
+          "name": "Canal St",
+          "slug": "canal-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "622",
+          "name": "Chambers St",
+          "slug": "chambers-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "93",
+          "name": "Chauncey St",
+          "slug": "chauncey-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "87",
+          "name": "Crescent St",
+          "slug": "crescent-st",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "625",
+          "name": "Delancey St-Essex St",
+          "slug": "delancey-st-essex-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "628",
+          "name": "Fulton St",
+          "slug": "fulton-st",
+          "borough": "Manhattan"
+        },
+        {
+          "id": "95",
+          "name": "Gates Av",
+          "slug": "gates-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "278",
+          "name": "Jamaica Center-Parsons/Archer",
+          "slug": "jamaica-center-parsonsarcher",
+          "borough": "Queens"
+        },
+        {
+          "id": "101",
+          "name": "Marcy Av",
+          "slug": "marcy-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "97",
+          "name": "Myrtle Av",
+          "slug": "myrtle-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "88",
+          "name": "Norwood Av",
+          "slug": "norwood-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "279",
+          "name": "Sutphin Blvd-Archer Av-JFK Airport",
+          "slug": "sutphin-blvd-archer-av-jfk-airport",
+          "borough": "Queens"
+        },
+        {
+          "id": "90",
+          "name": "Van Siclen Av",
+          "slug": "van-siclen-av",
+          "borough": "Brooklyn"
+        },
+        {
+          "id": "83",
+          "name": "Woodhaven Blvd",
+          "slug": "woodhaven-blvd",
+          "borough": "Queens"
+        }
+      ],
+      "count": 21
+    }
+  }
+}

@@ -130,7 +130,7 @@ class MTADataService {
   private loadStationData() {
     try {
       const dataDir = path.join(process.cwd(), 'data');
-      const stationsPath = path.join(dataDir, 'stations.json');
+      const stationsPath = path.join(dataDir, 'stations-normalized.json');
       
       // Read fresh data from filesystem
       this.stationsData = JSON.parse(fs.readFileSync(stationsPath, 'utf8'));
@@ -141,7 +141,7 @@ class MTADataService {
       
       // Build lookup maps for efficient access
       this.stationsData?.forEach(station => {
-        // Map by ID (now using complex_id)
+        // Map by ID
         if (station.id) {
           this.stationsByGtfsId.set(station.id, station);
         }
@@ -152,11 +152,11 @@ class MTADataService {
         }
       });
       
-      console.log(`[MTA Service] Loaded ${this.stationsData?.length} stations (normalized complexes)`);
+      console.log(`[MTA Service] Loaded ${this.stationsData?.length} stations (normalized complexes - 445 total)`);
     } catch (error) {
       console.error('[MTA Service] Error loading station data:', error);
       console.error('[MTA Service] Process cwd:', process.cwd());
-      console.error('[MTA Service] Looking for:', path.join(process.cwd(), 'data', 'stations.json'));
+      console.error('[MTA Service] Looking for:', path.join(process.cwd(), 'data', 'stations-normalized.json'));
     }
   }
 
