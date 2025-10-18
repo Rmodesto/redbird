@@ -132,7 +132,7 @@ stationName === '110 St-Malcolm X Plaza' && propName === '110 St-Central Park No
 ## Verification Points
 
 ### Route Integrity
-✅ Eastern Brooklyn branch properly rendered
+✅ Eastern Brooklyn branchthis is the wrong tooltip look at the claude md file  properly rendered
 ✅ Correct junction at Franklin Avenue/Botanic Garden
 ✅ No incorrect stations from 2/5 lines
 ✅ Proper termination at Harlem-148 St

@@ -32,7 +32,10 @@ const HARDCODED_LINES: Record<string, { stationCount: number }> = {
   '4': { stationCount: 28 },
   '5': { stationCount: 36 },
   '6': { stationCount: 37 },
-  'F': { stationCount: 45 }
+  'F': { stationCount: 45 },
+  'G': { stationCount: 21 },
+  'J': { stationCount: 30 },
+  'L': { stationCount: 24 }
 };
 
 interface SubwayStation {
@@ -2034,6 +2037,471 @@ export default function WorkingSubwayMap() {
         setLineMarkers(prev => ({ ...prev, [lineId]: markersForLine }));
         setActiveLines(prev => [...prev, lineId]);
         console.log(`✅ Hardcoded F train added successfully with ${fLineStations.length} stations`);
+        return;
+      }
+
+      // HARDCODED LINE G IMPLEMENTATION
+      if (lineId === 'G') {
+        const markersForLine: maplibregl.Marker[] = [];
+        const gLineCoords: [number, number][] = [
+          [-73.94503200000001, 40.747141000000006], // Court Sq-23 St
+          [-73.949724, 40.744065], // 21 St
+          [-73.954449, 40.731352], // Greenpoint Av
+          [-73.951277, 40.724635], // Nassau Av
+          [-73.95084650000001, 40.7134275], // Lorimer St
+          [-73.950308, 40.706092], // Broadway
+          [-73.950234, 40.700377], // Flushing Av
+          [-73.949046, 40.694568], // Myrtle-Willoughby Avs
+          [-73.953522, 40.689627], // Bedford-Nostrand Avs
+          [-73.96007, 40.688873], // Classon Av
+          [-73.966839, 40.688089], // Clinton-Washington Avs
+          [-73.975375, 40.687119], // Fulton St
+          [-73.985001, 40.688484], // Hoyt-Schermerhorn Sts
+          [-73.990862, 40.686145], // Bergen St
+          [-73.995048, 40.680303], // Carroll St
+          [-73.995959, 40.67358], // Smith-9 Sts
+          [-73.9890405, 40.670559499999996], // 4 Av-9 St
+          [-73.980305, 40.666271], // 7 Av
+          [-73.979493, 40.660365], // 15 St-Prospect Park
+          [-73.975776, 40.650782], // Fort Hamilton Pkwy
+          [-73.979678, 40.644041], // Church Av
+        ];
+
+        const lineGeoJSON = {
+          type: 'Feature' as const,
+          properties: {},
+          geometry: {
+            type: 'LineString' as const,
+            coordinates: gLineCoords,
+          },
+        };
+
+        if (!map.current!.getSource(`line-${lineId}`)) {
+          map.current!.addSource(`line-${lineId}`, {
+            type: 'geojson',
+            data: lineGeoJSON,
+          });
+        }
+
+        if (!map.current!.getLayer(`line-${lineId}`)) {
+          map.current!.addLayer({
+            id: `line-${lineId}`,
+            type: 'line',
+            source: `line-${lineId}`,
+            paint: {
+              'line-color': MTA_COLORS[lineId] || '#000000',
+              'line-width': 4,
+              'line-opacity': 0.8,
+            },
+          });
+        }
+
+        const gLineStations = [
+          { name: "Court Sq-23 St", coordinates: [-73.94503200000001, 40.747141000000006], lines: ['7', 'E', 'G', 'M'] },
+          { name: "21 St", coordinates: [-73.949724, 40.744065], lines: ['G'] },
+          { name: "Greenpoint Av", coordinates: [-73.954449, 40.731352], lines: ['G'] },
+          { name: "Nassau Av", coordinates: [-73.951277, 40.724635], lines: ['G'] },
+          { name: "Lorimer St", coordinates: [-73.95084650000001, 40.7134275], lines: ['G', 'L'] },
+          { name: "Broadway", coordinates: [-73.950308, 40.706092], lines: ['G'] },
+          { name: "Flushing Av", coordinates: [-73.950234, 40.700377], lines: ['G'] },
+          { name: "Myrtle-Willoughby Avs", coordinates: [-73.949046, 40.694568], lines: ['G'] },
+          { name: "Bedford-Nostrand Avs", coordinates: [-73.953522, 40.689627], lines: ['G'] },
+          { name: "Classon Av", coordinates: [-73.96007, 40.688873], lines: ['G'] },
+          { name: "Clinton-Washington Avs", coordinates: [-73.966839, 40.688089], lines: ['G'] },
+          { name: "Fulton St", coordinates: [-73.975375, 40.687119], lines: ['G'] },
+          { name: "Hoyt-Schermerhorn Sts", coordinates: [-73.985001, 40.688484], lines: ['A', 'C', 'G'] },
+          { name: "Bergen St", coordinates: [-73.990862, 40.686145], lines: ['F', 'G'] },
+          { name: "Carroll St", coordinates: [-73.995048, 40.680303], lines: ['F', 'G'] },
+          { name: "Smith-9 Sts", coordinates: [-73.995959, 40.67358], lines: ['F', 'G'] },
+          { name: "4 Av-9 St", coordinates: [-73.9890405, 40.670559499999996], lines: ['F', 'G', 'R'] },
+          { name: "7 Av", coordinates: [-73.980305, 40.666271], lines: ['F', 'G'] },
+          { name: "15 St-Prospect Park", coordinates: [-73.979493, 40.660365], lines: ['F', 'G'] },
+          { name: "Fort Hamilton Pkwy", coordinates: [-73.975776, 40.650782], lines: ['F', 'G'] },
+          { name: "Church Av", coordinates: [-73.979678, 40.644041], lines: ['F', 'G'] },
+        ];
+
+        gLineStations.forEach((station, index) => {
+          const el = document.createElement('div');
+          el.className = 'subway-marker';
+          el.style.backgroundColor = MTA_COLORS[lineId] || '#000000';
+          el.style.width = '16px';
+          el.style.height = '16px';
+          el.style.borderRadius = '50%';
+          el.style.border = '3px solid white';
+          el.style.cursor = 'pointer';
+          el.style.boxShadow = '0 2px 4px rgba(0,0,0,0.3)';
+
+          let hoverPopup: maplibregl.Popup | null = null;
+
+          el.addEventListener('mouseenter', () => {
+            const stationData = gLineStations[index];
+            const allLines = stationData.lines || [lineId];
+
+            hoverPopup = new maplibregl.Popup({
+              closeButton: false,
+              closeOnClick: false,
+              className: 'glassmorphic-tooltip',
+              offset: 25,
+              maxWidth: '280px'
+            })
+              .setLngLat(station.coordinates as [number, number])
+              .setHTML(`
+                <div class="glassmorphic-tooltip-content">
+                  <div class="font-semibold text-sm mb-2">${stationData.name}</div>
+                  <div class="flex gap-1.5 flex-wrap">
+                    ${allLines.map(line => `
+                      <span class="inline-block w-6 h-6 rounded-full text-xs font-bold text-center leading-6"
+                            style="background-color: ${MTA_COLORS[line] || '#000000'}; color: white;">
+                        ${line}
+                      </span>
+                    `).join('')}
+                  </div>
+                </div>
+              `)
+              .addTo(map.current!);
+          });
+
+          el.addEventListener('mouseleave', () => {
+            if (hoverPopup) {
+              hoverPopup.remove();
+              hoverPopup = null;
+            }
+          });
+
+          el.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const stationData = gLineStations[index];
+            console.log('Station clicked:', stationData.name);
+          });
+
+          const marker = new maplibregl.Marker({ element: el })
+            .setLngLat(station.coordinates as [number, number])
+            .addTo(map.current!);
+
+          markersForLine.push(marker);
+        });
+
+        setLineMarkers(prev => ({ ...prev, [lineId]: markersForLine }));
+        setActiveLines(prev => [...prev, lineId]);
+        console.log(`✅ Hardcoded G train added successfully with ${gLineStations.length} stations`);
+        return;
+      }
+
+      // HARDCODED LINE J IMPLEMENTATION
+      if (lineId === 'J') {
+        const markersForLine: maplibregl.Marker[] = [];
+        const jLineCoords: [number, number][] = [
+          [-73.801109, 40.702147], // Jamaica Center-Parsons/Archer
+          [-73.807969, 40.700486], // Sutphin Blvd-Archer Av-JFK Airport
+          [-73.828294, 40.700492], // 121 St
+          [-73.836345, 40.697418], // 111 St
+          [-73.84433, 40.695178], // 104 St
+          [-73.851576, 40.693879], // Woodhaven Blvd
+          [-73.86001, 40.692435], // 85 St-Forest Pkwy
+          [-73.867139, 40.691324], // 75 St-Elderts Ln
+          [-73.87255, 40.689941], // Cypress Hills
+          [-73.873785, 40.683194], // Crescent St
+          [-73.880039, 40.68141], // Norwood Av
+          [-73.884639, 40.679947], // Cleveland St
+          [-73.891688, 40.678024], // Van Siclen Av
+          [-73.898654, 40.676992], // Alabama Av
+          [-73.90435599999999, 40.678896], // Broadway Junction
+          [-73.910456, 40.682893], // Chauncey St
+          [-73.916559, 40.68637], // Halsey St
+          [-73.92227, 40.68963], // Gates Av
+          [-73.928814, 40.693342], // Kosciuszko St
+          [-73.935657, 40.697207], // Myrtle Av
+          [-73.941126, 40.70026], // Flushing Av
+          [-73.947408, 40.703869], // Lorimer St
+          [-73.953431, 40.70687], // Hewes St
+          [-73.957757, 40.708359], // Marcy Av
+          [-73.9877755, 40.718463], // Delancey St-Essex St
+          [-73.993915, 40.72028], // Bowery
+          [-74.00057999999999, 40.71870125], // Canal St
+          [-74.003766, 40.713154], // Chambers St
+          [-74.00783824999999, 40.71008875], // Fulton St
+          [-74.011056, 40.706476], // Broad St
+        ];
+
+        const lineGeoJSON = {
+          type: 'Feature' as const,
+          properties: {},
+          geometry: {
+            type: 'LineString' as const,
+            coordinates: jLineCoords,
+          },
+        };
+
+        if (!map.current!.getSource(`line-${lineId}`)) {
+          map.current!.addSource(`line-${lineId}`, {
+            type: 'geojson',
+            data: lineGeoJSON,
+          });
+        }
+
+        if (!map.current!.getLayer(`line-${lineId}`)) {
+          map.current!.addLayer({
+            id: `line-${lineId}`,
+            type: 'line',
+            source: `line-${lineId}`,
+            paint: {
+              'line-color': MTA_COLORS[lineId] || '#000000',
+              'line-width': 4,
+              'line-opacity': 0.8,
+            },
+          });
+        }
+
+        const jLineStations = [
+          { name: "Jamaica Center-Parsons/Archer", coordinates: [-73.801109, 40.702147], lines: ['E', 'J', 'Z'] },
+          { name: "Sutphin Blvd-Archer Av-JFK Airport", coordinates: [-73.807969, 40.700486], lines: ['E', 'J', 'Z'] },
+          { name: "121 St", coordinates: [-73.828294, 40.700492], lines: ['J', 'Z'] },
+          { name: "111 St", coordinates: [-73.836345, 40.697418], lines: ['J'] },
+          { name: "104 St", coordinates: [-73.84433, 40.695178], lines: ['J', 'Z'] },
+          { name: "Woodhaven Blvd", coordinates: [-73.851576, 40.693879], lines: ['J', 'Z'] },
+          { name: "85 St-Forest Pkwy", coordinates: [-73.86001, 40.692435], lines: ['J'] },
+          { name: "75 St-Elderts Ln", coordinates: [-73.867139, 40.691324], lines: ['J', 'Z'] },
+          { name: "Cypress Hills", coordinates: [-73.87255, 40.689941], lines: ['J'] },
+          { name: "Crescent St", coordinates: [-73.873785, 40.683194], lines: ['J', 'Z'] },
+          { name: "Norwood Av", coordinates: [-73.880039, 40.68141], lines: ['J', 'Z'] },
+          { name: "Cleveland St", coordinates: [-73.884639, 40.679947], lines: ['J'] },
+          { name: "Van Siclen Av", coordinates: [-73.891688, 40.678024], lines: ['J', 'Z'] },
+          { name: "Alabama Av", coordinates: [-73.898654, 40.676992], lines: ['J', 'Z'] },
+          { name: "Broadway Junction", coordinates: [-73.90435599999999, 40.678896], lines: ['A', 'C', 'J', 'L', 'Z'] },
+          { name: "Chauncey St", coordinates: [-73.910456, 40.682893], lines: ['J', 'Z'] },
+          { name: "Halsey St", coordinates: [-73.916559, 40.68637], lines: ['J'] },
+          { name: "Gates Av", coordinates: [-73.92227, 40.68963], lines: ['J', 'Z'] },
+          { name: "Kosciuszko St", coordinates: [-73.928814, 40.693342], lines: ['J'] },
+          { name: "Myrtle Av", coordinates: [-73.935657, 40.697207], lines: ['J', 'M', 'Z'] },
+          { name: "Flushing Av", coordinates: [-73.941126, 40.70026], lines: ['J', 'M'] },
+          { name: "Lorimer St", coordinates: [-73.947408, 40.703869], lines: ['J', 'M'] },
+          { name: "Hewes St", coordinates: [-73.953431, 40.70687], lines: ['J', 'M'] },
+          { name: "Marcy Av", coordinates: [-73.957757, 40.708359], lines: ['J', 'M', 'Z'] },
+          { name: "Delancey St-Essex St", coordinates: [-73.9877755, 40.718463], lines: ['F', 'J', 'M', 'Z'] },
+          { name: "Bowery", coordinates: [-73.993915, 40.72028], lines: ['J', 'Z'] },
+          { name: "Canal St", coordinates: [-74.00057999999999, 40.71870125], lines: ['6', 'J', 'N', 'Q', 'R', 'W', 'Z'] },
+          { name: "Chambers St", coordinates: [-74.003766, 40.713154], lines: ['4', '5', '6', 'J', 'Z'] },
+          { name: "Fulton St", coordinates: [-74.00783824999999, 40.71008875], lines: ['2', '3', '4', '5', 'A', 'C', 'J', 'Z'] },
+          { name: "Broad St", coordinates: [-74.011056, 40.706476], lines: ['J', 'Z'] },
+        ];
+
+        jLineStations.forEach((station, index) => {
+          const el = document.createElement('div');
+          el.className = 'subway-marker';
+          el.style.backgroundColor = MTA_COLORS[lineId] || '#000000';
+          el.style.width = '16px';
+          el.style.height = '16px';
+          el.style.borderRadius = '50%';
+          el.style.border = '3px solid white';
+          el.style.cursor = 'pointer';
+          el.style.boxShadow = '0 2px 4px rgba(0,0,0,0.3)';
+
+          let hoverPopup: maplibregl.Popup | null = null;
+
+          el.addEventListener('mouseenter', () => {
+            const stationData = jLineStations[index];
+            const allLines = stationData.lines || [lineId];
+
+            hoverPopup = new maplibregl.Popup({
+              closeButton: false,
+              closeOnClick: false,
+              className: 'glassmorphic-tooltip',
+              offset: 25,
+              maxWidth: '280px'
+            })
+              .setLngLat(station.coordinates as [number, number])
+              .setHTML(`
+                <div class="glassmorphic-tooltip-content">
+                  <div class="font-semibold text-sm mb-2">${stationData.name}</div>
+                  <div class="flex gap-1.5 flex-wrap">
+                    ${allLines.map(line => `
+                      <span class="inline-block w-6 h-6 rounded-full text-xs font-bold text-center leading-6"
+                            style="background-color: ${MTA_COLORS[line] || '#000000'}; color: white;">
+                        ${line}
+                      </span>
+                    `).join('')}
+                  </div>
+                </div>
+              `)
+              .addTo(map.current!);
+          });
+
+          el.addEventListener('mouseleave', () => {
+            if (hoverPopup) {
+              hoverPopup.remove();
+              hoverPopup = null;
+            }
+          });
+
+          el.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const stationData = jLineStations[index];
+            console.log('Station clicked:', stationData.name);
+          });
+
+          const marker = new maplibregl.Marker({ element: el })
+            .setLngLat(station.coordinates as [number, number])
+            .addTo(map.current!);
+
+          markersForLine.push(marker);
+        });
+
+        setLineMarkers(prev => ({ ...prev, [lineId]: markersForLine }));
+        setActiveLines(prev => [...prev, lineId]);
+        console.log(`✅ Hardcoded J train added successfully with ${jLineStations.length} stations`);
+        return;
+      }
+
+      // HARDCODED LINE L IMPLEMENTATION
+      if (lineId === 'L') {
+        const markersForLine: maplibregl.Marker[] = [];
+        const lLineCoords: [number, number][] = [
+          [-74.002134, 40.740335], // 8 Av
+          [-73.997732, 40.73779633333333], // 6 Av
+          [-73.99041633333333, 40.735066], // 14 St-Union Sq
+          [-73.986122, 40.732849], // 3 Av
+          [-73.981628, 40.730953], // 1 Av
+          [-73.956872, 40.717304], // Bedford Av
+          [-73.95084650000001, 40.7134275], // Lorimer St
+          [-73.944053, 40.714565], // Graham Av
+          [-73.94067, 40.711926], // Grand St
+          [-73.93985, 40.707739], // Montrose Av
+          [-73.933147, 40.706152], // Morgan Av
+          [-73.922913, 40.706607], // Jefferson St
+          [-73.918425, 40.703811], // DeKalb Av
+          [-73.9119855, 40.699622000000005], // Myrtle-Wyckoff Avs
+          [-73.904084, 40.695602], // Halsey St
+          [-73.904046, 40.688764], // Wilson Av
+          [-73.905249, 40.682829], // Bushwick Av-Aberdeen St
+          [-73.90435599999999, 40.678896], // Broadway Junction
+          [-73.903097, 40.675345], // Atlantic Av
+          [-73.901975, 40.669367], // Sutter Av
+          [-73.900571, 40.664038], // Livonia Av
+          [-73.899232, 40.658733], // New Lots Av
+          [-73.899485, 40.650573], // East 105 St
+          [-73.90185, 40.646654], // Canarsie-Rockaway Pkwy
+        ];
+
+        const lineGeoJSON = {
+          type: 'Feature' as const,
+          properties: {},
+          geometry: {
+            type: 'LineString' as const,
+            coordinates: lLineCoords,
+          },
+        };
+
+        if (!map.current!.getSource(`line-${lineId}`)) {
+          map.current!.addSource(`line-${lineId}`, {
+            type: 'geojson',
+            data: lineGeoJSON,
+          });
+        }
+
+        if (!map.current!.getLayer(`line-${lineId}`)) {
+          map.current!.addLayer({
+            id: `line-${lineId}`,
+            type: 'line',
+            source: `line-${lineId}`,
+            paint: {
+              'line-color': MTA_COLORS[lineId] || '#000000',
+              'line-width': 4,
+              'line-opacity': 0.8,
+            },
+          });
+        }
+
+        const lLineStations = [
+          { name: "8 Av", coordinates: [-74.002134, 40.740335], lines: ['A', 'C', 'E', 'L'] },
+          { name: "6 Av", coordinates: [-73.997732, 40.73779633333333], lines: ['1', '2', '3', 'F', 'L', 'M'] },
+          { name: "14 St-Union Sq", coordinates: [-73.99041633333333, 40.735066], lines: ['4', '5', '6', 'L', 'N', 'Q', 'R', 'W'] },
+          { name: "3 Av", coordinates: [-73.986122, 40.732849], lines: ['L'] },
+          { name: "1 Av", coordinates: [-73.981628, 40.730953], lines: ['L'] },
+          { name: "Bedford Av", coordinates: [-73.956872, 40.717304], lines: ['L'] },
+          { name: "Lorimer St", coordinates: [-73.95084650000001, 40.7134275], lines: ['G', 'L'] },
+          { name: "Graham Av", coordinates: [-73.944053, 40.714565], lines: ['L'] },
+          { name: "Grand St", coordinates: [-73.94067, 40.711926], lines: ['L'] },
+          { name: "Montrose Av", coordinates: [-73.93985, 40.707739], lines: ['L'] },
+          { name: "Morgan Av", coordinates: [-73.933147, 40.706152], lines: ['L'] },
+          { name: "Jefferson St", coordinates: [-73.922913, 40.706607], lines: ['L'] },
+          { name: "DeKalb Av", coordinates: [-73.918425, 40.703811], lines: ['L'] },
+          { name: "Myrtle-Wyckoff Avs", coordinates: [-73.9119855, 40.699622000000005], lines: ['L', 'M'] },
+          { name: "Halsey St", coordinates: [-73.904084, 40.695602], lines: ['L'] },
+          { name: "Wilson Av", coordinates: [-73.904046, 40.688764], lines: ['L'] },
+          { name: "Bushwick Av-Aberdeen St", coordinates: [-73.905249, 40.682829], lines: ['L'] },
+          { name: "Broadway Junction", coordinates: [-73.90435599999999, 40.678896], lines: ['A', 'C', 'J', 'L', 'Z'] },
+          { name: "Atlantic Av", coordinates: [-73.903097, 40.675345], lines: ['L'] },
+          { name: "Sutter Av", coordinates: [-73.901975, 40.669367], lines: ['L'] },
+          { name: "Livonia Av", coordinates: [-73.900571, 40.664038], lines: ['L'] },
+          { name: "New Lots Av", coordinates: [-73.899232, 40.658733], lines: ['L'] },
+          { name: "East 105 St", coordinates: [-73.899485, 40.650573], lines: ['L'] },
+          { name: "Canarsie-Rockaway Pkwy", coordinates: [-73.90185, 40.646654], lines: ['L'] },
+        ];
+
+        lLineStations.forEach((station, index) => {
+          const el = document.createElement('div');
+          el.className = 'subway-marker';
+          el.style.backgroundColor = MTA_COLORS[lineId] || '#000000';
+          el.style.width = '16px';
+          el.style.height = '16px';
+          el.style.borderRadius = '50%';
+          el.style.border = '3px solid white';
+          el.style.cursor = 'pointer';
+          el.style.boxShadow = '0 2px 4px rgba(0,0,0,0.3)';
+
+          let hoverPopup: maplibregl.Popup | null = null;
+
+          el.addEventListener('mouseenter', () => {
+            const stationData = lLineStations[index];
+            const allLines = stationData.lines || [lineId];
+
+            hoverPopup = new maplibregl.Popup({
+              closeButton: false,
+              closeOnClick: false,
+              className: 'glassmorphic-tooltip',
+              offset: 25,
+              maxWidth: '280px'
+            })
+              .setLngLat(station.coordinates as [number, number])
+              .setHTML(`
+                <div class="glassmorphic-tooltip-content">
+                  <div class="font-semibold text-sm mb-2">${stationData.name}</div>
+                  <div class="flex gap-1.5 flex-wrap">
+                    ${allLines.map(line => `
+                      <span class="inline-block w-6 h-6 rounded-full text-xs font-bold text-center leading-6"
+                            style="background-color: ${MTA_COLORS[line] || '#000000'}; color: white;">
+                        ${line}
+                      </span>
+                    `).join('')}
+                  </div>
+                </div>
+              `)
+              .addTo(map.current!);
+          });
+
+          el.addEventListener('mouseleave', () => {
+            if (hoverPopup) {
+              hoverPopup.remove();
+              hoverPopup = null;
+            }
+          });
+
+          el.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const stationData = lLineStations[index];
+            console.log('Station clicked:', stationData.name);
+          });
+
+          const marker = new maplibregl.Marker({ element: el })
+            .setLngLat(station.coordinates as [number, number])
+            .addTo(map.current!);
+
+          markersForLine.push(marker);
+        });
+
+        setLineMarkers(prev => ({ ...prev, [lineId]: markersForLine }));
+        setActiveLines(prev => [...prev, lineId]);
+        console.log(`✅ Hardcoded L train added successfully with ${lLineStations.length} stations`);
         return;
       }
 
