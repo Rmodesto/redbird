@@ -1,12 +1,13 @@
 "use client";
 
 import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Navigation from "../../../components/Navigation";
 import SubwayBadge from "../../../components/SubwayBadge";
 import CultureCard from "../../../components/CultureCard";
 import AdSlot from "../../../components/AdSlot";
-import { SUBWAY_LINE_ROUTES } from "../../../lib/map/subwayLineRoutes";
+import { getLineRoute, type LineRoute } from "../../../lib/map/subwayLineRoutes";
 
 // Helper function to format station names
 const formatStationName = (slug: string): string => {
@@ -86,10 +87,38 @@ const lineColors: Record<string, { bg: string; text: string }> = {
 export default function LinePage() {
   const params = useParams();
   const lineId = (params['line-id'] as string).toUpperCase();
-  
-  // Get line data from SUBWAY_LINE_ROUTES
-  const lineRoute = SUBWAY_LINE_ROUTES[lineId];
-  
+  const [lineRoute, setLineRoute] = useState<LineRoute | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  // Load line data asynchronously
+  useEffect(() => {
+    const loadLineData = async () => {
+      try {
+        const route = await getLineRoute(lineId);
+        setLineRoute(route || null);
+      } catch (error) {
+        console.error('Error loading line data:', error);
+        setLineRoute(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadLineData();
+  }, [lineId]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white">
+        <Navigation />
+        <div className="max-w-4xl mx-auto px-4 py-20 text-center">
+          <h1 className="text-4xl font-bold mb-4">Loading...</h1>
+          <p className="text-gray-600">Loading subway line information...</p>
+        </div>
+      </div>
+    );
+  }
+
   if (!lineRoute) {
     return (
       <div className="min-h-screen bg-white">

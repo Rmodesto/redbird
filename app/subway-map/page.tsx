@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic';
 // Dynamically import the working map component to avoid SSR issues
 const SubwayMap = dynamic(
   () => import('@/components/WorkingSubwayMap'),
-  { 
+  {
     ssr: false,
     loading: () => (
       <div className="w-full h-full flex items-center justify-center bg-gray-900">

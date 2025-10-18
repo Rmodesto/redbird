@@ -30,7 +30,7 @@ export default function Navigation() {
             <Link href="/stations" className="text-gray-700 hover:text-black font-medium">
               STATIONS
             </Link>
-            <Link href="/map" className="text-gray-700 hover:text-black font-medium">
+            <Link href="/subway-map" className="text-gray-700 hover:text-black font-medium">
               MAP
             </Link>
             <Link href="/culture" className="text-gray-700 hover:text-black font-medium">

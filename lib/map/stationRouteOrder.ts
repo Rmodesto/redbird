@@ -388,6 +388,7 @@ export const LINE_STATION_ORDER: Record<string, string[]> = {
   // Additional lines with basic ordering to prevent zigzag
   // B Line - 6th Avenue Express (Bronx to Brooklyn)
   'B': [
+    // Bronx section (D line stations)
     'Bedford Park Blvd',
     '182nd-183rd Sts',
     'Fordham Rd',
@@ -397,29 +398,38 @@ export const LINE_STATION_ORDER: Record<string, string[]> = {
     '167th St',
     '161st St - Yankee Stadium',
     '155th St',
-    '145th St - St Nicholas Ave',
-    '135th St - St Nicholas Ave',
-    '125th St - St Nicholas Ave',
-    'Cathedral Pkwy (110th St)',
-    '103rd St - Central Park West',
-    '96th St - Central Park West',
-    '86th St - Central Park West',
+    '145th St',
+    '135th St',
+    '125th St',
+    // Manhattan section
+    '110th St',
+    '103rd St',
+    '96th St',
+    '86th St',
     '81st St',
     '72nd St',
     '59th St - Columbus Circle',
     '47th-50th Sts - Rockefeller Ctr',
     '42nd St - Bryant Pk',
+    '34th St - Herald Sq',
+    '23rd St',
+    '14th St - Union Sq',
     'W 4th St - Washington Sq (Lower)',
     'Broadway - Lafayette St',
+    // Brooklyn section
     'DeKalb Ave',
+    'Atlantic Av - Barclays Ctr',
+    '7th Ave',
     'Prospect Park',
     'Parkside Ave',
+    'Church Ave',
     'Beverly Rd',
     'Cortelyou Rd',
     'Newkirk Ave',
     'Ave H',
     'Ave J',
     'Ave M',
+    'Kings Hwy',
     'Neck Rd',
     'Sheepshead Bay',
     'Brighton Beach'
@@ -569,43 +579,61 @@ export function orderStationsByRoute(stations: any[], lineId: string): any[] {
   console.log('Available stations:', stations.map(s => s.name));
   console.log('Route order:', routeOrder);
   
-  // Create a map for quick lookup
+  // Create maps for quick lookup - both by name and GTFS Stop ID
   const stationMap = new Map(stations.map(s => [s.name, s]));
-  
+  const stationByGtfsMap = new Map();
+
+  // Build GTFS Stop ID lookup map
+  stations.forEach(station => {
+    if (station.platforms) {
+      station.platforms.forEach((platform: any) => {
+        if (platform.gtfs_stop_id) {
+          stationByGtfsMap.set(platform.gtfs_stop_id, station);
+        }
+      });
+    }
+  });
+
   // Order stations according to route
   const orderedStations: any[] = [];
-  
-  for (const stationName of routeOrder) {
-    // Try exact match first
-    let station = stationMap.get(stationName);
-    
-    // If not found, try more flexible matching
+
+  for (const stationRef of routeOrder) {
+    let station = null;
+
+    // First try GTFS Stop ID lookup (for new format)
+    station = stationByGtfsMap.get(stationRef);
+
+    // If not found, fall back to name matching (for old format)
     if (!station) {
-      for (const [name, s] of Array.from(stationMap.entries())) {
-        // Try different matching strategies
-        if (
-          name === stationName ||
-          name.toLowerCase() === stationName.toLowerCase() ||
-          name.includes(stationName) || 
-          stationName.includes(name) ||
-          // Try without common suffixes/prefixes
-          name.replace(/\s*-\s*.*/, '') === stationName.replace(/\s*-\s*.*/, '') ||
-          // Try matching just the main part (before first dash)
-          name.split(' - ')[0] === stationName.split(' - ')[0]
-        ) {
-          station = s;
-          console.log(`Matched "${stationName}" to "${name}"`);
-          break;
+      station = stationMap.get(stationRef);
+
+      // If still not found, try flexible name matching
+      if (!station) {
+        for (const [name, s] of Array.from(stationMap.entries())) {
+          if (
+            name === stationRef ||
+            name.toLowerCase() === stationRef.toLowerCase() ||
+            name.includes(stationRef) ||
+            stationRef.includes(name) ||
+            name.replace(/\s*-\s*.*/, '') === stationRef.replace(/\s*-\s*.*/, '') ||
+            name.split(' - ')[0] === stationRef.split(' - ')[0]
+          ) {
+            station = s;
+            console.log(`Name matched "${stationRef}" to "${name}"`);
+            break;
+          }
         }
+      } else {
+        console.log(`Name exact match: "${stationRef}"`);
       }
     } else {
-      console.log(`Exact match: "${stationName}"`);
+      console.log(`GTFS match: "${stationRef}" to "${station.name}"`);
     }
-    
+
     if (station && !orderedStations.includes(station)) {
       orderedStations.push(station);
     } else if (!station) {
-      console.warn(`No match found for station: "${stationName}"`);
+      console.warn(`No match found for station: "${stationRef}"`);
     }
   }
   

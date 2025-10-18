@@ -171,24 +171,45 @@ export default function SubwayMap({ className = '' }: SubwayMapProps) {
         console.log('No route found for line:', lineId);
         return;
       }
-      console.log('Animating line:', lineId, 'Route:', lineRoute);
-      
-      // Get coordinates for all stations that serve this line from our MTA data
+      console.log('Animating line:', lineId, 'Route has', lineRoute.stations.length, 'stations');
+      console.log('First 5 stations:', lineRoute.stations.slice(0, 5));
+
+      // Get coordinates for all stations in the correct order from the route
       const coordinates: [number, number][] = [];
       const stationPoints: Array<{id: string; name: string; coordinates: [number, number]}> = [];
-      
-      // Find all stations that serve this line from our loaded stations data
-      stations.filter(station => station.lines.includes(lineId)).forEach(station => {
-        coordinates.push(station.coordinates);
-        stationPoints.push({
-          id: station.id,
-          name: station.name,
-          coordinates: station.coordinates
-        });
+
+      // Map stations in the order they appear in the route
+      console.log(`Line ${lineId} has ${lineRoute.stations.length} stations in route`);
+      console.log(`Available stations data count: ${stations.length}`);
+      console.log(`First few available stations:`, stations.slice(0, 3).map(s => ({name: s.name, slug: s.slug, lines: s.lines})));
+
+      lineRoute.stations.forEach((stationSlug, index) => {
+        // Find the matching station in our stations data by slug AND line
+        // Since multiple stations can have the same slug (different platforms),
+        // we need to find the one that serves this specific line
+        const station = stations.find(s =>
+          s.slug === stationSlug && s.lines.includes(lineId)
+        );
+        if (station && station.coordinates) {
+          coordinates.push(station.coordinates);
+          stationPoints.push({
+            id: station.id,
+            name: station.name,
+            coordinates: station.coordinates
+          });
+          console.log(`✓ Found station ${index + 1}/${lineRoute.stations.length}: ${station.name} (${stationSlug}) at [${station.coordinates.join(', ')}]`);
+        } else {
+          const matchingSlugStations = stations.filter(s => s.slug === stationSlug);
+          console.log(`✗ Station not found for line ${lineId}: ${stationSlug}`, {
+            foundSlugs: matchingSlugStations.length,
+            availableStations: matchingSlugStations.map(s => ({name: s.name, lines: s.lines, hasCoords: !!s.coordinates}))
+          });
+        }
       });
-      
+
       console.log('Found coordinates:', coordinates.length, 'out of', lineRoute.stations.length, 'stations');
-      
+      console.log('Coordinates sample:', coordinates.slice(0, 3));
+
       if (coordinates.length > 0) {
         // Animate the line drawing
         if (enableAnimation) {
@@ -209,11 +230,33 @@ export default function SubwayMap({ className = '' }: SubwayMapProps) {
           lineAnimator.current.animateLine(lineId, coordinates, lineRoute.color, 0);
           lineAnimator.current.addStationMarkers(lineId, stationPoints);
         }
-        
+
         setAnimatedLines(prev => [...prev, lineId]);
         setSelectedLines(prev => [...prev, lineId]);
       } else {
-        console.log('No coordinates found for line', lineId);
+        console.error(`❌ No coordinates found for line ${lineId}! Found ${coordinates.length}/${lineRoute.stations.length} stations`);
+        console.log('Available stations count:', stations.length);
+        console.log('Route stations:', lineRoute.stations.slice(0, 5));
+
+        // Emergency fallback - use hardcoded coordinates if it's the B line
+        if (lineId === 'B') {
+          console.log('🚨 Using emergency B line coordinates fallback');
+          const emergencyBCoords: [number, number][] = [
+            [-73.961376, 40.577621], // Brighton Beach
+            [-73.954155, 40.586896], // Sheepshead Bay
+            [-73.957734, 40.60867],  // Kings Hwy
+            [-73.962793, 40.635082], // Newkirk Plaza
+            [-73.949611, 40.650843], // Church Av
+            [-73.969142, 40.661614], // Prospect Park
+            [-73.97751, 40.677672],  // 7 Av
+            [-73.977666, 40.684359], // Atlantic Av-Barclays
+            [-73.983946, 40.703476]  // DeKalb Av
+          ];
+
+          lineAnimator.current.animateLine(lineId, emergencyBCoords, lineRoute.color, enableAnimation ? 3000 : 0);
+          setAnimatedLines(prev => [...prev, lineId]);
+          setSelectedLines(prev => [...prev, lineId]);
+        }
       }
     }
   }, [mapLoaded, animatedLines, enableAnimation]);

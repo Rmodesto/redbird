@@ -3,8 +3,8 @@
 import dynamic from 'next/dynamic';
 
 // Dynamic import with no SSR
-const NYCSubwayMap = dynamic(
-  () => import('@/components/NYCSubwayMap'),
+// const NYCSubwayMap = dynamic(
+//   () => import('@/components/NYCSubwayMap'),
   { 
     ssr: false,
     loading: () => (
@@ -36,7 +36,8 @@ export default function NYCMapPage() {
         </div>
       </header>
       <main className="flex-1 relative">
-        <NYCSubwayMap />
+        {/* <NYCSubwayMap /> */}
+        <div className="p-8 text-white">Component temporarily disabled</div>
       </main>
     </div>
   );

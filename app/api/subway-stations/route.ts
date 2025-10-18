@@ -1,11 +1,12 @@
 import { NextResponse } from 'next/server';
-import stationsData from '@/data/nyc-subway-stations-official.json';
+import stationsData from '@/data/stations.json';
 
 export const dynamic = 'force-dynamic';
 
 export interface SubwayStation {
   id: string;
   name: string;
+  slug?: string;
   lines: string[];
   coordinates: [number, number]; // [longitude, latitude]
   borough: string;
@@ -13,9 +14,14 @@ export interface SubwayStation {
 }
 
 // Load all NYC Subway Stations from official MTA coordinates (360+ stations)
-const SUBWAY_STATIONS: SubwayStation[] = stationsData.stations.map(station => ({
-  ...station,
-  coordinates: station.coordinates as [number, number]
+const SUBWAY_STATIONS: SubwayStation[] = stationsData.map((station: any) => ({
+  id: station.id,
+  name: station.name,
+  slug: station.slug,
+  lines: station.lines,
+  coordinates: [station.longitude, station.latitude] as [number, number],
+  borough: station.borough,
+  complex: station.complex || false
 }));
 
 export async function GET(request: Request) {

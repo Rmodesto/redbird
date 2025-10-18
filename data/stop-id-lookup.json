@@ -16,7 +16,8 @@
   },
   "119N": {
     "stationId": "119",
-    "stationName": "103 St",
+    "stationName": "103 St","john-Gafford"
+    
     "stationSlug": "103-st",
     
     "direction": "Uptown/Queens",
@@ -4677,9 +4678,8 @@
     "stationSlug": "beverly-rd",
     "direction": "Uptown/Queens",
     "lines": [
-      "1",
       "2",
-      "3"
+      "5"
     ]
   },
   "245S": {
@@ -4688,9 +4688,8 @@
     "stationSlug": "beverly-rd",
     "direction": "Downtown/Brooklyn",
     "lines": [
-      "1",
       "2",
-      "3"
+      "5"
     ]
   },
   "637N": {
@@ -5559,9 +5558,8 @@
     "stationSlug": "church-av",
     "direction": "Uptown/Queens",
     "lines": [
-      "1",
       "2",
-      "3"
+      "5"
     ]
   },
   "244S": {
@@ -5570,9 +5568,8 @@
     "stationSlug": "church-av",
     "direction": "Downtown/Brooklyn",
     "lines": [
-      "1",
       "2",
-      "3"
+      "5"
     ]
   },
   "D28N": {
@@ -6401,9 +6398,8 @@
     "stationSlug": "flatbush-av-brooklyn-college",
     "direction": "Uptown/Queens",
     "lines": [
-      "1",
       "2",
-      "3"
+      "5"
     ]
   },
   "247S": {
@@ -6412,9 +6408,8 @@
     "stationSlug": "flatbush-av-brooklyn-college",
     "direction": "Downtown/Brooklyn",
     "lines": [
-      "1",
       "2",
-      "3"
+      "5"
     ]
   },
   "G31N": {
@@ -8531,9 +8526,8 @@
     "stationSlug": "newkirk-av-little-haiti",
     "direction": "Uptown/Queens",
     "lines": [
-      "1",
       "2",
-      "3"
+      "5"
     ]
   },
   "246S": {
@@ -8542,9 +8536,8 @@
     "stationSlug": "newkirk-av-little-haiti",
     "direction": "Downtown/Brooklyn",
     "lines": [
-      "1",
       "2",
-      "3"
+      "5"
     ]
   },
   "D31N": {
@@ -8963,9 +8956,8 @@
     "stationSlug": "president-st-medgar-evers-college",
     "direction": "Uptown/Queens",
     "lines": [
-      "1",
       "2",
-      "3"
+      "5"
     ]
   },
   "241S": {
@@ -8974,9 +8966,8 @@
     "stationSlug": "president-st-medgar-evers-college",
     "direction": "Downtown/Brooklyn",
     "lines": [
-      "1",
       "2",
-      "3"
+      "5"
     ]
   },
   "R22N": {
@@ -9647,9 +9638,8 @@
     "stationSlug": "sterling-st",
     "direction": "Uptown/Queens",
     "lines": [
-      "1",
       "2",
-      "3"
+      "5"
     ]
   },
   "242S": {
@@ -9658,9 +9648,8 @@
     "stationSlug": "sterling-st",
     "direction": "Downtown/Brooklyn",
     "lines": [
-      "1",
       "2",
-      "3"
+      "5"
     ]
   },
   "F04N": {
@@ -10265,9 +10254,8 @@
     "stationSlug": "winthrop-st",
     "direction": "Uptown/Queens",
     "lines": [
-      "1",
       "2",
-      "3"
+      "5"
     ]
   },
   "243S": {
@@ -10276,9 +10264,8 @@
     "stationSlug": "winthrop-st",
     "direction": "Downtown/Brooklyn",
     "lines": [
-      "1",
       "2",
-      "3"
+      "5"
     ]
   },
   "G11N": {
@@ -10428,5 +10415,397 @@
       "5",
       "6"
     ]
+  },
+  "401N": {
+    "stationId": "401",
+    "stationName": "Woodlawn",
+    "stationSlug": "woodlawn",
+    "direction": "Uptown/Bronx",
+    "lines": ["4"]
+  },
+  "401S": {
+    "stationId": "401",
+    "stationName": "Woodlawn",
+    "stationSlug": "woodlawn",
+    "direction": "Downtown/Manhattan",
+    "lines": ["4"]
+  },
+  "402N": {
+    "stationId": "402",
+    "stationName": "Mosholu Pkwy",
+    "stationSlug": "mosholu-pkwy",
+    "direction": "Uptown/Bronx",
+    "lines": ["4"]
+  },
+  "402S": {
+    "stationId": "402",
+    "stationName": "Mosholu Pkwy",
+    "stationSlug": "mosholu-pkwy",
+    "direction": "Downtown/Manhattan",
+    "lines": ["4"]
+  },
+  "403N": {
+    "stationId": "403",
+    "stationName": "Bedford Park Blvd-Lehman College",
+    "stationSlug": "bedford-park-blvd-lehman-college",
+    "direction": "Uptown/Bronx",
+    "lines": ["4"]
+  },
+  "403S": {
+    "stationId": "403",
+    "stationName": "Bedford Park Blvd-Lehman College",
+    "stationSlug": "bedford-park-blvd-lehman-college",
+    "direction": "Downtown/Manhattan",
+    "lines": ["4"]
+  },
+  "404N": {
+    "stationId": "404",
+    "stationName": "Kingsbridge Rd",
+    "stationSlug": "kingsbridge-rd",
+    "direction": "Uptown/Bronx",
+    "lines": ["4"]
+  },
+  "404S": {
+    "stationId": "404",
+    "stationName": "Kingsbridge Rd",
+    "stationSlug": "kingsbridge-rd",
+    "direction": "Downtown/Manhattan",
+    "lines": ["4"]
+  },
+  "405N": {
+    "stationId": "405",
+    "stationName": "Fordham Rd",
+    "stationSlug": "fordham-rd",
+    "direction": "Uptown/Bronx",
+    "lines": ["4"]
+  },
+  "405S": {
+    "stationId": "405",
+    "stationName": "Fordham Rd",
+    "stationSlug": "fordham-rd",
+    "direction": "Downtown/Manhattan",
+    "lines": ["4"]
+  },
+  "406N": {
+    "stationId": "406",
+    "stationName": "183 St",
+    "stationSlug": "183-st",
+    "direction": "Uptown/Bronx",
+    "lines": ["4"]
+  },
+  "406S": {
+    "stationId": "406",
+    "stationName": "183 St",
+    "stationSlug": "183-st",
+    "direction": "Downtown/Manhattan",
+    "lines": ["4"]
+  },
+  "407N": {
+    "stationId": "407",
+    "stationName": "Burnside Av",
+    "stationSlug": "burnside-av",
+    "direction": "Uptown/Bronx",
+    "lines": ["4"]
+  },
+  "407S": {
+    "stationId": "407",
+    "stationName": "Burnside Av",
+    "stationSlug": "burnside-av",
+    "direction": "Downtown/Manhattan",
+    "lines": ["4"]
+  },
+  "408N": {
+    "stationId": "408",
+    "stationName": "176 St",
+    "stationSlug": "176-st",
+    "direction": "Uptown/Bronx",
+    "lines": ["4"]
+  },
+  "408S": {
+    "stationId": "408",
+    "stationName": "176 St",
+    "stationSlug": "176-st",
+    "direction": "Downtown/Manhattan",
+    "lines": ["4"]
+  },
+  "409N": {
+    "stationId": "409",
+    "stationName": "Mt Eden Av",
+    "stationSlug": "mt-eden-av",
+    "direction": "Uptown/Bronx",
+    "lines": ["4"]
+  },
+  "409S": {
+    "stationId": "409",
+    "stationName": "Mt Eden Av",
+    "stationSlug": "mt-eden-av",
+    "direction": "Downtown/Manhattan",
+    "lines": ["4"]
+  },
+  "410N": {
+    "stationId": "410",
+    "stationName": "170 St",
+    "stationSlug": "170-st",
+    "direction": "Uptown/Bronx",
+    "lines": ["4"]
+  },
+  "410S": {
+    "stationId": "410",
+    "stationName": "170 St",
+    "stationSlug": "170-st",
+    "direction": "Downtown/Manhattan",
+    "lines": ["4"]
+  },
+  "411N": {
+    "stationId": "411",
+    "stationName": "167 St",
+    "stationSlug": "167-st",
+    "direction": "Uptown/Bronx",
+    "lines": ["4"]
+  },
+  "411S": {
+    "stationId": "411",
+    "stationName": "167 St",
+    "stationSlug": "167-st",
+    "direction": "Downtown/Manhattan",
+    "lines": ["4"]
+  },
+  "412N": {
+    "stationId": "412",
+    "stationName": "161 St-Yankee Stadium",
+    "stationSlug": "161-st-yankee-stadium",
+    "direction": "Uptown/Bronx",
+    "lines": ["4", "B", "D"]
+  },
+  "412S": {
+    "stationId": "412",
+    "stationName": "161 St-Yankee Stadium",
+    "stationSlug": "161-st-yankee-stadium",
+    "direction": "Downtown/Manhattan",
+    "lines": ["4", "B", "D"]
+  },
+  "413N": {
+    "stationId": "413",
+    "stationName": "149 St-Grand Concourse",
+    "stationSlug": "149-st-grand-concourse",
+    "direction": "Uptown/Bronx",
+    "lines": ["4", "2", "5"]
+  },
+  "413S": {
+    "stationId": "413",
+    "stationName": "149 St-Grand Concourse",
+    "stationSlug": "149-st-grand-concourse",
+    "direction": "Downtown/Manhattan",
+    "lines": ["4", "2", "5"]
+  },
+  "414N": {
+    "stationId": "414",
+    "stationName": "138 St-Grand Concourse",
+    "stationSlug": "138-st-grand-concourse",
+    "direction": "Uptown/Bronx",
+    "lines": ["4", "5"]
+  },
+  "414S": {
+    "stationId": "414",
+    "stationName": "138 St-Grand Concourse",
+    "stationSlug": "138-st-grand-concourse",
+    "direction": "Downtown/Manhattan",
+    "lines": ["4", "5"]
+  },
+  "415N": {
+    "stationId": "415",
+    "stationName": "125 St",
+    "stationSlug": "125-st-lexington",
+    "direction": "Uptown/Bronx",
+    "lines": ["4", "5", "6"]
+  },
+  "415S": {
+    "stationId": "415",
+    "stationName": "125 St",
+    "stationSlug": "125-st-lexington",
+    "direction": "Downtown/Brooklyn",
+    "lines": ["4", "5", "6"]
+  },
+  "416N": {
+    "stationId": "416",
+    "stationName": "86 St",
+    "stationSlug": "86-st-lexington",
+    "direction": "Uptown/Bronx",
+    "lines": ["4", "5", "6"]
+  },
+  "416S": {
+    "stationId": "416",
+    "stationName": "86 St",
+    "stationSlug": "86-st-lexington",
+    "direction": "Downtown/Brooklyn",
+    "lines": ["4", "5", "6"]
+  },
+  "417N": {
+    "stationId": "417",
+    "stationName": "59 St",
+    "stationSlug": "59-st-lexington",
+    "direction": "Uptown/Bronx",
+    "lines": ["4", "5", "6", "N", "R", "W"]
+  },
+  "417S": {
+    "stationId": "417",
+    "stationName": "59 St",
+    "stationSlug": "59-st-lexington",
+    "direction": "Downtown/Brooklyn",
+    "lines": ["4", "5", "6", "N", "R", "W"]
+  },
+  "418N": {
+    "stationId": "418",
+    "stationName": "Grand Central-42 St",
+    "stationSlug": "grand-central-42-st",
+    "direction": "Uptown/Bronx",
+    "lines": ["4", "5", "6", "7", "S"]
+  },
+  "418S": {
+    "stationId": "418",
+    "stationName": "Grand Central-42 St",
+    "stationSlug": "grand-central-42-st",
+    "direction": "Downtown/Brooklyn",
+    "lines": ["4", "5", "6", "7", "S"]
+  },
+  "419N": {
+    "stationId": "419",
+    "stationName": "14 St-Union Sq",
+    "stationSlug": "14-st-union-sq",
+    "direction": "Uptown/Bronx",
+    "lines": ["4", "5", "6", "L", "N", "Q", "R", "W"]
+  },
+  "419S": {
+    "stationId": "419",
+    "stationName": "14 St-Union Sq",
+    "stationSlug": "14-st-union-sq",
+    "direction": "Downtown/Brooklyn",
+    "lines": ["4", "5", "6", "L", "N", "Q", "R", "W"]
+  },
+  "420N": {
+    "stationId": "420",
+    "stationName": "Brooklyn Bridge-City Hall",
+    "stationSlug": "brooklyn-bridge-city-hall",
+    "direction": "Uptown/Bronx",
+    "lines": ["4", "5", "6", "J", "Z"]
+  },
+  "420S": {
+    "stationId": "420",
+    "stationName": "Brooklyn Bridge-City Hall",
+    "stationSlug": "brooklyn-bridge-city-hall",
+    "direction": "Downtown/Brooklyn",
+    "lines": ["4", "5", "6", "J", "Z"]
+  },
+  "421N": {
+    "stationId": "421",
+    "stationName": "Fulton St",
+    "stationSlug": "fulton-st",
+    "direction": "Uptown/Bronx",
+    "lines": ["4", "5", "A", "C", "J", "Z", "2", "3"]
+  },
+  "421S": {
+    "stationId": "421",
+    "stationName": "Fulton St",
+    "stationSlug": "fulton-st",
+    "direction": "Downtown/Brooklyn",
+    "lines": ["4", "5", "A", "C", "J", "Z", "2", "3"]
+  },
+  "422N": {
+    "stationId": "422",
+    "stationName": "Wall St",
+    "stationSlug": "wall-st-lexington",
+    "direction": "Uptown/Bronx",
+    "lines": ["4", "5"]
+  },
+  "422S": {
+    "stationId": "422",
+    "stationName": "Wall St",
+    "stationSlug": "wall-st-lexington",
+    "direction": "Downtown/Brooklyn",
+    "lines": ["4", "5"]
+  },
+  "423N": {
+    "stationId": "423",
+    "stationName": "Bowling Green",
+    "stationSlug": "bowling-green",
+    "direction": "Uptown/Bronx",
+    "lines": ["4", "5"]
+  },
+  "423S": {
+    "stationId": "423",
+    "stationName": "Bowling Green",
+    "stationSlug": "bowling-green",
+    "direction": "Downtown/Brooklyn",
+    "lines": ["4", "5"]
+  },
+  "424N": {
+    "stationId": "424",
+    "stationName": "Borough Hall",
+    "stationSlug": "borough-hall",
+    "direction": "Uptown/Manhattan",
+    "lines": ["4", "5", "2", "3", "R"]
+  },
+  "424S": {
+    "stationId": "424",
+    "stationName": "Borough Hall",
+    "stationSlug": "borough-hall",
+    "direction": "Downtown/Brooklyn",
+    "lines": ["4", "5", "2", "3", "R"]
+  },
+  "425N": {
+    "stationId": "425",
+    "stationName": "Nevins St",
+    "stationSlug": "nevins-st",
+    "direction": "Uptown/Manhattan",
+    "lines": ["4", "5", "2", "3"]
+  },
+  "425S": {
+    "stationId": "425",
+    "stationName": "Nevins St",
+    "stationSlug": "nevins-st",
+    "direction": "Downtown/Brooklyn",
+    "lines": ["4", "5", "2", "3"]
+  },
+  "426N": {
+    "stationId": "426",
+    "stationName": "Atlantic Av-Barclays Ctr",
+    "stationSlug": "atlantic-av-barclays-ctr",
+    "direction": "Uptown/Manhattan",
+    "lines": ["4", "5", "2", "3", "B", "D", "N", "Q", "R", "W"]
+  },
+  "426S": {
+    "stationId": "426",
+    "stationName": "Atlantic Av-Barclays Ctr",
+    "stationSlug": "atlantic-av-barclays-ctr",
+    "direction": "Downtown/Brooklyn",
+    "lines": ["4", "5", "2", "3", "B", "D", "N", "Q", "R", "W"]
+  },
+  "427N": {
+    "stationId": "427",
+    "stationName": "Franklin Av-Medgar Evers College",
+    "stationSlug": "franklin-av-medgar-evers-college",
+    "direction": "Uptown/Manhattan",
+    "lines": ["4", "5", "2", "3"]
+  },
+  "427S": {
+    "stationId": "427",
+    "stationName": "Franklin Av-Medgar Evers College",
+    "stationSlug": "franklin-av-medgar-evers-college",
+    "direction": "Downtown/Brooklyn",
+    "lines": ["4", "5", "2", "3"]
+  },
+  "428N": {
+    "stationId": "428",
+    "stationName": "Crown Heights-Utica Av",
+    "stationSlug": "crown-heights-utica-av",
+    "direction": "Uptown/Manhattan",
+    "lines": ["4", "3"]
+  },
+  "428S": {
+    "stationId": "428",
+    "stationName": "Crown Heights-Utica Av",
+    "stationSlug": "crown-heights-utica-av",
+    "direction": "Downtown/Brooklyn",
+    "lines": ["4", "3"]
   }
 }
