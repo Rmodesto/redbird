@@ -20,6 +20,7 @@ const MTA_COLORS: Record<string, string> = {
   'L': '#A7A9AC',
   'N': '#FCCC0A', 'Q': '#FCCC0A', 'R': '#FCCC0A', 'W': '#FCCC0A',
   'S': '#808183',
+  'S-GC': '#808183', 'S-FR': '#808183', 'S-RK': '#808183',
 };
 
 // Hardcoded line configurations
@@ -35,7 +36,15 @@ const HARDCODED_LINES: Record<string, { stationCount: number }> = {
   'F': { stationCount: 45 },
   'G': { stationCount: 21 },
   'J': { stationCount: 30 },
-  'L': { stationCount: 24 }
+  'L': { stationCount: 24 },
+  'M': { stationCount: 36 },
+  'N': { stationCount: 28 },
+  'Q': { stationCount: 29 },
+  'R': { stationCount: 45 },
+  'W': { stationCount: 23 },
+  'S-GC': { stationCount: 2 },
+  'S-FR': { stationCount: 4 },
+  'S-RK': { stationCount: 5 }
 };
 
 interface SubwayStation {
@@ -174,6 +183,29 @@ export default function WorkingSubwayMap() {
   const toggleLine = (lineId: string) => {
     if (!map.current || !mapLoaded) {
       console.log('Map not ready');
+      return;
+    }
+
+    // Handle S shuttle as a special case - toggle all three shuttles together
+    if (lineId === 'S') {
+      const shuttleLines = ['S-GC', 'S-FR', 'S-RK'];
+      const anyShuttleActive = shuttleLines.some(shuttle => activeLines.includes(shuttle));
+
+      if (anyShuttleActive) {
+        // Turn off all shuttles
+        shuttleLines.forEach(shuttle => {
+          if (activeLines.includes(shuttle)) {
+            toggleLine(shuttle);
+          }
+        });
+      } else {
+        // Turn on all shuttles
+        shuttleLines.forEach(shuttle => {
+          if (!activeLines.includes(shuttle)) {
+            toggleLine(shuttle);
+          }
+        });
+      }
       return;
     }
 
@@ -2505,6 +2537,1189 @@ export default function WorkingSubwayMap() {
         return;
       }
 
+      // HARDCODED LINE M IMPLEMENTATION
+      if (lineId === 'M') {
+        const markersForLine: maplibregl.Marker[] = [];
+        const mLineCoords: [number, number][] = [
+          [-73.844521, 40.721691], // Forest Hills-71 Av
+          [-73.861604, 40.729846], // 63 Dr-Rego Park
+          [-73.852719, 40.726523], // 67 Av
+          [-73.869229, 40.733106], // Woodhaven Blvd
+          [-73.877223, 40.737015], // Grand Av-Newtown
+          [-73.882017, 40.742454], // Elmhurst Av
+          [-73.891366, 40.746746], // Jackson Hts-Roosevelt Av
+          [-73.898453, 40.749669], // 65 St
+          [-73.906006, 40.752885], // Northern Blvd
+          [-73.913333, 40.756312], // 46 St
+          [-73.92074, 40.756879], // Steinway St
+          [-73.928781, 40.752039], // 36 St
+          [-73.937243, 40.748973], // Queens Plaza
+          [-73.94503200000001, 40.747141000000006], // Court Sq-23 St
+          [-73.97048749999999, 40.7573295], // Lexington Av/53 St
+          [-73.975224, 40.760167], // 5 Av/53 St
+          [-73.981329, 40.758663], // 47-50 Sts-Rockefeller Ctr
+          [-73.98326599999999, 40.7540215], // 42 St-Bryant Pk
+          [-73.9878865, 40.749643], // 34 St-Herald Sq
+          [-73.992821, 40.742878], // 23 St
+          [-73.997732, 40.73779633333333], // 6 Av
+          [-74.000495, 40.732338], // W 4 St-Wash Sq
+          [-73.9954315, 40.725606], // Broadway-Lafayette St
+          [-73.9877755, 40.718463], // Delancey St-Essex St
+          [-73.957757, 40.708359], // Marcy Av
+          [-73.953431, 40.70687], // Hewes St
+          [-73.947408, 40.703869], // Lorimer St
+          [-73.941126, 40.70026], // Flushing Av
+          [-73.935657, 40.697207], // Myrtle Av
+          [-73.9119855, 40.699622000000005], // Myrtle-Wyckoff Avs
+          [-73.919711, 40.698664], // Knickerbocker Av
+          [-73.927397, 40.697857], // Central Av
+          [-73.903077, 40.704423], // Forest Av
+          [-73.895877, 40.706186], // Fresh Pond Rd
+          [-73.90774, 40.702762], // Seneca Av
+          [-73.889601, 40.711396], // Middle Village-Metropolitan Av
+        ];
+
+        const lineGeoJSON = {
+          type: 'Feature' as const,
+          properties: {},
+          geometry: {
+            type: 'LineString' as const,
+            coordinates: mLineCoords,
+          },
+        };
+
+        if (!map.current!.getSource(`line-${lineId}`)) {
+          map.current!.addSource(`line-${lineId}`, {
+            type: 'geojson',
+            data: lineGeoJSON,
+          });
+        }
+
+        if (!map.current!.getLayer(`line-${lineId}`)) {
+          map.current!.addLayer({
+            id: `line-${lineId}`,
+            type: 'line',
+            source: `line-${lineId}`,
+            paint: {
+              'line-color': MTA_COLORS[lineId] || '#000000',
+              'line-width': 4,
+              'line-opacity': 0.8,
+            },
+          });
+        }
+
+        const mLineStations = [
+          { name: "Forest Hills-71 Av", coordinates: [-73.844521, 40.721691], lines: ['E', 'F', 'M', 'R'] },
+          { name: "63 Dr-Rego Park", coordinates: [-73.861604, 40.729846], lines: ['M', 'R'] },
+          { name: "67 Av", coordinates: [-73.852719, 40.726523], lines: ['M', 'R'] },
+          { name: "Woodhaven Blvd", coordinates: [-73.869229, 40.733106], lines: ['M', 'R'] },
+          { name: "Grand Av-Newtown", coordinates: [-73.877223, 40.737015], lines: ['M', 'R'] },
+          { name: "Elmhurst Av", coordinates: [-73.882017, 40.742454], lines: ['M', 'R'] },
+          { name: "Jackson Hts-Roosevelt Av", coordinates: [-73.891366, 40.746746], lines: ['7', 'E', 'F', 'M', 'R'] },
+          { name: "65 St", coordinates: [-73.898453, 40.749669], lines: ['M', 'R'] },
+          { name: "Northern Blvd", coordinates: [-73.906006, 40.752885], lines: ['M', 'R'] },
+          { name: "46 St", coordinates: [-73.913333, 40.756312], lines: ['M', 'R'] },
+          { name: "Steinway St", coordinates: [-73.92074, 40.756879], lines: ['M', 'R'] },
+          { name: "36 St", coordinates: [-73.928781, 40.752039], lines: ['M', 'R'] },
+          { name: "Queens Plaza", coordinates: [-73.937243, 40.748973], lines: ['E', 'M', 'R'] },
+          { name: "Court Sq-23 St", coordinates: [-73.94503200000001, 40.747141000000006], lines: ['7', 'E', 'G', 'M'] },
+          { name: "Lexington Av/53 St", coordinates: [-73.97048749999999, 40.7573295], lines: ['6', 'E', 'M'] },
+          { name: "5 Av/53 St", coordinates: [-73.975224, 40.760167], lines: ['E', 'M'] },
+          { name: "47-50 Sts-Rockefeller Ctr", coordinates: [-73.981329, 40.758663], lines: ['B', 'D', 'F', 'M'] },
+          { name: "42 St-Bryant Pk", coordinates: [-73.98326599999999, 40.7540215], lines: ['7', 'B', 'D', 'F', 'M'] },
+          { name: "34 St-Herald Sq", coordinates: [-73.9878865, 40.749643], lines: ['B', 'D', 'F', 'M', 'N', 'Q', 'R', 'W'] },
+          { name: "23 St", coordinates: [-73.992821, 40.742878], lines: ['F', 'M'] },
+          { name: "6 Av", coordinates: [-73.997732, 40.73779633333333], lines: ['1', '2', '3', 'F', 'L', 'M'] },
+          { name: "W 4 St-Wash Sq", coordinates: [-74.000495, 40.732338], lines: ['A', 'B', 'C', 'D', 'E', 'F', 'M'] },
+          { name: "Broadway-Lafayette St", coordinates: [-73.9954315, 40.725606], lines: ['6', 'B', 'D', 'F', 'M'] },
+          { name: "Delancey St-Essex St", coordinates: [-73.9877755, 40.718463], lines: ['F', 'J', 'M', 'Z'] },
+          { name: "Marcy Av", coordinates: [-73.957757, 40.708359], lines: ['J', 'M', 'Z'] },
+          { name: "Hewes St", coordinates: [-73.953431, 40.70687], lines: ['J', 'M'] },
+          { name: "Lorimer St", coordinates: [-73.947408, 40.703869], lines: ['J', 'M'] },
+          { name: "Flushing Av", coordinates: [-73.941126, 40.70026], lines: ['J', 'M'] },
+          { name: "Myrtle Av", coordinates: [-73.935657, 40.697207], lines: ['J', 'M', 'Z'] },
+          { name: "Myrtle-Wyckoff Avs", coordinates: [-73.9119855, 40.699622000000005], lines: ['L', 'M'] },
+          { name: "Knickerbocker Av", coordinates: [-73.919711, 40.698664], lines: ['M'] },
+          { name: "Central Av", coordinates: [-73.927397, 40.697857], lines: ['M'] },
+          { name: "Forest Av", coordinates: [-73.903077, 40.704423], lines: ['M'] },
+          { name: "Fresh Pond Rd", coordinates: [-73.895877, 40.706186], lines: ['M'] },
+          { name: "Seneca Av", coordinates: [-73.90774, 40.702762], lines: ['M'] },
+          { name: "Middle Village-Metropolitan Av", coordinates: [-73.889601, 40.711396], lines: ['M'] },
+        ];
+
+        mLineStations.forEach((station, index) => {
+          const el = document.createElement('div');
+          el.className = 'subway-marker';
+          el.style.backgroundColor = MTA_COLORS[lineId] || '#000000';
+          el.style.width = '16px';
+          el.style.height = '16px';
+          el.style.borderRadius = '50%';
+          el.style.border = '3px solid white';
+          el.style.cursor = 'pointer';
+          el.style.boxShadow = '0 2px 4px rgba(0,0,0,0.3)';
+
+          let hoverPopup: maplibregl.Popup | null = null;
+
+          el.addEventListener('mouseenter', () => {
+            const stationData = mLineStations[index];
+            const allLines = stationData.lines || [lineId];
+
+            hoverPopup = new maplibregl.Popup({
+              closeButton: false,
+              closeOnClick: false,
+              className: 'glassmorphic-tooltip',
+              offset: 25,
+              maxWidth: '280px'
+            })
+              .setLngLat(station.coordinates as [number, number])
+              .setHTML(`
+                <div class="glassmorphic-tooltip-content">
+                  <div class="font-semibold text-sm mb-2">${stationData.name}</div>
+                  <div class="flex gap-1.5 flex-wrap">
+                    ${allLines.map(line => `
+                      <span class="inline-block w-6 h-6 rounded-full text-xs font-bold text-center leading-6"
+                            style="background-color: ${MTA_COLORS[line] || '#000000'}; color: white;">
+                        ${line}
+                      </span>
+                    `).join('')}
+                  </div>
+                </div>
+              `)
+              .addTo(map.current!);
+          });
+
+          el.addEventListener('mouseleave', () => {
+            if (hoverPopup) {
+              hoverPopup.remove();
+              hoverPopup = null;
+            }
+          });
+
+          el.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const stationData = mLineStations[index];
+            console.log('Station clicked:', stationData.name);
+          });
+
+          const marker = new maplibregl.Marker({ element: el })
+            .setLngLat(station.coordinates as [number, number])
+            .addTo(map.current!);
+
+          markersForLine.push(marker);
+        });
+
+        setLineMarkers(prev => ({ ...prev, [lineId]: markersForLine }));
+        setActiveLines(prev => [...prev, lineId]);
+        console.log(`✅ Hardcoded M train added successfully with ${mLineStations.length} stations`);
+        return;
+      }
+
+      // N Train - Hardcoded implementation (Astoria-Ditmars Blvd to Coney Island-Stillwell Av)
+      if (lineId === 'N') {
+        const markersForLine: maplibregl.Marker[] = [];
+        const nLineCoords: [number, number][] = [
+          [-73.912034, 40.775036],    // Astoria-Ditmars Blvd
+          [-73.917843, 40.770258],    // Astoria Blvd
+          [-73.921479, 40.766779],    // 30 Av
+          [-73.925508, 40.76182],     // Broadway
+          [-73.929575, 40.756804],    // 36 Av
+          [-73.932755, 40.752882],    // 39 Av-Dutch Kills
+          [-73.940202, 40.750582],    // Queensboro Plaza
+          [-73.9676125, 40.762592999999995], // Lexington Av/59 St
+          [-73.973347, 40.764811],    // 5 Av/59 St
+          [-73.980658, 40.764664],    // 57 St-7 Av
+          [-73.984139, 40.759901],    // 49 St
+          [-73.9875808, 40.755746],   // Times Sq-42 St
+          [-73.9878865, 40.749643],   // 34 St-Herald Sq
+          [-73.99041633333333, 40.735066], // 14 St-Union Sq
+          [-74.00057999999999, 40.71870125], // Canal St
+          [-73.97778866666665, 40.68416166666667], // Atlantic Av-Barclays Ctr
+          [-74.003549, 40.655144],    // 36 St
+          [-74.017881, 40.641362],    // 59 St
+          [-74.011719, 40.635064],    // 8 Av
+          [-74.005351, 40.631386],    // Fort Hamilton Pkwy
+          [-73.996624, 40.625657000000004], // 62 St
+          [-73.990414, 40.620671],    // 18 Av
+          [-73.985026, 40.61741],     // 20 Av
+          [-73.981848, 40.611815],    // Bay Pkwy
+          [-73.980353, 40.603923],    // Kings Hwy
+          [-73.979137, 40.597473],    // Avenue U
+          [-73.97823, 40.592721],     // 86 St
+          [-73.981233, 40.577422]     // Coney Island-Stillwell Av
+        ];
+
+        const lineGeoJSON = {
+          type: 'Feature' as const,
+          properties: {},
+          geometry: {
+            type: 'LineString' as const,
+            coordinates: nLineCoords,
+          },
+        };
+
+        map.current!.addSource(`line-${lineId}`, {
+          type: 'geojson',
+          data: lineGeoJSON,
+        });
+
+        map.current!.addLayer({
+          id: `line-${lineId}`,
+          type: 'line',
+          source: `line-${lineId}`,
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round',
+          },
+          paint: {
+            'line-color': MTA_COLORS[lineId] || '#000000',
+            'line-width': 4,
+            'line-opacity': 0.8,
+          },
+        });
+
+        const nLineStations = [
+          { name: 'Astoria-Ditmars Blvd', coordinates: [-73.912034, 40.775036] as [number, number], lines: ['N', 'W'] },
+          { name: 'Astoria Blvd', coordinates: [-73.917843, 40.770258] as [number, number], lines: ['N', 'W'] },
+          { name: '30 Av', coordinates: [-73.921479, 40.766779] as [number, number], lines: ['N', 'W'] },
+          { name: 'Broadway', coordinates: [-73.925508, 40.76182] as [number, number], lines: ['N', 'W'] },
+          { name: '36 Av', coordinates: [-73.929575, 40.756804] as [number, number], lines: ['N', 'W'] },
+          { name: '39 Av-Dutch Kills', coordinates: [-73.932755, 40.752882] as [number, number], lines: ['N', 'W'] },
+          { name: 'Queensboro Plaza', coordinates: [-73.940202, 40.750582] as [number, number], lines: ['7', 'N', 'W'] },
+          { name: 'Lexington Av/59 St', coordinates: [-73.9676125, 40.762592999999995] as [number, number], lines: ['4', '5', '6', 'N', 'R', 'W'] },
+          { name: '5 Av/59 St', coordinates: [-73.973347, 40.764811] as [number, number], lines: ['N', 'R', 'W'] },
+          { name: '57 St-7 Av', coordinates: [-73.980658, 40.764664] as [number, number], lines: ['N', 'Q', 'R', 'W'] },
+          { name: '49 St', coordinates: [-73.984139, 40.759901] as [number, number], lines: ['N', 'R', 'W'] },
+          { name: 'Times Sq-42 St', coordinates: [-73.9875808, 40.755746] as [number, number], lines: ['1', '2', '3', '7', 'A', 'C', 'E', 'N', 'Q', 'R', 'S', 'W'] },
+          { name: '34 St-Herald Sq', coordinates: [-73.9878865, 40.749643] as [number, number], lines: ['B', 'D', 'F', 'M', 'N', 'Q', 'R', 'W'] },
+          { name: '14 St-Union Sq', coordinates: [-73.99041633333333, 40.735066] as [number, number], lines: ['4', '5', '6', 'L', 'N', 'Q', 'R', 'W'] },
+          { name: 'Canal St', coordinates: [-74.00057999999999, 40.71870125] as [number, number], lines: ['6', 'J', 'N', 'Q', 'R', 'W', 'Z'] },
+          { name: 'Atlantic Av-Barclays Ctr', coordinates: [-73.97778866666665, 40.68416166666667] as [number, number], lines: ['2', '3', '4', '5', 'B', 'D', 'N', 'Q', 'R'] },
+          { name: '36 St', coordinates: [-74.003549, 40.655144] as [number, number], lines: ['D', 'N', 'R'] },
+          { name: '59 St', coordinates: [-74.017881, 40.641362] as [number, number], lines: ['N', 'R'] },
+          { name: '8 Av', coordinates: [-74.011719, 40.635064] as [number, number], lines: ['N'] },
+          { name: 'Fort Hamilton Pkwy', coordinates: [-74.005351, 40.631386] as [number, number], lines: ['N'] },
+          { name: '62 St', coordinates: [-73.996624, 40.625657000000004] as [number, number], lines: ['D', 'N'] },
+          { name: '18 Av', coordinates: [-73.990414, 40.620671] as [number, number], lines: ['N'] },
+          { name: '20 Av', coordinates: [-73.985026, 40.61741] as [number, number], lines: ['N'] },
+          { name: 'Bay Pkwy', coordinates: [-73.981848, 40.611815] as [number, number], lines: ['N'] },
+          { name: 'Kings Hwy', coordinates: [-73.980353, 40.603923] as [number, number], lines: ['N'] },
+          { name: 'Avenue U', coordinates: [-73.979137, 40.597473] as [number, number], lines: ['N'] },
+          { name: '86 St', coordinates: [-73.97823, 40.592721] as [number, number], lines: ['N'] },
+          { name: 'Coney Island-Stillwell Av', coordinates: [-73.981233, 40.577422] as [number, number], lines: ['D', 'F', 'N', 'Q'] }
+        ];
+
+        nLineStations.forEach((station, index) => {
+          const el = document.createElement('div');
+          el.className = 'subway-marker';
+          el.style.cssText = `
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: ${MTA_COLORS[lineId] || '#000000'};
+            border: 3px solid white;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+          `;
+
+          let tooltip: maplibregl.Popup | null = null;
+
+          el.addEventListener('mouseenter', () => {
+            const lineBadges = station.lines
+              .map(line => `<span style="display: inline-block; width: 24px; height: 24px; line-height: 24px; border-radius: 50%; background-color: ${MTA_COLORS[line] || '#000000'}; color: white; text-align: center; font-weight: bold; font-size: 14px; margin-right: 4px;">${line}</span>`)
+              .join('');
+
+            tooltip = new maplibregl.Popup({
+              closeButton: false,
+              closeOnClick: false,
+              offset: 25,
+              className: 'glassmorphic-tooltip'
+            })
+              .setLngLat(station.coordinates)
+              .setHTML(`
+                <div class="glassmorphic-tooltip-content">
+                  <div style="font-weight: bold; margin-bottom: 8px; color: white;">${station.name}</div>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                    ${lineBadges}
+                  </div>
+                </div>
+              `)
+              .addTo(map.current!);
+          });
+
+          el.addEventListener('mouseleave', () => {
+            if (tooltip) {
+              tooltip.remove();
+              tooltip = null;
+            }
+          });
+
+          el.addEventListener('click', () => {
+            map.current?.flyTo({
+              center: station.coordinates,
+              zoom: 14,
+              duration: 1000
+            });
+          });
+
+          const marker = new maplibregl.Marker({ element: el })
+            .setLngLat(station.coordinates)
+            .addTo(map.current!);
+
+          markersForLine.push(marker);
+        });
+
+        setLineMarkers(prev => ({ ...prev, [lineId]: markersForLine }));
+        setActiveLines(prev => [...prev, lineId]);
+        console.log(`✅ Hardcoded N train added successfully with ${nLineStations.length} stations`);
+        return;
+      }
+
+      // Q Train - Hardcoded implementation (96 St to Coney Island-Stillwell Av)
+      if (lineId === 'Q') {
+        const markersForLine: maplibregl.Marker[] = [];
+        const qLineCoords: [number, number][] = [
+          [-73.947152, 40.784318],    // 96 St
+          [-73.951787, 40.777891],    // 86 St
+          [-73.958424, 40.768799],    // 72 St
+          [-73.966113, 40.764629],    // Lexington Av/63 St
+          [-73.980658, 40.764664],    // 57 St-7 Av
+          [-73.9875808, 40.755746],   // Times Sq-42 St
+          [-73.9878865, 40.749643],   // 34 St-Herald Sq
+          [-73.99041633333333, 40.735066], // 14 St-Union Sq
+          [-74.00057999999999, 40.71870125], // Canal St
+          [-73.981824, 40.690635],    // DeKalb Av
+          [-73.97778866666665, 40.68416166666667], // Atlantic Av-Barclays Ctr
+          [-73.972367, 40.67705],     // 7 Av
+          [-73.962246, 40.661614],    // Prospect Park
+          [-73.961495, 40.655292],    // Parkside Av
+          [-73.962982, 40.650527],    // Church Av
+          [-73.964492, 40.644031],    // Beverley Rd
+          [-73.963891, 40.640927],    // Cortelyou Rd
+          [-73.962793, 40.635082],    // Newkirk Plaza
+          [-73.957734, 40.60867],     // Kings Hwy
+          [-73.961639, 40.62927],     // Avenue H
+          [-73.960803, 40.625039],    // Avenue J
+          [-73.959399, 40.617618],    // Avenue M
+          [-73.955929, 40.5993],      // Avenue U
+          [-73.955161, 40.595246],    // Neck Rd
+          [-73.954155, 40.586896],    // Sheepshead Bay
+          [-73.961376, 40.577621],    // Brighton Beach
+          [-73.968501, 40.576312],    // Ocean Pkwy
+          [-73.975939, 40.576127],    // W 8 St-NY Aquarium
+          [-73.981233, 40.577422]     // Coney Island-Stillwell Av
+        ];
+
+        const lineGeoJSON = {
+          type: 'Feature' as const,
+          properties: {},
+          geometry: {
+            type: 'LineString' as const,
+            coordinates: qLineCoords,
+          },
+        };
+
+        map.current!.addSource(`line-${lineId}`, {
+          type: 'geojson',
+          data: lineGeoJSON,
+        });
+
+        map.current!.addLayer({
+          id: `line-${lineId}`,
+          type: 'line',
+          source: `line-${lineId}`,
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round',
+          },
+          paint: {
+            'line-color': MTA_COLORS[lineId] || '#000000',
+            'line-width': 4,
+            'line-opacity': 0.8,
+          },
+        });
+
+        const qLineStations = [
+          { name: '96 St', coordinates: [-73.947152, 40.784318] as [number, number], lines: ['Q'] },
+          { name: '86 St', coordinates: [-73.951787, 40.777891] as [number, number], lines: ['Q'] },
+          { name: '72 St', coordinates: [-73.958424, 40.768799] as [number, number], lines: ['Q'] },
+          { name: 'Lexington Av/63 St', coordinates: [-73.966113, 40.764629] as [number, number], lines: ['F', 'Q'] },
+          { name: '57 St-7 Av', coordinates: [-73.980658, 40.764664] as [number, number], lines: ['N', 'Q', 'R', 'W'] },
+          { name: 'Times Sq-42 St', coordinates: [-73.9875808, 40.755746] as [number, number], lines: ['1', '2', '3', '7', 'A', 'C', 'E', 'N', 'Q', 'R', 'S', 'W'] },
+          { name: '34 St-Herald Sq', coordinates: [-73.9878865, 40.749643] as [number, number], lines: ['B', 'D', 'F', 'M', 'N', 'Q', 'R', 'W'] },
+          { name: '14 St-Union Sq', coordinates: [-73.99041633333333, 40.735066] as [number, number], lines: ['4', '5', '6', 'L', 'N', 'Q', 'R', 'W'] },
+          { name: 'Canal St', coordinates: [-74.00057999999999, 40.71870125] as [number, number], lines: ['6', 'J', 'N', 'Q', 'R', 'W', 'Z'] },
+          { name: 'DeKalb Av', coordinates: [-73.981824, 40.690635] as [number, number], lines: ['B', 'Q', 'R'] },
+          { name: 'Atlantic Av-Barclays Ctr', coordinates: [-73.97778866666665, 40.68416166666667] as [number, number], lines: ['2', '3', '4', '5', 'B', 'D', 'N', 'Q', 'R'] },
+          { name: '7 Av', coordinates: [-73.972367, 40.67705] as [number, number], lines: ['B', 'Q'] },
+          { name: 'Prospect Park', coordinates: [-73.962246, 40.661614] as [number, number], lines: ['B', 'Q', 'S'] },
+          { name: 'Parkside Av', coordinates: [-73.961495, 40.655292] as [number, number], lines: ['Q'] },
+          { name: 'Church Av', coordinates: [-73.962982, 40.650527] as [number, number], lines: ['B', 'Q'] },
+          { name: 'Beverley Rd', coordinates: [-73.964492, 40.644031] as [number, number], lines: ['Q'] },
+          { name: 'Cortelyou Rd', coordinates: [-73.963891, 40.640927] as [number, number], lines: ['Q'] },
+          { name: 'Newkirk Plaza', coordinates: [-73.962793, 40.635082] as [number, number], lines: ['B', 'Q'] },
+          { name: 'Kings Hwy', coordinates: [-73.957734, 40.60867] as [number, number], lines: ['B', 'Q'] },
+          { name: 'Avenue H', coordinates: [-73.961639, 40.62927] as [number, number], lines: ['Q'] },
+          { name: 'Avenue J', coordinates: [-73.960803, 40.625039] as [number, number], lines: ['Q'] },
+          { name: 'Avenue M', coordinates: [-73.959399, 40.617618] as [number, number], lines: ['Q'] },
+          { name: 'Avenue U', coordinates: [-73.955929, 40.5993] as [number, number], lines: ['Q'] },
+          { name: 'Neck Rd', coordinates: [-73.955161, 40.595246] as [number, number], lines: ['Q'] },
+          { name: 'Sheepshead Bay', coordinates: [-73.954155, 40.586896] as [number, number], lines: ['B', 'Q'] },
+          { name: 'Brighton Beach', coordinates: [-73.961376, 40.577621] as [number, number], lines: ['B', 'Q'] },
+          { name: 'Ocean Pkwy', coordinates: [-73.968501, 40.576312] as [number, number], lines: ['Q'] },
+          { name: 'W 8 St-NY Aquarium', coordinates: [-73.975939, 40.576127] as [number, number], lines: ['F', 'Q'] },
+          { name: 'Coney Island-Stillwell Av', coordinates: [-73.981233, 40.577422] as [number, number], lines: ['D', 'F', 'N', 'Q'] }
+        ];
+
+        qLineStations.forEach((station, index) => {
+          const el = document.createElement('div');
+          el.className = 'subway-marker';
+          el.style.backgroundColor = MTA_COLORS[lineId] || '#000000';
+          el.style.width = '16px';
+          el.style.height = '16px';
+          el.style.borderRadius = '50%';
+          el.style.border = '3px solid white';
+          el.style.cursor = 'pointer';
+          el.style.boxShadow = '0 2px 4px rgba(0,0,0,0.3)';
+
+          let tooltip: maplibregl.Popup | null = null;
+
+          el.addEventListener('mouseenter', () => {
+            const lineBadges = station.lines
+              .map(line => {
+                const color = MTA_COLORS[line] || '#000000';
+                return `<span class="w-6 h-6 rounded-full text-center leading-6 inline-block font-bold" style="background-color: ${color}; color: white;">${line}</span>`;
+              })
+              .join('');
+
+            tooltip = new maplibregl.Popup({
+              closeButton: false,
+              closeOnClick: false,
+              offset: 25,
+              className: 'glassmorphic-tooltip'
+            })
+              .setLngLat(station.coordinates)
+              .setHTML(`
+                <div class="glassmorphic-tooltip-content">
+                  <div style="font-weight: bold; margin-bottom: 8px; color: white;">${station.name}</div>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                    ${lineBadges}
+                  </div>
+                </div>
+              `)
+              .addTo(map.current!);
+          });
+
+          el.addEventListener('mouseleave', () => {
+            if (tooltip) {
+              tooltip.remove();
+              tooltip = null;
+            }
+          });
+
+          el.addEventListener('click', () => {
+            map.current?.flyTo({
+              center: station.coordinates,
+              zoom: 14,
+              duration: 1000
+            });
+          });
+
+          const marker = new maplibregl.Marker({ element: el })
+            .setLngLat(station.coordinates)
+            .addTo(map.current!);
+
+          markersForLine.push(marker);
+        });
+
+        setLineMarkers(prev => ({ ...prev, [lineId]: markersForLine }));
+        setActiveLines(prev => [...prev, lineId]);
+        console.log(`✅ Hardcoded Q train added successfully with ${qLineStations.length} stations`);
+        return;
+      }
+
+      // R Train - Hardcoded implementation (Forest Hills-71 Av to Bay Ridge-95 St)
+      if (lineId === 'R') {
+        const markersForLine: maplibregl.Marker[] = [];
+        const rLineCoords: [number, number][] = [
+          [-73.844521, 40.721691],    // Forest Hills-71 Av
+          [-73.861604, 40.729846],    // 63 Dr-Rego Park
+          [-73.852719, 40.726523],    // 67 Av
+          [-73.869229, 40.733106],    // Woodhaven Blvd
+          [-73.877223, 40.737015],    // Grand Av-Newtown
+          [-73.882017, 40.742454],    // Elmhurst Av
+          [-73.891366, 40.746746],    // Jackson Hts-Roosevelt Av
+          [-73.898453, 40.749669],    // 65 St
+          [-73.906006, 40.752885],    // Northern Blvd
+          [-73.913333, 40.756312],    // 46 St
+          [-73.92074, 40.756879],     // Steinway St
+          [-73.928781, 40.752039],    // 36 St
+          [-73.937243, 40.748973],    // Queens Plaza
+          [-73.9676125, 40.762592999999995], // Lexington Av/59 St
+          [-73.973347, 40.764811],    // 5 Av/59 St
+          [-73.980658, 40.764664],    // 57 St-7 Av
+          [-73.984139, 40.759901],    // 49 St
+          [-73.9875808, 40.755746],   // Times Sq-42 St
+          [-73.9878865, 40.749643],   // 34 St-Herald Sq
+          [-73.988691, 40.745494],    // 28 St
+          [-73.989344, 40.741303],    // 23 St
+          [-73.99041633333333, 40.735066], // 14 St-Union Sq
+          [-73.992629, 40.730328],    // 8 St-NYU
+          [-73.997702, 40.724329],    // Prince St
+          [-74.00057999999999, 40.71870125], // Canal St
+          [-74.006978, 40.713282],    // City Hall
+          [-74.0095515, 40.712603],   // Cortlandt St
+          [-74.013342, 40.70722],     // Rector St
+          [-74.013329, 40.7025775],   // Whitehall St-South Ferry
+          [-73.990642, 40.693241],    // Court St
+          [-73.98664199999999, 40.692259], // Jay St-MetroTech
+          [-73.981824, 40.690635],    // DeKalb Av
+          [-73.97778866666665, 40.68416166666667], // Atlantic Av-Barclays Ctr
+          [-73.98311, 40.677316],     // Union St
+          [-73.9890405, 40.670559499999996], // 4 Av-9 St
+          [-73.992872, 40.665414],    // Prospect Av
+          [-73.998091, 40.660397],    // 25 St
+          [-74.003549, 40.655144],    // 36 St
+          [-74.010006, 40.648939],    // 45 St
+          [-74.014034, 40.645069],    // 53 St
+          [-74.017881, 40.641362],    // 59 St
+          [-74.023377, 40.634967],    // Bay Ridge Av
+          [-74.02551, 40.629742],     // 77 St
+          [-74.028398, 40.622687],    // 86 St
+          [-74.030876, 40.616622]     // Bay Ridge-95 St
+        ];
+
+        const lineGeoJSON = {
+          type: 'Feature' as const,
+          properties: {},
+          geometry: {
+            type: 'LineString' as const,
+            coordinates: rLineCoords,
+          },
+        };
+
+        map.current!.addSource(`line-${lineId}`, {
+          type: 'geojson',
+          data: lineGeoJSON,
+        });
+
+        map.current!.addLayer({
+          id: `line-${lineId}`,
+          type: 'line',
+          source: `line-${lineId}`,
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round',
+          },
+          paint: {
+            'line-color': MTA_COLORS[lineId] || '#000000',
+            'line-width': 4,
+            'line-opacity': 0.8,
+          },
+        });
+
+        const rLineStations = [
+          { name: 'Forest Hills-71 Av', coordinates: [-73.844521, 40.721691] as [number, number], lines: ['E', 'F', 'M', 'R'] },
+          { name: '63 Dr-Rego Park', coordinates: [-73.861604, 40.729846] as [number, number], lines: ['M', 'R'] },
+          { name: '67 Av', coordinates: [-73.852719, 40.726523] as [number, number], lines: ['M', 'R'] },
+          { name: 'Woodhaven Blvd', coordinates: [-73.869229, 40.733106] as [number, number], lines: ['M', 'R'] },
+          { name: 'Grand Av-Newtown', coordinates: [-73.877223, 40.737015] as [number, number], lines: ['M', 'R'] },
+          { name: 'Elmhurst Av', coordinates: [-73.882017, 40.742454] as [number, number], lines: ['M', 'R'] },
+          { name: 'Jackson Hts-Roosevelt Av', coordinates: [-73.891366, 40.746746] as [number, number], lines: ['7', 'E', 'F', 'M', 'R'] },
+          { name: '65 St', coordinates: [-73.898453, 40.749669] as [number, number], lines: ['M', 'R'] },
+          { name: 'Northern Blvd', coordinates: [-73.906006, 40.752885] as [number, number], lines: ['M', 'R'] },
+          { name: '46 St', coordinates: [-73.913333, 40.756312] as [number, number], lines: ['M', 'R'] },
+          { name: 'Steinway St', coordinates: [-73.92074, 40.756879] as [number, number], lines: ['M', 'R'] },
+          { name: '36 St', coordinates: [-73.928781, 40.752039] as [number, number], lines: ['M', 'R'] },
+          { name: 'Queens Plaza', coordinates: [-73.937243, 40.748973] as [number, number], lines: ['E', 'M', 'R'] },
+          { name: 'Lexington Av/59 St', coordinates: [-73.9676125, 40.762592999999995] as [number, number], lines: ['4', '5', '6', 'N', 'R', 'W'] },
+          { name: '5 Av/59 St', coordinates: [-73.973347, 40.764811] as [number, number], lines: ['N', 'R', 'W'] },
+          { name: '57 St-7 Av', coordinates: [-73.980658, 40.764664] as [number, number], lines: ['N', 'Q', 'R', 'W'] },
+          { name: '49 St', coordinates: [-73.984139, 40.759901] as [number, number], lines: ['N', 'R', 'W'] },
+          { name: 'Times Sq-42 St', coordinates: [-73.9875808, 40.755746] as [number, number], lines: ['1', '2', '3', '7', 'A', 'C', 'E', 'N', 'Q', 'R', 'S', 'W'] },
+          { name: '34 St-Herald Sq', coordinates: [-73.9878865, 40.749643] as [number, number], lines: ['B', 'D', 'F', 'M', 'N', 'Q', 'R', 'W'] },
+          { name: '28 St', coordinates: [-73.988691, 40.745494] as [number, number], lines: ['R', 'W'] },
+          { name: '23 St', coordinates: [-73.989344, 40.741303] as [number, number], lines: ['R', 'W'] },
+          { name: '14 St-Union Sq', coordinates: [-73.99041633333333, 40.735066] as [number, number], lines: ['4', '5', '6', 'L', 'N', 'Q', 'R', 'W'] },
+          { name: '8 St-NYU', coordinates: [-73.992629, 40.730328] as [number, number], lines: ['R', 'W'] },
+          { name: 'Prince St', coordinates: [-73.997702, 40.724329] as [number, number], lines: ['R', 'W'] },
+          { name: 'Canal St', coordinates: [-74.00057999999999, 40.71870125] as [number, number], lines: ['6', 'J', 'N', 'Q', 'R', 'W', 'Z'] },
+          { name: 'City Hall', coordinates: [-74.006978, 40.713282] as [number, number], lines: ['R', 'W'] },
+          { name: 'Cortlandt St', coordinates: [-74.0095515, 40.712603] as [number, number], lines: ['2', '3', 'A', 'C', 'E', 'R', 'W'] },
+          { name: 'Rector St', coordinates: [-74.013342, 40.70722] as [number, number], lines: ['R', 'W'] },
+          { name: 'Whitehall St-South Ferry', coordinates: [-74.013329, 40.7025775] as [number, number], lines: ['1', 'R', 'W'] },
+          { name: 'Court St', coordinates: [-73.990642, 40.693241] as [number, number], lines: ['2', '3', '4', '5', 'R'] },
+          { name: 'Jay St-MetroTech', coordinates: [-73.98664199999999, 40.692259] as [number, number], lines: ['A', 'C', 'F', 'R'] },
+          { name: 'DeKalb Av', coordinates: [-73.981824, 40.690635] as [number, number], lines: ['B', 'Q', 'R'] },
+          { name: 'Atlantic Av-Barclays Ctr', coordinates: [-73.97778866666665, 40.68416166666667] as [number, number], lines: ['2', '3', '4', '5', 'B', 'D', 'N', 'Q', 'R'] },
+          { name: 'Union St', coordinates: [-73.98311, 40.677316] as [number, number], lines: ['R'] },
+          { name: '4 Av-9 St', coordinates: [-73.9890405, 40.670559499999996] as [number, number], lines: ['F', 'G', 'R'] },
+          { name: 'Prospect Av', coordinates: [-73.992872, 40.665414] as [number, number], lines: ['R'] },
+          { name: '25 St', coordinates: [-73.998091, 40.660397] as [number, number], lines: ['R'] },
+          { name: '36 St', coordinates: [-74.003549, 40.655144] as [number, number], lines: ['D', 'N', 'R'] },
+          { name: '45 St', coordinates: [-74.010006, 40.648939] as [number, number], lines: ['R'] },
+          { name: '53 St', coordinates: [-74.014034, 40.645069] as [number, number], lines: ['R'] },
+          { name: '59 St', coordinates: [-74.017881, 40.641362] as [number, number], lines: ['N', 'R'] },
+          { name: 'Bay Ridge Av', coordinates: [-74.023377, 40.634967] as [number, number], lines: ['R'] },
+          { name: '77 St', coordinates: [-74.02551, 40.629742] as [number, number], lines: ['R'] },
+          { name: '86 St', coordinates: [-74.028398, 40.622687] as [number, number], lines: ['R'] },
+          { name: 'Bay Ridge-95 St', coordinates: [-74.030876, 40.616622] as [number, number], lines: ['R'] }
+        ];
+
+        rLineStations.forEach((station, index) => {
+          const el = document.createElement('div');
+          el.className = 'subway-marker';
+          el.style.backgroundColor = MTA_COLORS[lineId] || '#000000';
+          el.style.width = '16px';
+          el.style.height = '16px';
+          el.style.borderRadius = '50%';
+          el.style.border = '3px solid white';
+          el.style.cursor = 'pointer';
+          el.style.boxShadow = '0 2px 4px rgba(0,0,0,0.3)';
+
+          let tooltip: maplibregl.Popup | null = null;
+
+          el.addEventListener('mouseenter', () => {
+            const lineBadges = station.lines
+              .map(line => {
+                const color = MTA_COLORS[line] || '#000000';
+                return `<span class="w-6 h-6 rounded-full text-center leading-6 inline-block font-bold" style="background-color: ${color}; color: white;">${line}</span>`;
+              })
+              .join('');
+
+            tooltip = new maplibregl.Popup({
+              closeButton: false,
+              closeOnClick: false,
+              offset: 25,
+              className: 'glassmorphic-tooltip'
+            })
+              .setLngLat(station.coordinates)
+              .setHTML(`
+                <div class="glassmorphic-tooltip-content">
+                  <div style="font-weight: bold; margin-bottom: 8px; color: white;">${station.name}</div>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                    ${lineBadges}
+                  </div>
+                </div>
+              `)
+              .addTo(map.current!);
+          });
+
+          el.addEventListener('mouseleave', () => {
+            if (tooltip) {
+              tooltip.remove();
+              tooltip = null;
+            }
+          });
+
+          el.addEventListener('click', () => {
+            map.current?.flyTo({
+              center: station.coordinates,
+              zoom: 14,
+              duration: 1000
+            });
+          });
+
+          const marker = new maplibregl.Marker({ element: el })
+            .setLngLat(station.coordinates)
+            .addTo(map.current!);
+
+          markersForLine.push(marker);
+        });
+
+        setLineMarkers(prev => ({ ...prev, [lineId]: markersForLine }));
+        setActiveLines(prev => [...prev, lineId]);
+        console.log(`✅ Hardcoded R train added successfully with ${rLineStations.length} stations`);
+        return;
+      }
+
+      // W Train - Hardcoded implementation (Astoria-Ditmars Blvd to Whitehall St-South Ferry)
+      if (lineId === 'W') {
+        const markersForLine: maplibregl.Marker[] = [];
+        const wLineCoords: [number, number][] = [
+          [-73.912034, 40.775036],    // Astoria-Ditmars Blvd
+          [-73.917843, 40.770258],    // Astoria Blvd
+          [-73.921479, 40.766779],    // 30 Av
+          [-73.925508, 40.76182],     // Broadway
+          [-73.929575, 40.756804],    // 36 Av
+          [-73.932755, 40.752882],    // 39 Av-Dutch Kills
+          [-73.940202, 40.750582],    // Queensboro Plaza
+          [-73.9676125, 40.762592999999995], // Lexington Av/59 St
+          [-73.973347, 40.764811],    // 5 Av/59 St
+          [-73.980658, 40.764664],    // 57 St-7 Av
+          [-73.984139, 40.759901],    // 49 St
+          [-73.9875808, 40.755746],   // Times Sq-42 St
+          [-73.9878865, 40.749643],   // 34 St-Herald Sq
+          [-73.988691, 40.745494],    // 28 St
+          [-73.989344, 40.741303],    // 23 St
+          [-73.99041633333333, 40.735066], // 14 St-Union Sq
+          [-73.992629, 40.730328],    // 8 St-NYU
+          [-73.997702, 40.724329],    // Prince St
+          [-74.00057999999999, 40.71870125], // Canal St
+          [-74.006978, 40.713282],    // City Hall
+          [-74.0095515, 40.712603],   // Cortlandt St
+          [-74.013342, 40.70722],     // Rector St
+          [-74.013329, 40.7025775]    // Whitehall St-South Ferry
+        ];
+
+        const lineGeoJSON = {
+          type: 'Feature' as const,
+          properties: {},
+          geometry: {
+            type: 'LineString' as const,
+            coordinates: wLineCoords,
+          },
+        };
+
+        map.current!.addSource(`line-${lineId}`, {
+          type: 'geojson',
+          data: lineGeoJSON,
+        });
+
+        map.current!.addLayer({
+          id: `line-${lineId}`,
+          type: 'line',
+          source: `line-${lineId}`,
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round',
+          },
+          paint: {
+            'line-color': MTA_COLORS[lineId] || '#000000',
+            'line-width': 4,
+            'line-opacity': 0.8,
+          },
+        });
+
+        const wLineStations = [
+          { name: 'Astoria-Ditmars Blvd', coordinates: [-73.912034, 40.775036] as [number, number], lines: ['N', 'W'] },
+          { name: 'Astoria Blvd', coordinates: [-73.917843, 40.770258] as [number, number], lines: ['N', 'W'] },
+          { name: '30 Av', coordinates: [-73.921479, 40.766779] as [number, number], lines: ['N', 'W'] },
+          { name: 'Broadway', coordinates: [-73.925508, 40.76182] as [number, number], lines: ['N', 'W'] },
+          { name: '36 Av', coordinates: [-73.929575, 40.756804] as [number, number], lines: ['N', 'W'] },
+          { name: '39 Av-Dutch Kills', coordinates: [-73.932755, 40.752882] as [number, number], lines: ['N', 'W'] },
+          { name: 'Queensboro Plaza', coordinates: [-73.940202, 40.750582] as [number, number], lines: ['7', 'N', 'W'] },
+          { name: 'Lexington Av/59 St', coordinates: [-73.9676125, 40.762592999999995] as [number, number], lines: ['4', '5', '6', 'N', 'R', 'W'] },
+          { name: '5 Av/59 St', coordinates: [-73.973347, 40.764811] as [number, number], lines: ['N', 'R', 'W'] },
+          { name: '57 St-7 Av', coordinates: [-73.980658, 40.764664] as [number, number], lines: ['N', 'Q', 'R', 'W'] },
+          { name: '49 St', coordinates: [-73.984139, 40.759901] as [number, number], lines: ['N', 'R', 'W'] },
+          { name: 'Times Sq-42 St', coordinates: [-73.9875808, 40.755746] as [number, number], lines: ['1', '2', '3', '7', 'A', 'C', 'E', 'N', 'Q', 'R', 'S', 'W'] },
+          { name: '34 St-Herald Sq', coordinates: [-73.9878865, 40.749643] as [number, number], lines: ['B', 'D', 'F', 'M', 'N', 'Q', 'R', 'W'] },
+          { name: '28 St', coordinates: [-73.988691, 40.745494] as [number, number], lines: ['R', 'W'] },
+          { name: '23 St', coordinates: [-73.989344, 40.741303] as [number, number], lines: ['R', 'W'] },
+          { name: '14 St-Union Sq', coordinates: [-73.99041633333333, 40.735066] as [number, number], lines: ['4', '5', '6', 'L', 'N', 'Q', 'R', 'W'] },
+          { name: '8 St-NYU', coordinates: [-73.992629, 40.730328] as [number, number], lines: ['R', 'W'] },
+          { name: 'Prince St', coordinates: [-73.997702, 40.724329] as [number, number], lines: ['R', 'W'] },
+          { name: 'Canal St', coordinates: [-74.00057999999999, 40.71870125] as [number, number], lines: ['6', 'J', 'N', 'Q', 'R', 'W', 'Z'] },
+          { name: 'City Hall', coordinates: [-74.006978, 40.713282] as [number, number], lines: ['R', 'W'] },
+          { name: 'Cortlandt St', coordinates: [-74.0095515, 40.712603] as [number, number], lines: ['2', '3', 'A', 'C', 'E', 'R', 'W'] },
+          { name: 'Rector St', coordinates: [-74.013342, 40.70722] as [number, number], lines: ['R', 'W'] },
+          { name: 'Whitehall St-South Ferry', coordinates: [-74.013329, 40.7025775] as [number, number], lines: ['1', 'R', 'W'] }
+        ];
+
+        wLineStations.forEach((station, index) => {
+          const el = document.createElement('div');
+          el.className = 'subway-marker';
+          el.style.backgroundColor = MTA_COLORS[lineId] || '#000000';
+          el.style.width = '16px';
+          el.style.height = '16px';
+          el.style.borderRadius = '50%';
+          el.style.border = '3px solid white';
+          el.style.cursor = 'pointer';
+          el.style.boxShadow = '0 2px 4px rgba(0,0,0,0.3)';
+
+          let tooltip: maplibregl.Popup | null = null;
+
+          el.addEventListener('mouseenter', () => {
+            const lineBadges = station.lines
+              .map(line => {
+                const color = MTA_COLORS[line] || '#000000';
+                return `<span class="w-6 h-6 rounded-full text-center leading-6 inline-block font-bold" style="background-color: ${color}; color: white;">${line}</span>`;
+              })
+              .join('');
+
+            tooltip = new maplibregl.Popup({
+              closeButton: false,
+              closeOnClick: false,
+              offset: 25,
+              className: 'glassmorphic-tooltip'
+            })
+              .setLngLat(station.coordinates)
+              .setHTML(`
+                <div class="glassmorphic-tooltip-content">
+                  <div style="font-weight: bold; margin-bottom: 8px; color: white;">${station.name}</div>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                    ${lineBadges}
+                  </div>
+                </div>
+              `)
+              .addTo(map.current!);
+          });
+
+          el.addEventListener('mouseleave', () => {
+            if (tooltip) {
+              tooltip.remove();
+              tooltip = null;
+            }
+          });
+
+          el.addEventListener('click', () => {
+            map.current?.flyTo({
+              center: station.coordinates,
+              zoom: 14,
+              duration: 1000
+            });
+          });
+
+          const marker = new maplibregl.Marker({ element: el })
+            .setLngLat(station.coordinates)
+            .addTo(map.current!);
+
+          markersForLine.push(marker);
+        });
+
+        setLineMarkers(prev => ({ ...prev, [lineId]: markersForLine }));
+        setActiveLines(prev => [...prev, lineId]);
+        console.log(`✅ Hardcoded W train added successfully with ${wLineStations.length} stations`);
+        return;
+      }
+
+      // S-GC: 42 St Shuttle (Grand Central Shuttle) - Hardcoded implementation
+      if (lineId === 'S-GC') {
+        const markersForLine: maplibregl.Marker[] = [];
+        const sgcLineCoords: [number, number][] = [
+          [-73.9875808, 40.755746],   // Times Sq-42 St
+          [-73.97735933333333, 40.751992]  // Grand Central-42 St
+        ];
+
+        const lineGeoJSON = {
+          type: 'Feature' as const,
+          properties: {},
+          geometry: {
+            type: 'LineString' as const,
+            coordinates: sgcLineCoords,
+          },
+        };
+
+        map.current!.addSource(`line-${lineId}`, {
+          type: 'geojson',
+          data: lineGeoJSON,
+        });
+
+        map.current!.addLayer({
+          id: `line-${lineId}`,
+          type: 'line',
+          source: `line-${lineId}`,
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round',
+          },
+          paint: {
+            'line-color': MTA_COLORS[lineId] || '#000000',
+            'line-width': 4,
+            'line-opacity': 0.8,
+          },
+        });
+
+        const sgcLineStations = [
+          { name: 'Times Sq-42 St', coordinates: [-73.9875808, 40.755746] as [number, number], lines: ['1', '2', '3', '7', 'A', 'C', 'E', 'N', 'Q', 'R', 'S', 'W'] },
+          { name: 'Grand Central-42 St', coordinates: [-73.97735933333333, 40.751992] as [number, number], lines: ['4', '5', '6', '7', 'S'] }
+        ];
+
+        sgcLineStations.forEach((station, index) => {
+          const el = document.createElement('div');
+          el.className = 'subway-marker';
+          el.style.backgroundColor = MTA_COLORS[lineId] || '#000000';
+          el.style.width = '16px';
+          el.style.height = '16px';
+          el.style.borderRadius = '50%';
+          el.style.border = '3px solid white';
+          el.style.cursor = 'pointer';
+          el.style.boxShadow = '0 2px 4px rgba(0,0,0,0.3)';
+
+          let tooltip: maplibregl.Popup | null = null;
+
+          el.addEventListener('mouseenter', () => {
+            const lineBadges = station.lines
+              .map(line => {
+                const color = MTA_COLORS[line] || '#000000';
+                return `<span class="w-6 h-6 rounded-full text-center leading-6 inline-block font-bold" style="background-color: ${color}; color: white;">${line}</span>`;
+              })
+              .join('');
+
+            tooltip = new maplibregl.Popup({
+              closeButton: false,
+              closeOnClick: false,
+              offset: 25,
+              className: 'glassmorphic-tooltip'
+            })
+              .setLngLat(station.coordinates)
+              .setHTML(`
+                <div class="glassmorphic-tooltip-content">
+                  <div style="font-weight: bold; margin-bottom: 8px; color: white;">${station.name}</div>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                    ${lineBadges}
+                  </div>
+                </div>
+              `)
+              .addTo(map.current!);
+          });
+
+          el.addEventListener('mouseleave', () => {
+            if (tooltip) {
+              tooltip.remove();
+              tooltip = null;
+            }
+          });
+
+          el.addEventListener('click', () => {
+            map.current?.flyTo({
+              center: station.coordinates,
+              zoom: 14,
+              duration: 1000
+            });
+          });
+
+          const marker = new maplibregl.Marker({ element: el })
+            .setLngLat(station.coordinates)
+            .addTo(map.current!);
+
+          markersForLine.push(marker);
+        });
+
+        setLineMarkers(prev => ({ ...prev, [lineId]: markersForLine }));
+        setActiveLines(prev => [...prev, lineId]);
+        console.log(`✅ Hardcoded S-GC (42 St Shuttle) added successfully with ${sgcLineStations.length} stations`);
+        return;
+      }
+
+      // S-FR: Franklin Shuttle - Hardcoded implementation
+      if (lineId === 'S-FR') {
+        const markersForLine: maplibregl.Marker[] = [];
+        const sfrLineCoords: [number, number][] = [
+          [-73.95633749999999, 40.680988],  // Franklin Av
+          [-73.957624, 40.674772],          // Park Pl
+          [-73.958688, 40.6705125],         // Botanic Garden
+          [-73.962246, 40.661614]           // Prospect Park
+        ];
+
+        const lineGeoJSON = {
+          type: 'Feature' as const,
+          properties: {},
+          geometry: {
+            type: 'LineString' as const,
+            coordinates: sfrLineCoords,
+          },
+        };
+
+        map.current!.addSource(`line-${lineId}`, {
+          type: 'geojson',
+          data: lineGeoJSON,
+        });
+
+        map.current!.addLayer({
+          id: `line-${lineId}`,
+          type: 'line',
+          source: `line-${lineId}`,
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round',
+          },
+          paint: {
+            'line-color': MTA_COLORS[lineId] || '#000000',
+            'line-width': 4,
+            'line-opacity': 0.8,
+          },
+        });
+
+        const sfrLineStations = [
+          { name: 'Franklin Av', coordinates: [-73.95633749999999, 40.680988] as [number, number], lines: ['C', 'S'] },
+          { name: 'Park Pl', coordinates: [-73.957624, 40.674772] as [number, number], lines: ['S'] },
+          { name: 'Botanic Garden', coordinates: [-73.958688, 40.6705125] as [number, number], lines: ['2', '3', '4', '5', 'S'] },
+          { name: 'Prospect Park', coordinates: [-73.962246, 40.661614] as [number, number], lines: ['B', 'Q', 'S'] }
+        ];
+
+        sfrLineStations.forEach((station, index) => {
+          const el = document.createElement('div');
+          el.className = 'subway-marker';
+          el.style.backgroundColor = MTA_COLORS[lineId] || '#000000';
+          el.style.width = '16px';
+          el.style.height = '16px';
+          el.style.borderRadius = '50%';
+          el.style.border = '3px solid white';
+          el.style.cursor = 'pointer';
+          el.style.boxShadow = '0 2px 4px rgba(0,0,0,0.3)';
+
+          let tooltip: maplibregl.Popup | null = null;
+
+          el.addEventListener('mouseenter', () => {
+            const lineBadges = station.lines
+              .map(line => {
+                const color = MTA_COLORS[line] || '#000000';
+                return `<span class="w-6 h-6 rounded-full text-center leading-6 inline-block font-bold" style="background-color: ${color}; color: white;">${line}</span>`;
+              })
+              .join('');
+
+            tooltip = new maplibregl.Popup({
+              closeButton: false,
+              closeOnClick: false,
+              offset: 25,
+              className: 'glassmorphic-tooltip'
+            })
+              .setLngLat(station.coordinates)
+              .setHTML(`
+                <div class="glassmorphic-tooltip-content">
+                  <div style="font-weight: bold; margin-bottom: 8px; color: white;">${station.name}</div>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                    ${lineBadges}
+                  </div>
+                </div>
+              `)
+              .addTo(map.current!);
+          });
+
+          el.addEventListener('mouseleave', () => {
+            if (tooltip) {
+              tooltip.remove();
+              tooltip = null;
+            }
+          });
+
+          el.addEventListener('click', () => {
+            map.current?.flyTo({
+              center: station.coordinates,
+              zoom: 14,
+              duration: 1000
+            });
+          });
+
+          const marker = new maplibregl.Marker({ element: el })
+            .setLngLat(station.coordinates)
+            .addTo(map.current!);
+
+          markersForLine.push(marker);
+        });
+
+        setLineMarkers(prev => ({ ...prev, [lineId]: markersForLine }));
+        setActiveLines(prev => [...prev, lineId]);
+        console.log(`✅ Hardcoded S-FR (Franklin Shuttle) added successfully with ${sfrLineStations.length} stations`);
+        return;
+      }
+
+      // S-RK: Rockaway Shuttle - Hardcoded implementation
+      if (lineId === 'S-RK') {
+        const markersForLine: maplibregl.Marker[] = [];
+        const srkLineCoords: [number, number][] = [
+          [-73.815925, 40.608382],   // Broad Channel
+          [-73.813641, 40.588034],   // Beach 90 St
+          [-73.820558, 40.585307],   // Beach 98 St
+          [-73.827559, 40.583209],   // Beach 105 St
+          [-73.835592, 40.580903]    // Rockaway Park-Beach 116 St
+        ];
+
+        const lineGeoJSON = {
+          type: 'Feature' as const,
+          properties: {},
+          geometry: {
+            type: 'LineString' as const,
+            coordinates: srkLineCoords,
+          },
+        };
+
+        map.current!.addSource(`line-${lineId}`, {
+          type: 'geojson',
+          data: lineGeoJSON,
+        });
+
+        map.current!.addLayer({
+          id: `line-${lineId}`,
+          type: 'line',
+          source: `line-${lineId}`,
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round',
+          },
+          paint: {
+            'line-color': MTA_COLORS[lineId] || '#000000',
+            'line-width': 4,
+            'line-opacity': 0.8,
+          },
+        });
+
+        const srkLineStations = [
+          { name: 'Broad Channel', coordinates: [-73.815925, 40.608382] as [number, number], lines: ['A', 'S'] },
+          { name: 'Beach 90 St', coordinates: [-73.813641, 40.588034] as [number, number], lines: ['A', 'S'] },
+          { name: 'Beach 98 St', coordinates: [-73.820558, 40.585307] as [number, number], lines: ['A', 'S'] },
+          { name: 'Beach 105 St', coordinates: [-73.827559, 40.583209] as [number, number], lines: ['A', 'S'] },
+          { name: 'Rockaway Park-Beach 116 St', coordinates: [-73.835592, 40.580903] as [number, number], lines: ['A', 'S'] }
+        ];
+
+        srkLineStations.forEach((station, index) => {
+          const el = document.createElement('div');
+          el.className = 'subway-marker';
+          el.style.backgroundColor = MTA_COLORS[lineId] || '#000000';
+          el.style.width = '16px';
+          el.style.height = '16px';
+          el.style.borderRadius = '50%';
+          el.style.border = '3px solid white';
+          el.style.cursor = 'pointer';
+          el.style.boxShadow = '0 2px 4px rgba(0,0,0,0.3)';
+
+          let tooltip: maplibregl.Popup | null = null;
+
+          el.addEventListener('mouseenter', () => {
+            const lineBadges = station.lines
+              .map(line => {
+                const color = MTA_COLORS[line] || '#000000';
+                return `<span class="w-6 h-6 rounded-full text-center leading-6 inline-block font-bold" style="background-color: ${color}; color: white;">${line}</span>`;
+              })
+              .join('');
+
+            tooltip = new maplibregl.Popup({
+              closeButton: false,
+              closeOnClick: false,
+              offset: 25,
+              className: 'glassmorphic-tooltip'
+            })
+              .setLngLat(station.coordinates)
+              .setHTML(`
+                <div class="glassmorphic-tooltip-content">
+                  <div style="font-weight: bold; margin-bottom: 8px; color: white;">${station.name}</div>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                    ${lineBadges}
+                  </div>
+                </div>
+              `)
+              .addTo(map.current!);
+          });
+
+          el.addEventListener('mouseleave', () => {
+            if (tooltip) {
+              tooltip.remove();
+              tooltip = null;
+            }
+          });
+
+          el.addEventListener('click', () => {
+            map.current?.flyTo({
+              center: station.coordinates,
+              zoom: 14,
+              duration: 1000
+            });
+          });
+
+          const marker = new maplibregl.Marker({ element: el })
+            .setLngLat(station.coordinates)
+            .addTo(map.current!);
+
+          markersForLine.push(marker);
+        });
+
+        setLineMarkers(prev => ({ ...prev, [lineId]: markersForLine }));
+        setActiveLines(prev => [...prev, lineId]);
+        console.log(`✅ Hardcoded S-RK (Rockaway Shuttle) added successfully with ${srkLineStations.length} stations`);
+        return;
+      }
+
       // Get stations for this line
       const lineStations = stations.filter(station => 
         station.lines.includes(lineId)
@@ -2633,12 +3848,20 @@ export default function WorkingSubwayMap() {
       });
       setActiveLines([]);
     } else {
-      // Show all
-      Object.keys(MTA_COLORS).forEach(lineId => {
-        if (!activeLines.includes(lineId)) {
-          toggleLine(lineId);
-        }
-      });
+      // Show all (filter out individual shuttle IDs)
+      Object.keys(MTA_COLORS)
+        .filter(lineId => !['S-GC', 'S-FR', 'S-RK'].includes(lineId))
+        .forEach(lineId => {
+          if (lineId === 'S') {
+            // For 'S', check if any shuttle is active
+            const anyShuttleActive = ['S-GC', 'S-FR', 'S-RK'].some(shuttle => activeLines.includes(shuttle));
+            if (!anyShuttleActive) {
+              toggleLine(lineId);
+            }
+          } else if (!activeLines.includes(lineId)) {
+            toggleLine(lineId);
+          }
+        });
     }
   };
 
@@ -2724,24 +3947,33 @@ export default function WorkingSubwayMap() {
         
         {/* Subway Lines Grid */}
         <div className="grid grid-cols-6 gap-2">
-          {Object.keys(MTA_COLORS).map(line => (
-            <button
-              key={line}
-              onClick={() => toggleLine(line)}
-              className={`w-10 h-10 rounded font-bold text-sm transition-all ${
-                activeLines.includes(line)
-                  ? 'text-white shadow-lg transform scale-110'
-                  : 'text-gray-600 bg-gray-100 hover:bg-gray-200'
-              }`}
-              style={{
-                backgroundColor: activeLines.includes(line) 
-                  ? MTA_COLORS[line]
-                  : undefined
-              }}
-            >
-              {line}
-            </button>
-          ))}
+          {Object.keys(MTA_COLORS)
+            .filter(line => !['S-GC', 'S-FR', 'S-RK'].includes(line)) // Filter out individual shuttle IDs
+            .map(line => {
+              // For 'S', check if any of the three shuttles are active
+              const isActive = line === 'S'
+                ? ['S-GC', 'S-FR', 'S-RK'].some(shuttle => activeLines.includes(shuttle))
+                : activeLines.includes(line);
+
+              return (
+                <button
+                  key={line}
+                  onClick={() => toggleLine(line)}
+                  className={`w-10 h-10 rounded font-bold text-sm transition-all ${
+                    isActive
+                      ? 'text-white shadow-lg transform scale-110'
+                      : 'text-gray-600 bg-gray-100 hover:bg-gray-200'
+                  }`}
+                  style={{
+                    backgroundColor: isActive
+                      ? MTA_COLORS[line]
+                      : undefined
+                  }}
+                >
+                  {line}
+                </button>
+              );
+            })}
         </div>
         
         <div className="mt-3 text-xs text-gray-600">
