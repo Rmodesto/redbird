@@ -3826,27 +3826,11 @@ export default function WorkingSubwayMap() {
   // Toggle all lines
   const toggleAllLines = () => {
     if (activeLines.length > 0) {
-      // Clear all
-      activeLines.forEach(lineId => {
-        const sourceId = `line-${lineId}`;
-        const layerId = `line-layer-${lineId}`;
-        const stationsSourceId = `line-stations-${lineId}`;
-        const stationsLayerId = `line-stations-layer-${lineId}`;
-        
-        if (map.current?.getLayer(layerId)) {
-          map.current.removeLayer(layerId);
-        }
-        if (map.current?.getLayer(stationsLayerId)) {
-          map.current.removeLayer(stationsLayerId);
-        }
-        if (map.current?.getSource(sourceId)) {
-          map.current.removeSource(sourceId);
-        }
-        if (map.current?.getSource(stationsSourceId)) {
-          map.current.removeSource(stationsSourceId);
-        }
+      // Clear all - use a copy of activeLines to avoid mutation issues
+      const linesToClear = [...activeLines];
+      linesToClear.forEach(lineId => {
+        toggleLine(lineId);
       });
-      setActiveLines([]);
     } else {
       // Show all (filter out individual shuttle IDs)
       Object.keys(MTA_COLORS)
