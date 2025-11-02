@@ -1,0 +1,78 @@
+{
+  "name": "Subway Sounds NYC - Real-Time NYC Subway Directory",
+  "short_name": "Subway Sounds",
+  "description": "Your comprehensive guide to NYC subway stations with real-time arrivals, subway sounds, interactive maps, and cultural insights",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait",
+  "categories": ["navigation", "travel", "transportation"],
+  "lang": "en-US",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-1.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "Homepage - NYC Subway Directory"
+    },
+    {
+      "src": "/screenshot-2.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "Real-Time Arrivals"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Subway Map",
+      "short_name": "Map",
+      "description": "Interactive NYC subway map",
+      "url": "/subway-map",
+      "icons": [{ "src": "/icon-map.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "All Stations",
+      "short_name": "Stations",
+      "description": "Browse all NYC subway stations",
+      "url": "/stations",
+      "icons": [{ "src": "/icon-station.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Subway Sounds",
+      "short_name": "Sounds",
+      "description": "NYC subway sounds archive",
+      "url": "/subway-sounds",
+      "icons": [{ "src": "/icon-sound.png", "sizes": "96x96" }]
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "web",
+      "url": "https://subwaysounds.nyc"
+    }
+  ],
+  "prefer_related_applications": false,
+  "scope": "/",
+  "id": "/"
+}

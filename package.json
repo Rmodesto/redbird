@@ -6,21 +6,37 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next build && next export",
+    "cdk:install": "cd cdk && npm install",
+    "cdk:deploy": "npm run export && cd cdk && npm run deploy",
+    "cdk:destroy": "cd cdk && npm run destroy",
+    "cdk:diff": "cd cdk && npm run diff",
+    "deploy": "npm run cdk:deploy"
   },
   "dependencies": {
+    "@protobufjs/fetch": "^1.1.0",
+    "@types/maplibre-gl": "^1.13.2",
+    "clsx": "^2.1.1",
+    "critters": "^0.0.23",
+    "gtfs-realtime-bindings": "^1.1.1",
+    "maplibre-gl": "^5.7.0",
+    "next": "14.2.14",
+    "node-fetch": "^3.3.2",
+    "protobufjs": "^7.4.0",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.14"
+    "react-map-gl": "^8.0.4",
+    "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^18",
+    "@types/node": "^20.17.9",
+    "@types/react": "^18.3.12",
     "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.14",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.14"
+    "typescript": "^5.7.2"
   }
 }

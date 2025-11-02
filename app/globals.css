@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* MapLibre GL CSS - Required for map controls */
+@import 'maplibre-gl/dist/maplibre-gl.css';
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -24,4 +27,43 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* Glassmorphic Tooltip Styles */
+.glassmorphic-tooltip .maplibregl-popup-content {
+  @apply backdrop-blur-md bg-white bg-opacity-10 border border-white border-opacity-20 rounded-lg shadow-xl p-0;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    0 8px 32px 0 rgba(31, 38, 135, 0.37),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 0 rgba(255, 255, 255, 0.05);
+}
+
+.glassmorphic-tooltip .maplibregl-popup-tip {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.glassmorphic-tooltip-content {
+  @apply p-3 max-w-xs;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+}
+
+/* Dark Glassmorphic Popup - matches main map tooltip */
+.dark-glassmorphic-popup .maplibregl-popup-content {
+  @apply p-0 rounded-lg shadow-2xl border-0;
+  background: rgba(55, 65, 81, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    0 8px 32px 0 rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+}
+
+.dark-glassmorphic-popup .maplibregl-popup-tip {
+  border-top-color: rgba(55, 65, 81, 0.95);
+}
+
+.dark-tooltip-content {
+  @apply p-3;
 }
