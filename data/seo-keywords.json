@@ -1,0 +1,476 @@
+{
+  "$schema": "SEO Keywords Configuration for subwaysounds.net",
+  "version": "1.0.0",
+  "lastUpdated": "2025-01-20",
+
+  "stationPageSections": {
+    "liveArrivals": {
+      "primary": [
+        "live train arrivals",
+        "real-time subway tracking",
+        "MTA GTFS real-time",
+        "live NYC subway arrivals",
+        "train arrival times"
+      ],
+      "longTail": [
+        "Is the L train running?",
+        "NYC subway delays today",
+        "MTA service status",
+        "live subway updates NYC",
+        "real-time train tracking {station}",
+        "{line} train running today"
+      ],
+      "metadata": {
+        "intent": "Informational",
+        "volume": "High",
+        "competition": "Medium"
+      },
+      "ariaLabel": "Real-time NYC subway train arrivals and MTA live tracking",
+      "description": "Real-time {station} train tracking. Live MTA arrivals updated every 30 seconds."
+    },
+
+    "accessibility": {
+      "primary": [
+        "ADA accessible",
+        "wheelchair accessible stations",
+        "NYC subway elevators",
+        "accessible subway stations",
+        "disability access NYC subway"
+      ],
+      "longTail": [
+        "NYC subway accessible stations",
+        "Is {station} ADA accessible?",
+        "wheelchair accessible {line} train",
+        "NYC subway elevator status",
+        "ADA compliant subway stations NYC"
+      ],
+      "metadata": {
+        "intent": "Informational",
+        "volume": "Low",
+        "competition": "Low"
+      },
+      "ariaLabel": "Station accessibility information: ADA, elevators, WiFi, restrooms",
+      "description": "Complete accessibility guide for {station}: ADA compliance, elevators, WiFi, public restrooms, and amenities."
+    },
+
+    "safety": {
+      "primary": [
+        "NYC subway safety",
+        "subway crime statistics",
+        "safest subway stations",
+        "subway safety data",
+        "transit crime stats"
+      ],
+      "longTail": [
+        "NYC subway crime stats by station",
+        "safest NYC subway lines",
+        "Is the NYC subway safe?",
+        "{station} crime statistics",
+        "busiest NYC subway stations",
+        "NYC subway ridership 2025"
+      ],
+      "metadata": {
+        "intent": "Informational",
+        "volume": "Low-Medium",
+        "competition": "Low"
+      },
+      "ariaLabel": "NYC subway safety statistics and crime data",
+      "description": "Safety data for {station}: crime statistics, ridership numbers, and real-time safety scores from NYC Open Data."
+    },
+
+    "sounds": {
+      "primary": [
+        "subway sounds",
+        "NYC subway audio",
+        "train station sounds",
+        "subway announcements",
+        "ambient subway sounds"
+      ],
+      "longTail": [
+        "NYC subway sounds recording",
+        "authentic subway audio",
+        "platform announcement sounds",
+        "train arrival sounds NYC",
+        "subway ASMR",
+        "urban exploration audio"
+      ],
+      "metadata": {
+        "intent": "Cultural/Informational",
+        "volume": "Low",
+        "competition": "Low"
+      },
+      "ariaLabel": "NYC subway sounds and ambient audio recordings",
+      "description": "Authentic NYC subway audio recordings: train arrivals, platform announcements, ambient station sounds for urban exploration & ASMR."
+    },
+
+    "location": {
+      "primary": [
+        "subway station location",
+        "NYC subway map",
+        "interactive subway map",
+        "3D subway map",
+        "station coordinates"
+      ],
+      "longTail": [
+        "{station} location",
+        "where is {station}",
+        "{station} subway map",
+        "interactive NYC transit map",
+        "3D NYC subway visualization"
+      ],
+      "metadata": {
+        "intent": "Navigational/Informational",
+        "volume": "High",
+        "competition": "High"
+      },
+      "ariaLabel": "Interactive station map and location information",
+      "description": "Interactive 3D map of {station} with exact coordinates, nearby landmarks, and transfer information."
+    },
+
+    "stationInfo": {
+      "primary": [
+        "station information",
+        "subway station details",
+        "transit hub info",
+        "station amenities",
+        "platform information"
+      ],
+      "longTail": [
+        "{station} subway station",
+        "{station} station guide",
+        "complete {station} information",
+        "{line} train stations",
+        "{borough} subway stations"
+      ],
+      "metadata": {
+        "intent": "Informational",
+        "volume": "Medium-High",
+        "competition": "Medium-High"
+      },
+      "ariaLabel": "Complete station information and transit details",
+      "description": "{station} station guide: {lines} trains, amenities, accessibility, real-time arrivals, and NYC transit information."
+    }
+  },
+
+  "keywordCategories": {
+    "realTime": {
+      "keywords": [
+        "Is the L train running?",
+        "NYC subway outages today",
+        "NYC subway map",
+        "NYC subway delays today",
+        "MTA service status",
+        "live train tracking",
+        "real-time arrivals",
+        "subway status updates",
+        "MTA alerts",
+        "train delay notifications"
+      ],
+      "hashtags": ["#NYCSubway", "#MTA", "#TrainDelay", "#NYCUnderground"],
+      "intent": "Informational - Immediate Updates",
+      "avgVolume": "High",
+      "competition": "Medium-High"
+    },
+
+    "tourist": {
+      "keywords": [
+        "Best subway route from JFK to Manhattan",
+        "How much is NYC subway fare?",
+        "NYC subway accessible stations",
+        "How to use NYC subway",
+        "MetroCard how to buy",
+        "OMNY card NYC",
+        "NYC subway guide for tourists",
+        "subway from JFK",
+        "NYC transit tips",
+        "subway etiquette NYC"
+      ],
+      "hashtags": ["#NYCTravel", "#TravelTips", "#NYCSubway", "#Accessibility"],
+      "intent": "Informational - How-to/Navigation",
+      "avgVolume": "Medium",
+      "competition": "Medium"
+    },
+
+    "safety": {
+      "keywords": [
+        "NYC subway crime stats by station",
+        "busiest NYC subway stations",
+        "NYC subway ridership 2025",
+        "safest NYC subway lines",
+        "safest NYC subway stations",
+        "Is the NYC subway safe?",
+        "subway safety tips",
+        "crime statistics NYC transit",
+        "subway violence data",
+        "transit safety NYC"
+      ],
+      "hashtags": ["#SubwaySafety", "#NYCTransit", "#CityData", "#NYCSubway"],
+      "intent": "Informational - Data/Stats",
+      "avgVolume": "Low-Medium",
+      "competition": "Low"
+    },
+
+    "culture": {
+      "keywords": [
+        "Movies filmed in the NYC subway",
+        "Pizza Rat meme",
+        "NYC subway in pop culture",
+        "NYC subway myths",
+        "abandoned NYC subway stations",
+        "hidden tunnels NYC subway",
+        "subway urban legends",
+        "NYC subway history",
+        "vintage subway photos",
+        "subway in movies"
+      ],
+      "hashtags": ["#NYCSubway", "#PizzaRat", "#SubwayMemes", "#Movies", "#NYCUnderground", "#UrbanExploration", "#AbandonedNYC"],
+      "intent": "Cultural/Informational",
+      "avgVolume": "Low-Medium",
+      "competition": "Medium"
+    },
+
+    "art": {
+      "keywords": [
+        "Best NYC subway art installations",
+        "NYC subway photography spots",
+        "Is photography allowed in NYC subway?",
+        "MTA Arts & Design",
+        "subway mosaics NYC",
+        "public art subway",
+        "subway station architecture",
+        "subway art tour",
+        "best subway photography locations"
+      ],
+      "hashtags": ["#SubwayArt", "#PublicArt", "#NYCPhotography", "#UrbanPhotography", "#SubwayPhotography"],
+      "intent": "Informational/Cultural",
+      "avgVolume": "Low",
+      "competition": "Low-Medium"
+    }
+  },
+
+  "highPriorityKeywords": [
+    {
+      "phrase": "NYC subway map",
+      "intent": "Informational",
+      "volume": "~165k/mo",
+      "competition": "High",
+      "contentFormat": "Interactive Map Page / Guide",
+      "hashtags": ["#NYCSubway", "#MTA"],
+      "internalLink": "/maps"
+    },
+    {
+      "phrase": "Is the L train running?",
+      "intent": "Informational",
+      "volume": "High (daily peaks)",
+      "competition": "Medium",
+      "contentFormat": "Live Status Page (Line Page)",
+      "hashtags": ["#LTrain", "#NYCSubway"],
+      "internalLink": "/lines/L-train-status"
+    },
+    {
+      "phrase": "NYC subway delays today",
+      "intent": "Informational",
+      "volume": "Medium (daily trend)",
+      "competition": "Medium",
+      "contentFormat": "Blog - Service Updates",
+      "hashtags": ["#NYCSubway", "#TrainDelay"],
+      "internalLink": "/blog/service-updates"
+    },
+    {
+      "phrase": "MTA service status",
+      "intent": "Informational",
+      "volume": "High",
+      "competition": "High",
+      "contentFormat": "Live Status Dashboard",
+      "hashtags": ["#MTA", "#NYCSubway"],
+      "internalLink": "/status"
+    },
+    {
+      "phrase": "Best route from JFK to Manhattan",
+      "intent": "Informational",
+      "volume": "Medium",
+      "competition": "Medium",
+      "contentFormat": "How-To Guide (Blog/Video)",
+      "hashtags": ["#NYCTravel", "#TravelTips"],
+      "internalLink": "/guides/jfk-to-manhattan"
+    },
+    {
+      "phrase": "How much is NYC subway fare",
+      "intent": "Informational",
+      "volume": "Medium",
+      "competition": "High",
+      "contentFormat": "FAQ Article",
+      "hashtags": ["#NYCSubway", "#MetroCard"],
+      "internalLink": "/blog/nyc-fare-guide"
+    },
+    {
+      "phrase": "NYC subway accessible stations",
+      "intent": "Informational",
+      "volume": "Low",
+      "competition": "Low",
+      "contentFormat": "Accessibility Guide / Page",
+      "hashtags": ["#Accessibility", "#NYCSubway"],
+      "internalLink": "/guides/accessibility"
+    },
+    {
+      "phrase": "Times Square subway station",
+      "intent": "Navigational/Informational",
+      "volume": "High",
+      "competition": "High",
+      "contentFormat": "Station Page (Directory)",
+      "hashtags": ["#TimesSquare", "#NYCSubway"],
+      "internalLink": "/stations/times-square"
+    },
+    {
+      "phrase": "NYC subway crime stats by station",
+      "intent": "Informational",
+      "volume": "Low",
+      "competition": "Low",
+      "contentFormat": "Data Page + Infographic",
+      "hashtags": ["#SubwaySafety", "#NYCTransit"],
+      "internalLink": "/data/crime-stats"
+    },
+    {
+      "phrase": "Safest NYC subway stations",
+      "intent": "Informational",
+      "volume": "Low",
+      "competition": "Low",
+      "contentFormat": "Blog List (Data-Backed)",
+      "hashtags": ["#SubwaySafety", "#CityData"],
+      "internalLink": "/blog/safest-stations"
+    },
+    {
+      "phrase": "Busiest NYC subway stations",
+      "intent": "Informational",
+      "volume": "Low/Medium",
+      "competition": "Low",
+      "contentFormat": "Blog List / Data Visuals",
+      "hashtags": ["#NYCTransit", "#CityData"],
+      "internalLink": "/blog/busiest-stations"
+    },
+    {
+      "phrase": "Abandoned NYC subway stations",
+      "intent": "Informational/Cultural",
+      "volume": "Medium",
+      "competition": "Medium",
+      "contentFormat": "Long Blog + Video Documentary",
+      "hashtags": ["#NYCUnderground", "#UrbanExploration"],
+      "internalLink": "/culture/abandoned-stations"
+    },
+    {
+      "phrase": "NYC subway myths",
+      "intent": "Informational/Cultural",
+      "volume": "Low",
+      "competition": "Low",
+      "contentFormat": "Blog ('Myths Busted' list) + Video",
+      "hashtags": ["#NYCSubway", "#UrbanLegends"],
+      "internalLink": "/blog/subway-myths"
+    },
+    {
+      "phrase": "Movies filmed in NYC subway",
+      "intent": "Informational/Cultural",
+      "volume": "Low/Medium",
+      "competition": "Medium",
+      "contentFormat": "Listicle Blog Post",
+      "hashtags": ["#NYCSubway", "#Movies"],
+      "internalLink": "/culture/movies"
+    },
+    {
+      "phrase": "Pizza Rat meme",
+      "intent": "Cultural",
+      "volume": "Low/Trending",
+      "competition": "Medium",
+      "contentFormat": "Short Blog or Video (story)",
+      "hashtags": ["#PizzaRat", "#NYCSubway"],
+      "internalLink": "/culture/memes"
+    },
+    {
+      "phrase": "Best NYC subway art installations",
+      "intent": "Informational/Cultural",
+      "volume": "Low",
+      "competition": "Medium",
+      "contentFormat": "Curated Guide w/ Photos",
+      "hashtags": ["#SubwayArt", "#PublicArt"],
+      "internalLink": "/culture/art"
+    }
+  ],
+
+  "hashtags": {
+    "global": ["#NYCSubway", "#MTA", "#NYC", "#Subway", "#Transit"],
+    "byCategory": {
+      "realTime": ["#NYCSubway", "#MTA", "#NYCUnderground", "#TrainDelay"],
+      "tourist": ["#NYCTravel", "#NYCSubway", "#TravelTips", "#Accessibility"],
+      "safety": ["#SubwaySafety", "#NYCTransit", "#CityData", "#NYCSubway"],
+      "culture": ["#NYCSubway", "#PizzaRat", "#SubwayMemes", "#Movies", "#NYCUnderground", "#UrbanExploration", "#AbandonedNYC", "#UrbanLegends"],
+      "art": ["#SubwayArt", "#PublicArt", "#NYCPhotography", "#UrbanPhotography", "#SubwayPhotography"]
+    },
+    "trending": ["#PizzaRat", "#LTrain", "#TrainDelay"]
+  },
+
+  "commonQueries": {
+    "voice": [
+      "Is the {line} train running?",
+      "How much is the subway fare?",
+      "Is {station} accessible?",
+      "What time does the subway run?",
+      "How do I get to {landmark} by subway?"
+    ],
+    "mobile": [
+      "{station} subway",
+      "{line} train delays",
+      "subway map",
+      "nearest subway station",
+      "subway fare NYC"
+    ],
+    "questionBased": [
+      "Is the NYC subway safe?",
+      "Is photography allowed in NYC subway?",
+      "Is {station} ADA accessible?",
+      "How much is NYC subway fare?",
+      "Is the L train running?",
+      "What trains stop at {station}?"
+    ]
+  },
+
+  "schemaKeywords": {
+    "transitStation": [
+      "NYC subway station",
+      "transit hub",
+      "public transportation",
+      "MTA station",
+      "train station NYC"
+    ],
+    "place": [
+      "location",
+      "address",
+      "coordinates",
+      "borough",
+      "neighborhood"
+    ],
+    "localBusiness": [
+      "amenities",
+      "services",
+      "accessibility",
+      "hours",
+      "contact"
+    ]
+  },
+
+  "seasonalKeywords": {
+    "summer": [
+      "air conditioned subway stations",
+      "coolest subway stations NYC",
+      "summer subway tips"
+    ],
+    "winter": [
+      "heated subway stations",
+      "winter subway delays",
+      "snow subway closures"
+    ],
+    "tourist": [
+      "NYC subway tourist guide",
+      "first time NYC subway",
+      "subway from airport"
+    ]
+  }
+}

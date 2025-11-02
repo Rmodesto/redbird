@@ -57,20 +57,25 @@ export function useStationScore(station: Station | null): StationScore | null {
 
   // Mock scoring logic (can be enhanced with real data)
   let score = 100;
-  
+
   // Deduct points based on various factors
-  if (!station.amenities?.includes('ADA')) score -= 10;
-  if (!station.amenities?.includes('WiFi')) score -= 5;
-  if (!station.amenities?.includes('Restrooms')) score -= 5;
-  
+  if (!station.amenities?.elevators) score -= 10;
+  if (!station.amenities?.wifi) score -= 5;
+  if (!station.amenities?.restrooms) score -= 5;
+
   const rating = score >= 90 ? 'EXCELLENT' : score >= 70 ? 'GOOD' : score >= 50 ? 'FAIR' : 'POOR';
+
+  // Count available amenities
+  const amenityCount = station.amenities
+    ? (station.amenities.wifi ? 1 : 0) + (station.amenities.restrooms ? 1 : 0) + (station.amenities.elevators ? 1 : 0)
+    : 0;
 
   return {
     score,
     rating,
     factors: [
-      { name: 'Accessibility', value: station.amenities?.includes('ADA') ? 10 : 0, weight: 0.3, description: 'ADA compliance' },
-      { name: 'Amenities', value: station.amenities?.length || 0, weight: 0.2, description: 'Available amenities' },
+      { name: 'Accessibility', value: station.amenities?.elevators ? 10 : 0, weight: 0.3, description: 'ADA compliance' },
+      { name: 'Amenities', value: amenityCount, weight: 0.2, description: 'Available amenities' },
       { name: 'Connectivity', value: station.lines.length * 2, weight: 0.5, description: 'Number of lines served' },
     ]
   };
@@ -100,12 +105,12 @@ export function generateMockRodentReports(): RodentReports {
 
 export function generateMockAmenities(station: Station): StationAmenities {
   return {
-    ada: station.amenities?.includes('ADA') || false,
-    elevators: station.amenities?.includes('Elevators') || false,
-    restrooms: station.amenities?.includes('Restrooms') || false,
-    policePresence: station.amenities?.includes('Police') || false,
-    wifi: station.amenities?.includes('WiFi') || false,
-    yearBuilt: getStationYearBuilt(station.name),
+    ada: station.amenities?.elevators || false,
+    elevators: station.amenities?.elevators || false,
+    restrooms: station.amenities?.restrooms || false,
+    policePresence: false, // Not available in data
+    wifi: station.amenities?.wifi || false,
+    yearBuilt: station.amenities?.yearBuilt || getStationYearBuilt(station.name),
     stationType: 'underground',
   };
 }

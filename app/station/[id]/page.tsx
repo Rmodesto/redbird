@@ -6,6 +6,13 @@ import { mtaDataService } from '@/lib/services/mta-data-service';
 import SubwayLinesBadges from '@/components/subway/SubwayLinesBadges';
 import Navigation from '@/components/Navigation';
 import StationMap from '@/components/maps/StationMap';
+import {
+  buildPageTitle,
+  buildMetaDescription,
+  getMetadataKeywords,
+  getAriaLabel,
+  getSchemaKeywords
+} from '@/lib/utils/seo-keywords';
 
 interface Props {
   params: { id: string }
@@ -19,7 +26,7 @@ async function getStation(id: string) {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const station = await getStation(params.id);
-  
+
   if (!station) {
     return {
       title: 'Station Not Found',
@@ -27,21 +34,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const title = `${station.name} Station - Crime Stats, Safety, & NYC Subway Info`;
-  const description = `Complete ${station.name} station guide: crime statistics, safety scores, rat reports, ADA accessibility, amenities & current NYC subway fare ($2.90). Serving ${station.lines.join(', ')} lines in ${station.borough}.`;
-  const keywords = [
-    `${station.name} station`,
-    `${station.borough} subway`,
-    'NYC subway crime statistics',
-    'subway safety',
-    'rat sightings NYC',
-    'ADA accessible stations',
-    'NYC subway fare',
-    'OMNY',
-    ...station.lines.map(line => `${line} train`),
-    'MTA',
-    'subway sounds'
-  ];
+  // Use centralized SEO keyword utilities
+  const title = buildPageTitle(station);
+  const description = buildMetaDescription(station);
+  const keywords = getMetadataKeywords(station);
 
   return {
     title,
@@ -100,12 +96,12 @@ export const dynamic = 'force-dynamic';
 // Station score calculation (mock for now, can be enhanced with real data)
 function calculateStationScore(station: any) {
   let score = 100;
-  
+
   // Deduct points based on various factors
-  if (!station.amenities?.includes('ADA')) score -= 10;
-  if (!station.amenities?.includes('WiFi')) score -= 5;
-  if (!station.amenities?.includes('Restrooms')) score -= 5;
-  
+  if (!station.ada) score -= 10;
+  if (!station.amenities?.wifi) score -= 5;
+  if (!station.amenities?.restrooms) score -= 5;
+
   return {
     score,
     rating: score >= 90 ? 'EXCELLENT' : score >= 70 ? 'GOOD' : score >= 50 ? 'FAIR' : 'POOR'
@@ -152,8 +148,68 @@ export default async function StationPage({ params }: Props) {
     year: 2024
   };
 
+  // Build Schema.org structured data
+  const schemaKeywords = getSchemaKeywords();
+  const schemaData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      // TransitStation schema
+      {
+        '@type': 'TransitStation',
+        '@id': `https://subwaysounds.net/station/${station.slug}`,
+        name: `${station.name} Station`,
+        description: buildMetaDescription(station),
+        url: `https://subwaysounds.net/station/${station.slug}`,
+        keywords: [...schemaKeywords.transitStation, ...getMetadataKeywords(station).slice(0, 10)].join(', '),
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: station.latitude,
+          longitude: station.longitude
+        },
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: station.borough,
+          addressRegion: 'NY',
+          addressCountry: 'US'
+        },
+        ...(station.ada && {
+          amenityFeature: [
+            {
+              '@type': 'LocationFeatureSpecification',
+              name: 'Wheelchair Accessible',
+              value: true
+            }
+          ]
+        })
+      },
+      // Place schema
+      {
+        '@type': 'Place',
+        '@id': `https://subwaysounds.net/station/${station.slug}#place`,
+        name: station.name,
+        keywords: schemaKeywords.place.join(', '),
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: station.latitude,
+          longitude: station.longitude
+        },
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: station.borough,
+          addressRegion: 'NY',
+          addressCountry: 'US'
+        }
+      }
+    ]
+  };
+
   return (
     <>
+      {/* Schema.org JSON-LD for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+      />
       <Navigation />
       <main className="min-h-screen bg-gray-50">
         {/* Header */}
@@ -200,7 +256,10 @@ export default async function StationPage({ params }: Props) {
           {/* Main Content - Left Column */}
           <div className="lg:col-span-2 space-y-8">
             {/* Live Arrivals Section */}
-            <section className="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+            <section
+              className="bg-white rounded-lg shadow-lg p-6 border border-gray-200"
+              aria-label={getAriaLabel('liveArrivals', station)}
+            >
               <h2 className="text-2xl font-bold mb-6 flex items-center gap-3 text-gray-900">
                 <span className="text-3xl">🕐</span>
                 &quot;LIVE&quot; ARRIVALS
@@ -244,7 +303,10 @@ export default async function StationPage({ params }: Props) {
             </section>
 
             {/* Subway Sounds Section */}
-            <section className="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+            <section
+              className="bg-white rounded-lg shadow-lg p-6 border border-gray-200"
+              aria-label={getAriaLabel('sounds', station)}
+            >
               <h2 className="text-2xl font-bold mb-6 flex items-center gap-3 text-gray-900">
                 <span className="text-3xl">🔊</span>
                 SUBWAY &quot;SOUNDS&quot;
@@ -275,7 +337,10 @@ export default async function StationPage({ params }: Props) {
             </section>
 
             {/* Station Information */}
-            <section className="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+            <section
+              className="bg-white rounded-lg shadow-lg p-6 border border-gray-200"
+              aria-label={getAriaLabel('stationInfo', station)}
+            >
               <h2 className="text-2xl font-bold mb-6 flex items-center gap-3 text-gray-900">
                 <span className="text-3xl">ℹ️</span>
                 STATION &quot;INFORMATION&quot;
@@ -380,7 +445,10 @@ export default async function StationPage({ params }: Props) {
             </section>
 
             {/* Accessibility & Amenities */}
-            <section className="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+            <section
+              className="bg-white rounded-lg shadow-lg p-6 border border-gray-200"
+              aria-label={getAriaLabel('accessibility', station)}
+            >
               <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-gray-900">
                 <span>♿</span>
                 ACCESSIBILITY & &quot;AMENITIES&quot;
@@ -390,40 +458,32 @@ export default async function StationPage({ params }: Props) {
                   <span className="flex items-center gap-2 text-gray-700">
                     <span>♿</span> ADA Accessible
                   </span>
-                  <span className={station.amenities?.includes('ADA') ? 'text-green-400' : 'text-red-400'}>
-                    {station.amenities?.includes('ADA') ? '✓' : '✗'}
+                  <span className={station.ada ? 'text-green-400' : 'text-red-400'}>
+                    {station.ada ? '✓' : '✗'}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="flex items-center gap-2">
                     <span>🛗</span> Elevators
                   </span>
-                  <span className={station.amenities?.includes('Elevators') ? 'text-green-400' : 'text-red-400'}>
-                    {station.amenities?.includes('Elevators') ? '✓' : '✗'}
+                  <span className={station.ada ? 'text-green-400' : 'text-red-400'}>
+                    {station.ada ? '✓' : '✗'}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-2">
+                  <span className="flex items-center gap-2 text-gray-700">
                     <span>🚻</span> Restrooms
                   </span>
-                  <span className={station.amenities?.includes('Restrooms') ? 'text-green-400' : 'text-red-400'}>
-                    {station.amenities?.includes('Restrooms') ? '✓' : '✗'}
+                  <span className={station.amenities?.restrooms ? 'text-green-400' : 'text-red-400'}>
+                    {station.amenities?.restrooms ? '✓' : '✗'}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-2">
-                    <span>👮</span> Police Presence
-                  </span>
-                  <span className={station.amenities?.includes('Police') ? 'text-green-400' : 'text-gray-400'}>
-                    {station.amenities?.includes('Police') ? '✓' : '—'}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-2">
+                  <span className="flex items-center gap-2 text-gray-700">
                     <span>📶</span> WiFi
                   </span>
-                  <span className={station.amenities?.includes('WiFi') ? 'text-green-400' : 'text-red-400'}>
-                    {station.amenities?.includes('WiFi') ? '✓' : '✗'}
+                  <span className={station.amenities?.wifi ? 'text-green-400' : 'text-red-400'}>
+                    {station.amenities?.wifi ? '✓' : '✗'}
                   </span>
                 </div>
               </div>
@@ -431,7 +491,9 @@ export default async function StationPage({ params }: Props) {
               <div className="mt-6 pt-4 border-t border-gray-200">
                 <div className="flex items-center justify-between">
                   <span className="text-gray-700">🏛️ Built:</span>
-                  <span className="font-bold text-gray-900">{yearBuilt}</span>
+                  <span className="font-bold text-gray-900">
+                    {station.amenities?.yearBuilt || yearBuilt}
+                  </span>
                 </div>
               </div>
               
@@ -468,7 +530,10 @@ export default async function StationPage({ params }: Props) {
         </div>
 
         {/* Location Section */}
-        <section className="mt-8 bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+        <section
+          className="mt-8 bg-white rounded-lg shadow-lg p-6 border border-gray-200"
+          aria-label={getAriaLabel('location', station)}
+        >
           <h2 className="text-2xl font-bold mb-6 flex items-center gap-3 text-gray-900">
             <span className="text-3xl">📍</span>
             &quot;LOCATION&quot;

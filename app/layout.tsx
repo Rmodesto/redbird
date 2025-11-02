@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import { generateSEOMetadata } from "@/lib/seo";
 import { generateWebsiteSchema, generateStructuredDataScript } from "@/lib/structured-data";
+import ClientLayout from "@/components/ClientLayout";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -66,8 +67,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
-        
+        <ClientLayout>
+          {children}
+        </ClientLayout>
+
         {/* Google Analytics - Replace GA_MEASUREMENT_ID with your actual ID */}
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>

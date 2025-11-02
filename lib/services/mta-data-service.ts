@@ -18,7 +18,13 @@ export interface Station {
   borough: string;
   lines: string[];
   platforms: Platform[];
-  amenities?: string[];
+  ada: boolean;
+  amenities?: {
+    wifi: boolean;
+    restrooms: boolean;
+    elevators: boolean;
+    yearBuilt: number | null;
+  };
 }
 
 export interface Platform {

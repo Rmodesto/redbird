@@ -5,18 +5,18 @@ import dynamic from 'next/dynamic';
 // Dynamic import with no SSR
 // const NYCSubwayMap = dynamic(
 //   () => import('@/components/NYCSubwayMap'),
-  { 
-    ssr: false,
-    loading: () => (
-      <div className="w-full h-full flex items-center justify-center bg-gray-900">
-        <div className="text-center">
-          <div className="text-6xl mb-4">🚇</div>
-          <p className="text-xl text-white font-semibold">Loading NYC Subway Map...</p>
-        </div>
-      </div>
-    )
-  }
-);
+//   {
+//     ssr: false,
+//     loading: () => (
+//       <div className="w-full h-full flex items-center justify-center bg-gray-900">
+//         <div className="text-center">
+//           <div className="text-6xl mb-4">🚇</div>
+//           <p className="text-xl text-white font-semibold">Loading NYC Subway Map...</p>
+//         </div>
+//       </div>
+//     )
+//   }
+// );
 
 export default function NYCMapPage() {
   return (

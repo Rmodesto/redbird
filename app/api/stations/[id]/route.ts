@@ -39,8 +39,8 @@ export async function GET(
       nearbyStations,
       metadata: {
         totalLines: station.lines.length,
-        isAccessible: station.amenities?.includes('ADA') || false,
-        hasWifi: station.amenities?.includes('WiFi') || false,
+        isAccessible: station.amenities?.elevators || false,
+        hasWifi: station.amenities?.wifi || false,
         borough: station.borough
       }
     });
