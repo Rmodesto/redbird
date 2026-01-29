@@ -1,47 +1,35 @@
-export interface SubwayLineColors {
-  bg: string;
-  text: string;
-  name: string;
-}
+/**
+ * Subway Line Colors Utility
+ *
+ * Re-exports from centralized constants for backwards compatibility.
+ * New code should import directly from '@/lib/constants'.
+ */
 
-export const SUBWAY_LINE_COLORS: Record<string, SubwayLineColors> = {
-  // IRT Lines (numbered trains)
-  '1': { bg: 'bg-red-600', text: 'text-white', name: 'Broadway-7th Ave Local' },
-  '2': { bg: 'bg-red-600', text: 'text-white', name: 'Broadway-7th Ave Express' },
-  '3': { bg: 'bg-red-600', text: 'text-white', name: 'Broadway-7th Ave Express' },
-  '4': { bg: 'bg-green-500', text: 'text-white', name: 'Lexington Ave Express' },
-  '5': { bg: 'bg-green-500', text: 'text-white', name: 'Lexington Ave Express' },
-  '6': { bg: 'bg-green-500', text: 'text-white', name: 'Lexington Ave Local' },
-  '7': { bg: 'bg-purple-600', text: 'text-white', name: 'Flushing Express/Local' },
-  
-  // BMT/IND Lines (lettered trains)
-  'A': { bg: 'bg-blue-600', text: 'text-white', name: '8th Ave Express' },
-  'C': { bg: 'bg-blue-600', text: 'text-white', name: '8th Ave Local' },
-  'E': { bg: 'bg-blue-600', text: 'text-white', name: '8th Ave Local' },
-  'B': { bg: 'bg-orange-500', text: 'text-white', name: '6th Ave Express' },
-  'D': { bg: 'bg-orange-500', text: 'text-white', name: '6th Ave Express' },
-  'F': { bg: 'bg-orange-500', text: 'text-white', name: '6th Ave Local' },
-  'M': { bg: 'bg-orange-500', text: 'text-white', name: '6th Ave Local' },
-  'N': { bg: 'bg-yellow-500', text: 'text-black', name: 'Broadway Express' },
-  'Q': { bg: 'bg-yellow-500', text: 'text-black', name: 'Broadway Express' },
-  'R': { bg: 'bg-yellow-500', text: 'text-black', name: 'Broadway Local' },
-  'W': { bg: 'bg-yellow-500', text: 'text-black', name: 'Broadway Local' },
-  'J': { bg: 'bg-amber-700', text: 'text-white', name: 'Jamaica Line' },
-  'Z': { bg: 'bg-amber-700', text: 'text-white', name: 'Jamaica Express' },
-  'L': { bg: 'bg-gray-500', text: 'text-white', name: '14th St-Canarsie' },
-  'G': { bg: 'bg-lime-500', text: 'text-black', name: 'Brooklyn-Queens Crosstown' },
-  'S': { bg: 'bg-gray-600', text: 'text-white', name: 'Shuttle' },
-};
+import {
+  MTA_TAILWIND_COLORS,
+  type TailwindLineColor,
+  getLineTailwindColor,
+} from '@/lib/constants';
 
+// Re-export types for backwards compatibility
+export type SubwayLineColors = TailwindLineColor;
+
+// Re-export the color map
+export const SUBWAY_LINE_COLORS = MTA_TAILWIND_COLORS;
+
+/**
+ * Get color configuration for a subway line
+ * @deprecated Use getLineTailwindColor from '@/lib/constants' instead
+ */
 export function getSubwayLineColor(line: string): SubwayLineColors {
-  return SUBWAY_LINE_COLORS[line.toUpperCase()] || { 
-    bg: 'bg-gray-400', 
-    text: 'text-white', 
-    name: 'Unknown Line' 
-  };
+  return getLineTailwindColor(line);
 }
 
+/**
+ * Get combined Tailwind classes for a subway line badge
+ * @deprecated Use getLineBgClass and getLineTextClass from '@/lib/constants' instead
+ */
 export function getSubwayLineColorClasses(line: string): string {
-  const colors = getSubwayLineColor(line);
+  const colors = getLineTailwindColor(line);
   return `${colors.bg} ${colors.text}`;
 }

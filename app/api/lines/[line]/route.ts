@@ -1,5 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { mtaDataService } from '@/lib/services/mta-data-service';
+import { apiSuccess, notFound, serverError, CACHE_HEADERS } from '@/lib/api/responses';
 
 export const dynamic = 'force-dynamic';
 
@@ -10,20 +11,17 @@ export async function GET(
   try {
     const { line } = params;
     const lineUpper = line.toUpperCase();
-    
+
     // Get line information
     const lineInfo = mtaDataService.getLineInfo(lineUpper);
-    
+
     if (!lineInfo) {
-      return NextResponse.json(
-        { error: 'Line not found' },
-        { status: 404 }
-      );
+      return notFound('Line not found');
     }
 
     // Get all stations on this line
     const stations = mtaDataService.getStationsByLine(lineUpper);
-    
+
     // Get service alerts for this line
     const alerts = await mtaDataService.getServiceAlerts([lineUpper]);
 
@@ -36,23 +34,23 @@ export async function GET(
       return acc;
     }, {} as Record<string, typeof stations>);
 
-    return NextResponse.json({
-      line: lineInfo,
-      stations,
-      stationsByBorough,
-      alerts,
-      metadata: {
-        totalStations: stations.length,
-        boroughsServed: Object.keys(stationsByBorough),
-        terminals: lineInfo.terminals
-      }
-    });
+    return apiSuccess(
+      {
+        line: lineInfo,
+        stations,
+        stationsByBorough,
+        alerts,
+        metadata: {
+          totalStations: stations.length,
+          boroughsServed: Object.keys(stationsByBorough),
+          terminals: lineInfo.terminals
+        }
+      },
+      CACHE_HEADERS.MEDIUM
+    );
 
   } catch (error) {
-    console.error('Error fetching line data:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch line data' },
-      { status: 500 }
-    );
+    console.error('[API /lines/[line]] Error:', error);
+    return serverError('Failed to fetch line data');
   }
 }

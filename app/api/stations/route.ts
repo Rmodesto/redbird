@@ -1,30 +1,18 @@
-import { NextResponse } from "next/server";
 import fs from 'fs';
 import path from 'path';
+import type { Station, Platform } from '@/lib/types';
+import { apiSuccess, serverError, CACHE_HEADERS } from '@/lib/api/responses';
 
 export const dynamic = 'force-dynamic';
 
-interface Platform {
-  stopId: string;
-  direction: string;
-  lines: string[];
-}
-
-interface Station {
-  id: string;
-  name: string;
-  slug: string;
-  latitude: number;
-  longitude: number;
-  borough: string;
-  platforms: Platform[];
-  lines: string[];
+// Extended Station type for this route (includes amenities as string array from JSON)
+interface StationData extends Omit<Station, 'amenities'> {
   amenities: string[];
 }
 
-let stationsData: Station[] | null = null;
+let stationsData: StationData[] | null = null;
 let slugLookup: Record<string, string> | null = null;
-let stopIdLookup: Record<string, any> | null = null;
+let stopIdLookup: Record<string, { stationId: string; direction: string }> | null = null;
 
 function loadStationData() {
   if (!stationsData) {
@@ -78,20 +66,21 @@ export async function GET(request: Request) {
       );
     }
     
-    // Limit results
-    filteredStations = filteredStations.slice(0, limit);
-    
-    return NextResponse.json({
-      stations: filteredStations,
-      total: filteredStations.length,
-      filters: { search, borough, line, limit }
-    });
-    
-  } catch (error) {
-    console.error('Error in stations API:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch station data' },
-      { status: 500 }
+    // Limit results (cap at 100 to prevent abuse)
+    const safeLimit = Math.min(Math.max(1, limit), 100);
+    filteredStations = filteredStations.slice(0, safeLimit);
+
+    return apiSuccess(
+      {
+        stations: filteredStations,
+        total: filteredStations.length,
+        filters: { search, borough, line, limit: safeLimit }
+      },
+      CACHE_HEADERS.MEDIUM
     );
+
+  } catch (error) {
+    console.error('[API /stations] Error:', error);
+    return serverError('Failed to fetch station data');
   }
 }

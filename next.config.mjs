@@ -46,15 +46,8 @@ const nextConfig = {
           },
         ],
       },
-      {
-        source: '/api/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'no-store, max-age=0',
-          },
-        ],
-      },
+      // Note: Individual API routes set their own cache headers via the response.
+      // Real-time endpoints (arrivals) use no-cache, static data uses appropriate TTLs.
       {
         source: '/stations',
         headers: [

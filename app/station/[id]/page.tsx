@@ -6,6 +6,7 @@ import { mtaDataService } from '@/lib/services/mta-data-service';
 import SubwayLinesBadges from '@/components/subway/SubwayLinesBadges';
 import Navigation from '@/components/Navigation';
 import StationMap from '@/components/maps/StationMap';
+import { getLineBgClass, getLineTextClass } from '@/lib/constants';
 import {
   buildPageTitle,
   buildMetaDescription,
@@ -18,8 +19,18 @@ interface Props {
   params: { id: string }
 }
 
+// Generate static params for all stations at build time
+// Using unique station ID (not slug) because NYC has 56+ stations with duplicate names
+// e.g., "103 St" exists on 1, 6, and B/C lines at different locations
+export async function generateStaticParams() {
+  const stations = mtaDataService.getAllStations();
+  return stations.map((station) => ({
+    id: station.id,
+  }));
+}
+
 async function getStation(id: string) {
-  const station = mtaDataService.getStationById(id) || 
+  const station = mtaDataService.getStationById(id) ||
                  mtaDataService.getStationBySlug(id);
   return station;
 }
@@ -90,8 +101,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
   };
 }
-
-export const dynamic = 'force-dynamic';
 
 // Station score calculation (mock for now, can be enhanced with real data)
 function calculateStationScore(station: any) {
@@ -231,18 +240,7 @@ export default async function StationPage({ params }: Props) {
             {station.lines.map((line: string) => (
               <span
                 key={line}
-                className={`inline-flex items-center justify-center w-10 h-10 rounded text-white font-bold text-lg
-                  ${line === '4' || line === '5' || line === '6' ? 'bg-green-500' : ''}
-                  ${line === '7' ? 'bg-purple-600' : ''}
-                  ${line === 'S' ? 'bg-gray-600' : ''}
-                  ${line === 'N' || line === 'Q' || line === 'R' || line === 'W' ? 'bg-yellow-500' : ''}
-                  ${line === 'L' ? 'bg-gray-500' : ''}
-                  ${line === 'A' || line === 'C' || line === 'E' ? 'bg-blue-600' : ''}
-                  ${line === 'B' || line === 'D' || line === 'F' || line === 'M' ? 'bg-orange-500' : ''}
-                  ${line === 'G' ? 'bg-lime-500' : ''}
-                  ${line === 'J' || line === 'Z' ? 'bg-amber-700' : ''}
-                  ${line === '1' || line === '2' || line === '3' ? 'bg-red-600' : ''}
-                `}
+                className={`inline-flex items-center justify-center w-10 h-10 rounded font-bold text-lg ${getLineBgClass(line)} ${getLineTextClass(line)}`}
               >
                 {line}
               </span>
@@ -270,18 +268,7 @@ export default async function StationPage({ params }: Props) {
                 {station.lines.slice(0, 5).map((line: string, index: number) => (
                   <div key={line} className="flex items-center justify-between py-3 border-b border-gray-200 last:border-0">
                     <div className="flex items-center gap-4">
-                      <span className={`inline-flex items-center justify-center w-10 h-10 rounded text-white font-bold
-                        ${line === '4' || line === '5' || line === '6' ? 'bg-green-500' : ''}
-                        ${line === '7' ? 'bg-purple-600' : ''}
-                        ${line === 'S' ? 'bg-gray-600' : ''}
-                        ${line === 'N' || line === 'Q' || line === 'R' || line === 'W' ? 'bg-yellow-500' : ''}
-                        ${line === 'L' ? 'bg-gray-500' : ''}
-                        ${line === 'A' || line === 'C' || line === 'E' ? 'bg-blue-600' : ''}
-                        ${line === 'B' || line === 'D' || line === 'F' || line === 'M' ? 'bg-orange-500' : ''}
-                        ${line === 'G' ? 'bg-lime-500' : ''}
-                        ${line === 'J' || line === 'Z' ? 'bg-amber-700' : ''}
-                        ${line === '1' || line === '2' || line === '3' ? 'bg-red-600' : ''}
-                      `}>
+                      <span className={`inline-flex items-center justify-center w-10 h-10 rounded font-bold ${getLineBgClass(line)} ${getLineTextClass(line)}`}>
                         {line}
                       </span>
                       <div>
@@ -363,18 +350,7 @@ export default async function StationPage({ params }: Props) {
                     {station.lines.map((line: string) => (
                       <span
                         key={line}
-                        className={`inline-flex items-center justify-center w-10 h-10 rounded text-white font-bold
-                          ${line === '4' || line === '5' || line === '6' ? 'bg-green-500' : ''}
-                          ${line === '7' ? 'bg-purple-600' : ''}
-                          ${line === 'S' ? 'bg-gray-600' : ''}
-                          ${line === 'N' || line === 'Q' || line === 'R' || line === 'W' ? 'bg-yellow-500' : ''}
-                          ${line === 'L' ? 'bg-gray-500' : ''}
-                          ${line === 'A' || line === 'C' || line === 'E' ? 'bg-blue-600' : ''}
-                          ${line === 'B' || line === 'D' || line === 'F' || line === 'M' ? 'bg-orange-500' : ''}
-                          ${line === 'G' ? 'bg-lime-500' : ''}
-                          ${line === 'J' || line === 'Z' ? 'bg-amber-700' : ''}
-                          ${line === '1' || line === '2' || line === '3' ? 'bg-red-600' : ''}
-                        `}
+                        className={`inline-flex items-center justify-center w-10 h-10 rounded font-bold ${getLineBgClass(line)} ${getLineTextClass(line)}`}
                       >
                         {line}
                       </span>
