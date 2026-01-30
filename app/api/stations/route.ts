@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import type { Station, Platform } from '@/lib/types';
-import { apiSuccess, serverError, CACHE_HEADERS } from '@/lib/api/responses';
+import { apiSuccess, serverError, CACHE_HEADERS, validationError } from '@/lib/api/responses';
+import { stationsQuery } from '@/lib/api/schemas';
 
 export const dynamic = 'force-dynamic';
 
@@ -35,13 +36,21 @@ export async function GET(request: Request) {
     loadStationData();
     
     const { searchParams } = new URL(request.url);
-    const search = searchParams.get('search');
-    const borough = searchParams.get('borough');
-    const line = searchParams.get('line');
-    const limit = parseInt(searchParams.get('limit') || '50');
-    
+    const parsed = stationsQuery.safeParse({
+      search: searchParams.get('search') ?? undefined,
+      borough: searchParams.get('borough') ?? undefined,
+      line: searchParams.get('line') ?? undefined,
+      limit: searchParams.get('limit') ?? undefined,
+    });
+
+    if (!parsed.success) {
+      return validationError(parsed.error);
+    }
+
+    const { search, borough, line, limit } = parsed.data;
+
     let filteredStations = [...(stationsData || [])];
-    
+
     // Filter by search query
     if (search) {
       const searchLower = search.toLowerCase();
@@ -66,15 +75,14 @@ export async function GET(request: Request) {
       );
     }
     
-    // Limit results (cap at 100 to prevent abuse)
-    const safeLimit = Math.min(Math.max(1, limit), 100);
-    filteredStations = filteredStations.slice(0, safeLimit);
+    // Limit results
+    filteredStations = filteredStations.slice(0, limit);
 
     return apiSuccess(
       {
         stations: filteredStations,
         total: filteredStations.length,
-        filters: { search, borough, line, limit: safeLimit }
+        filters: { search, borough, line, limit }
       },
       CACHE_HEADERS.MEDIUM
     );

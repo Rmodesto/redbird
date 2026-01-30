@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server';
 import { mtaDataService } from '@/lib/services/mta-data-service';
-import { apiSuccess, notFound, serverError, CACHE_HEADERS } from '@/lib/api/responses';
+import { apiSuccess, notFound, badRequest, serverError, CACHE_HEADERS } from '@/lib/api/responses';
 
 export const dynamic = 'force-dynamic';
 
@@ -10,6 +10,10 @@ export async function GET(
 ) {
   try {
     const { id } = params;
+
+    if (!id || typeof id !== 'string' || id.trim().length === 0) {
+      return badRequest('Station ID is required');
+    }
 
     // Try to get station by GTFS ID first, then by slug
     const station = mtaDataService.getStationById(id) ||

@@ -214,7 +214,14 @@ export async function GET(
     loadStationData();
     
     const stationId = params.stationId;
-    
+
+    if (!stationId || typeof stationId !== 'string' || stationId.trim().length === 0) {
+      return NextResponse.json(
+        { error: 'Station ID is required' },
+        { status: 400 }
+      );
+    }
+
     if (!stationsData || !stopIdLookup) {
       throw new Error('Station data not loaded');
     }

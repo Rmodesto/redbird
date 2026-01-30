@@ -5,6 +5,7 @@
  */
 
 import { NextResponse } from 'next/server';
+import { type ZodError } from 'zod';
 
 // =============================================================================
 // Response Types
@@ -53,6 +54,21 @@ export function apiError(
  */
 export function badRequest(message: string = 'Bad Request'): NextResponse<ApiErrorResponse> {
   return apiError(message, 400, 'BAD_REQUEST');
+}
+
+/**
+ * Create a 400 response from Zod validation errors
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function validationError(error: ZodError<any>): NextResponse<ApiErrorResponse> {
+  const details = error.issues.map((e) => ({
+    field: e.path.map(String).join('.'),
+    message: e.message,
+  }));
+  return NextResponse.json(
+    { error: 'Validation failed', code: 'VALIDATION_ERROR', details },
+    { status: 400 }
+  );
 }
 
 /**

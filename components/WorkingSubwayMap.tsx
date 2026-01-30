@@ -28,14 +28,14 @@ const HARDCODED_LINES: Record<string, { stationCount: number }> = {
   'E': { stationCount: 22 },
   '1': { stationCount: 38 },
   'D': { stationCount: 36 },
-  '2': { stationCount: 50 },
+  '2': { stationCount: 49 },
   '3': { stationCount: 34 },
   '4': { stationCount: 28 },
   '5': { stationCount: 36 },
   '6': { stationCount: 37 },
   '7': { stationCount: 22 },
   'A': { stationCount: 44 },
-  'B': { stationCount: 37 },
+  'B': { stationCount: 38 },
   'C': { stationCount: 40 },
   'F': { stationCount: 45 },
   'G': { stationCount: 21 },
@@ -300,7 +300,7 @@ export default function WorkingSubwayMap() {
           [-74.000495, 40.732338], // W 4 St-Wash Sq
           [-74.003739, 40.726227], // Spring St
           [-74.005229, 40.720824], // Canal St
-          [-74.009266, 40.713243], // Chambers St (8th Ave - A/C/E platform)
+          [-74.009266, 40.713243], // Chambers St / World Trade Center
         ];
 
         const lineGeoJSON = {
@@ -354,7 +354,7 @@ export default function WorkingSubwayMap() {
           { name: "W 4 St-Wash Sq", coordinates: [-74.000495, 40.732338], lines: ['A', 'B', 'C', 'D', 'E', 'F', 'M'] },
           { name: "Spring St", coordinates: [-74.003739, 40.726227], lines: ['C', 'E'] },
           { name: "Canal St", coordinates: [-74.005229, 40.720824], lines: ['A', 'C', 'E'] },
-          { name: "Chambers St (8th Ave A/C/E)", coordinates: [-74.009266, 40.713243], lines: ['A', 'C', 'E'] },
+          { name: "Chambers St / World Trade Center", coordinates: [-74.009266, 40.713243], lines: ['A', 'C', 'E'] },
         ];
 
         eLineStations.forEach((station, index) => {
@@ -476,7 +476,7 @@ export default function WorkingSubwayMap() {
           [-74.009266, 40.715478], // Chambers St
           [-74.012188, 40.711835], // WTC Cortlandt
           [-74.013783, 40.707513], // Rector St
-          [-74.013329, 40.7025775], // Whitehall St-South Ferry
+          [-74.013329, 40.7025775], // South Ferry
         ];
 
         const lineGeoJSON = {
@@ -547,7 +547,7 @@ export default function WorkingSubwayMap() {
           { name: "Chambers St", coordinates: [-74.009266, 40.715478], lines: ['1', '2', '3'] },
           { name: "WTC Cortlandt", coordinates: [-74.012188, 40.711835], lines: ['1'] },
           { name: "Rector St", coordinates: [-74.013783, 40.707513], lines: ['1'] },
-          { name: "Whitehall St-South Ferry", coordinates: [-74.013329, 40.7025775], lines: ['1', 'R', 'W'] },
+          { name: "South Ferry", coordinates: [-74.013329, 40.7025775], lines: ['1', 'R', 'W'] },
         ];
 
         oneLineStations.forEach((station, index) => {
@@ -651,7 +651,7 @@ export default function WorkingSubwayMap() {
                       ${stationName}
                     </div>
                     <div class="flex gap-1.5 flex-wrap">
-                      ${stationName === 'Chambers St (8th Ave A/C/E)' ?
+                      ${stationName === 'Chambers St / World Trade Center' ?
                         ['A', 'C', 'E'].map(line => `
                           <span class="inline-block w-7 h-7 rounded-full text-xs font-bold text-white text-center leading-7"
                                 style="background-color: ${MTA_COLORS[line]}">
@@ -688,8 +688,8 @@ export default function WorkingSubwayMap() {
           [-73.887138, 40.873244], // Bedford Park Blvd
           [-73.893509, 40.866978], // Kingsbridge Rd
           [-73.897749, 40.861296], // Fordham Rd
-          [-73.905227, 40.85041], // Tremont Av
           [-73.900741, 40.856093], // 182-183 Sts
+          [-73.905227, 40.85041], // Tremont Av
           [-73.910136, 40.8459], // 174-175 Sts
           [-73.9134, 40.839306], // 170 St
           [-73.91844, 40.833771], // 167 St
@@ -757,8 +757,8 @@ export default function WorkingSubwayMap() {
           { name: "Bedford Park Blvd", coordinates: [-73.887138, 40.873244], lines: ['B', 'D'] },
           { name: "Kingsbridge Rd", coordinates: [-73.893509, 40.866978], lines: ['B', 'D'] },
           { name: "Fordham Rd", coordinates: [-73.897749, 40.861296], lines: ['B', 'D'] },
-          { name: "Tremont Av", coordinates: [-73.905227, 40.85041], lines: ['B', 'D'] },
           { name: "182-183 Sts", coordinates: [-73.900741, 40.856093], lines: ['B', 'D'] },
+          { name: "Tremont Av", coordinates: [-73.905227, 40.85041], lines: ['B', 'D'] },
           { name: "174-175 Sts", coordinates: [-73.910136, 40.8459], lines: ['B', 'D'] },
           { name: "170 St", coordinates: [-73.9134, 40.839306], lines: ['B', 'D'] },
           { name: "167 St", coordinates: [-73.91844, 40.833771], lines: ['B', 'D'] },
@@ -918,8 +918,7 @@ export default function WorkingSubwayMap() {
           [-73.9502, 40.656652], // Winthrop St
           [-73.95085, 40.662742], // Sterling St
           [-73.950683, 40.667883], // President St-Medgar Evers College
-          [-73.958688, 40.6705125], // Botanic Garden
-          [-73.958416, 40.674249], // Franklin Av
+          [-73.958688, 40.6705125], // Franklin Av-Medgar Evers College
           [-73.964375, 40.671987], // Eastern Pkwy-Brooklyn Museum
           [-73.971046, 40.675235], // Grand Army Plaza
           [-73.975098, 40.680829], // Bergen St
@@ -930,13 +929,13 @@ export default function WorkingSubwayMap() {
           [-73.993086, 40.697466], // Clark St
           [-74.0091, 40.706821], // Wall St
           [-74.00783824999999, 40.71008875], // Fulton St
+          [-74.008587, 40.713051], // Park Place
           [-74.009266, 40.715478], // Chambers St
-          [-73.989862, 40.734803], // 14 St
+          [-73.997732, 40.73779633333333], // 6 Av
           [-73.991057, 40.750373], // 34 St-Penn Station
           [-73.9875808, 40.755746], // Times Sq-42 St
           [-73.98197, 40.778453], // 72 St
           [-73.972323, 40.793919], // 96 St
-          [-73.968379, 40.799446], // 103 St
           [-73.951822, 40.799075], // 110 St-Malcolm X Plaza
           [-73.949625, 40.802098], // 116 St
           [-73.945495, 40.807754], // 125 St
@@ -1001,8 +1000,7 @@ export default function WorkingSubwayMap() {
           { name: "Winthrop St", coordinates: [-73.9502, 40.656652], lines: ['2', '5'] },
           { name: "Sterling St", coordinates: [-73.95085, 40.662742], lines: ['2', '5'] },
           { name: "President St-Medgar Evers College", coordinates: [-73.950683, 40.667883], lines: ['2', '5'] },
-          { name: "Botanic Garden", coordinates: [-73.958688, 40.6705125], lines: ['2', '4', '5', 'S'] },
-          { name: "Franklin Av", coordinates: [-73.958416, 40.674249], lines: ['2', '3', '4', '5', 'S'] },
+          { name: "Franklin Av-Medgar Evers College", coordinates: [-73.958688, 40.6705125], lines: ['2', '3', '4', '5', 'S'] },
           { name: "Eastern Pkwy-Brooklyn Museum", coordinates: [-73.964375, 40.671987], lines: ['2', '3'] },
           { name: "Grand Army Plaza", coordinates: [-73.971046, 40.675235], lines: ['2', '3'] },
           { name: "Bergen St", coordinates: [-73.975098, 40.680829], lines: ['2', '3'] },
@@ -1013,13 +1011,13 @@ export default function WorkingSubwayMap() {
           { name: "Clark St", coordinates: [-73.993086, 40.697466], lines: ['2', '3'] },
           { name: "Wall St", coordinates: [-74.0091, 40.706821], lines: ['2', '3'] },
           { name: "Fulton St", coordinates: [-74.00783824999999, 40.71008875], lines: ['2', '3', '4', '5', 'A', 'C', 'J', 'Z'] },
+          { name: "Park Place", coordinates: [-74.008587, 40.713051], lines: ['2', '3'] },
           { name: "Chambers St", coordinates: [-74.009266, 40.715478], lines: ['1', '2', '3'] },
-          { name: "14 St", coordinates: [-73.989862, 40.734803], lines: ['2', '3'] },
+          { name: "6 Av", coordinates: [-73.997732, 40.73779633333333], lines: ['1', '2', '3', 'F', 'L', 'M'] },
           { name: "34 St-Penn Station", coordinates: [-73.991057, 40.750373], lines: ['1', '2', '3'] },
           { name: "Times Sq-42 St", coordinates: [-73.9875808, 40.755746], lines: ['1', '2', '3', '7', 'N', 'Q', 'R', 'W', 'S', 'A', 'C', 'E'] },
           { name: "72 St", coordinates: [-73.98197, 40.778453], lines: ['1', '2', '3'] },
           { name: "96 St", coordinates: [-73.972323, 40.793919], lines: ['1', '2', '3'] },
-          { name: "103 St", coordinates: [-73.968379, 40.799446], lines: ['1'] },
           { name: "110 St-Malcolm X Plaza", coordinates: [-73.951822, 40.799075], lines: ['2', '3'] },
           { name: "116 St", coordinates: [-73.949625, 40.802098], lines: ['2', '3'] },
           { name: "125 St", coordinates: [-73.945495, 40.807754], lines: ['2', '3'] },
@@ -1162,40 +1160,40 @@ export default function WorkingSubwayMap() {
       if (lineId === '3') {
         const markersForLine: maplibregl.Marker[] = [];
         const threeLineCoords: [number, number][] = [
-          [-73.884079, 40.666235], // New Lots Av
-          [-73.889395, 40.665449], // Van Siclen Av
-          [-73.894895, 40.664635], // Pennsylvania Av
-          [-73.902447, 40.663515], // Junius St
-          [-73.908946, 40.662549], // Rockaway Av
-          [-73.916327, 40.661453], // Saratoga Av
-          [-73.92261, 40.664717], // Sutter Av-Rutland Rd
-          [-73.932942, 40.668897], // Crown Hts-Utica Av
-          [-73.942161, 40.669399], // Kingston Av
-          [-73.950466, 40.669847], // Nostrand Av
-          [-73.958688, 40.6705125], // Botanic Garden
-          [-73.964375, 40.671987], // Eastern Pkwy-Brooklyn Museum
-          [-73.971046, 40.675235], // Grand Army Plaza
-          [-73.975098, 40.680829], // Bergen St
-          [-73.97778866666665, 40.68416166666667], // Atlantic Av-Barclays Ctr
-          [-73.980492, 40.688246], // Nevins St
-          [-73.985065, 40.690545], // Hoyt St
-          [-73.990642, 40.693241], // Court St
-          [-73.993086, 40.697466], // Clark St
-          [-74.0091, 40.706821], // Wall St
-          [-74.00783824999999, 40.71008875], // Fulton St
-          [-74.0095515, 40.712603], // Cortlandt St
-          [-74.009266, 40.715478], // Chambers St
-          [-73.989862, 40.734803], // 14 St
-          [-73.991057, 40.750373], // 34 St-Penn Station
-          [-73.9875808, 40.755746], // Times Sq-42 St
-          [-73.98197, 40.778453], // 72 St
-          [-73.972323, 40.793919], // 96 St
-          [-73.951822, 40.799075], // 110 St-Malcolm X Plaza
-          [-73.949625, 40.802098], // 116 St
-          [-73.945495, 40.807754], // 125 St
-          [-73.94077, 40.814229], // 135 St
-          [-73.936245, 40.820421], // 145 St
           [-73.93647, 40.82388], // Harlem-148 St
+          [-73.936245, 40.820421], // 145 St
+          [-73.94077, 40.814229], // 135 St
+          [-73.945495, 40.807754], // 125 St
+          [-73.949625, 40.802098], // 116 St
+          [-73.951822, 40.799075], // 110 St-Malcolm X Plaza
+          [-73.972323, 40.793919], // 96 St
+          [-73.98197, 40.778453], // 72 St
+          [-73.9875808, 40.755746], // Times Sq-42 St
+          [-73.991057, 40.750373], // 34 St-Penn Station
+          [-73.996209, 40.738228], // 14 St
+          [-74.009266, 40.715478], // Chambers St
+          [-74.008811, 40.713051], // Park Place
+          [-74.00783824999999, 40.71008875], // Fulton St
+          [-74.0091, 40.706821], // Wall St
+          [-73.993086, 40.697466], // Clark St
+          [-73.989998, 40.693219], // Borough Hall
+          [-73.985065, 40.690545], // Hoyt St
+          [-73.980492, 40.688246], // Nevins St
+          [-73.97778866666665, 40.68416166666667], // Atlantic Av-Barclays Ctr
+          [-73.975098, 40.680829], // Bergen St
+          [-73.971046, 40.675235], // Grand Army Plaza
+          [-73.964375, 40.671987], // Eastern Pkwy-Brooklyn Museum
+          [-73.958131, 40.670682], // Franklin Av-Medgar Evers College
+          [-73.950466, 40.669847], // Nostrand Av
+          [-73.942161, 40.669399], // Kingston Av
+          [-73.932942, 40.668897], // Crown Heights-Utica Av
+          [-73.92261, 40.664717], // Sutter Av-Rutland Rd
+          [-73.916327, 40.661453], // Saratoga Av
+          [-73.908946, 40.662549], // Rockaway Av
+          [-73.902447, 40.663515], // Junius St
+          [-73.894895, 40.664635], // Pennsylvania Av
+          [-73.889395, 40.665449], // Van Siclen Av
+          [-73.884079, 40.666235], // New Lots Av
         ];
 
         // Add line to map
@@ -1234,40 +1232,40 @@ export default function WorkingSubwayMap() {
         }
 
         const threeLineStations = [
-          { name: "New Lots Av", coordinates: [-73.884079, 40.666235], lines: ["3"] },
-          { name: "Van Siclen Av", coordinates: [-73.889395, 40.665449], lines: ["3"] },
-          { name: "Pennsylvania Av", coordinates: [-73.894895, 40.664635], lines: ["3"] },
-          { name: "Junius St", coordinates: [-73.902447, 40.663515], lines: ["3"] },
-          { name: "Rockaway Av", coordinates: [-73.908946, 40.662549], lines: ["3"] },
-          { name: "Saratoga Av", coordinates: [-73.916327, 40.661453], lines: ["3"] },
-          { name: "Sutter Av-Rutland Rd", coordinates: [-73.92261, 40.664717], lines: ["3"] },
-          { name: "Crown Hts-Utica Av", coordinates: [-73.932942, 40.668897], lines: ["3","4"] },
-          { name: "Kingston Av", coordinates: [-73.942161, 40.669399], lines: ["3"] },
-          { name: "Nostrand Av", coordinates: [-73.950466, 40.669847], lines: ["3"] },
-          { name: "Botanic Garden", coordinates: [-73.958688, 40.6705125], lines: ["2","3","4","5","S"] },
-          { name: "Eastern Pkwy-Brooklyn Museum", coordinates: [-73.964375, 40.671987], lines: ["2","3"] },
-          { name: "Grand Army Plaza", coordinates: [-73.971046, 40.675235], lines: ["2","3"] },
-          { name: "Bergen St", coordinates: [-73.975098, 40.680829], lines: ["2","3"] },
-          { name: "Atlantic Av-Barclays Ctr", coordinates: [-73.97778866666665, 40.68416166666667], lines: ["2","3","4","5","B","D","N","Q","R"] },
-          { name: "Nevins St", coordinates: [-73.980492, 40.688246], lines: ["2","3","4","5"] },
-          { name: "Hoyt St", coordinates: [-73.985065, 40.690545], lines: ["2","3"] },
-          { name: "Court St", coordinates: [-73.990642, 40.693241], lines: ["2","3","4","5","R"] },
-          { name: "Clark St", coordinates: [-73.993086, 40.697466], lines: ["2","3"] },
-          { name: "Wall St", coordinates: [-74.0091, 40.706821], lines: ["2","3"] },
-          { name: "Fulton St", coordinates: [-74.00783824999999, 40.71008875], lines: ["2","3","4","5","A","C","J","Z"] },
-          { name: "Cortlandt St", coordinates: [-74.0095515, 40.712603], lines: ["2","3","A","C","E","R","W"] },
-          { name: "Chambers St", coordinates: [-74.009266, 40.715478], lines: ["1","2","3"] },
-          { name: "14 St", coordinates: [-73.989862, 40.734803], lines: ["2","3"] },
-          { name: "34 St-Penn Station", coordinates: [-73.991057, 40.750373], lines: ["1","2","3"] },
-          { name: "Times Sq-42 St", coordinates: [-73.9875808, 40.755746], lines: ["1","2","3","7","A","C","E","N","Q","R","S","W"] },
-          { name: "72 St", coordinates: [-73.98197, 40.778453], lines: ["1","2","3"] },
-          { name: "96 St", coordinates: [-73.972323, 40.793919], lines: ["1","2","3"] },
-          { name: "110 St-Malcolm X Plaza", coordinates: [-73.951822, 40.799075], lines: ["2","3"] },
-          { name: "116 St", coordinates: [-73.949625, 40.802098], lines: ["2","3"] },
-          { name: "125 St", coordinates: [-73.945495, 40.807754], lines: ["2","3"] },
-          { name: "135 St", coordinates: [-73.94077, 40.814229], lines: ["2","3"] },
-          { name: "145 St", coordinates: [-73.936245, 40.820421], lines: ["3"] },
           { name: "Harlem-148 St", coordinates: [-73.93647, 40.82388], lines: ["3"] },
+          { name: "145 St", coordinates: [-73.936245, 40.820421], lines: ["3"] },
+          { name: "135 St", coordinates: [-73.94077, 40.814229], lines: ["2","3"] },
+          { name: "125 St", coordinates: [-73.945495, 40.807754], lines: ["2","3"] },
+          { name: "116 St", coordinates: [-73.949625, 40.802098], lines: ["2","3"] },
+          { name: "110 St-Malcolm X Plaza", coordinates: [-73.951822, 40.799075], lines: ["2","3"] },
+          { name: "96 St", coordinates: [-73.972323, 40.793919], lines: ["1","2","3"] },
+          { name: "72 St", coordinates: [-73.98197, 40.778453], lines: ["1","2","3"] },
+          { name: "Times Sq-42 St", coordinates: [-73.9875808, 40.755746], lines: ["1","2","3","7","A","C","E","N","Q","R","S","W"] },
+          { name: "34 St-Penn Station", coordinates: [-73.991057, 40.750373], lines: ["1","2","3"] },
+          { name: "14 St", coordinates: [-73.996209, 40.738228], lines: ["1","2","3"] },
+          { name: "Chambers St", coordinates: [-74.009266, 40.715478], lines: ["1","2","3"] },
+          { name: "Park Place", coordinates: [-74.008811, 40.713051], lines: ["2","3"] },
+          { name: "Fulton St", coordinates: [-74.00783824999999, 40.71008875], lines: ["2","3","4","5","A","C","J","Z"] },
+          { name: "Wall St", coordinates: [-74.0091, 40.706821], lines: ["2","3"] },
+          { name: "Clark St", coordinates: [-73.993086, 40.697466], lines: ["2","3"] },
+          { name: "Borough Hall", coordinates: [-73.989998, 40.693219], lines: ["2","3","4","5","R"] },
+          { name: "Hoyt St", coordinates: [-73.985065, 40.690545], lines: ["2","3"] },
+          { name: "Nevins St", coordinates: [-73.980492, 40.688246], lines: ["2","3","4","5"] },
+          { name: "Atlantic Av-Barclays Ctr", coordinates: [-73.97778866666665, 40.68416166666667], lines: ["2","3","4","5","B","D","N","Q","R"] },
+          { name: "Bergen St", coordinates: [-73.975098, 40.680829], lines: ["2","3"] },
+          { name: "Grand Army Plaza", coordinates: [-73.971046, 40.675235], lines: ["2","3"] },
+          { name: "Eastern Pkwy-Brooklyn Museum", coordinates: [-73.964375, 40.671987], lines: ["2","3"] },
+          { name: "Franklin Av-Medgar Evers College", coordinates: [-73.958131, 40.670682], lines: ["2","3","4","5","S"] },
+          { name: "Nostrand Av", coordinates: [-73.950466, 40.669847], lines: ["3"] },
+          { name: "Kingston Av", coordinates: [-73.942161, 40.669399], lines: ["3"] },
+          { name: "Crown Heights-Utica Av", coordinates: [-73.932942, 40.668897], lines: ["3","4"] },
+          { name: "Sutter Av-Rutland Rd", coordinates: [-73.92261, 40.664717], lines: ["3"] },
+          { name: "Saratoga Av", coordinates: [-73.916327, 40.661453], lines: ["3"] },
+          { name: "Rockaway Av", coordinates: [-73.908946, 40.662549], lines: ["3"] },
+          { name: "Junius St", coordinates: [-73.902447, 40.663515], lines: ["3"] },
+          { name: "Pennsylvania Av", coordinates: [-73.894895, 40.664635], lines: ["3"] },
+          { name: "Van Siclen Av", coordinates: [-73.889395, 40.665449], lines: ["3"] },
+          { name: "New Lots Av", coordinates: [-73.884079, 40.666235], lines: ["3"] },
         ];
 
         // Add station markers and event handlers
@@ -1361,7 +1359,7 @@ export default function WorkingSubwayMap() {
           [-73.929849, 40.813224], // 138 St-Grand Concourse
           [-73.937594, 40.804138], // 125 St
           [-73.955589, 40.779492], // 86 St
-          [-73.9676125, 40.762592999999995], // Lexington Av/59 St
+          [-73.9676125, 40.762592999999995], // 59 St
           [-73.97735933333333, 40.751992], // Grand Central-42 St
           [-73.99041633333333, 40.735066], // 14 St-Union Sq
           [-74.003766, 40.713154], // Brooklyn Bridge-City Hall
@@ -1371,8 +1369,8 @@ export default function WorkingSubwayMap() {
           [-73.989998, 40.693219], // Borough Hall
           [-73.980492, 40.688246], // Nevins St
           [-73.97778866666665, 40.68416166666667], // Atlantic Av-Barclays Ctr
-          [-73.958416, 40.674249], // Franklin Av
-          [-73.932942, 40.668897], // Crown Hts-Utica Av
+          [-73.958688, 40.6705125], // Franklin Av-Medgar Evers College
+          [-73.932942, 40.668897], // Crown Heights-Utica Av
         ];
 
         // Add line to map
@@ -1427,7 +1425,7 @@ export default function WorkingSubwayMap() {
           { name: "138 St-Grand Concourse", coordinates: [-73.929849, 40.813224], lines: ["4","5"] },
           { name: "125 St", coordinates: [-73.937594, 40.804138], lines: ["4","5","6"] },
           { name: "86 St", coordinates: [-73.955589, 40.779492], lines: ["4","5","6"] },
-          { name: "Lexington Av/59 St", coordinates: [-73.9676125, 40.762592999999995], lines: ["4","5","6","N","R","W"] },
+          { name: "59 St", coordinates: [-73.9676125, 40.762592999999995], lines: ["4","5","6","N","R","W"] },
           { name: "Grand Central-42 St", coordinates: [-73.97735933333333, 40.751992], lines: ["4","5","6","7","S"] },
           { name: "14 St-Union Sq", coordinates: [-73.99041633333333, 40.735066], lines: ["4","5","6","L","N","Q","R","W"] },
           { name: "Brooklyn Bridge-City Hall", coordinates: [-74.003766, 40.713154], lines: ["4","5","6"] },
@@ -1437,8 +1435,8 @@ export default function WorkingSubwayMap() {
           { name: "Borough Hall", coordinates: [-73.989998, 40.693219], lines: ["2","3","4","5","R"] },
           { name: "Nevins St", coordinates: [-73.980492, 40.688246], lines: ["2","3","4","5"] },
           { name: "Atlantic Av-Barclays Ctr", coordinates: [-73.97778866666665, 40.68416166666667], lines: ["2","3","4","5","B","D","N","Q","R"] },
-          { name: "Franklin Av", coordinates: [-73.958416, 40.674249], lines: ["2","3","4","5","S"] },
-          { name: "Crown Hts-Utica Av", coordinates: [-73.932942, 40.668897], lines: ["3","4"] },
+          { name: "Franklin Av-Medgar Evers College", coordinates: [-73.958688, 40.6705125], lines: ["2","3","4","5","S"] },
+          { name: "Crown Heights-Utica Av", coordinates: [-73.932942, 40.668897], lines: ["3","4"] },
         ];
 
         // Add station markers and event handlers
@@ -1534,7 +1532,7 @@ export default function WorkingSubwayMap() {
           [-73.929849, 40.813224], // 138 St-Grand Concourse
           [-73.937594, 40.804138], // 125 St
           [-73.955589, 40.779492], // 86 St
-          [-73.9676125, 40.762592999999995], // Lexington Av/59 St
+          [-73.9676125, 40.762592999999995], // 59 St
           [-73.97735933333333, 40.751992], // Grand Central-42 St
           [-73.99041633333333, 40.735066], // 14 St-Union Sq
           [-74.003766, 40.713154], // Brooklyn Bridge-City Hall
@@ -1544,7 +1542,7 @@ export default function WorkingSubwayMap() {
           [-73.989998, 40.693219], // Borough Hall
           [-73.980492, 40.688246], // Nevins St
           [-73.97778866666665, 40.68416166666667], // Atlantic Av-Barclays Ctr
-          [-73.958416, 40.674249], // Franklin Av
+          [-73.958688, 40.6705125], // Franklin Av-Medgar Evers College
           [-73.950683, 40.667883], // President St-Medgar Evers College
           [-73.95085, 40.662742], // Sterling St
           [-73.9502, 40.656652], // Winthrop St
@@ -1608,7 +1606,7 @@ export default function WorkingSubwayMap() {
           { name: "138 St-Grand Concourse", coordinates: [-73.929849, 40.813224], lines: ["4","5"] },
           { name: "125 St", coordinates: [-73.937594, 40.804138], lines: ["4","5","6"] },
           { name: "86 St", coordinates: [-73.955589, 40.779492], lines: ["4","5","6"] },
-          { name: "Lexington Av/59 St", coordinates: [-73.9676125, 40.762592999999995], lines: ["4","5","6","N","R","W"] },
+          { name: "59 St", coordinates: [-73.9676125, 40.762592999999995], lines: ["4","5","6","N","R","W"] },
           { name: "Grand Central-42 St", coordinates: [-73.97735933333333, 40.751992], lines: ["4","5","6","7","S"] },
           { name: "14 St-Union Sq", coordinates: [-73.99041633333333, 40.735066], lines: ["4","5","6","L","N","Q","R","W"] },
           { name: "Brooklyn Bridge-City Hall", coordinates: [-74.003766, 40.713154], lines: ["4","5","6"] },
@@ -1618,7 +1616,7 @@ export default function WorkingSubwayMap() {
           { name: "Borough Hall", coordinates: [-73.989998, 40.693219], lines: ["2","3","4","5","R"] },
           { name: "Nevins St", coordinates: [-73.980492, 40.688246], lines: ["2","3","4","5"] },
           { name: "Atlantic Av-Barclays Ctr", coordinates: [-73.97778866666665, 40.68416166666667], lines: ["2","3","4","5","B","D","N","Q","R"] },
-          { name: "Franklin Av", coordinates: [-73.958416, 40.674249], lines: ["2","3","4","5","S"] },
+          { name: "Franklin Av-Medgar Evers College", coordinates: [-73.958688, 40.6705125], lines: ["2","3","4","5","S"] },
           { name: "President St-Medgar Evers College", coordinates: [-73.950683, 40.667883], lines: ["2","5"] },
           { name: "Sterling St", coordinates: [-73.95085, 40.662742], lines: ["2","5"] },
           { name: "Winthrop St", coordinates: [-73.9502, 40.656652], lines: ["2","5"] },
@@ -1706,7 +1704,7 @@ export default function WorkingSubwayMap() {
           [-73.828121, 40.852462], // Pelham Bay Park
           [-73.832569, 40.84681], // Buhre Av
           [-73.836322, 40.843863], // Middletown Rd
-          [-73.842952, 40.839892], // Westchester Sq-E Tremont Av
+          [-73.842952, 40.839892], // Westchester Sq-East Tremont Av
           [-73.847036, 40.836488], // Zerega Av
           [-73.851222, 40.834255], // Castle Hill Av
           [-73.860816, 40.833226], // Parkchester
@@ -1729,17 +1727,18 @@ export default function WorkingSubwayMap() {
           [-73.955589, 40.779492], // 86 St
           [-73.959874, 40.77362], // 77 St
           [-73.96387, 40.768141], // 68 St-Hunter College
-          [-73.9676125, 40.762593], // Lexington Av/59 St
-          [-73.97048749999999, 40.7573295], // Lexington Av/53 St
+          [-73.9676125, 40.762593], // 59 St
+          [-73.97048749999999, 40.7573295], // 51 St
           [-73.97735933333333, 40.751992], // Grand Central-42 St
           [-73.982076, 40.746081], // 33 St
           [-73.984264, 40.74307], // 28 St
           [-73.986599, 40.739864], // 23 St
           [-73.99041633333333, 40.735066], // 14 St-Union Sq
           [-73.99107, 40.730054], // Astor Pl
+          [-73.9954315, 40.725606], // Bleecker St
           [-73.997141, 40.722301], // Spring St
           [-74.00057999999999, 40.71870125], // Canal St
-          [-74.003766, 40.713154] // Chambers St
+          [-74.003766, 40.713154] // Brooklyn Bridge-City Hall
         ];
 
         const lineGeoJSON = {
@@ -1775,7 +1774,7 @@ export default function WorkingSubwayMap() {
           { name: "Pelham Bay Park", coordinates: [-73.828121, 40.852462], lines: ['6'] },
           { name: "Buhre Av", coordinates: [-73.832569, 40.84681], lines: ['6'] },
           { name: "Middletown Rd", coordinates: [-73.836322, 40.843863], lines: ['6'] },
-          { name: "Westchester Sq-E Tremont Av", coordinates: [-73.842952, 40.839892], lines: ['6'] },
+          { name: "Westchester Sq-East Tremont Av", coordinates: [-73.842952, 40.839892], lines: ['6'] },
           { name: "Zerega Av", coordinates: [-73.847036, 40.836488], lines: ['6'] },
           { name: "Castle Hill Av", coordinates: [-73.851222, 40.834255], lines: ['6'] },
           { name: "Parkchester", coordinates: [-73.860816, 40.833226], lines: ['6'] },
@@ -1798,17 +1797,18 @@ export default function WorkingSubwayMap() {
           { name: "86 St", coordinates: [-73.955589, 40.779492], lines: ['6'] },
           { name: "77 St", coordinates: [-73.959874, 40.77362], lines: ['6'] },
           { name: "68 St-Hunter College", coordinates: [-73.96387, 40.768141], lines: ['6'] },
-          { name: "Lexington Av/59 St", coordinates: [-73.9676125, 40.762593], lines: ['6'] },
-          { name: "Lexington Av/53 St", coordinates: [-73.97048749999999, 40.7573295], lines: ['6'] },
+          { name: "59 St", coordinates: [-73.9676125, 40.762593], lines: ['4', '5', '6', 'N', 'R', 'W'] },
+          { name: "51 St", coordinates: [-73.97048749999999, 40.7573295], lines: ['6'] },
           { name: "Grand Central-42 St", coordinates: [-73.97735933333333, 40.751992], lines: ['6', '4', '5', '7'] },
           { name: "33 St", coordinates: [-73.982076, 40.746081], lines: ['6'] },
           { name: "28 St", coordinates: [-73.984264, 40.74307], lines: ['6'] },
           { name: "23 St", coordinates: [-73.986599, 40.739864], lines: ['6'] },
           { name: "14 St-Union Sq", coordinates: [-73.99041633333333, 40.735066], lines: ['6', '4', '5', 'N', 'Q', 'R', 'W'] },
           { name: "Astor Pl", coordinates: [-73.99107, 40.730054], lines: ['6'] },
+          { name: "Bleecker St", coordinates: [-73.9954315, 40.725606], lines: ['6', 'B', 'D', 'F', 'M'] },
           { name: "Spring St", coordinates: [-73.997141, 40.722301], lines: ['6'] },
           { name: "Canal St", coordinates: [-74.00057999999999, 40.71870125], lines: ['6'] },
-          { name: "Chambers St", coordinates: [-74.003766, 40.713154], lines: ['6'] }
+          { name: "Brooklyn Bridge-City Hall", coordinates: [-74.003766, 40.713154], lines: ['4', '5', '6', 'J', 'Z'] }
         ];
 
         // Add station markers and event handlers
@@ -1895,10 +1895,10 @@ export default function WorkingSubwayMap() {
           [-73.837324, 40.718331], // 75 Av
           [-73.844521, 40.721691], // Forest Hills-71 Av
           [-73.891366, 40.746746], // Jackson Hts-Roosevelt Av
-          [-73.942836, 40.754203], // 21 St-Queensbridge
-          [-73.95326, 40.759145], // Roosevelt Island
-          [-73.966113, 40.764629], // Lexington Av/63 St
-          [-73.97745, 40.763972], // 57 St
+          [-73.937243, 40.748973], // Queens Plaza
+          [-73.94503200000001, 40.747141000000006], // Court Sq-23 St
+          [-73.97048749999999, 40.7573295], // Lexington Av/53 St
+          [-73.975224, 40.760167], // 5 Av/53 St
           [-73.981329, 40.758663], // 47-50 Sts-Rockefeller Ctr
           [-73.98326599999999, 40.7540215], // 42 St-Bryant Pk
           [-73.9878865, 40.749643], // 34 St-Herald Sq
@@ -1972,10 +1972,10 @@ export default function WorkingSubwayMap() {
           { name: "75 Av", coordinates: [-73.837324, 40.718331], lines: ['E', 'F'] },
           { name: "Forest Hills-71 Av", coordinates: [-73.844521, 40.721691], lines: ['E', 'F', 'M', 'R'] },
           { name: "Jackson Hts-Roosevelt Av", coordinates: [-73.891366, 40.746746], lines: ['7', 'E', 'F', 'M', 'R'] },
-          { name: "21 St-Queensbridge", coordinates: [-73.942836, 40.754203], lines: ['F'] },
-          { name: "Roosevelt Island", coordinates: [-73.95326, 40.759145], lines: ['F'] },
-          { name: "Lexington Av/63 St", coordinates: [-73.966113, 40.764629], lines: ['F', 'Q'] },
-          { name: "57 St", coordinates: [-73.97745, 40.763972], lines: ['F'] },
+          { name: "Queens Plaza", coordinates: [-73.937243, 40.748973], lines: ['E', 'M', 'R'] },
+          { name: "Court Sq-23 St", coordinates: [-73.94503200000001, 40.747141000000006], lines: ['7', 'E', 'G', 'M'] },
+          { name: "Lexington Av/53 St", coordinates: [-73.97048749999999, 40.7573295], lines: ['6', 'E', 'M'] },
+          { name: "5 Av/53 St", coordinates: [-73.975224, 40.760167], lines: ['E', 'M'] },
           { name: "47-50 Sts-Rockefeller Ctr", coordinates: [-73.981329, 40.758663], lines: ['B', 'D', 'F', 'M'] },
           { name: "42 St-Bryant Pk", coordinates: [-73.98326599999999, 40.7540215], lines: ['7', 'B', 'D', 'F', 'M'] },
           { name: "34 St-Herald Sq", coordinates: [-73.9878865, 40.749643], lines: ['B', 'D', 'F', 'M', 'N', 'Q', 'R', 'W'] },
@@ -2085,7 +2085,7 @@ export default function WorkingSubwayMap() {
           [-73.949724, 40.744065], // 21 St
           [-73.954449, 40.731352], // Greenpoint Av
           [-73.951277, 40.724635], // Nassau Av
-          [-73.95084650000001, 40.7134275], // Lorimer St
+          [-73.95084650000001, 40.7134275], // Metropolitan Av
           [-73.950308, 40.706092], // Broadway
           [-73.950234, 40.700377], // Flushing Av
           [-73.949046, 40.694568], // Myrtle-Willoughby Avs
@@ -2138,7 +2138,7 @@ export default function WorkingSubwayMap() {
           { name: "21 St", coordinates: [-73.949724, 40.744065], lines: ['G'] },
           { name: "Greenpoint Av", coordinates: [-73.954449, 40.731352], lines: ['G'] },
           { name: "Nassau Av", coordinates: [-73.951277, 40.724635], lines: ['G'] },
-          { name: "Lorimer St", coordinates: [-73.95084650000001, 40.7134275], lines: ['G', 'L'] },
+          { name: "Metropolitan Av", coordinates: [-73.95084650000001, 40.7134275], lines: ['G', 'L'] },
           { name: "Broadway", coordinates: [-73.950308, 40.706092], lines: ['G'] },
           { name: "Flushing Av", coordinates: [-73.950234, 40.700377], lines: ['G'] },
           { name: "Myrtle-Willoughby Avs", coordinates: [-73.949046, 40.694568], lines: ['G'] },
@@ -2547,8 +2547,8 @@ export default function WorkingSubwayMap() {
         const markersForLine: maplibregl.Marker[] = [];
         const mLineCoords: [number, number][] = [
           [-73.844521, 40.721691], // Forest Hills-71 Av
-          [-73.861604, 40.729846], // 63 Dr-Rego Park
           [-73.852719, 40.726523], // 67 Av
+          [-73.861604, 40.729846], // 63 Dr-Rego Park
           [-73.869229, 40.733106], // Woodhaven Blvd
           [-73.877223, 40.737015], // Grand Av-Newtown
           [-73.882017, 40.742454], // Elmhurst Av
@@ -2558,10 +2558,10 @@ export default function WorkingSubwayMap() {
           [-73.913333, 40.756312], // 46 St
           [-73.92074, 40.756879], // Steinway St
           [-73.928781, 40.752039], // 36 St
-          [-73.937243, 40.748973], // Queens Plaza
-          [-73.94503200000001, 40.747141000000006], // Court Sq-23 St
-          [-73.97048749999999, 40.7573295], // Lexington Av/53 St
-          [-73.975224, 40.760167], // 5 Av/53 St
+          [-73.942836, 40.754203], // 21 St-Queensbridge
+          [-73.95326, 40.759145], // Roosevelt Island
+          [-73.966113, 40.764629], // Lexington Av/63 St
+          [-73.97745, 40.763972], // 57 St
           [-73.981329, 40.758663], // 47-50 Sts-Rockefeller Ctr
           [-73.98326599999999, 40.7540215], // 42 St-Bryant Pk
           [-73.9878865, 40.749643], // 34 St-Herald Sq
@@ -2575,12 +2575,12 @@ export default function WorkingSubwayMap() {
           [-73.947408, 40.703869], // Lorimer St
           [-73.941126, 40.70026], // Flushing Av
           [-73.935657, 40.697207], // Myrtle Av
-          [-73.9119855, 40.699622000000005], // Myrtle-Wyckoff Avs
-          [-73.919711, 40.698664], // Knickerbocker Av
           [-73.927397, 40.697857], // Central Av
+          [-73.919711, 40.698664], // Knickerbocker Av
+          [-73.9119855, 40.699622000000005], // Myrtle-Wyckoff Avs
+          [-73.90774, 40.702762], // Seneca Av
           [-73.903077, 40.704423], // Forest Av
           [-73.895877, 40.706186], // Fresh Pond Rd
-          [-73.90774, 40.702762], // Seneca Av
           [-73.889601, 40.711396], // Middle Village-Metropolitan Av
         ];
 
@@ -2615,8 +2615,8 @@ export default function WorkingSubwayMap() {
 
         const mLineStations = [
           { name: "Forest Hills-71 Av", coordinates: [-73.844521, 40.721691], lines: ['E', 'F', 'M', 'R'] },
-          { name: "63 Dr-Rego Park", coordinates: [-73.861604, 40.729846], lines: ['M', 'R'] },
           { name: "67 Av", coordinates: [-73.852719, 40.726523], lines: ['M', 'R'] },
+          { name: "63 Dr-Rego Park", coordinates: [-73.861604, 40.729846], lines: ['M', 'R'] },
           { name: "Woodhaven Blvd", coordinates: [-73.869229, 40.733106], lines: ['M', 'R'] },
           { name: "Grand Av-Newtown", coordinates: [-73.877223, 40.737015], lines: ['M', 'R'] },
           { name: "Elmhurst Av", coordinates: [-73.882017, 40.742454], lines: ['M', 'R'] },
@@ -2626,10 +2626,10 @@ export default function WorkingSubwayMap() {
           { name: "46 St", coordinates: [-73.913333, 40.756312], lines: ['M', 'R'] },
           { name: "Steinway St", coordinates: [-73.92074, 40.756879], lines: ['M', 'R'] },
           { name: "36 St", coordinates: [-73.928781, 40.752039], lines: ['M', 'R'] },
-          { name: "Queens Plaza", coordinates: [-73.937243, 40.748973], lines: ['E', 'M', 'R'] },
-          { name: "Court Sq-23 St", coordinates: [-73.94503200000001, 40.747141000000006], lines: ['7', 'E', 'G', 'M'] },
-          { name: "Lexington Av/53 St", coordinates: [-73.97048749999999, 40.7573295], lines: ['6', 'E', 'M'] },
-          { name: "5 Av/53 St", coordinates: [-73.975224, 40.760167], lines: ['E', 'M'] },
+          { name: "21 St-Queensbridge", coordinates: [-73.942836, 40.754203], lines: ['F'] },
+          { name: "Roosevelt Island", coordinates: [-73.95326, 40.759145], lines: ['F'] },
+          { name: "Lexington Av/63 St", coordinates: [-73.966113, 40.764629], lines: ['F', 'Q'] },
+          { name: "57 St", coordinates: [-73.97745, 40.763972], lines: ['F'] },
           { name: "47-50 Sts-Rockefeller Ctr", coordinates: [-73.981329, 40.758663], lines: ['B', 'D', 'F', 'M'] },
           { name: "42 St-Bryant Pk", coordinates: [-73.98326599999999, 40.7540215], lines: ['7', 'B', 'D', 'F', 'M'] },
           { name: "34 St-Herald Sq", coordinates: [-73.9878865, 40.749643], lines: ['B', 'D', 'F', 'M', 'N', 'Q', 'R', 'W'] },
@@ -2643,12 +2643,12 @@ export default function WorkingSubwayMap() {
           { name: "Lorimer St", coordinates: [-73.947408, 40.703869], lines: ['J', 'M'] },
           { name: "Flushing Av", coordinates: [-73.941126, 40.70026], lines: ['J', 'M'] },
           { name: "Myrtle Av", coordinates: [-73.935657, 40.697207], lines: ['J', 'M', 'Z'] },
-          { name: "Myrtle-Wyckoff Avs", coordinates: [-73.9119855, 40.699622000000005], lines: ['L', 'M'] },
-          { name: "Knickerbocker Av", coordinates: [-73.919711, 40.698664], lines: ['M'] },
           { name: "Central Av", coordinates: [-73.927397, 40.697857], lines: ['M'] },
+          { name: "Knickerbocker Av", coordinates: [-73.919711, 40.698664], lines: ['M'] },
+          { name: "Myrtle-Wyckoff Avs", coordinates: [-73.9119855, 40.699622000000005], lines: ['L', 'M'] },
+          { name: "Seneca Av", coordinates: [-73.90774, 40.702762], lines: ['M'] },
           { name: "Forest Av", coordinates: [-73.903077, 40.704423], lines: ['M'] },
           { name: "Fresh Pond Rd", coordinates: [-73.895877, 40.706186], lines: ['M'] },
-          { name: "Seneca Av", coordinates: [-73.90774, 40.702762], lines: ['M'] },
           { name: "Middle Village-Metropolitan Av", coordinates: [-73.889601, 40.711396], lines: ['M'] },
         ];
 
@@ -2743,7 +2743,7 @@ export default function WorkingSubwayMap() {
           [-74.017881, 40.641362],    // 59 St
           [-74.011719, 40.635064],    // 8 Av
           [-74.005351, 40.631386],    // Fort Hamilton Pkwy
-          [-73.996624, 40.625657000000004], // 62 St
+          [-73.996624, 40.625657000000004], // New Utrecht Av
           [-73.990414, 40.620671],    // 18 Av
           [-73.985026, 40.61741],     // 20 Av
           [-73.981848, 40.611815],    // Bay Pkwy
@@ -2803,7 +2803,7 @@ export default function WorkingSubwayMap() {
           { name: '59 St', coordinates: [-74.017881, 40.641362] as [number, number], lines: ['N', 'R'] },
           { name: '8 Av', coordinates: [-74.011719, 40.635064] as [number, number], lines: ['N'] },
           { name: 'Fort Hamilton Pkwy', coordinates: [-74.005351, 40.631386] as [number, number], lines: ['N'] },
-          { name: '62 St', coordinates: [-73.996624, 40.625657000000004] as [number, number], lines: ['D', 'N'] },
+          { name: 'New Utrecht Av', coordinates: [-73.996624, 40.625657000000004] as [number, number], lines: ['D', 'N'] },
           { name: '18 Av', coordinates: [-73.990414, 40.620671] as [number, number], lines: ['N'] },
           { name: '20 Av', coordinates: [-73.985026, 40.61741] as [number, number], lines: ['N'] },
           { name: 'Bay Pkwy', coordinates: [-73.981848, 40.611815] as [number, number], lines: ['N'] },
@@ -2898,13 +2898,13 @@ export default function WorkingSubwayMap() {
           [-73.962246, 40.661614],    // Prospect Park
           [-73.961495, 40.655292],    // Parkside Av
           [-73.962982, 40.650527],    // Church Av
-          [-73.964492, 40.644031],    // Beverley Rd
+          [-73.964492, 40.644031],    // Beverly Rd
           [-73.963891, 40.640927],    // Cortelyou Rd
           [-73.962793, 40.635082],    // Newkirk Plaza
-          [-73.957734, 40.60867],     // Kings Hwy
           [-73.961639, 40.62927],     // Avenue H
           [-73.960803, 40.625039],    // Avenue J
           [-73.959399, 40.617618],    // Avenue M
+          [-73.957734, 40.60867],     // Kings Hwy
           [-73.955929, 40.5993],      // Avenue U
           [-73.955161, 40.595246],    // Neck Rd
           [-73.954155, 40.586896],    // Sheepshead Bay
@@ -2959,13 +2959,13 @@ export default function WorkingSubwayMap() {
           { name: 'Prospect Park', coordinates: [-73.962246, 40.661614] as [number, number], lines: ['B', 'Q', 'S'] },
           { name: 'Parkside Av', coordinates: [-73.961495, 40.655292] as [number, number], lines: ['Q'] },
           { name: 'Church Av', coordinates: [-73.962982, 40.650527] as [number, number], lines: ['B', 'Q'] },
-          { name: 'Beverley Rd', coordinates: [-73.964492, 40.644031] as [number, number], lines: ['Q'] },
+          { name: 'Beverly Rd', coordinates: [-73.964492, 40.644031] as [number, number], lines: ['Q'] },
           { name: 'Cortelyou Rd', coordinates: [-73.963891, 40.640927] as [number, number], lines: ['Q'] },
           { name: 'Newkirk Plaza', coordinates: [-73.962793, 40.635082] as [number, number], lines: ['B', 'Q'] },
-          { name: 'Kings Hwy', coordinates: [-73.957734, 40.60867] as [number, number], lines: ['B', 'Q'] },
           { name: 'Avenue H', coordinates: [-73.961639, 40.62927] as [number, number], lines: ['Q'] },
           { name: 'Avenue J', coordinates: [-73.960803, 40.625039] as [number, number], lines: ['Q'] },
           { name: 'Avenue M', coordinates: [-73.959399, 40.617618] as [number, number], lines: ['Q'] },
+          { name: 'Kings Hwy', coordinates: [-73.957734, 40.60867] as [number, number], lines: ['B', 'Q'] },
           { name: 'Avenue U', coordinates: [-73.955929, 40.5993] as [number, number], lines: ['Q'] },
           { name: 'Neck Rd', coordinates: [-73.955161, 40.595246] as [number, number], lines: ['Q'] },
           { name: 'Sheepshead Bay', coordinates: [-73.954155, 40.586896] as [number, number], lines: ['B', 'Q'] },
@@ -3047,8 +3047,8 @@ export default function WorkingSubwayMap() {
         const markersForLine: maplibregl.Marker[] = [];
         const rLineCoords: [number, number][] = [
           [-73.844521, 40.721691],    // Forest Hills-71 Av
-          [-73.861604, 40.729846],    // 63 Dr-Rego Park
           [-73.852719, 40.726523],    // 67 Av
+          [-73.861604, 40.729846],    // 63 Dr-Rego Park
           [-73.869229, 40.733106],    // Woodhaven Blvd
           [-73.877223, 40.737015],    // Grand Av-Newtown
           [-73.882017, 40.742454],    // Elmhurst Av
@@ -3124,8 +3124,8 @@ export default function WorkingSubwayMap() {
 
         const rLineStations = [
           { name: 'Forest Hills-71 Av', coordinates: [-73.844521, 40.721691] as [number, number], lines: ['E', 'F', 'M', 'R'] },
-          { name: '63 Dr-Rego Park', coordinates: [-73.861604, 40.729846] as [number, number], lines: ['M', 'R'] },
           { name: '67 Av', coordinates: [-73.852719, 40.726523] as [number, number], lines: ['M', 'R'] },
+          { name: '63 Dr-Rego Park', coordinates: [-73.861604, 40.729846] as [number, number], lines: ['M', 'R'] },
           { name: 'Woodhaven Blvd', coordinates: [-73.869229, 40.733106] as [number, number], lines: ['M', 'R'] },
           { name: 'Grand Av-Newtown', coordinates: [-73.877223, 40.737015] as [number, number], lines: ['M', 'R'] },
           { name: 'Elmhurst Av', coordinates: [-73.882017, 40.742454] as [number, number], lines: ['M', 'R'] },
@@ -3502,7 +3502,7 @@ export default function WorkingSubwayMap() {
         const markersForLine: maplibregl.Marker[] = [];
         const sfrLineCoords: [number, number][] = [
           [-73.95633749999999, 40.680988],  // Franklin Av
-          [-73.957624, 40.674772],          // Park Pl
+          [-73.957624, 40.674772],          // Park Place
           [-73.958688, 40.6705125],         // Botanic Garden
           [-73.962246, 40.661614]           // Prospect Park
         ];
@@ -3538,7 +3538,7 @@ export default function WorkingSubwayMap() {
 
         const sfrLineStations = [
           { name: 'Franklin Av', coordinates: [-73.95633749999999, 40.680988] as [number, number], lines: ['C', 'S'] },
-          { name: 'Park Pl', coordinates: [-73.957624, 40.674772] as [number, number], lines: ['S'] },
+          { name: 'Park Place', coordinates: [-73.957624, 40.674772] as [number, number], lines: ['S'] },
           { name: 'Botanic Garden', coordinates: [-73.958688, 40.6705125] as [number, number], lines: ['2', '3', '4', '5', 'S'] },
           { name: 'Prospect Park', coordinates: [-73.962246, 40.661614] as [number, number], lines: ['B', 'Q', 'S'] }
         ];
@@ -3736,7 +3736,7 @@ export default function WorkingSubwayMap() {
           [-73.869527, 40.749145],   // Junction Blvd
           [-73.876613, 40.748408],   // 90 St-Elmhurst Av
           [-73.883697, 40.747659],   // 82 St-Jackson Hts
-          [-73.891366, 40.746746],   // Jackson Hts-Roosevelt Av
+          [-73.891394, 40.746848],   // 74 St-Broadway
           [-73.896403, 40.746325],   // 69 St
           [-73.902984, 40.74563],    // 61 St-Woodside
           [-73.912549, 40.744149],   // 52 St
@@ -3748,7 +3748,7 @@ export default function WorkingSubwayMap() {
           [-73.948916, 40.742216],   // Hunters Point Av
           [-73.953581, 40.742626],   // Vernon Blvd-Jackson Av
           [-73.97735933333333, 40.751992], // Grand Central-42 St
-          [-73.98326599999999, 40.7540215], // 42 St-Bryant Pk
+          [-73.981963, 40.753821],   // 5 Av
           [-73.9875808, 40.755746],  // Times Sq-42 St
           [-74.00191, 40.755882],    // 34 St-Hudson Yards (terminal)
         ];
@@ -3787,7 +3787,7 @@ export default function WorkingSubwayMap() {
           { name: 'Junction Blvd', coordinates: [-73.869527, 40.749145] as [number, number], lines: ['7'] },
           { name: '90 St-Elmhurst Av', coordinates: [-73.876613, 40.748408] as [number, number], lines: ['7'] },
           { name: '82 St-Jackson Hts', coordinates: [-73.883697, 40.747659] as [number, number], lines: ['7'] },
-          { name: 'Jackson Hts-Roosevelt Av', coordinates: [-73.891366, 40.746746] as [number, number], lines: ['7', 'E', 'F', 'M', 'R'] },
+          { name: '74 St-Broadway', coordinates: [-73.891394, 40.746848] as [number, number], lines: ['7', 'E', 'F', 'M', 'R'] },
           { name: '69 St', coordinates: [-73.896403, 40.746325] as [number, number], lines: ['7'] },
           { name: '61 St-Woodside', coordinates: [-73.902984, 40.74563] as [number, number], lines: ['7'] },
           { name: '52 St', coordinates: [-73.912549, 40.744149] as [number, number], lines: ['7'] },
@@ -3799,7 +3799,7 @@ export default function WorkingSubwayMap() {
           { name: 'Hunters Point Av', coordinates: [-73.948916, 40.742216] as [number, number], lines: ['7'] },
           { name: 'Vernon Blvd-Jackson Av', coordinates: [-73.953581, 40.742626] as [number, number], lines: ['7'] },
           { name: 'Grand Central-42 St', coordinates: [-73.97735933333333, 40.751992] as [number, number], lines: ['4', '5', '6', '7', 'S'] },
-          { name: '42 St-Bryant Pk', coordinates: [-73.98326599999999, 40.7540215] as [number, number], lines: ['7', 'B', 'D', 'F', 'M'] },
+          { name: '5 Av', coordinates: [-73.981963, 40.753821] as [number, number], lines: ['7'] },
           { name: 'Times Sq-42 St', coordinates: [-73.9875808, 40.755746] as [number, number], lines: ['1', '2', '3', '7', 'A', 'C', 'E', 'N', 'Q', 'R', 'S', 'W'] },
           { name: '34 St-Hudson Yards', coordinates: [-74.00191, 40.755882] as [number, number], lines: ['7'] },
         ];
@@ -3850,14 +3850,23 @@ export default function WorkingSubwayMap() {
           [-74.002134, 40.740335],   // 8 Av (14 St)
           [-74.000495, 40.732338],   // W 4 St-Wash Sq
           [-74.005229, 40.720824],   // Canal St
-          [-74.0095515, 40.712603],  // Cortlandt St
+          [-74.009266, 40.713243],   // Chambers St / World Trade Center
           [-74.00783824999999, 40.71008875], // Fulton St
           [-73.990531, 40.699337],   // High St
           [-73.98664199999999, 40.692259], // Jay St-MetroTech
           [-73.985001, 40.688484],   // Hoyt-Schermerhorn Sts
+          [-73.973946, 40.686113],   // (Lafayette Av - waypoint)
+          [-73.965838, 40.683263],   // (Clinton-Washington Avs - waypoint)
+          [-73.95633749999999, 40.680988], // (Franklin Av - waypoint)
           [-73.950426, 40.680438],   // Nostrand Av
+          [-73.940858, 40.679921],   // (Kingston-Throop Avs - waypoint)
           [-73.930729, 40.679364],   // Utica Av
+          [-73.920786, 40.678822],   // (Ralph Av - waypoint)
+          [-73.911946, 40.67834],    // (Rockaway Av - waypoint)
           [-73.90435599999999, 40.678896], // Broadway Junction
+          [-73.896548, 40.674542],   // (Liberty Av - waypoint)
+          [-73.890358, 40.67271],    // (Van Siclen Av - waypoint)
+          [-73.88075, 40.67413],     // (Shepherd Av - waypoint)
           [-73.872106, 40.675377],   // Euclid Av
         ];
 
@@ -3876,7 +3885,13 @@ export default function WorkingSubwayMap() {
         // Far Rockaway Branch: Broadway Junction to Far Rockaway
         const aLineFarRockawayCoords: [number, number][] = [
           [-73.90435599999999, 40.678896], // Broadway Junction
+          [-73.896548, 40.674542],   // (Liberty Av - waypoint)
+          [-73.890358, 40.67271],    // (Van Siclen Av - waypoint)
+          [-73.88075, 40.67413],     // (Shepherd Av - waypoint)
           [-73.872106, 40.675377],   // Euclid Av
+          [-73.86505, 40.677044],    // (Grant Av - waypoint)
+          [-73.858992, 40.679371],   // (80 St - waypoint)
+          [-73.843853, 40.680429],   // (Rockaway Blvd - waypoint)
           [-73.835919, 40.672097],   // Aqueduct Racetrack
           [-73.834058, 40.668234],   // Aqueduct-N Conduit Av
           [-73.830301, 40.660476],   // Howard Beach-JFK Airport
@@ -3933,7 +3948,7 @@ export default function WorkingSubwayMap() {
           { name: '8 Av', coordinates: [-74.002134, 40.740335] as [number, number], lines: ['A', 'C', 'E', 'L'] },
           { name: 'W 4 St-Wash Sq', coordinates: [-74.000495, 40.732338] as [number, number], lines: ['A', 'B', 'C', 'D', 'E', 'F', 'M'] },
           { name: 'Canal St', coordinates: [-74.005229, 40.720824] as [number, number], lines: ['A', 'C', 'E'] },
-          { name: 'Cortlandt St', coordinates: [-74.0095515, 40.712603] as [number, number], lines: ['2', '3', 'A', 'C', 'E', 'R', 'W'] },
+          { name: 'Chambers St / World Trade Center', coordinates: [-74.009266, 40.713243] as [number, number], lines: ['A', 'C', 'E'] },
           { name: 'Fulton St', coordinates: [-74.00783824999999, 40.71008875] as [number, number], lines: ['2', '3', '4', '5', 'A', 'C', 'J', 'Z'] },
           { name: 'High St', coordinates: [-73.990531, 40.699337] as [number, number], lines: ['A', 'C'] },
           { name: 'Jay St-MetroTech', coordinates: [-73.98664199999999, 40.692259] as [number, number], lines: ['A', 'C', 'F', 'R'] },
@@ -4016,8 +4031,9 @@ export default function WorkingSubwayMap() {
           [-73.972143, 40.781433],   // 81 St-Museum of Natural History
           [-73.97641, 40.775594],    // 72 St
           [-73.9818325, 40.7682715], // 59 St-Columbus Circle
+          [-73.981637, 40.762862],   // 7 Av (Manhattan)
           [-73.981329, 40.758663],   // 47-50 Sts-Rockefeller Ctr
-          [-73.98326599999999, 40.7540215], // 42 St-Bryant Pk
+          [-73.98326599999999, 40.7540215], // 42 St-Bryant Park
           [-73.9878865, 40.749643],  // 34 St-Herald Sq
           [-74.000495, 40.732338],   // W 4 St-Wash Sq
           [-73.9954315, 40.725606],  // Broadway-Lafayette St
@@ -4070,8 +4086,9 @@ export default function WorkingSubwayMap() {
           { name: '81 St-Museum of Natural History', coordinates: [-73.972143, 40.781433] as [number, number], lines: ['B', 'C'] },
           { name: '72 St', coordinates: [-73.97641, 40.775594] as [number, number], lines: ['B', 'C'] },
           { name: '59 St-Columbus Circle', coordinates: [-73.9818325, 40.7682715] as [number, number], lines: ['1', 'A', 'B', 'C', 'D'] },
+          { name: '7 Av', coordinates: [-73.981637, 40.762862] as [number, number], lines: ['B', 'D', 'E'] },
           { name: '47-50 Sts-Rockefeller Ctr', coordinates: [-73.981329, 40.758663] as [number, number], lines: ['B', 'D', 'F', 'M'] },
-          { name: '42 St-Bryant Pk', coordinates: [-73.98326599999999, 40.7540215] as [number, number], lines: ['7', 'B', 'D', 'F', 'M'] },
+          { name: '42 St-Bryant Park', coordinates: [-73.98326599999999, 40.7540215] as [number, number], lines: ['7', 'B', 'D', 'F', 'M'] },
           { name: '34 St-Herald Sq', coordinates: [-73.9878865, 40.749643] as [number, number], lines: ['B', 'D', 'F', 'M', 'N', 'Q', 'R', 'W'] },
           { name: 'W 4 St-Wash Sq', coordinates: [-74.000495, 40.732338] as [number, number], lines: ['A', 'B', 'C', 'D', 'E', 'F', 'M'] },
           { name: 'Broadway-Lafayette St', coordinates: [-73.9954315, 40.725606] as [number, number], lines: ['6', 'B', 'D', 'F', 'M'] },
@@ -4139,7 +4156,7 @@ export default function WorkingSubwayMap() {
           [-74.000495, 40.732338],   // W 4 St-Wash Sq
           [-74.003739, 40.726227],   // Spring St
           [-74.005229, 40.720824],   // Canal St
-          [-74.0095515, 40.712603],  // Cortlandt St
+          [-74.009266, 40.713243],   // Chambers St / World Trade Center
           [-74.00783824999999, 40.71008875], // Fulton St
           [-73.990531, 40.699337],   // High St
           [-73.98664199999999, 40.692259], // Jay St-MetroTech
@@ -4197,7 +4214,7 @@ export default function WorkingSubwayMap() {
           { name: 'W 4 St-Wash Sq', coordinates: [-74.000495, 40.732338] as [number, number], lines: ['A', 'B', 'C', 'D', 'E', 'F', 'M'] },
           { name: 'Spring St', coordinates: [-74.003739, 40.726227] as [number, number], lines: ['C', 'E'] },
           { name: 'Canal St', coordinates: [-74.005229, 40.720824] as [number, number], lines: ['A', 'C', 'E'] },
-          { name: 'Cortlandt St', coordinates: [-74.0095515, 40.712603] as [number, number], lines: ['2', '3', 'A', 'C', 'E', 'R', 'W'] },
+          { name: 'Chambers St / World Trade Center', coordinates: [-74.009266, 40.713243] as [number, number], lines: ['A', 'C', 'E'] },
           { name: 'Fulton St', coordinates: [-74.00783824999999, 40.71008875] as [number, number], lines: ['2', '3', '4', '5', 'A', 'C', 'J', 'Z'] },
           { name: 'High St', coordinates: [-73.990531, 40.699337] as [number, number], lines: ['A', 'C'] },
           { name: 'Jay St-MetroTech', coordinates: [-73.98664199999999, 40.692259] as [number, number], lines: ['A', 'C', 'F', 'R'] },
@@ -4250,14 +4267,14 @@ export default function WorkingSubwayMap() {
           [-73.801109, 40.702147],   // Jamaica Center-Parsons/Archer (terminal)
           [-73.807969, 40.700486],   // Sutphin Blvd-Archer Av-JFK Airport
           [-73.828294, 40.700492],   // 121 St
-          [-73.851576, 40.693879],   // Woodhaven Blvd
           [-73.84433, 40.695178],    // 104 St
-          [-73.880039, 40.68141],    // Norwood Av
-          [-73.873785, 40.683194],   // Crescent St
+          [-73.851576, 40.693879],   // Woodhaven Blvd
           [-73.867139, 40.691324],   // 75 St-Elderts Ln
-          [-73.90435599999999, 40.678896], // Broadway Junction
-          [-73.898654, 40.676992],   // Alabama Av
+          [-73.873785, 40.683194],   // Crescent St
+          [-73.880039, 40.68141],    // Norwood Av
           [-73.891688, 40.678024],   // Van Siclen Av
+          [-73.898654, 40.676992],   // Alabama Av
+          [-73.90435599999999, 40.678896], // Broadway Junction
           [-73.910456, 40.682893],   // Chauncey St
           [-73.92227, 40.68963],     // Gates Av
           [-73.935657, 40.697207],   // Myrtle Av
@@ -4289,14 +4306,14 @@ export default function WorkingSubwayMap() {
           { name: 'Jamaica Center-Parsons/Archer', coordinates: [-73.801109, 40.702147] as [number, number], lines: ['E', 'J', 'Z'] },
           { name: 'Sutphin Blvd-Archer Av-JFK Airport', coordinates: [-73.807969, 40.700486] as [number, number], lines: ['E', 'J', 'Z'] },
           { name: '121 St', coordinates: [-73.828294, 40.700492] as [number, number], lines: ['J', 'Z'] },
-          { name: 'Woodhaven Blvd', coordinates: [-73.851576, 40.693879] as [number, number], lines: ['J', 'Z'] },
           { name: '104 St', coordinates: [-73.84433, 40.695178] as [number, number], lines: ['J', 'Z'] },
-          { name: 'Norwood Av', coordinates: [-73.880039, 40.68141] as [number, number], lines: ['J', 'Z'] },
-          { name: 'Crescent St', coordinates: [-73.873785, 40.683194] as [number, number], lines: ['J', 'Z'] },
+          { name: 'Woodhaven Blvd', coordinates: [-73.851576, 40.693879] as [number, number], lines: ['J', 'Z'] },
           { name: '75 St-Elderts Ln', coordinates: [-73.867139, 40.691324] as [number, number], lines: ['J', 'Z'] },
-          { name: 'Broadway Junction', coordinates: [-73.90435599999999, 40.678896] as [number, number], lines: ['A', 'C', 'J', 'L', 'Z'] },
-          { name: 'Alabama Av', coordinates: [-73.898654, 40.676992] as [number, number], lines: ['J', 'Z'] },
+          { name: 'Crescent St', coordinates: [-73.873785, 40.683194] as [number, number], lines: ['J', 'Z'] },
+          { name: 'Norwood Av', coordinates: [-73.880039, 40.68141] as [number, number], lines: ['J', 'Z'] },
           { name: 'Van Siclen Av', coordinates: [-73.891688, 40.678024] as [number, number], lines: ['J', 'Z'] },
+          { name: 'Alabama Av', coordinates: [-73.898654, 40.676992] as [number, number], lines: ['J', 'Z'] },
+          { name: 'Broadway Junction', coordinates: [-73.90435599999999, 40.678896] as [number, number], lines: ['A', 'C', 'J', 'L', 'Z'] },
           { name: 'Chauncey St', coordinates: [-73.910456, 40.682893] as [number, number], lines: ['J', 'Z'] },
           { name: 'Gates Av', coordinates: [-73.92227, 40.68963] as [number, number], lines: ['J', 'Z'] },
           { name: 'Myrtle Av', coordinates: [-73.935657, 40.697207] as [number, number], lines: ['J', 'M', 'Z'] },

@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server';
 import { mtaDataService } from '@/lib/services/mta-data-service';
-import { apiSuccess, notFound, serverError, CACHE_HEADERS } from '@/lib/api/responses';
+import { apiSuccess, notFound, badRequest, serverError, CACHE_HEADERS } from '@/lib/api/responses';
+import { lineId } from '@/lib/api/schemas';
 
 export const dynamic = 'force-dynamic';
 
@@ -11,6 +12,11 @@ export async function GET(
   try {
     const { line } = params;
     const lineUpper = line.toUpperCase();
+
+    const parsed = lineId.safeParse(lineUpper);
+    if (!parsed.success) {
+      return badRequest(`Invalid line code: ${line}`);
+    }
 
     // Get line information
     const lineInfo = mtaDataService.getLineInfo(lineUpper);
