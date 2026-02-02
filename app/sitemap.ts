@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import fs from 'fs';
 import path from 'path';
+import { prisma } from '@/lib/db';
 
 interface Station {
   slug: string;
@@ -82,6 +83,32 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 0.6,
     });
+  });
+
+  // Add published blog posts
+  try {
+    const posts = await prisma.post.findMany({
+      where: { status: 'PUBLISHED' },
+      select: { slug: true, updatedAt: true },
+    });
+    posts.forEach((post) => {
+      entries.push({
+        url: `${SITE_URL}/blog/${post.slug}`,
+        lastModified: post.updatedAt,
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      });
+    });
+  } catch {
+    // DB may not be available during build
+  }
+
+  // Add blog index page
+  entries.push({
+    url: `${SITE_URL}/blog`,
+    lastModified: new Date(),
+    changeFrequency: 'daily',
+    priority: 0.8,
   });
 
   return entries;

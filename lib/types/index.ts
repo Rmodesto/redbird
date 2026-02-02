@@ -192,6 +192,51 @@ export interface DetailedAmenities {
 // Page Data Types (for SSR)
 // =============================================================================
 
+// =============================================================================
+// Blog Types
+// =============================================================================
+
+export type PostStatus = 'DRAFT' | 'PUBLISHED';
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  featuredImage: string | null;
+  featuredImageAlt: string | null;
+  status: PostStatus;
+  publishedAt: string | null;
+  authorId: string;
+  authorName: string;
+  readingTimeMinutes: number;
+  metaTitle: string | null;
+  metaDescription: string | null;
+  ogImage: string | null;
+  canonicalUrl: string | null;
+  keywords: string[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface BlogListResponse {
+  posts: BlogPost[];
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+}
+
+export interface AdSlotProps {
+  placement: 'blog-header' | 'blog-inline' | 'blog-sidebar' | 'blog-footer';
+  className?: string;
+}
+
+// =============================================================================
+// Page Data Types (for SSR)
+// =============================================================================
+
 export interface StationPageData {
   station: Station;
   score: StationScore;
