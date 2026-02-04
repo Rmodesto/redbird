@@ -1,0 +1,90 @@
+{
+  "name": "Subway Sounds — YouTube Upload",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [{ "field": "minutes", "minutesInterval": 5 }]
+        }
+      },
+      "id": "schedule-trigger",
+      "name": "Every 5 Minutes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const fs = require('fs');\nconst path = require('path');\n\nconst videoDir = '/videos/subway-sounds';\nconst doneDir = path.join(videoDir, 'done');\nconst extensions = ['.mp4', '.mov'];\n\n// Ensure done/ subfolder exists\nif (!fs.existsSync(doneDir)) {\n  fs.mkdirSync(doneDir, { recursive: true });\n}\n\nconst files = fs.readdirSync(videoDir).filter(f => {\n  const ext = path.extname(f).toLowerCase();\n  return extensions.includes(ext);\n});\n\nconst results = [];\n\nfor (const file of files) {\n  const filePath = path.join(videoDir, file);\n  const baseName = path.basename(file, path.extname(file));\n  const sidecarPath = path.join(videoDir, baseName + '.json');\n\n  let title = baseName.replace(/[-_]/g, ' ').replace(/\\b\\w/g, c => c.toUpperCase());\n  let description = `NYC subway sounds from ${baseName.replace(/[-_]/g, ' ')}. Subscribe for more authentic subway audio.`;\n  let tags = ['nyc subway', 'subway sounds', 'MTA'];\n  let privacy = 'public';\n  let category = '22';\n\n  if (fs.existsSync(sidecarPath)) {\n    try {\n      const meta = JSON.parse(fs.readFileSync(sidecarPath, 'utf8'));\n      if (meta.title) title = meta.title;\n      if (meta.description) description = meta.description;\n      if (meta.tags) tags = meta.tags;\n      if (meta.privacy) privacy = meta.privacy;\n      if (meta.category) category = meta.category;\n    } catch (e) {\n      // ignore bad JSON, use defaults\n    }\n  }\n\n  results.push({\n    json: { filePath, file, baseName, sidecarPath, title, description, tags, privacy, category }\n  });\n}\n\nreturn results.length > 0 ? results : [{ json: { noFiles: true } }];"
+      },
+      "id": "list-videos",
+      "name": "List Videos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [
+            {
+              "id": "has-files",
+              "leftValue": "={{ $json.noFiles }}",
+              "rightValue": true,
+              "operator": { "type": "boolean", "operation": "notTrue" }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "if-has-files",
+      "name": "Has Files?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "title": "={{ $json.title }}",
+        "description": "={{ $json.description }}",
+        "privacyStatus": "={{ $json.privacy }}",
+        "categoryId": "={{ $json.category }}",
+        "tags": "={{ $json.tags.join(',') }}",
+        "options": {}
+      },
+      "id": "youtube-upload",
+      "name": "Upload to YouTube",
+      "type": "n8n-nodes-base.youTube",
+      "typeVersion": 1,
+      "position": [900, 200],
+      "credentials": {
+        "youTubeOAuth2Api": { "id": "CONFIGURE_IN_N8N_UI", "name": "YouTube OAuth2" }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const fs = require('fs');\nconst path = require('path');\n\nconst filePath = $input.first().json.filePath;\nconst file = $input.first().json.file;\nconst baseName = $input.first().json.baseName;\nconst videoDir = path.dirname(filePath);\nconst doneDir = path.join(videoDir, 'done');\n\n// Move video file\nfs.renameSync(filePath, path.join(doneDir, file));\n\n// Move sidecar JSON if it exists\nconst sidecarPath = path.join(videoDir, baseName + '.json');\nif (fs.existsSync(sidecarPath)) {\n  fs.renameSync(sidecarPath, path.join(doneDir, baseName + '.json'));\n}\n\nreturn [{ json: { moved: file, to: doneDir } }];"
+      },
+      "id": "move-to-done",
+      "name": "Move to Done",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1120, 200]
+    }
+  ],
+  "connections": {
+    "Every 5 Minutes": { "main": [[{ "node": "List Videos", "type": "main", "index": 0 }]] },
+    "List Videos": { "main": [[{ "node": "Has Files?", "type": "main", "index": 0 }]] },
+    "Has Files?": {
+      "main": [
+        [{ "node": "Upload to YouTube", "type": "main", "index": 0 }],
+        []
+      ]
+    },
+    "Upload to YouTube": { "main": [[{ "node": "Move to Done", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "meta": { "templateCredsSetupCompleted": true }
+}
