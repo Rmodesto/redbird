@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://subwaysounds.nyc';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://subwaysounds.net';
 const SITE_NAME = 'Subway Sounds NYC';
 const SITE_DESCRIPTION = 'Your comprehensive guide to NYC subway with real-time arrivals, subway sounds, interactive maps, and station information';
 
