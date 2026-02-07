@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { generateSEOMetadata } from '@/lib/seo';
 import type { BlogPost } from '@/lib/types';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://subwaysounds.nyc';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://subwaysounds.net';
 
 export function generateBlogPostMetadata(post: BlogPost): Metadata {
   return generateSEOMetadata({

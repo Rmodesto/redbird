@@ -131,12 +131,9 @@ export default function Footer({ onOpenCookieSettings }: FooterProps) {
 
         {/* Bottom Bar */}
         <div className="mt-8 pt-8 border-t border-gray-800">
-          <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+          <div className="text-sm text-gray-500">
             <p>
               © {currentYear} Subway Sounds Media LLC. All rights reserved.
-            </p>
-            <p className="mt-2 md:mt-0">
-              Made with ❤️ in New York City
             </p>
           </div>
           <p className="text-xs text-gray-600 mt-4 text-center md:text-left">
