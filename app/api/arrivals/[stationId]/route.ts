@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import GtfsRealtimeBindings from "gtfs-realtime-bindings";
-import fs from 'fs';
-import path from 'path';
+
+// Import JSON directly so Next.js bundles them (works in serverless)
+import stationsNormalized from '@/data/stations-normalized.json';
+import stopIdLookupData from '@/data/stop-id-lookup.json';
 
 export const dynamic = 'force-dynamic';
 
@@ -27,57 +29,32 @@ interface Arrival {
   tripId: string;
 }
 
-let stationsData: any[] | null = null;
-let stopIdLookup: Record<string, any> | null = null;
-let slugToStopIds: Record<string, string[]> | null = null;
-
-function loadStationData() {
-  if (!stationsData) {
-    try {
-      const dataDir = path.join(process.cwd(), 'data');
-      const stationsPath = path.join(dataDir, 'stations-normalized.json');
-      const stopIdLookupPath = path.join(dataDir, 'stop-id-lookup.json');
-
-      const stations = JSON.parse(fs.readFileSync(stationsPath, 'utf8'));
-
-      // Load stop ID lookup and build reverse mapping (slug -> stop IDs)
-      stopIdLookup = JSON.parse(fs.readFileSync(stopIdLookupPath, 'utf8'));
-      slugToStopIds = {};
-
-      for (const [stopId, info] of Object.entries(stopIdLookup as Record<string, any>)) {
-        const slug = info.stationSlug;
-        if (slug) {
-          if (!slugToStopIds[slug]) {
-            slugToStopIds[slug] = [];
-          }
-          slugToStopIds[slug].push(stopId);
-        }
-      }
-
-      console.log(`Built slug->stopIds mapping for ${Object.keys(slugToStopIds).length} stations`);
-
-      // Use normalized stations data which has correct slugs
-      stationsData = stations.map((station: any) => ({
-        id: station.id,
-        name: station.name,
-        slug: station.slug,
-        lines: station.lines || [],
-        platforms: station.lines?.map((line: string, index: number) => ({
-          stopId: `${station.id}${index % 2 === 0 ? 'N' : 'S'}`,
-          direction: index % 2 === 0 ? 'N' : 'S',
-          lines: [line]
-        })) || []
-      }));
-
-      console.log(`Loaded ${stationsData?.length || 0} stations from official data`);
-    } catch (error) {
-      console.error('Error loading station data:', error);
-      // Fallback to mock data
-      stationsData = [];
-      slugToStopIds = {};
+// Build slug -> stopIds mapping at module load time (works in serverless)
+const slugToStopIds: Record<string, string[]> = {};
+for (const [stopId, info] of Object.entries(stopIdLookupData as Record<string, any>)) {
+  const slug = info.stationSlug;
+  if (slug) {
+    if (!slugToStopIds[slug]) {
+      slugToStopIds[slug] = [];
     }
+    slugToStopIds[slug].push(stopId);
   }
 }
+
+// Process stations data at module load time
+const stationsData = stationsNormalized.map((station: any) => ({
+  id: station.id,
+  name: station.name,
+  slug: station.slug,
+  lines: station.lines || [],
+  platforms: station.lines?.map((line: string, index: number) => ({
+    stopId: `${station.id}${index % 2 === 0 ? 'N' : 'S'}`,
+    direction: index % 2 === 0 ? 'N' : 'S',
+    lines: [line]
+  })) || []
+}));
+
+console.log(`Loaded ${stationsData.length} stations, ${Object.keys(slugToStopIds).length} slug mappings`);
 
 function determineRelevantFeeds(lines: string[]): string[] {
   const feeds: string[] = [];
@@ -238,8 +215,6 @@ export async function GET(
   { params }: { params: Promise<{ stationId: string }> }
 ) {
   try {
-    loadStationData();
-
     const { stationId } = await params;
 
     if (!stationId || typeof stationId !== 'string' || stationId.trim().length === 0) {
@@ -249,10 +224,6 @@ export async function GET(
       );
     }
 
-    if (!stationsData) {
-      throw new Error('Station data not loaded');
-    }
-    
     // Find the station
     const station = stationsData.find(s => s.id === stationId || s.slug === stationId);
     
