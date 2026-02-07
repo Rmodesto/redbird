@@ -10,8 +10,13 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  const slugs = await postService.getAllPublishedSlugs();
-  return slugs.map((slug) => ({ slug }));
+  try {
+    const slugs = await postService.getAllPublishedSlugs();
+    return slugs.map((slug) => ({ slug }));
+  } catch {
+    // Database not available during build (e.g., missing DATABASE_URL)
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

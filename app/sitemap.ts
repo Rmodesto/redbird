@@ -48,7 +48,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Load station data
   try {
     const dataDir = path.join(process.cwd(), 'data');
-    const stationsPath = path.join(dataDir, 'stations.json');
+    const stationsPath = path.join(dataDir, 'stations-normalized.json');
     const stationsData: Station[] = JSON.parse(fs.readFileSync(stationsPath, 'utf8'));
     
     // Add all station pages
