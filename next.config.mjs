@@ -123,11 +123,16 @@ const nextConfig = {
     ];
   },
   
-  // Environment variables
+  // Environment variables - explicitly define for AWS Amplify SSR
   env: {
-    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || 'https://subwaysounds.nyc',
+    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || 'https://subwaysounds.net',
     NEXT_PUBLIC_SITE_NAME: 'Subway Sounds NYC',
     NEXT_PUBLIC_SITE_DESCRIPTION: 'Your comprehensive guide to NYC subway with real-time arrivals, subway sounds, interactive maps, and station information',
+    // Clerk Configuration - critical for SSR middleware
+    CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+    // Database Configuration
+    DATABASE_URL: process.env.DATABASE_URL,
   },
   
   // Build configuration
