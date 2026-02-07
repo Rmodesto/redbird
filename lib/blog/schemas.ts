@@ -11,6 +11,11 @@ export const createPostSchema = z.object({
   ogImage: z.string().url().nullable().optional(),
   canonicalUrl: z.string().url().nullable().optional(),
   keywords: z.array(z.string()).default([]),
+  category: z.string().max(50).default(''),
+  tags: z.array(z.string()).default([]),
+  featured: z.boolean().default(false),
+  authorImage: z.string().nullable().optional(),
+  authorRole: z.string().max(100).default('Contributing Writer'),
 });
 
 export const updatePostSchema = createPostSchema.partial();
@@ -19,6 +24,8 @@ export const blogListQuery = z.object({
   page: z.coerce.number().int().min(1).default(1),
   limit: z.coerce.number().int().min(1).max(50).default(10),
   status: z.enum(['DRAFT', 'PUBLISHED']).optional(),
+  category: z.string().optional(),
+  search: z.string().optional(),
 });
 
 export type CreatePostInput = z.infer<typeof createPostSchema>;

@@ -86,12 +86,12 @@ export default function SubwaySoundsPage() {
   ];
 
   const popularStations = [
-    "Times Square-42 St",
-    "Grand Central-42 St",
-    "Union Square-14 St",
-    "Herald Square",
-    "Fulton St",
-    "Atlantic Ave-Barclays",
+    { name: "Times Square-42 St", slug: "times-sq-42-st" },
+    { name: "Grand Central-42 St", slug: "grand-central-42-st" },
+    { name: "Union Square-14 St", slug: "14-st-union-sq" },
+    { name: "34 St-Herald Sq", slug: "34-st-herald-sq" },
+    { name: "Fulton St", slug: "fulton-st-2345acjz" },
+    { name: "Atlantic Av-Barclays Ctr", slug: "atlantic-av-barclays-ctr" },
   ];
 
   return (
@@ -229,12 +229,12 @@ export default function SubwaySoundsPage() {
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               {popularStations.map((station) => (
                 <a
-                  key={station}
-                  href={`/station/${station.toLowerCase().replace(/\s+/g, '-')}`}
+                  key={station.slug}
+                  href={`/station/${station.slug}`}
                   className="bg-white p-4 rounded-lg text-center hover:shadow-lg transition"
                 >
                   <div className="text-2xl mb-2">🎵</div>
-                  <div className="font-semibold text-sm">{station}</div>
+                  <div className="font-semibold text-sm">{station.name}</div>
                 </a>
               ))}
             </div>

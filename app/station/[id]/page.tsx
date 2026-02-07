@@ -7,6 +7,7 @@ import SubwayLinesBadges from '@/components/subway/SubwayLinesBadges';
 import Navigation from '@/components/Navigation';
 import StationMap from '@/components/maps/StationMap';
 import { getLineBgClass, getLineTextClass } from '@/lib/constants';
+import LiveArrivalsSection from '@/components/station/LiveArrivalsSection';
 import {
   buildPageTitle,
   buildMetaDescription,
@@ -16,17 +17,25 @@ import {
 } from '@/lib/utils/seo-keywords';
 
 interface Props {
-  params: { id: string }
+  params: Promise<{ id: string }>;
 }
 
 // Generate static params for all stations at build time
-// Using unique station ID (not slug) because NYC has 56+ stations with duplicate names
-// e.g., "103 St" exists on 1, 6, and B/C lines at different locations
+// Generate both by ID and by slug for maximum SEO coverage
 export async function generateStaticParams() {
   const stations = mtaDataService.getAllStations();
-  return stations.map((station) => ({
-    id: station.id,
-  }));
+  const params: { id: string }[] = [];
+
+  stations.forEach((station) => {
+    // Generate by ID (primary)
+    params.push({ id: station.id });
+    // Also generate by slug for SEO-friendly URLs
+    if (station.slug && station.slug !== station.id) {
+      params.push({ id: station.slug });
+    }
+  });
+
+  return params;
 }
 
 async function getStation(id: string) {
@@ -36,7 +45,8 @@ async function getStation(id: string) {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const station = await getStation(params.id);
+  const { id } = await params;
+  const station = await getStation(id);
 
   if (!station) {
     return {
@@ -73,7 +83,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       type: 'website',
       locale: 'en_US',
-      url: `/station/${params.id}`,
+      url: `/station/${station.slug}`,
       siteName: 'NYC Subway Sounds',
       images: [
         {
@@ -91,7 +101,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [`/api/og?station=${encodeURIComponent(station.name)}&borough=${station.borough}&lines=${station.lines.join(',')}`],
     },
     alternates: {
-      canonical: `/station/${params.id}`,
+      canonical: `/station/${station.slug}`,
     },
     other: {
       'geo.position': `${station.latitude};${station.longitude}`,
@@ -134,7 +144,8 @@ function getStationYearBuilt(stationName: string): number {
 }
 
 export default async function StationPage({ params }: Props) {
-  const station = await getStation(params.id);
+  const { id } = await params;
+  const station = await getStation(id);
   
   if (!station) {
     notFound();
@@ -254,40 +265,10 @@ export default async function StationPage({ params }: Props) {
           {/* Main Content - Left Column */}
           <div className="lg:col-span-2 space-y-8">
             {/* Live Arrivals Section */}
-            <section
-              className="bg-white rounded-lg shadow-lg p-6 border border-gray-200"
-              aria-label={getAriaLabel('liveArrivals', station)}
-            >
-              <h2 className="text-2xl font-bold mb-6 flex items-center gap-3 text-gray-900">
-                <span className="text-3xl">🕐</span>
-                &quot;LIVE&quot; ARRIVALS
-              </h2>
-              
-              {/* Mock arrivals data */}
-              <div className="space-y-4">
-                {station.lines.slice(0, 5).map((line: string, index: number) => (
-                  <div key={line} className="flex items-center justify-between py-3 border-b border-gray-200 last:border-0">
-                    <div className="flex items-center gap-4">
-                      <span className={`inline-flex items-center justify-center w-10 h-10 rounded font-bold ${getLineBgClass(line)} ${getLineTextClass(line)}`}>
-                        {line}
-                      </span>
-                      <div>
-                        <div className="font-semibold text-gray-900">Downtown</div>
-                        <div className="text-sm text-gray-500 uppercase">{station.borough}</div>
-                      </div>
-                    </div>
-                    <div className="text-2xl font-bold text-gray-900">
-                      {5 + index * 2} min
-                    </div>
-                  </div>
-                ))}
-              </div>
-              
-              <div className="mt-4 flex justify-between text-sm text-gray-500">
-                <span>Updated every 30 seconds • Last update: 9:34:33 PM</span>
-                <span>Data: MTA GTFS Real-time</span>
-              </div>
-            </section>
+            <LiveArrivalsSection
+              stationId={station.slug || station.id}
+              stationLines={station.lines}
+            />
 
             {/* Subway Sounds Section */}
             <section

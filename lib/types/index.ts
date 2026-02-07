@@ -216,6 +216,12 @@ export interface BlogPost {
   ogImage: string | null;
   canonicalUrl: string | null;
   keywords: string[];
+  category: string;
+  tags: string[];
+  views: number;
+  featured: boolean;
+  authorImage: string | null;
+  authorRole: string;
   createdAt: string;
   updatedAt: string;
 }

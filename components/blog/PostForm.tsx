@@ -7,6 +7,14 @@ import type { BlogPost } from '@/lib/types';
 
 const PostEditor = dynamic(() => import('./PostEditor'), { ssr: false });
 
+const CATEGORIES = [
+  { value: '', label: 'Select Category' },
+  { value: 'TIPS', label: 'Tips' },
+  { value: 'GUIDES', label: 'Guides' },
+  { value: 'CULTURE', label: 'Culture' },
+  { value: 'HISTORY', label: 'History' },
+];
+
 interface PostFormProps {
   post?: BlogPost;
 }
@@ -24,6 +32,11 @@ export default function PostForm({ post }: PostFormProps) {
   const [metaTitle, setMetaTitle] = useState(post?.metaTitle || '');
   const [metaDescription, setMetaDescription] = useState(post?.metaDescription || '');
   const [keywords, setKeywords] = useState(post?.keywords?.join(', ') || '');
+  const [category, setCategory] = useState(post?.category || '');
+  const [tags, setTags] = useState(post?.tags?.join(', ') || '');
+  const [featured, setFeatured] = useState(post?.featured || false);
+  const [authorImage, setAuthorImage] = useState(post?.authorImage || '');
+  const [authorRole, setAuthorRole] = useState(post?.authorRole || 'Contributing Writer');
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -42,6 +55,14 @@ export default function PostForm({ post }: PostFormProps) {
         .split(',')
         .map((k) => k.trim())
         .filter(Boolean),
+      category,
+      tags: tags
+        .split(',')
+        .map((t) => t.trim())
+        .filter(Boolean),
+      featured,
+      authorImage: authorImage || null,
+      authorRole: authorRole || 'Contributing Writer',
     };
 
     try {
@@ -67,7 +88,7 @@ export default function PostForm({ post }: PostFormProps) {
     }
   }
 
-  async function handleImageUpload() {
+  async function handleImageUpload(setter: (url: string) => void) {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
@@ -78,7 +99,7 @@ export default function PostForm({ post }: PostFormProps) {
       formData.append('file', file);
       const res = await fetch('/api/upload', { method: 'POST', body: formData });
       const data = await res.json();
-      if (data.url) setFeaturedImage(data.url);
+      if (data.url) setter(data.url);
     };
     input.click();
   }
@@ -100,6 +121,48 @@ export default function PostForm({ post }: PostFormProps) {
           required
           className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-medium text-gray-300 mb-1">Category</label>
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            {CATEGORIES.map((c) => (
+              <option key={c.value} value={c.value}>
+                {c.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-300 mb-1">
+            Tags (comma separated)
+          </label>
+          <input
+            type="text"
+            value={tags}
+            onChange={(e) => setTags(e.target.value)}
+            placeholder="subway, mta, tips"
+            className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+      </div>
+
+      <div className="flex items-center gap-2">
+        <input
+          type="checkbox"
+          id="featured"
+          checked={featured}
+          onChange={(e) => setFeatured(e.target.checked)}
+          className="w-4 h-4 rounded border-gray-700 bg-gray-800 text-blue-600 focus:ring-blue-500"
+        />
+        <label htmlFor="featured" className="text-sm font-medium text-gray-300">
+          Featured Article
+        </label>
       </div>
 
       <div>
@@ -129,7 +192,7 @@ export default function PostForm({ post }: PostFormProps) {
           />
           <button
             type="button"
-            onClick={handleImageUpload}
+            onClick={() => handleImageUpload(setFeaturedImage)}
             className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
           >
             Upload
@@ -148,6 +211,43 @@ export default function PostForm({ post }: PostFormProps) {
           className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
+
+      <details className="border border-gray-700 rounded-lg p-4">
+        <summary className="text-sm font-medium text-gray-300 cursor-pointer">
+          Author Settings
+        </summary>
+        <div className="mt-4 space-y-4">
+          <div>
+            <label className="block text-sm text-gray-400 mb-1">Author Role</label>
+            <input
+              type="text"
+              value={authorRole}
+              onChange={(e) => setAuthorRole(e.target.value)}
+              placeholder="Contributing Writer"
+              className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <div>
+            <label className="block text-sm text-gray-400 mb-1">Author Image</label>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={authorImage}
+                onChange={(e) => setAuthorImage(e.target.value)}
+                placeholder="/uploads/authors/avatar.jpg"
+                className="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <button
+                type="button"
+                onClick={() => handleImageUpload(setAuthorImage)}
+                className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
+              >
+                Upload
+              </button>
+            </div>
+          </div>
+        </div>
+      </details>
 
       <details className="border border-gray-700 rounded-lg p-4">
         <summary className="text-sm font-medium text-gray-300 cursor-pointer">

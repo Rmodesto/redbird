@@ -5,6 +5,7 @@ import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
 import Link from '@tiptap/extension-link';
 import Placeholder from '@tiptap/extension-placeholder';
+import Youtube from '@tiptap/extension-youtube';
 import { useCallback } from 'react';
 
 interface PostEditorProps {
@@ -19,6 +20,10 @@ export default function PostEditor({ content, onChange }: PostEditorProps) {
       Image,
       Link.configure({ openOnClick: false }),
       Placeholder.configure({ placeholder: 'Start writing your post...' }),
+      Youtube.configure({
+        controls: true,
+        nocookie: true,
+      }),
     ],
     content,
     onUpdate: ({ editor }) => {
@@ -47,6 +52,14 @@ export default function PostEditor({ content, onChange }: PostEditorProps) {
       }
     };
     input.click();
+  }, [editor]);
+
+  const addVideo = useCallback(() => {
+    if (!editor) return;
+    const url = window.prompt('Enter YouTube URL');
+    if (url) {
+      editor.commands.setYoutubeVideo({ src: url });
+    }
   }, [editor]);
 
   if (!editor) return null;
@@ -95,6 +108,7 @@ export default function PostEditor({ content, onChange }: PostEditorProps) {
           label="Code"
         />
         <ToolButton active={false} onClick={addImage} label="Image" />
+        <ToolButton active={false} onClick={addVideo} label="Video" />
         <ToolButton
           active={false}
           onClick={() => {

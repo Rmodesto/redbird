@@ -102,12 +102,12 @@ export default function HomePage() {
   ];
 
   const popularStations = [
-    { name: "Times Square-42 St", lines: ["N", "Q", "R", "W", "S", "1", "2", "3", "7"], slug: "times-square-42-st" },
+    { name: "Times Square-42 St", lines: ["N", "Q", "R", "W", "S", "1", "2", "3", "7"], slug: "times-sq-42-st" },
     { name: "Grand Central-42 St", lines: ["4", "5", "6", "7", "S"], slug: "grand-central-42-st" },
-    { name: "Union Square-14 St", lines: ["4", "5", "6", "N", "Q", "R", "W", "L"], slug: "union-square-14-st" },
-    { name: "Herald Square", lines: ["B", "D", "F", "M", "N", "Q", "R", "W"], slug: "herald-square" },
-    { name: "Fulton St", lines: ["2", "3", "4", "5", "A", "C", "J", "Z"], slug: "fulton-st" },
-    { name: "Atlantic Ave", lines: ["B", "Q", "D", "N", "R", "W", "2", "3", "4", "5"], slug: "atlantic-ave-barclays" },
+    { name: "Union Square-14 St", lines: ["4", "5", "6", "N", "Q", "R", "W", "L"], slug: "14-st-union-sq" },
+    { name: "34 St-Herald Sq", lines: ["B", "D", "F", "M", "N", "Q", "R", "W"], slug: "34-st-herald-sq" },
+    { name: "Fulton St", lines: ["2", "3", "4", "5", "A", "C", "J", "Z"], slug: "fulton-st-2345acjz" },
+    { name: "Atlantic Av-Barclays Ctr", lines: ["B", "Q", "D", "N", "R", "W", "2", "3", "4", "5"], slug: "atlantic-av-barclays-ctr" },
   ];
 
   const featureCards = [

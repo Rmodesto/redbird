@@ -22,7 +22,12 @@ export function sanitizeHtml(html: string): string {
       'blockquote', 'a', 'img',
       'table', 'thead', 'tbody', 'tr', 'th', 'td',
       'div', 'span',
+      'iframe', 'video', 'source',
     ],
-    ALLOWED_ATTR: ['href', 'src', 'alt', 'title', 'target', 'rel', 'class'],
+    ALLOWED_ATTR: [
+      'href', 'src', 'alt', 'title', 'target', 'rel', 'class',
+      'width', 'height', 'frameborder', 'allowfullscreen', 'allow',
+      'autoplay', 'controls', 'type', 'data-youtube-video',
+    ],
   });
 }

@@ -7,14 +7,19 @@ const isPublicRoute = createRouteMatcher([
   '/',
   '/sign-in(.*)',
   '/sign-up(.*)',
-  '/api/auth/sync',
+  '/api/(.*)',  // All API routes should be public
   '/station(.*)',
   '/line(.*)',
+  '/lines(.*)',
+  '/stations(.*)',
   '/map(.*)',
   '/culture(.*)',
   '/subway-sounds(.*)',
+  '/subway-map(.*)',
   '/blog(.*)',
-  '/api/blog(.*)',
+  '/contact(.*)',
+  '/privacy-policy(.*)',
+  '/terms(.*)',
 ]);
 
 const clerkHandler = clerkMiddleware(async (auth, req) => {

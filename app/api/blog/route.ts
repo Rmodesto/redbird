@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
     const parsed = blogListQuery.safeParse(params);
     if (!parsed.success) return validationError(parsed.error);
 
-    const { page, limit, status } = parsed.data;
+    const { page, limit, status, category, search } = parsed.data;
 
     // Check if admin request (has auth + status filter)
     let data;
@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
         await requireAdmin();
         data = await postService.getAdminPosts(page, limit, status);
       } catch {
-        data = await postService.getPublicPosts(page, limit);
+        data = await postService.getPublicPosts(page, limit, category, search);
       }
     } else {
       // Check auth optionally for admin listing
@@ -31,10 +31,10 @@ export async function GET(req: NextRequest) {
         if (userId) {
           data = await postService.getAdminPosts(page, limit);
         } else {
-          data = await postService.getPublicPosts(page, limit);
+          data = await postService.getPublicPosts(page, limit, category, search);
         }
       } catch {
-        data = await postService.getPublicPosts(page, limit);
+        data = await postService.getPublicPosts(page, limit, category, search);
       }
     }
 

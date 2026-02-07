@@ -84,6 +84,42 @@ const nextConfig = {
         destination: '/lines',
         permanent: true,
       },
+      // Station slug redirects - common alternate URL patterns
+      {
+        source: '/station/times-square-42-st',
+        destination: '/station/times-sq-42-st',
+        permanent: true,
+      },
+      {
+        source: '/station/union-square-14-st',
+        destination: '/station/14-st-union-sq',
+        permanent: true,
+      },
+      {
+        source: '/station/herald-square',
+        destination: '/station/34-st-herald-sq',
+        permanent: true,
+      },
+      {
+        source: '/station/fulton-st',
+        destination: '/station/fulton-st-2345acjz',
+        permanent: true,
+      },
+      {
+        source: '/station/atlantic-ave-barclays',
+        destination: '/station/atlantic-av-barclays-ctr',
+        permanent: true,
+      },
+      {
+        source: '/station/penn-station',
+        destination: '/station/34-st-penn-station',
+        permanent: true,
+      },
+      {
+        source: '/station/world-trade-center',
+        destination: '/station/wtc-cortlandt',
+        permanent: true,
+      },
     ];
   },
   

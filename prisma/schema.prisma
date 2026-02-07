@@ -41,6 +41,12 @@ model Post {
   ogImage            String?
   canonicalUrl       String?
   keywords           String    @default("[]")
+  category           String    @default("")
+  tags               String    @default("[]")
+  views              Int       @default(0)
+  featured           Boolean   @default(false)
+  authorImage        String?
+  authorRole         String    @default("Contributing Writer")
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
 

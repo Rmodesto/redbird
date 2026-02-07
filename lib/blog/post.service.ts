@@ -4,7 +4,9 @@ import type { BlogPost, BlogListResponse } from '@/lib/types';
 import type { CreatePostInput, UpdatePostInput } from './schemas';
 import type { Post } from '@prisma/client';
 
-function toApiBlogPost(post: Post): BlogPost {
+type PostWithAuthor = Post & { author?: { imageUrl: string | null } | null };
+
+function toApiBlogPost(post: PostWithAuthor): BlogPost {
   return {
     ...post,
     status: post.status as BlogPost['status'],
@@ -12,6 +14,8 @@ function toApiBlogPost(post: Post): BlogPost {
     createdAt: post.createdAt.toISOString(),
     updatedAt: post.updatedAt.toISOString(),
     keywords: JSON.parse(post.keywords),
+    tags: JSON.parse(post.tags),
+    authorImage: post.authorImage || post.author?.imageUrl || null,
   };
 }
 
@@ -41,6 +45,12 @@ export async function createPost(
     ogImage: input.ogImage ?? null,
     canonicalUrl: input.canonicalUrl ?? null,
     keywords: JSON.stringify(input.keywords || []),
+    category: input.category || '',
+    tags: JSON.stringify(input.tags || []),
+    views: 0,
+    featured: input.featured || false,
+    authorImage: input.authorImage ?? null,
+    authorRole: input.authorRole || 'Contributing Writer',
   });
 
   return toApiBlogPost(post);
@@ -65,6 +75,11 @@ export async function updatePost(id: string, input: UpdatePostInput): Promise<Bl
   if (input.ogImage !== undefined) data.ogImage = input.ogImage;
   if (input.canonicalUrl !== undefined) data.canonicalUrl = input.canonicalUrl;
   if (input.keywords !== undefined) data.keywords = JSON.stringify(input.keywords);
+  if (input.category !== undefined) data.category = input.category;
+  if (input.tags !== undefined) data.tags = JSON.stringify(input.tags);
+  if (input.featured !== undefined) data.featured = input.featured;
+  if (input.authorImage !== undefined) data.authorImage = input.authorImage;
+  if (input.authorRole !== undefined) data.authorRole = input.authorRole;
 
   const post = await repo.update(id, data);
   return toApiBlogPost(post);
@@ -80,8 +95,13 @@ export async function unpublishPost(id: string): Promise<BlogPost> {
   return toApiBlogPost(post);
 }
 
-export async function getPublicPosts(page: number, limit: number): Promise<BlogListResponse> {
-  const { posts, total } = await repo.findMany({ page, limit, status: 'PUBLISHED' });
+export async function getPublicPosts(
+  page: number,
+  limit: number,
+  category?: string,
+  search?: string,
+): Promise<BlogListResponse> {
+  const { posts, total } = await repo.findMany({ page, limit, status: 'PUBLISHED', category, search });
   return {
     posts: posts.map(toApiBlogPost),
     total,
@@ -118,4 +138,12 @@ export async function deletePost(id: string): Promise<void> {
 
 export async function getAllPublishedSlugs(): Promise<string[]> {
   return repo.getAllSlugs();
+}
+
+export async function incrementViews(id: string): Promise<void> {
+  return repo.incrementViews(id);
+}
+
+export async function getCategoryCounts(): Promise<Record<string, number>> {
+  return repo.getCategoryCounts();
 }
