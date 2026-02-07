@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { mtaDataService } from '@/lib/services/mta-data-service';
+import { stationStatsQuery, stationStatsBody } from '@/lib/api/schemas';
+import { validationError } from '@/lib/api/responses';
 
 export const dynamic = 'force-dynamic';
 
@@ -13,9 +15,9 @@ function calculateDistance(
   const R = 3959; // Earth's radius in miles
   const dLat = (lat2 - lat1) * Math.PI / 180;
   const dLon = (lon2 - lon1) * Math.PI / 180;
-  const a = 
+  const a =
     Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
     Math.sin(dLon/2) * Math.sin(dLon/2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
   return R * c;
@@ -44,33 +46,33 @@ interface RatData {
 
 async function fetchNearbyData(lat: number, lon: number, radiusMiles: number = 0.25) {
   const promises = [];
-  
+
   // Fetch recent crime data within radius
   const crimeQuery = `
     https://data.cityofnewyork.us/resource/5uac-w243.json?
-    $where=latitude IS NOT NULL 
-    AND longitude IS NOT NULL 
-    AND latitude != '0' 
-    AND longitude != '0' 
+    $where=latitude IS NOT NULL
+    AND longitude IS NOT NULL
+    AND latitude != '0'
+    AND longitude != '0'
     AND cmplnt_fr_dt >= '2024-01-01T00:00:00'
     &$limit=1000
   `.replace(/\s+/g, '');
-  
+
   promises.push(
     fetch(crimeQuery)
       .then(res => res.json())
       .catch(() => [])
   );
 
-  // Fetch recent rat sightings within radius  
+  // Fetch recent rat sightings within radius
   const ratQuery = `
     https://data.cityofnewyork.us/resource/3q43-55fe.json?
-    $where=latitude IS NOT NULL 
-    AND longitude IS NOT NULL 
+    $where=latitude IS NOT NULL
+    AND longitude IS NOT NULL
     AND created_date >= '2024-01-01T00:00:00'
     &$limit=1000
   `.replace(/\s+/g, '');
-  
+
   promises.push(
     fetch(ratQuery)
       .then(res => res.json())
@@ -78,14 +80,14 @@ async function fetchNearbyData(lat: number, lon: number, radiusMiles: number = 0
   );
 
   const [crimeData, ratData] = await Promise.all(promises);
-  
+
   // Ensure data is arrays and filter within radius
   const crimeArray = Array.isArray(crimeData) ? crimeData as CrimeData[] : [];
   const nearbyCrimes = crimeArray.filter(crime => {
     const crimeLat = parseFloat(crime.latitude);
     const crimeLon = parseFloat(crime.longitude);
     if (!crimeLat || !crimeLon || crimeLat === 0 || crimeLon === 0) return false;
-    
+
     const distance = calculateDistance(lat, lon, crimeLat, crimeLon);
     return distance <= radiusMiles;
   });
@@ -95,7 +97,7 @@ async function fetchNearbyData(lat: number, lon: number, radiusMiles: number = 0
     const ratLat = parseFloat(rat.latitude);
     const ratLon = parseFloat(rat.longitude);
     if (!ratLat || !ratLon) return false;
-    
+
     const distance = calculateDistance(lat, lon, ratLat, ratLon);
     return distance <= radiusMiles;
   });
@@ -105,19 +107,20 @@ async function fetchNearbyData(lat: number, lon: number, radiusMiles: number = 0
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const stationId = searchParams.get('station');
-  const radius = parseFloat(searchParams.get('radius') || '0.25');
-  
-  if (!stationId) {
-    return NextResponse.json(
-      { error: 'Station ID is required' },
-      { status: 400 }
-    );
+  const parsed = stationStatsQuery.safeParse({
+    station: searchParams.get('station'),
+    radius: searchParams.get('radius') ?? undefined,
+  });
+
+  if (!parsed.success) {
+    return validationError(parsed.error);
   }
+
+  const { station: stationId, radius } = parsed.data;
 
   // Find the station using MTA data service
   const station = mtaDataService.getStationById(stationId);
-  
+
   if (!station) {
     return NextResponse.json(
       { error: 'Station not found' },
@@ -129,7 +132,7 @@ export async function GET(request: Request) {
     const stationLat = station.latitude;
     const stationLon = station.longitude;
     const { crimes, rats } = await fetchNearbyData(stationLat, stationLon, radius);
-    
+
     // Analyze crime types
     const crimeStats = {
       total: crimes.length,
@@ -192,9 +195,9 @@ export async function GET(request: Request) {
 
     // Cache for 1 hour since this data doesn't change frequently
     response.headers.set('Cache-Control', 'public, max-age=3600, stale-while-revalidate=7200');
-    
+
     return response;
-    
+
   } catch (error) {
     console.error('Error fetching station stats:', error);
     return NextResponse.json(
@@ -207,14 +210,14 @@ export async function GET(request: Request) {
 // Get stats for multiple stations
 export async function POST(request: Request) {
   try {
-    const { stationIds, radius = 0.25 } = await request.json();
-    
-    if (!Array.isArray(stationIds) || stationIds.length === 0) {
-      return NextResponse.json(
-        { error: 'Station IDs array is required' },
-        { status: 400 }
-      );
+    const body = await request.json();
+    const parsed = stationStatsBody.safeParse(body);
+
+    if (!parsed.success) {
+      return validationError(parsed.error);
     }
+
+    const { stationIds, radius: radiusVal = 0.25 } = parsed.data;
 
     const results = await Promise.all(
       stationIds.map(async (stationId: string) => {
@@ -224,8 +227,8 @@ export async function POST(request: Request) {
         try {
           const stationLat = station.latitude;
           const stationLon = station.longitude;
-          const { crimes, rats } = await fetchNearbyData(stationLat, stationLon, radius);
-          
+          const { crimes, rats } = await fetchNearbyData(stationLat, stationLon, radiusVal);
+
           const crimeWeight = crimes.length * 2;
           const ratWeight = rats.length * 0.5;
           const safetyScore = Math.round(Math.max(0, 100 - (crimeWeight + ratWeight)));
@@ -254,9 +257,9 @@ export async function POST(request: Request) {
     });
 
     response.headers.set('Cache-Control', 'public, max-age=3600, stale-while-revalidate=7200');
-    
+
     return response;
-    
+
   } catch (error) {
     console.error('Error fetching multiple station stats:', error);
     return NextResponse.json(

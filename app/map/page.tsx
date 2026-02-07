@@ -131,39 +131,6 @@ export default function RealTimeMapPage() {
           </div>
         </footer>
       </div>
-      
-      {/* Add keyboard shortcuts */}
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-            document.addEventListener('keydown', function(e) {
-              if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-              
-              switch(e.key.toLowerCase()) {
-                case '3':
-                  // Trigger 3D toggle
-                  document.querySelector('button:contains("3D Mode")')?.click();
-                  break;
-                case 't':
-                  // Trigger quick tour
-                  document.querySelector('button:contains("Quick Tour")')?.click();
-                  break;
-                case 'r':
-                  e.preventDefault();
-                  window.location.reload();
-                  break;
-                case 'f':
-                  if (document.fullscreenElement) {
-                    document.exitFullscreen();
-                  } else {
-                    document.documentElement.requestFullscreen();
-                  }
-                  break;
-              }
-            });
-          `
-        }}
-      />
     </>
   );
 }

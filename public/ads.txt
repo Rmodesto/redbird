@@ -1,0 +1,11 @@
+# ads.txt file for Subway Sounds NYC
+# This file will be updated with your Google AdSense publisher ID after approval
+
+# Placeholder - Replace PUBLISHER_ID with your actual AdSense pub-XXXXXXXXXX after approval
+# google.com, pub-XXXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+
+# Instructions:
+# 1. Apply for Google AdSense at https://www.google.com/adsense/
+# 2. Once approved, you'll receive a publisher ID (format: pub-XXXXXXXXXXXXXXXXX)
+# 3. Uncomment and update the google.com line above with your publisher ID
+# 4. Remove these comment lines after updating

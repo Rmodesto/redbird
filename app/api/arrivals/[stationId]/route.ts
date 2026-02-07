@@ -29,33 +29,52 @@ interface Arrival {
 
 let stationsData: any[] | null = null;
 let stopIdLookup: Record<string, any> | null = null;
+let slugToStopIds: Record<string, string[]> | null = null;
 
 function loadStationData() {
   if (!stationsData) {
     try {
       const dataDir = path.join(process.cwd(), 'data');
-      const stationsPath = path.join(dataDir, 'nyc-subway-stations-official.json');
-      
-      const fileData = JSON.parse(fs.readFileSync(stationsPath, 'utf8'));
-      
-      // Convert to expected format with mock platforms for now
-      stationsData = fileData.stations.map((station: any) => ({
+      const stationsPath = path.join(dataDir, 'stations-normalized.json');
+      const stopIdLookupPath = path.join(dataDir, 'stop-id-lookup.json');
+
+      const stations = JSON.parse(fs.readFileSync(stationsPath, 'utf8'));
+
+      // Load stop ID lookup and build reverse mapping (slug -> stop IDs)
+      stopIdLookup = JSON.parse(fs.readFileSync(stopIdLookupPath, 'utf8'));
+      slugToStopIds = {};
+
+      for (const [stopId, info] of Object.entries(stopIdLookup as Record<string, any>)) {
+        const slug = info.stationSlug;
+        if (slug) {
+          if (!slugToStopIds[slug]) {
+            slugToStopIds[slug] = [];
+          }
+          slugToStopIds[slug].push(stopId);
+        }
+      }
+
+      console.log(`Built slug->stopIds mapping for ${Object.keys(slugToStopIds).length} stations`);
+
+      // Use normalized stations data which has correct slugs
+      stationsData = stations.map((station: any) => ({
         id: station.id,
         name: station.name,
-        slug: station.id,
+        slug: station.slug,
         lines: station.lines || [],
         platforms: station.lines?.map((line: string, index: number) => ({
-          stopId: `${station.id.toUpperCase().replace(/-/g, '')}${index % 2 === 0 ? 'N' : 'S'}`,
+          stopId: `${station.id}${index % 2 === 0 ? 'N' : 'S'}`,
           direction: index % 2 === 0 ? 'N' : 'S',
           lines: [line]
         })) || []
       }));
-      
+
       console.log(`Loaded ${stationsData?.length || 0} stations from official data`);
     } catch (error) {
       console.error('Error loading station data:', error);
       // Fallback to mock data
       stationsData = [];
+      slugToStopIds = {};
     }
   }
 }
@@ -165,8 +184,16 @@ function getDestinationFromTrip(tripId: string, routeId: string, direction: stri
       downtown: ['Broad St']
     },
     'Z': {
-      uptown: ['Jamaica Center'], 
+      uptown: ['Jamaica Center'],
       downtown: ['Broad St']
+    },
+    'GS': {
+      uptown: ['Grand Central-42 St'],
+      downtown: ['Times Sq-42 St']
+    },
+    'S': {
+      uptown: ['Grand Central-42 St'],
+      downtown: ['Times Sq-42 St']
     }
   };
   
@@ -208,14 +235,21 @@ async function fetchFeedData(feedUrl: string): Promise<any[]> {
 
 export async function GET(
   request: Request,
-  { params }: { params: { stationId: string } }
+  { params }: { params: Promise<{ stationId: string }> }
 ) {
   try {
     loadStationData();
-    
-    const stationId = params.stationId;
-    
-    if (!stationsData || !stopIdLookup) {
+
+    const { stationId } = await params;
+
+    if (!stationId || typeof stationId !== 'string' || stationId.trim().length === 0) {
+      return NextResponse.json(
+        { error: 'Station ID is required' },
+        { status: 400 }
+      );
+    }
+
+    if (!stationsData) {
       throw new Error('Station data not loaded');
     }
     
@@ -229,10 +263,21 @@ export async function GET(
       );
     }
     
-    // Get all stop IDs for this station
-    const stopIds = station.platforms.map((p: any) => p.stopId);
+    // Get all stop IDs for this station from the real GTFS lookup
+    let stopIds: string[] = [];
+
+    // First try to get real GTFS stop IDs from the lookup
+    if (slugToStopIds && slugToStopIds[station.slug]) {
+      stopIds = slugToStopIds[station.slug];
+      console.log(`Using real GTFS stop IDs from lookup: ${stopIds.join(', ')}`);
+    } else {
+      // Fallback to generated stop IDs (less accurate)
+      stopIds = station.platforms.map((p: any) => p.stopId);
+      console.log(`Using generated stop IDs (fallback): ${stopIds.join(', ')}`);
+    }
+
     const stationLines = station.lines;
-    
+
     console.log(`Fetching arrivals for station: ${station.name}`);
     console.log(`Stop IDs: ${stopIds.join(', ')}`);
     console.log(`Lines: ${stationLines.join(', ')}`);

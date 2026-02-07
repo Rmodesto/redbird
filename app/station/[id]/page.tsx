@@ -6,6 +6,8 @@ import { mtaDataService } from '@/lib/services/mta-data-service';
 import SubwayLinesBadges from '@/components/subway/SubwayLinesBadges';
 import Navigation from '@/components/Navigation';
 import StationMap from '@/components/maps/StationMap';
+import { getLineBgClass, getLineTextClass } from '@/lib/constants';
+import LiveArrivalsSection from '@/components/station/LiveArrivalsSection';
 import {
   buildPageTitle,
   buildMetaDescription,
@@ -15,17 +17,36 @@ import {
 } from '@/lib/utils/seo-keywords';
 
 interface Props {
-  params: { id: string }
+  params: Promise<{ id: string }>;
+}
+
+// Generate static params for all stations at build time
+// Generate both by ID and by slug for maximum SEO coverage
+export async function generateStaticParams() {
+  const stations = mtaDataService.getAllStations();
+  const params: { id: string }[] = [];
+
+  stations.forEach((station) => {
+    // Generate by ID (primary)
+    params.push({ id: station.id });
+    // Also generate by slug for SEO-friendly URLs
+    if (station.slug && station.slug !== station.id) {
+      params.push({ id: station.slug });
+    }
+  });
+
+  return params;
 }
 
 async function getStation(id: string) {
-  const station = mtaDataService.getStationById(id) || 
+  const station = mtaDataService.getStationById(id) ||
                  mtaDataService.getStationBySlug(id);
   return station;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const station = await getStation(params.id);
+  const { id } = await params;
+  const station = await getStation(id);
 
   if (!station) {
     return {
@@ -62,7 +83,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       type: 'website',
       locale: 'en_US',
-      url: `/station/${params.id}`,
+      url: `/station/${station.slug}`,
       siteName: 'NYC Subway Sounds',
       images: [
         {
@@ -80,7 +101,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [`/api/og?station=${encodeURIComponent(station.name)}&borough=${station.borough}&lines=${station.lines.join(',')}`],
     },
     alternates: {
-      canonical: `/station/${params.id}`,
+      canonical: `/station/${station.slug}`,
     },
     other: {
       'geo.position': `${station.latitude};${station.longitude}`,
@@ -90,8 +111,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
   };
 }
-
-export const dynamic = 'force-dynamic';
 
 // Station score calculation (mock for now, can be enhanced with real data)
 function calculateStationScore(station: any) {
@@ -125,7 +144,8 @@ function getStationYearBuilt(stationName: string): number {
 }
 
 export default async function StationPage({ params }: Props) {
-  const station = await getStation(params.id);
+  const { id } = await params;
+  const station = await getStation(id);
   
   if (!station) {
     notFound();
@@ -231,18 +251,7 @@ export default async function StationPage({ params }: Props) {
             {station.lines.map((line: string) => (
               <span
                 key={line}
-                className={`inline-flex items-center justify-center w-10 h-10 rounded text-white font-bold text-lg
-                  ${line === '4' || line === '5' || line === '6' ? 'bg-green-500' : ''}
-                  ${line === '7' ? 'bg-purple-600' : ''}
-                  ${line === 'S' ? 'bg-gray-600' : ''}
-                  ${line === 'N' || line === 'Q' || line === 'R' || line === 'W' ? 'bg-yellow-500' : ''}
-                  ${line === 'L' ? 'bg-gray-500' : ''}
-                  ${line === 'A' || line === 'C' || line === 'E' ? 'bg-blue-600' : ''}
-                  ${line === 'B' || line === 'D' || line === 'F' || line === 'M' ? 'bg-orange-500' : ''}
-                  ${line === 'G' ? 'bg-lime-500' : ''}
-                  ${line === 'J' || line === 'Z' ? 'bg-amber-700' : ''}
-                  ${line === '1' || line === '2' || line === '3' ? 'bg-red-600' : ''}
-                `}
+                className={`inline-flex items-center justify-center w-10 h-10 rounded font-bold text-lg ${getLineBgClass(line)} ${getLineTextClass(line)}`}
               >
                 {line}
               </span>
@@ -256,51 +265,10 @@ export default async function StationPage({ params }: Props) {
           {/* Main Content - Left Column */}
           <div className="lg:col-span-2 space-y-8">
             {/* Live Arrivals Section */}
-            <section
-              className="bg-white rounded-lg shadow-lg p-6 border border-gray-200"
-              aria-label={getAriaLabel('liveArrivals', station)}
-            >
-              <h2 className="text-2xl font-bold mb-6 flex items-center gap-3 text-gray-900">
-                <span className="text-3xl">🕐</span>
-                &quot;LIVE&quot; ARRIVALS
-              </h2>
-              
-              {/* Mock arrivals data */}
-              <div className="space-y-4">
-                {station.lines.slice(0, 5).map((line: string, index: number) => (
-                  <div key={line} className="flex items-center justify-between py-3 border-b border-gray-200 last:border-0">
-                    <div className="flex items-center gap-4">
-                      <span className={`inline-flex items-center justify-center w-10 h-10 rounded text-white font-bold
-                        ${line === '4' || line === '5' || line === '6' ? 'bg-green-500' : ''}
-                        ${line === '7' ? 'bg-purple-600' : ''}
-                        ${line === 'S' ? 'bg-gray-600' : ''}
-                        ${line === 'N' || line === 'Q' || line === 'R' || line === 'W' ? 'bg-yellow-500' : ''}
-                        ${line === 'L' ? 'bg-gray-500' : ''}
-                        ${line === 'A' || line === 'C' || line === 'E' ? 'bg-blue-600' : ''}
-                        ${line === 'B' || line === 'D' || line === 'F' || line === 'M' ? 'bg-orange-500' : ''}
-                        ${line === 'G' ? 'bg-lime-500' : ''}
-                        ${line === 'J' || line === 'Z' ? 'bg-amber-700' : ''}
-                        ${line === '1' || line === '2' || line === '3' ? 'bg-red-600' : ''}
-                      `}>
-                        {line}
-                      </span>
-                      <div>
-                        <div className="font-semibold text-gray-900">Downtown</div>
-                        <div className="text-sm text-gray-500 uppercase">{station.borough}</div>
-                      </div>
-                    </div>
-                    <div className="text-2xl font-bold text-gray-900">
-                      {5 + index * 2} min
-                    </div>
-                  </div>
-                ))}
-              </div>
-              
-              <div className="mt-4 flex justify-between text-sm text-gray-500">
-                <span>Updated every 30 seconds • Last update: 9:34:33 PM</span>
-                <span>Data: MTA GTFS Real-time</span>
-              </div>
-            </section>
+            <LiveArrivalsSection
+              stationId={station.slug || station.id}
+              stationLines={station.lines}
+            />
 
             {/* Subway Sounds Section */}
             <section
@@ -363,18 +331,7 @@ export default async function StationPage({ params }: Props) {
                     {station.lines.map((line: string) => (
                       <span
                         key={line}
-                        className={`inline-flex items-center justify-center w-10 h-10 rounded text-white font-bold
-                          ${line === '4' || line === '5' || line === '6' ? 'bg-green-500' : ''}
-                          ${line === '7' ? 'bg-purple-600' : ''}
-                          ${line === 'S' ? 'bg-gray-600' : ''}
-                          ${line === 'N' || line === 'Q' || line === 'R' || line === 'W' ? 'bg-yellow-500' : ''}
-                          ${line === 'L' ? 'bg-gray-500' : ''}
-                          ${line === 'A' || line === 'C' || line === 'E' ? 'bg-blue-600' : ''}
-                          ${line === 'B' || line === 'D' || line === 'F' || line === 'M' ? 'bg-orange-500' : ''}
-                          ${line === 'G' ? 'bg-lime-500' : ''}
-                          ${line === 'J' || line === 'Z' ? 'bg-amber-700' : ''}
-                          ${line === '1' || line === '2' || line === '3' ? 'bg-red-600' : ''}
-                        `}
+                        className={`inline-flex items-center justify-center w-10 h-10 rounded font-bold ${getLineBgClass(line)} ${getLineTextClass(line)}`}
                       >
                         {line}
                       </span>

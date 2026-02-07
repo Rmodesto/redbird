@@ -1,4 +1,6 @@
 import { NextResponse } from 'next/server';
+import { subwayTrainsBody, subwayTrainsQuery } from '@/lib/api/schemas';
+import { validationError } from '@/lib/api/responses';
 
 export const dynamic = 'force-dynamic';
 
@@ -176,8 +178,16 @@ function generateTrains(): SubwayTrain[] {
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const lines = searchParams.get('lines')?.split(',') || [];
-  
+  const parsed = subwayTrainsQuery.safeParse({
+    lines: searchParams.get('lines') ?? undefined,
+  });
+
+  if (!parsed.success) {
+    return validationError(parsed.error);
+  }
+
+  const lines = parsed.data.lines?.split(',') || [];
+
   let trains = generateTrains();
   
   // Filter by lines if specified
@@ -200,14 +210,21 @@ export async function GET(request: Request) {
 
 // Optional: Add a POST endpoint to simulate train movement updates
 export async function POST(request: Request) {
-  const { trainId, coordinates } = await request.json();
-  
+  const body = await request.json();
+  const parsed = subwayTrainsBody.safeParse(body);
+
+  if (!parsed.success) {
+    return validationError(parsed.error);
+  }
+
+  const { trainId, coordinates } = parsed.data;
+
   // Update specific train position (for future real-time integration)
   const trainIndex = trainCache.findIndex(train => train.id === trainId);
   if (trainIndex !== -1) {
     trainCache[trainIndex].coordinates = coordinates;
     trainCache[trainIndex].timestamp = new Date().toISOString();
   }
-  
+
   return NextResponse.json({ success: true });
 }

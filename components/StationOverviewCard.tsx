@@ -83,11 +83,11 @@ const StationOverviewCard = ({ stationId, stationName, borough, lines, station }
   const stationAmenities = {
     adaAccessible: pseudoRandom(1) > 0.77, // 23% of stations are ADA accessible
     hasRestroom: pseudoRandom(2) > 0.85,   // Few stations have public restrooms
-    hasPolice: ['times-square-42', 'union-square', 'grand-central', 'atlantic-ave-barclays'].includes(stationId),
+    hasPolice: ['times-sq-42-st', '14-st-union-sq', 'grand-central-42-st', 'atlantic-av-barclays-ctr'].includes(stationId),
     yearBuilt: getEstimatedYearBuilt(stationName, displayLines[0], hashCode),
     hasElevator: pseudoRandom(3) > 0.77,
     hasWiFi: pseudoRandom(4) > 0.5,
-    isUnderground: !['coney-island-stillwell', 'yankee-stadium', 'astoria-ditmars'].includes(stationId),
+    isUnderground: !['coney-island-stillwell-av', '161-st-yankee-stadium', 'astoria-ditmars-blvd'].includes(stationId),
   };
 
   function getEstimatedYearBuilt(name: string, primaryLine: string, seed: number): number {

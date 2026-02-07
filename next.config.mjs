@@ -46,15 +46,8 @@ const nextConfig = {
           },
         ],
       },
-      {
-        source: '/api/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'no-store, max-age=0',
-          },
-        ],
-      },
+      // Note: Individual API routes set their own cache headers via the response.
+      // Real-time endpoints (arrivals) use no-cache, static data uses appropriate TTLs.
       {
         source: '/stations',
         headers: [
@@ -89,6 +82,42 @@ const nextConfig = {
       {
         source: '/line',
         destination: '/lines',
+        permanent: true,
+      },
+      // Station slug redirects - common alternate URL patterns
+      {
+        source: '/station/times-square-42-st',
+        destination: '/station/times-sq-42-st',
+        permanent: true,
+      },
+      {
+        source: '/station/union-square-14-st',
+        destination: '/station/14-st-union-sq',
+        permanent: true,
+      },
+      {
+        source: '/station/herald-square',
+        destination: '/station/34-st-herald-sq',
+        permanent: true,
+      },
+      {
+        source: '/station/fulton-st',
+        destination: '/station/fulton-st-2345acjz',
+        permanent: true,
+      },
+      {
+        source: '/station/atlantic-ave-barclays',
+        destination: '/station/atlantic-av-barclays-ctr',
+        permanent: true,
+      },
+      {
+        source: '/station/penn-station',
+        destination: '/station/34-st-penn-station',
+        permanent: true,
+      },
+      {
+        source: '/station/world-trade-center',
+        destination: '/station/wtc-cortlandt',
         permanent: true,
       },
     ];

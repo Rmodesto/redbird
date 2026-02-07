@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import stationsData from '@/data/stations.json';
+import { subwayStationsQuery } from '@/lib/api/schemas';
+import { validationError } from '@/lib/api/responses';
 
 export const dynamic = 'force-dynamic';
 
@@ -26,8 +28,17 @@ const SUBWAY_STATIONS: SubwayStation[] = stationsData.map((station: any) => ({
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const lines = searchParams.get('lines')?.split(',') || [];
-  const borough = searchParams.get('borough');
+  const parsed = subwayStationsQuery.safeParse({
+    lines: searchParams.get('lines') ?? undefined,
+    borough: searchParams.get('borough') ?? undefined,
+  });
+
+  if (!parsed.success) {
+    return validationError(parsed.error);
+  }
+
+  const lines = parsed.data.lines?.split(',') || [];
+  const borough = parsed.data.borough;
 
   let filteredStations = SUBWAY_STATIONS;
 

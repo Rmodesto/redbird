@@ -1,0 +1,55 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String   @id @default(uuid())
+  clerkUserId   String   @unique
+  email         String   @unique
+  firstName     String?
+  lastName      String?
+  imageUrl      String?
+  role          String   @default("AUTHOR")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  posts         Post[]
+
+  @@index([clerkUserId])
+}
+
+model Post {
+  id                 String    @id @default(cuid())
+  title              String
+  slug               String    @unique
+  excerpt            String    @default("")
+  content            String
+  featuredImage      String?
+  featuredImageAlt   String?
+  status             String    @default("DRAFT")
+  publishedAt        DateTime?
+  authorId           String
+  author             User      @relation(fields: [authorId], references: [id])
+  authorName         String
+  readingTimeMinutes Int       @default(0)
+  metaTitle          String?
+  metaDescription    String?
+  ogImage            String?
+  canonicalUrl       String?
+  keywords           String    @default("[]")
+  category           String    @default("")
+  tags               String    @default("[]")
+  views              Int       @default(0)
+  featured           Boolean   @default(false)
+  authorImage        String?
+  authorRole         String    @default("Contributing Writer")
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  @@index([status, publishedAt])
+  @@index([authorId])
+}

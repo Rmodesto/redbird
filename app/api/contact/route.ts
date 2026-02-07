@@ -1,47 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
+import { contactForm } from '@/lib/api/schemas';
+import { validationError } from '@/lib/api/responses';
 
 export const dynamic = "force-dynamic";
 
-interface ContactFormData {
-  name: string;
-  email: string;
-  message: string;
-}
-
 export async function POST(request: NextRequest) {
   try {
-    const body: ContactFormData = await request.json();
+    const body = await request.json();
+    const parsed = contactForm.safeParse(body);
 
-    // Validate required fields
-    if (!body.name || !body.email || !body.message) {
-      return NextResponse.json(
-        { error: "All fields are required" },
-        { status: 400 }
-      );
+    if (!parsed.success) {
+      return validationError(parsed.error);
     }
 
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(body.email)) {
-      return NextResponse.json(
-        { error: "Invalid email address" },
-        { status: 400 }
-      );
-    }
-
-    // Validate message length
-    if (body.message.length < 10) {
-      return NextResponse.json(
-        { error: "Message must be at least 10 characters long" },
-        { status: 400 }
-      );
-    }
+    const { name, email, message } = parsed.data;
 
     // Log the contact form submission
     console.log("=== New Contact Form Submission ===");
-    console.log(`Name: ${body.name}`);
-    console.log(`Email: ${body.email}`);
-    console.log(`Message: ${body.message}`);
+    console.log(`Name: ${name}`);
+    console.log(`Email: ${email}`);
+    console.log(`Message: ${message}`);
     console.log(`Timestamp: ${new Date().toISOString()}`);
     console.log("===================================");
 

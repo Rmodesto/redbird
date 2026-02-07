@@ -70,7 +70,7 @@ export default function Navigation() {
                 <Link href="/stations" className="text-gray-700 hover:text-black font-medium py-2">
                   STATIONS
                 </Link>
-                <Link href="/map" className="text-gray-700 hover:text-black font-medium py-2">
+                <Link href="/subway-map" className="text-gray-700 hover:text-black font-medium py-2">
                   MAP
                 </Link>
                 <Link href="/culture" className="text-gray-700 hover:text-black font-medium py-2">

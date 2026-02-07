@@ -16,10 +16,8 @@
   },
   "119N": {
     "stationId": "119",
-    "stationName": "103 St","john-Gafford"
-    
+    "stationName": "103 St",
     "stationSlug": "103-st",
-    
     "direction": "Uptown/Queens",
     "lines": [
       "1",
