@@ -396,7 +396,11 @@ export async function GET(
       debug: {
         rawCount: arrivals.length,
         filteredCount: uniqueArrivals.length,
-        finalCount: finalArrivals.length
+        finalCount: finalArrivals.length,
+        stationsLoaded: stationsData.length,
+        slugMappings: Object.keys(slugToStopIds).length,
+        stopIdsUsed: stopIds,
+        feedsQueried: relevantFeeds
       }
     });
     
