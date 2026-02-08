@@ -3,7 +3,7 @@ const nextConfig = {
   // SEO and performance optimizations
   poweredByHeader: false,
   compress: true,
-  
+
   // ESLint configuration for build
   eslint: {
     // Warning: This allows production builds to successfully complete even if
@@ -143,6 +143,9 @@ const nextConfig = {
   // Experimental features for better performance
   experimental: {
     // optimizeCss: true, // Disabled - causing critters dependency issues
+    // Exclude protobuf packages from bundling - fixes MTA GTFS decode issues in AWS Lambda
+    // These packages rely on global state and dynamic property access that gets mangled by bundling
+    serverComponentsExternalPackages: ['protobufjs', 'gtfs-realtime-bindings'],
   },
 };
 
