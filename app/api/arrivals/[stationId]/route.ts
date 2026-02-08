@@ -8,6 +8,7 @@ import stopIdLookupData from '@/data/stop-id-lookup.json';
 export const dynamic = 'force-dynamic';
 
 // MTA feed URLs for different subway lines
+// Note: 7 and S shuttle are included in the main feed (nyct/gtfs), not separate
 const MTA_FEEDS = {
   'ACE': 'https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-ace',
   'BDFM': 'https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-bdfm',
@@ -15,8 +16,7 @@ const MTA_FEEDS = {
   'JZ': 'https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-jz',
   'NQRW': 'https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-nqrw',
   'L': 'https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-l',
-  '123456': 'https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs',
-  '7': 'https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-7'
+  '1234567S': 'https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs',
 };
 
 interface Arrival {
@@ -58,7 +58,7 @@ console.log(`Loaded ${stationsData.length} stations, ${Object.keys(slugToStopIds
 
 function determineRelevantFeeds(lines: string[]): string[] {
   const feeds: string[] = [];
-  
+
   for (const line of lines) {
     if (['A', 'C', 'E'].includes(line)) feeds.push('ACE');
     else if (['B', 'D', 'F', 'M'].includes(line)) feeds.push('BDFM');
@@ -66,10 +66,9 @@ function determineRelevantFeeds(lines: string[]): string[] {
     else if (['J', 'Z'].includes(line)) feeds.push('JZ');
     else if (['N', 'Q', 'R', 'W'].includes(line)) feeds.push('NQRW');
     else if (['L'].includes(line)) feeds.push('L');
-    else if (['1', '2', '3', '4', '5', '6'].includes(line)) feeds.push('123456');
-    else if (['7'].includes(line)) feeds.push('7');
+    else if (['1', '2', '3', '4', '5', '6', '7', 'S', 'GS'].includes(line)) feeds.push('1234567S');
   }
-  
+
   return Array.from(new Set(feeds)); // Remove duplicates
 }
 
@@ -216,6 +215,17 @@ async function fetchFeedData(feedUrl: string): Promise<any[]> {
     );
 
     console.log(`Decoded ${feed.entity.length} entities from feed`);
+
+    // Log sample stop IDs from the feed to debug matching
+    const sampleStopIds = new Set<string>();
+    for (const entity of feed.entity.slice(0, 20)) {
+      if (entity.tripUpdate?.stopTimeUpdate) {
+        for (const stu of entity.tripUpdate.stopTimeUpdate.slice(0, 5)) {
+          if (stu.stopId) sampleStopIds.add(stu.stopId);
+        }
+      }
+    }
+    console.log(`Sample stop IDs from feed: ${Array.from(sampleStopIds).slice(0, 15).join(', ')}`);
 
     return feed.entity.filter(entity =>
       entity.tripUpdate &&
