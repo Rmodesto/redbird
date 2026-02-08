@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
-import GtfsRealtimeBindings from "gtfs-realtime-bindings";
+// Use static protobuf code instead of dynamic gtfs-realtime-bindings
+// Dynamic protobuf breaks in AWS Lambda/bundled environments
+import { transit_realtime } from "@/lib/gtfs/gtfs-realtime";
 
 // Import JSON directly so Next.js bundles them (works in serverless)
 import stationsNormalized from '@/data/stations-normalized.json';
@@ -210,7 +212,7 @@ async function fetchFeedData(feedUrl: string): Promise<any[]> {
 
     console.log(`Feed response: ${buffer.byteLength} bytes, content-type: ${contentType}`);
 
-    const feed = GtfsRealtimeBindings.transit_realtime.FeedMessage.decode(
+    const feed = transit_realtime.FeedMessage.decode(
       new Uint8Array(buffer)
     );
 
