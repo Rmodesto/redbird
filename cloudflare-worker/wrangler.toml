@@ -1,0 +1,6 @@
+name = "mta-gtfs-proxy"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+ALLOWED_ORIGINS = "https://subwaysounds.net,http://localhost:3000,http://localhost:3001"
