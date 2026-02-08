@@ -186,24 +186,43 @@ function getDestinationFromTrip(tripId: string, routeId: string, direction: stri
 
 async function fetchFeedData(feedUrl: string): Promise<any[]> {
   try {
-    const response = await fetch(feedUrl);
-    
+    const response = await fetch(feedUrl, {
+      headers: {
+        'User-Agent': 'SubwaySounds/1.0 (https://subwaysounds.net)',
+        'Accept': 'application/x-protobuf, application/octet-stream, */*',
+      },
+    });
+
     if (!response.ok) {
-      console.error(`Feed request failed: ${response.status}`);
+      console.error(`Feed request failed: ${response.status} ${response.statusText}`);
       return [];
     }
-    
+
+    const contentType = response.headers.get('content-type') || '';
     const buffer = await response.arrayBuffer();
+
+    // Check if response looks like protobuf (should NOT start with '<' which indicates HTML)
+    const firstByte = new Uint8Array(buffer)[0];
+    if (firstByte === 60) { // '<' character - likely HTML error page
+      const text = new TextDecoder().decode(buffer.slice(0, 500));
+      console.error(`Feed returned HTML instead of protobuf: ${text.substring(0, 200)}`);
+      return [];
+    }
+
+    console.log(`Feed response: ${buffer.byteLength} bytes, content-type: ${contentType}`);
+
     const feed = GtfsRealtimeBindings.transit_realtime.FeedMessage.decode(
       new Uint8Array(buffer)
     );
-    
-    return feed.entity.filter(entity => 
-      entity.tripUpdate && 
-      entity.tripUpdate.stopTimeUpdate && 
+
+    console.log(`Decoded ${feed.entity.length} entities from feed`);
+
+    return feed.entity.filter(entity =>
+      entity.tripUpdate &&
+      entity.tripUpdate.stopTimeUpdate &&
       entity.tripUpdate.stopTimeUpdate.length > 0
     );
-    
+
   } catch (error) {
     console.error('Error fetching feed:', error);
     return [];
