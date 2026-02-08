@@ -22,18 +22,26 @@ frontend:
         - 'echo "# Auto-generated environment file for AWS Amplify build" > .env.production'
         - 'echo "# Branch: $AWS_BRANCH" >> .env.production'
         - 'echo "# Build Time: $(date)" >> .env.production'
+        - 'echo "# Environment: $(if [ \"$AWS_BRANCH\" = \"main\" ]; then echo production; else echo staging; fi)" >> .env.production'
 
         # Clerk variables (critical for middleware)
         - 'echo "CLERK_SECRET_KEY=$CLERK_SECRET_KEY" >> .env.production'
         - 'echo "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=$NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY" >> .env.production'
         - 'echo "NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in" >> .env.production'
         - 'echo "NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up" >> .env.production'
+        - 'echo "NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/admin" >> .env.production'
+        - 'echo "NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/admin" >> .env.production'
 
         # Database variables
         - 'echo "DATABASE_URL=$DATABASE_URL" >> .env.production'
 
-        # Site URL
-        - 'echo "NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL" >> .env.production'
+        # Site URL (different for prod vs staging)
+        - |
+          if [ "$AWS_BRANCH" = "main" ]; then
+            echo "NEXT_PUBLIC_SITE_URL=https://subwaysounds.net" >> .env.production
+          else
+            echo "NEXT_PUBLIC_SITE_URL=https://staging.subwaysounds.net" >> .env.production
+          fi
 
         # GTM
         - 'echo "NEXT_PUBLIC_GTM_ID=$NEXT_PUBLIC_GTM_ID" >> .env.production'
