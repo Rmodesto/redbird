@@ -382,42 +382,9 @@ export async function GET(
       console.log(`- Raw arrivals before filtering: ${arrivals.length}`);
     }
     
-    // If no real arrivals, provide mock data for demonstration
-    let finalArrivals = limitedArrivals.slice(0, 12);
-    
-    if (finalArrivals.length === 0) {
-      console.log('No real arrivals found, using mock data for demonstration');
-      // Generate realistic mock arrivals for this station
-      const mockArrivals: Arrival[] = [];
-      const baseTime = now;
-      
-      stationLines.forEach((line: string, lineIndex: number) => {
-        // Uptown trains
-        mockArrivals.push({
-          line: line,
-          direction: 'Uptown',
-          destination: getDestinationFromTrip('', line, 'Uptown'),
-          arrivalTime: baseTime + (lineIndex * 180) + 120, // 2+ minutes from now
-          minutesUntil: Math.floor((baseTime + (lineIndex * 180) + 120 - now) / 60),
-          stopId: `${station.id}N`,
-          tripId: `MOCK_${line}_UP_${Date.now()}`
-        });
-        
-        // Downtown trains
-        mockArrivals.push({
-          line: line,
-          direction: 'Downtown', 
-          destination: getDestinationFromTrip('', line, 'Downtown'),
-          arrivalTime: baseTime + (lineIndex * 200) + 300, // 5+ minutes from now
-          minutesUntil: Math.floor((baseTime + (lineIndex * 200) + 300 - now) / 60),
-          stopId: `${station.id}S`,
-          tripId: `MOCK_${line}_DN_${Date.now()}`
-        });
-      });
-      
-      finalArrivals = mockArrivals.slice(0, 6); // Limit mock data
-    }
-    
+    // Return real arrivals only (no mock data)
+    const finalArrivals = limitedArrivals.slice(0, 12);
+
     return NextResponse.json({
       station: {
         id: station.id,
@@ -429,8 +396,7 @@ export async function GET(
       debug: {
         rawCount: arrivals.length,
         filteredCount: uniqueArrivals.length,
-        finalCount: limitedArrivals.length,
-        isMockData: limitedArrivals.length === 0
+        finalCount: finalArrivals.length
       }
     });
     
