@@ -55,6 +55,9 @@ frontend:
         - 'grep "CLERK_SECRET_KEY" .env.production || echo "❌ CLERK_SECRET_KEY not found!"'
         - 'grep "DATABASE_URL" .env.production || echo "❌ DATABASE_URL not found!"'
 
+        # Generate Prisma client
+        - npx prisma generate
+
         - npm run build
   artifacts:
     baseDirectory: .next
