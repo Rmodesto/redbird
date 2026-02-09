@@ -15,10 +15,11 @@ export default function AdminDashboard() {
       .finally(() => setLoading(false));
   }, []);
 
-  const totalPosts = data?.posts.length ?? 0;
-  const published = data?.posts.filter((p) => p.status === 'PUBLISHED').length ?? 0;
-  const drafts = data?.posts.filter((p) => p.status === 'DRAFT').length ?? 0;
-  const recentPosts = data?.posts.slice(0, 5) ?? [];
+  const posts = data?.posts ?? [];
+  const totalPosts = posts.length;
+  const published = posts.filter((p) => p.status === 'PUBLISHED').length;
+  const drafts = posts.filter((p) => p.status === 'DRAFT').length;
+  const recentPosts = posts.slice(0, 5);
 
   return (
     <div>
