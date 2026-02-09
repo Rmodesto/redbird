@@ -1,4 +1,5 @@
 import { auth } from '@clerk/nextjs/server';
+import { prisma } from '@/lib/db';
 
 export async function requireAdmin() {
   const { userId, sessionClaims } = await auth();
@@ -7,8 +8,13 @@ export async function requireAdmin() {
     throw new Error('UNAUTHORIZED');
   }
 
-  const role = (sessionClaims?.metadata as { role?: string } | undefined)?.role;
-  if (role !== 'admin') {
+  // Check database for admin role
+  const user = await prisma.user.findUnique({
+    where: { clerkUserId: userId },
+    select: { role: true },
+  });
+
+  if (!user || user.role !== 'ADMIN') {
     throw new Error('FORBIDDEN');
   }
 
