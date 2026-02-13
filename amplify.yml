@@ -46,6 +46,13 @@ frontend:
         # GTM
         - 'echo "NEXT_PUBLIC_GTM_ID=$NEXT_PUBLIC_GTM_ID" >> .env.production'
 
+        # Cloudflare R2 (Image Storage)
+        - 'echo "R2_ACCOUNT_ID=$R2_ACCOUNT_ID" >> .env.production'
+        - 'echo "R2_ACCESS_KEY_ID=$R2_ACCESS_KEY_ID" >> .env.production'
+        - 'echo "R2_SECRET_ACCESS_KEY=$R2_SECRET_ACCESS_KEY" >> .env.production'
+        - 'echo "R2_BUCKET_NAME=subway-sounds-images" >> .env.production'
+        - 'echo "R2_PUBLIC_URL=https://pub-e840d0273cf34b648e38bac3383b2fa1.r2.dev" >> .env.production'
+
         # Debug - show what was written
         - 'echo "=== .env.production contents ==="'
         - cat .env.production
