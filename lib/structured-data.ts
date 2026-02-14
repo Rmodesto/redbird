@@ -286,6 +286,34 @@ export function generateFAQSchema(faqs: Array<{ question: string; answer: string
   };
 }
 
+// Generate VideoObject schema for YouTube videos
+export function generateVideoObjectSchema(video: {
+  name: string;
+  description: string;
+  thumbnailUrl: string;
+  uploadDate: string;
+  duration: string;  // ISO 8601 format: "PT30M"
+  embedUrl: string;
+  transcript?: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name: video.name,
+    description: video.description,
+    thumbnailUrl: video.thumbnailUrl,
+    uploadDate: video.uploadDate,
+    duration: video.duration,
+    embedUrl: video.embedUrl,
+    transcript: video.transcript,
+    publisher: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+  };
+}
+
 // Helper function to inject structured data into page
 export function generateStructuredDataScript(data: any) {
   return {

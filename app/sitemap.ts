@@ -26,10 +26,14 @@ const STATIC_PAGES = [
   { url: '', priority: 1.0, changeFrequency: 'daily' as const },
   { url: '/stations', priority: 0.9, changeFrequency: 'daily' as const },
   { url: '/lines', priority: 0.9, changeFrequency: 'weekly' as const },
-  { url: '/subway-map', priority: 0.9, changeFrequency: 'weekly' as const },
+  { url: '/subway-map', priority: 0.95, changeFrequency: 'weekly' as const },
   { url: '/subway-sounds', priority: 0.8, changeFrequency: 'weekly' as const },
-  { url: '/real-time', priority: 0.8, changeFrequency: 'always' as const },
-  { url: '/accessibility', priority: 0.7, changeFrequency: 'monthly' as const },
+  { url: '/culture', priority: 0.7, changeFrequency: 'monthly' as const },
+  { url: '/operations', priority: 0.7, changeFrequency: 'monthly' as const },
+  { url: '/history', priority: 0.7, changeFrequency: 'monthly' as const },
+  { url: '/contact', priority: 0.5, changeFrequency: 'monthly' as const },
+  { url: '/privacy-policy', priority: 0.3, changeFrequency: 'yearly' as const },
+  { url: '/terms', priority: 0.3, changeFrequency: 'yearly' as const },
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -84,6 +88,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     });
   });
+
+  // Add neighborhood GEO hub pages
+  try {
+    const dataDir = path.join(process.cwd(), 'data');
+    const neighborhoodsPath = path.join(dataDir, 'neighborhoods.json');
+    const neighborhoodsData = JSON.parse(fs.readFileSync(neighborhoodsPath, 'utf8'));
+
+    neighborhoodsData.neighborhoods.forEach((neighborhood: { slug: string }) => {
+      entries.push({
+        url: `${SITE_URL}/neighborhood/${neighborhood.slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      });
+    });
+  } catch (error) {
+    console.error('Error loading neighborhood data for sitemap:', error);
+  }
 
   // Add published blog posts
   try {

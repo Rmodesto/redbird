@@ -1,0 +1,184 @@
+{
+  "neighborhoods": [
+    {
+      "slug": "chelsea",
+      "name": "Chelsea",
+      "borough": "Manhattan",
+      "stationSlugs": ["23-st-ce", "23-st-1", "28-st-1", "14-st-ace", "14-st-123"],
+      "keyLines": ["A", "C", "E", "1", "2", "3"],
+      "landmarks": ["High Line", "Chelsea Market", "Madison Square Garden"],
+      "editorialIntro": "Chelsea is one of Manhattan's most vibrant neighborhoods, with excellent subway access via the 8th Avenue and 7th Avenue lines. The neighborhood is home to world-class galleries, the iconic High Line park, and Chelsea Market."
+    },
+    {
+      "slug": "soho",
+      "name": "SoHo",
+      "borough": "Manhattan",
+      "stationSlugs": ["spring-st-ce", "prince-st", "canal-st-ace", "broadway-lafayette-st"],
+      "keyLines": ["A", "C", "E", "N", "Q", "R", "W", "6", "B", "D", "F", "M"],
+      "landmarks": ["SoHo Cast Iron Historic District", "Prada Store", "Dean & DeLuca"],
+      "editorialIntro": "SoHo, short for South of Houston, features cobblestone streets lined with cast-iron architecture. Multiple subway lines make it easy to reach this shopping and arts destination."
+    },
+    {
+      "slug": "tribeca",
+      "name": "Tribeca",
+      "borough": "Manhattan",
+      "stationSlugs": ["chambers-st-ace", "franklin-st", "canal-st-ace", "chambers-st-123"],
+      "keyLines": ["A", "C", "E", "1", "2", "3"],
+      "landmarks": ["Tribeca Film Festival", "One World Trade Center", "Washington Market Park"],
+      "editorialIntro": "Tribeca (Triangle Below Canal Street) transformed from industrial warehouses to one of NYC's most prestigious neighborhoods. Home to celebrities and the famous film festival."
+    },
+    {
+      "slug": "midtown",
+      "name": "Midtown",
+      "borough": "Manhattan",
+      "stationSlugs": ["times-sq-42-st", "42-st-bryant-pk", "grand-central-42-st", "34-st-penn-station", "34-st-herald-sq", "47-50-sts-rockefeller-ctr"],
+      "keyLines": ["1", "2", "3", "7", "A", "C", "E", "B", "D", "F", "M", "N", "Q", "R", "W", "S", "4", "5", "6"],
+      "landmarks": ["Times Square", "Empire State Building", "Grand Central Terminal", "Rockefeller Center"],
+      "editorialIntro": "Midtown Manhattan is the commercial heart of NYC, home to iconic landmarks, Broadway theaters, and the busiest subway stations in the system."
+    },
+    {
+      "slug": "upper-west-side",
+      "name": "Upper West Side",
+      "borough": "Manhattan",
+      "stationSlugs": ["66-st-lincoln-center", "72-st-123", "79-st", "86-st-1", "96-st-123", "103-st-1"],
+      "keyLines": ["1", "2", "3", "B", "C"],
+      "landmarks": ["Lincoln Center", "American Museum of Natural History", "Central Park West"],
+      "editorialIntro": "The Upper West Side is a classic residential neighborhood bordering Central Park, known for brownstones, cultural institutions, and excellent schools."
+    },
+    {
+      "slug": "financial-district",
+      "name": "Financial District",
+      "borough": "Manhattan",
+      "stationSlugs": ["wall-st-45", "fulton-st-2345acjz", "chambers-st-ace", "wtc-cortlandt", "bowling-green", "whitehall-st"],
+      "keyLines": ["1", "2", "3", "4", "5", "A", "C", "J", "Z", "R", "W"],
+      "landmarks": ["Wall Street", "One World Trade Center", "Federal Hall", "Battery Park"],
+      "editorialIntro": "The Financial District is where New York began and remains the economic engine of the city. Historic sites blend with modern skyscrapers above busy subway stations."
+    },
+    {
+      "slug": "williamsburg",
+      "name": "Williamsburg",
+      "borough": "Brooklyn",
+      "stationSlugs": ["bedford-av", "lorimer-st-l", "graham-av", "grand-st-l", "montrose-av"],
+      "keyLines": ["L", "G", "J", "M", "Z"],
+      "landmarks": ["Bedford Avenue", "Domino Park", "Music Hall of Williamsburg"],
+      "editorialIntro": "Williamsburg has transformed from industrial waterfront to cultural hotspot. The L train on Bedford Avenue is the neighborhood's lifeline to Manhattan."
+    },
+    {
+      "slug": "dumbo",
+      "name": "DUMBO",
+      "borough": "Brooklyn",
+      "stationSlugs": ["york-st", "high-st", "jay-st-metrotech"],
+      "keyLines": ["F", "A", "C"],
+      "landmarks": ["Brooklyn Bridge Park", "Manhattan Bridge View", "Time Out Market"],
+      "editorialIntro": "DUMBO (Down Under the Manhattan Bridge Overpass) offers stunning views of Manhattan and the Brooklyn Bridge, with cobblestone streets and converted warehouse spaces."
+    },
+    {
+      "slug": "park-slope",
+      "name": "Park Slope",
+      "borough": "Brooklyn",
+      "stationSlugs": ["7-av", "prospect-park-bqs", "grand-army-plaza", "bergen-st", "union-st"],
+      "keyLines": ["B", "Q", "S", "2", "3", "F", "G", "R"],
+      "landmarks": ["Prospect Park", "Brooklyn Museum", "Grand Army Plaza"],
+      "editorialIntro": "Park Slope is one of Brooklyn's most desirable neighborhoods, featuring beautiful brownstones, proximity to Prospect Park, and a thriving family community."
+    },
+    {
+      "slug": "bushwick",
+      "name": "Bushwick",
+      "borough": "Brooklyn",
+      "stationSlugs": ["dekalb-av-l", "jefferson-st", "morgan-av", "myrtle-wyckoff-avs"],
+      "keyLines": ["L", "J", "M", "Z"],
+      "landmarks": ["Bushwick Collective", "House of Yes", "Roberta's Pizza"],
+      "editorialIntro": "Bushwick is Brooklyn's arts and nightlife hub, known for vibrant street art, creative studios, and an eclectic dining scene. The L and J/M/Z trains connect to Manhattan."
+    },
+    {
+      "slug": "astoria",
+      "name": "Astoria",
+      "borough": "Queens",
+      "stationSlugs": ["astoria-ditmars-blvd", "astoria-blvd", "30-av", "broadway", "36-av", "39-av"],
+      "keyLines": ["N", "W"],
+      "landmarks": ["Museum of the Moving Image", "Astoria Park", "Steinway Street"],
+      "editorialIntro": "Astoria is Queens' most diverse neighborhood, offering authentic cuisines from Greek to Egyptian. The N/W trains provide a quick commute to Midtown."
+    },
+    {
+      "slug": "long-island-city",
+      "name": "Long Island City",
+      "borough": "Queens",
+      "stationSlugs": ["court-sq", "court-sq-23-st", "queensboro-plaza", "hunters-point-av", "vernon-blvd-jackson-av"],
+      "keyLines": ["7", "E", "M", "G", "N", "W"],
+      "landmarks": ["MoMA PS1", "Gantry Plaza State Park", "Pepsi-Cola Sign"],
+      "editorialIntro": "Long Island City has evolved into a waterfront destination with stunning Manhattan skyline views, world-class art institutions, and excellent transit connections."
+    },
+    {
+      "slug": "jackson-heights",
+      "name": "Jackson Heights",
+      "borough": "Queens",
+      "stationSlugs": ["jackson-hts-roosevelt-av", "74-st-broadway", "82-st-jackson-hts", "90-st-elmhurst-av"],
+      "keyLines": ["7", "E", "F", "M", "R"],
+      "landmarks": ["Diversity Plaza", "Jackson Heights Historic District", "Roosevelt Avenue"],
+      "editorialIntro": "Jackson Heights is one of NYC's most ethnically diverse neighborhoods, with Little India, Little Colombia, and cuisines from around the world. The 7 train is its main artery."
+    },
+    {
+      "slug": "flushing",
+      "name": "Flushing",
+      "borough": "Queens",
+      "stationSlugs": ["flushing-main-st"],
+      "keyLines": ["7"],
+      "landmarks": ["Flushing Meadows-Corona Park", "Queens Botanical Garden", "Main Street Chinatown"],
+      "editorialIntro": "Flushing is home to one of the largest Chinatowns outside Asia. The 7 train terminus at Main Street is one of the busiest stations outside Manhattan."
+    },
+    {
+      "slug": "south-bronx",
+      "name": "South Bronx",
+      "borough": "Bronx",
+      "stationSlugs": ["138-st-grand-concourse", "149-st-grand-concourse", "3-av-149-st", "brook-av", "cypress-av"],
+      "keyLines": ["2", "4", "5", "6"],
+      "landmarks": ["Yankee Stadium", "Grand Concourse", "Bronx Museum of the Arts"],
+      "editorialIntro": "The South Bronx is the birthplace of hip-hop culture and home to Yankee Stadium. The area is experiencing revitalization while maintaining its cultural heritage."
+    },
+    {
+      "slug": "fordham",
+      "name": "Fordham",
+      "borough": "Bronx",
+      "stationSlugs": ["fordham-rd-4", "kingsbridge-rd"],
+      "keyLines": ["4", "B", "D"],
+      "landmarks": ["Fordham University", "Bronx Zoo", "New York Botanical Garden"],
+      "editorialIntro": "Fordham is a bustling Bronx neighborhood centered around Fordham Road, one of the borough's main shopping corridors. It's near top attractions like the Bronx Zoo."
+    },
+    {
+      "slug": "harlem",
+      "name": "Harlem",
+      "borough": "Manhattan",
+      "stationSlugs": ["125-st-456", "125-st-ac", "116-st-bc", "116-st-2-3", "135-st"],
+      "keyLines": ["A", "B", "C", "2", "3", "4", "5", "6"],
+      "landmarks": ["Apollo Theater", "Sylvia's Restaurant", "Studio Museum"],
+      "editorialIntro": "Harlem is the cultural capital of Black America, rich in history from the Harlem Renaissance to today. Multiple subway lines connect this vibrant neighborhood to all of NYC."
+    },
+    {
+      "slug": "east-village",
+      "name": "East Village",
+      "borough": "Manhattan",
+      "stationSlugs": ["astor-pl", "1-av", "2-av", "8-st-nyu"],
+      "keyLines": ["6", "L", "F", "M", "N", "R", "W"],
+      "landmarks": ["Tompkins Square Park", "St. Marks Place", "Bowery"],
+      "editorialIntro": "The East Village retains its counterculture spirit while evolving into a diverse residential area. It's a hub for nightlife, restaurants, and creative energy."
+    },
+    {
+      "slug": "lower-east-side",
+      "name": "Lower East Side",
+      "borough": "Manhattan",
+      "stationSlugs": ["delancey-st-essex-st", "east-broadway", "grand-st-bd"],
+      "keyLines": ["F", "M", "J", "Z", "B", "D"],
+      "landmarks": ["Katz's Delicatessen", "Tenement Museum", "Essex Market"],
+      "editorialIntro": "The Lower East Side is steeped in immigrant history while hosting cutting-edge galleries and nightlife. Historic delis stand alongside modern boutiques."
+    },
+    {
+      "slug": "greenwich-village",
+      "name": "Greenwich Village",
+      "borough": "Manhattan",
+      "stationSlugs": ["w-4-st-wash-sq", "christopher-st-sheridan-sq", "14-st-6-av", "astor-pl"],
+      "keyLines": ["A", "B", "C", "D", "E", "F", "M", "1"],
+      "landmarks": ["Washington Square Park", "Stonewall Inn", "Blue Note Jazz Club"],
+      "editorialIntro": "Greenwich Village is where Bob Dylan played, the LGBTQ+ rights movement began, and NYU students study. Its tree-lined streets and cultural history make it quintessentially NYC."
+    }
+  ]
+}

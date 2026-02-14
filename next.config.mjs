@@ -69,6 +69,12 @@ const nextConfig = {
         destination: '/subway-map',
         permanent: true,
       },
+      // SEO keyword-optimized URL redirect
+      {
+        source: '/nyc-subway-map',
+        destination: '/subway-map',
+        permanent: true,
+      },
       {
         source: '/sounds',
         destination: '/subway-sounds',
