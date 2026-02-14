@@ -17,9 +17,7 @@ Crawl-delay: 0
 Allow: /
 
 # Sitemap location
-Sitemap: https://subwaysounds.nyc/sitemap.xml
-Sitemap: https://subwaysounds.nyc/sitemap-stations.xml
-Sitemap: https://subwaysounds.nyc/sitemap-lines.xml
+Sitemap: https://subwaysounds.net/sitemap.xml
 
 # Block bad bots
 User-agent: AhrefsBot
