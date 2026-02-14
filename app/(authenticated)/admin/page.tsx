@@ -25,6 +25,45 @@ export default function AdminDashboard() {
     <div>
       <h1 className="text-2xl font-bold text-white mb-8">Dashboard</h1>
 
+      {/* Navigation Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <Link
+          href="/admin/blog/new"
+          className="bg-blue-600 hover:bg-blue-500 border border-blue-500 rounded-lg p-6 transition-colors group"
+        >
+          <div className="text-3xl mb-2">+</div>
+          <h3 className="text-lg font-semibold text-white">New Post</h3>
+          <p className="text-blue-200 text-sm">Create a new blog article</p>
+        </Link>
+
+        <Link
+          href="/admin/blog"
+          className="bg-gray-900 hover:bg-gray-800 border border-gray-700 rounded-lg p-6 transition-colors"
+        >
+          <div className="text-3xl mb-2">&#x1F4DD;</div>
+          <h3 className="text-lg font-semibold text-white">Blog Posts</h3>
+          <p className="text-gray-400 text-sm">Manage all articles</p>
+        </Link>
+
+        <Link
+          href="/admin/analytics"
+          className="bg-gray-900 hover:bg-gray-800 border border-gray-700 rounded-lg p-6 transition-colors"
+        >
+          <div className="text-3xl mb-2">&#x1F4CA;</div>
+          <h3 className="text-lg font-semibold text-white">Analytics</h3>
+          <p className="text-gray-400 text-sm">View site statistics</p>
+        </Link>
+
+        <Link
+          href="/"
+          className="bg-gray-900 hover:bg-gray-800 border border-gray-700 rounded-lg p-6 transition-colors"
+        >
+          <div className="text-3xl mb-2">&#x1F310;</div>
+          <h3 className="text-lg font-semibold text-white">View Site</h3>
+          <p className="text-gray-400 text-sm">Open public website</p>
+        </Link>
+      </div>
+
       {/* Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
         <div className="bg-gray-900 border border-gray-800 rounded-lg p-6">
@@ -47,50 +86,32 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      {/* Analytics Placeholder */}
-      <div className="bg-gray-900 border border-gray-800 rounded-lg p-6 mb-8">
-        <h2 className="text-lg font-semibold text-white mb-1">Site Analytics</h2>
-        <p className="text-gray-500 text-sm mb-6">Coming Soon</p>
-        <div className="h-40 flex items-center justify-center border border-dashed border-gray-700 rounded-lg">
-          <p className="text-gray-600 text-sm">Chart placeholder</p>
-        </div>
-      </div>
-
-      {/* Quick Actions */}
-      <div className="flex flex-wrap gap-3 mb-8">
-        <Link
-          href="/admin/blog/new"
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition-colors text-sm"
-        >
-          New Post
-        </Link>
-        <Link
-          href="/admin/blog"
-          className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm"
-        >
-          View All Posts
-        </Link>
-        <Link
-          href="/"
-          className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm"
-        >
-          View Site
-        </Link>
-      </div>
-
       {/* Recent Posts */}
-      <div>
-        <h2 className="text-lg font-semibold text-white mb-4">Recent Posts</h2>
+      <div className="bg-gray-900 border border-gray-800 rounded-lg p-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold text-white">Recent Posts</h2>
+          <Link href="/admin/blog" className="text-blue-400 hover:text-blue-300 text-sm">
+            View all
+          </Link>
+        </div>
         {loading ? (
           <p className="text-gray-400">Loading...</p>
         ) : !recentPosts.length ? (
-          <p className="text-gray-400">No posts yet.</p>
+          <div className="text-center py-8">
+            <p className="text-gray-400 mb-4">No posts yet</p>
+            <Link
+              href="/admin/blog/new"
+              className="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition-colors text-sm"
+            >
+              Create your first post
+            </Link>
+          </div>
         ) : (
           <div className="space-y-2">
             {recentPosts.map((post: BlogPost) => (
               <div
                 key={post.id}
-                className="flex items-center justify-between bg-gray-900 border border-gray-800 rounded-lg px-4 py-3"
+                className="flex items-center justify-between bg-gray-800 border border-gray-700 rounded-lg px-4 py-3"
               >
                 <div className="flex items-center gap-3">
                   <span

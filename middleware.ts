@@ -5,6 +5,7 @@ import type { NextRequest } from 'next/server';
 
 const isPublicRoute = createRouteMatcher([
   '/',
+  '/login(.*)',
   '/sign-in(.*)',
   '/sign-up(.*)',
   '/api/(.*)',  // All API routes should be public
