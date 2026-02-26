@@ -42,7 +42,7 @@ export default function AdminBlogDashboard() {
         </Link>
       </div>
 
-      {!data?.posts.length ? (
+      {!data?.posts?.length ? (
         <p className="text-gray-400">No posts yet.</p>
       ) : (
         <div className="overflow-x-auto">

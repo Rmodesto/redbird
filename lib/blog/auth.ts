@@ -11,12 +11,12 @@ export async function requireAdmin() {
   // Check database for admin role
   const user = await prisma.user.findUnique({
     where: { clerkUserId: userId },
-    select: { role: true },
+    select: { id: true, role: true },
   });
 
   if (!user || user.role !== 'ADMIN') {
     throw new Error('FORBIDDEN');
   }
 
-  return { userId, sessionClaims };
+  return { userId: user.id, sessionClaims };
 }

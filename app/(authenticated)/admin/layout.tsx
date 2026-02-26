@@ -1,9 +1,12 @@
 'use client';
 
 import Link from 'next/link';
+import { useClerk } from '@clerk/nextjs';
 import AuthWrapper from '@/components/auth/AuthWrapper';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
+  const { signOut } = useClerk();
+
   return (
     <AuthWrapper requireAdmin fallbackUrl="/sign-in">
       <div className="min-h-screen bg-gray-950">
@@ -23,9 +26,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 New Post
               </Link>
             </div>
-            <Link href="/" className="text-gray-400 hover:text-white text-sm">
-              Back to Site
-            </Link>
+            <div className="flex items-center gap-4">
+              <Link href="/" className="text-gray-400 hover:text-white text-sm">
+                Back to Site
+              </Link>
+              <button
+                onClick={() => signOut({ redirectUrl: '/' })}
+                className="text-gray-400 hover:text-red-400 text-sm"
+              >
+                Logout
+              </button>
+            </div>
           </div>
         </nav>
         <main className="max-w-7xl mx-auto px-4 py-8">{children}</main>

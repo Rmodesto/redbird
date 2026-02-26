@@ -28,6 +28,7 @@ model Post {
   slug               String    @unique
   excerpt            String    @default("")
   content            String
+  contentBlocks      String?
   featuredImage      String?
   featuredImageAlt   String?
   status             String    @default("DRAFT")

@@ -204,6 +204,7 @@ export interface BlogPost {
   slug: string;
   excerpt: string;
   content: string;
+  contentBlocks: string | null;
   featuredImage: string | null;
   featuredImageAlt: string | null;
   status: PostStatus;
