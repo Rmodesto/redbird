@@ -42,3 +42,15 @@ prisma/dev.db-journal
 *.tsbuildinfo
 next-env.d.ts
 n8n/.env*
+
+# youtube api credentials & review files
+scripts/credentials.json
+scripts/token.json
+scripts/shorts-review.json
+scripts/shorts-applied.json
+scripts/token-analytics.json
+scripts/channel-analytics.json
+scripts/full-video-report.json
+scripts/unlist-remaining.json
+scripts/unlist-batch2.json
+scripts/unlisted-videos.json

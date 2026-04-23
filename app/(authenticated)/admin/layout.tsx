@@ -25,6 +25,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <Link href="/admin/blog/new" className="text-gray-400 hover:text-white text-sm">
                 New Post
               </Link>
+              <Link href="/admin/analytics" className="text-gray-400 hover:text-white text-sm">
+                Analytics
+              </Link>
+              <Link href="/admin/unlisted" className="text-gray-400 hover:text-white text-sm">
+                Unlisted
+              </Link>
             </div>
             <div className="flex items-center gap-4">
               <Link href="/" className="text-gray-400 hover:text-white text-sm">

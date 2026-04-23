@@ -12,7 +12,10 @@
     "cdk:deploy": "npm run export && cd cdk && npm run deploy",
     "cdk:destroy": "cd cdk && npm run destroy",
     "cdk:diff": "cd cdk && npm run diff",
-    "deploy": "npm run cdk:deploy"
+    "deploy": "npm run cdk:deploy",
+    "shorts:discover": "node scripts/update-shorts.mjs",
+    "shorts:discover:all": "ALL_VIDEOS=true node scripts/update-shorts.mjs",
+    "shorts:apply": "APPLY=true node scripts/update-shorts.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.989.0",
@@ -32,6 +35,7 @@
     "@types/maplibre-gl": "^1.13.2",
     "clsx": "^2.1.1",
     "critters": "^0.0.23",
+    "dotenv": "^17.4.2",
     "gtfs-realtime-bindings": "^1.1.1",
     "isomorphic-dompurify": "^2.35.0",
     "maplibre-gl": "^5.7.0",
@@ -53,9 +57,12 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.25",
+    "google-auth-library": "^10.6.2",
+    "googleapis": "^171.4.0",
     "postcss": "^8",
     "prisma": "^6.19.2",
     "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
   }
 }
