@@ -54,3 +54,8 @@ scripts/full-video-report.json
 scripts/unlist-remaining.json
 scripts/unlist-batch2.json
 scripts/unlisted-videos.json
+
+# Local-only: security notes, automation tool, agent worktrees
+SECURITY_HANDOFF.md
+red-claw/
+.claude/worktrees/

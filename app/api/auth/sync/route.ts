@@ -1,23 +1,35 @@
 import { auth, clerkClient } from '@clerk/nextjs/server';
 import { prisma } from '@/lib/db';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
 const ADMIN_EMAIL = '01streetware@gmail.com';
 
-export async function PUT(req: NextRequest) {
+export async function PUT() {
   const { userId } = await auth();
   if (!userId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const body = await req.json();
-  const { firstName, lastName, email, imageUrl } = body;
+  // Never trust client-sent profile data for authorization decisions.
+  // Fetch the verified identity from Clerk directly.
+  const clerk = await clerkClient();
+  const clerkUser = await clerk.users.getUser(userId);
+
+  const primaryEmail = clerkUser.emailAddresses.find(
+    (e) => e.id === clerkUser.primaryEmailAddressId
+  );
+  const email = primaryEmail?.emailAddress;
 
   if (!email) {
     return NextResponse.json({ error: 'Email required' }, { status: 400 });
   }
 
-  const role = email === ADMIN_EMAIL ? 'ADMIN' : 'AUTHOR';
+  const isVerified = primaryEmail?.verification?.status === 'verified';
+  const role = isVerified && email === ADMIN_EMAIL ? 'ADMIN' : 'AUTHOR';
+
+  const firstName = clerkUser.firstName;
+  const lastName = clerkUser.lastName;
+  const imageUrl = clerkUser.imageUrl;
 
   const user = await prisma.user.upsert({
     where: { clerkUserId: userId },
@@ -40,7 +52,6 @@ export async function PUT(req: NextRequest) {
 
   // Set Clerk public metadata for role
   if (role === 'ADMIN') {
-    const clerk = await clerkClient();
     await clerk.users.updateUserMetadata(userId, {
       publicMetadata: { role: 'admin' },
     });

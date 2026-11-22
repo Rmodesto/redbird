@@ -101,7 +101,7 @@ export default async function NeighborhoodPage({ params }: PageProps) {
     containsPlace: stations.map((station) => ({
       '@type': 'TransitStation',
       name: `${station.name} Subway Station`,
-      url: `https://subwaysounds.net/station/${station.slug}`,
+      url: `https://www.subwaysounds.net/station/${station.slug}`,
     })),
   };
 

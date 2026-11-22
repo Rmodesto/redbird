@@ -3,6 +3,7 @@ import stationsData from '@/data/nyc-subway-stations-official.json';
 import type { SubwayStation } from '@/app/api/subway-stations/route';
 import { nearestStationsQuery, nearestStationsBody } from '@/lib/api/schemas';
 import { validationError } from '@/lib/api/responses';
+import { rateLimit } from '@/lib/api/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
@@ -83,6 +84,10 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
+  // Calls an external geocoder — keep this tight.
+  const limited = rateLimit(request, 'geocode', 10, 60 * 1000); // 10/min per IP
+  if (limited) return limited;
+
   try {
     const body = await request.json();
     const parsed = nearestStationsBody.safeParse(body);
@@ -96,7 +101,11 @@ export async function POST(request: Request) {
     // Geocode the address using a simple approach
     // In production, you'd want to use a proper geocoding service
     const geocodeResponse = await fetch(
-      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address + ', New York, NY')}&limit=1`
+      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address + ', New York, NY')}&limit=1`,
+      {
+        // Nominatim usage policy requires an identifying User-Agent
+        headers: { 'User-Agent': 'subwaysounds.net (contact: via site form)' },
+      }
     );
 
     if (!geocodeResponse.ok) {

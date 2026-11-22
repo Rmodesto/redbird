@@ -8,6 +8,7 @@ import Navigation from '@/components/Navigation';
 import StationMap from '@/components/maps/StationMap';
 import { getLineBgClass, getLineTextClass } from '@/lib/constants';
 import LiveArrivalsSection from '@/components/station/LiveArrivalsSection';
+import StationVideosSection from '@/components/station/StationVideosSection';
 import {
   buildPageTitle,
   buildMetaDescription,
@@ -176,10 +177,10 @@ export default async function StationPage({ params }: Props) {
       // TransitStation schema
       {
         '@type': 'TransitStation',
-        '@id': `https://subwaysounds.net/station/${station.slug}`,
+        '@id': `https://www.subwaysounds.net/station/${station.slug}`,
         name: `${station.name} Station`,
         description: buildMetaDescription(station),
-        url: `https://subwaysounds.net/station/${station.slug}`,
+        url: `https://www.subwaysounds.net/station/${station.slug}`,
         keywords: [...schemaKeywords.transitStation, ...getMetadataKeywords(station).slice(0, 10)].join(', '),
         geo: {
           '@type': 'GeoCoordinates',
@@ -205,7 +206,7 @@ export default async function StationPage({ params }: Props) {
       // Place schema
       {
         '@type': 'Place',
-        '@id': `https://subwaysounds.net/station/${station.slug}#place`,
+        '@id': `https://www.subwaysounds.net/station/${station.slug}#place`,
         name: station.name,
         keywords: schemaKeywords.place.join(', '),
         geo: {
@@ -303,6 +304,9 @@ export default async function StationPage({ params }: Props) {
                 </div>
               </div>
             </section>
+
+            {/* Station Videos Section */}
+            <StationVideosSection stationSlug={station.slug} />
 
             {/* Station Information */}
             <section

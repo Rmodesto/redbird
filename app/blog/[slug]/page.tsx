@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { generateBlogPostMetadata, generateBlogPostJsonLd } from '@/lib/blog/seo.service';
 import * as postService from '@/lib/blog/post.service';
+import { sanitizeHtml } from '@/lib/blog/utils';
 import ViewTracker from '@/components/blog/ViewTracker';
 import AdSlot from '@/components/blog/AdSlot';
 
@@ -132,10 +133,11 @@ export default async function BlogPostPage({ params }: Props) {
           />
         )}
 
-        {/* Content */}
+        {/* Content — sanitized again at render as a backstop for write paths
+            that bypass the API (e.g. scripts writing via Prisma directly) */}
         <div
           className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-blue-600 prose-img:rounded-xl"
-          dangerouslySetInnerHTML={{ __html: post.content }}
+          dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.content) }}
         />
 
         {/* Ad: inline (after content) */}
