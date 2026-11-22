@@ -1,115 +1,90 @@
 import { MetadataRoute } from 'next';
-import fs from 'fs';
-import path from 'path';
+import stationsData from '@/data/stations-normalized.json';
+import neighborhoodsData from '@/data/neighborhoods.json';
 import { prisma } from '@/lib/db';
 
-interface Station {
-  slug: string;
-  name: string;
-}
+// Import JSON directly (not fs.readFileSync) so the data is bundled into the
+// Amplify SSR Lambda, same fix as app/api/arrivals.
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.subwaysounds.net').replace(/\/$/, '');
 
-interface StationsData {
-  stations: Station[];
-}
+// Regenerate at most once an hour (picks up newly published blog posts).
+export const revalidate = 3600;
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://subwaysounds.net';
-
-// All subway lines in NYC
 const SUBWAY_LINES = [
   '1', '2', '3', '4', '5', '6', '7',
   'A', 'B', 'C', 'D', 'E', 'F', 'G',
-  'J', 'L', 'M', 'N', 'Q', 'R', 'S', 'W', 'Z'
+  'J', 'L', 'M', 'N', 'Q', 'R', 'S', 'W', 'Z',
 ];
 
-// Static pages with their priority and change frequency
-const STATIC_PAGES = [
-  { url: '', priority: 1.0, changeFrequency: 'daily' as const },
-  { url: '/stations', priority: 0.9, changeFrequency: 'daily' as const },
-  { url: '/lines', priority: 0.9, changeFrequency: 'weekly' as const },
-  { url: '/subway-map', priority: 0.9, changeFrequency: 'weekly' as const },
-  { url: '/subway-sounds', priority: 0.8, changeFrequency: 'weekly' as const },
-  { url: '/real-time', priority: 0.8, changeFrequency: 'always' as const },
-  { url: '/accessibility', priority: 0.7, changeFrequency: 'monthly' as const },
+const STATIC_PAGES: { url: string; priority: number; changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency'] }[] = [
+  { url: '', priority: 1.0, changeFrequency: 'daily' },
+  { url: '/stations', priority: 0.9, changeFrequency: 'weekly' },
+  { url: '/lines', priority: 0.9, changeFrequency: 'weekly' },
+  { url: '/subway-map', priority: 0.95, changeFrequency: 'weekly' },
+  { url: '/subway-sounds', priority: 0.8, changeFrequency: 'weekly' },
+  { url: '/blog', priority: 0.8, changeFrequency: 'daily' },
+  { url: '/culture', priority: 0.7, changeFrequency: 'monthly' },
+  { url: '/operations', priority: 0.7, changeFrequency: 'monthly' },
+  { url: '/history', priority: 0.7, changeFrequency: 'monthly' },
+  { url: '/contact', priority: 0.5, changeFrequency: 'monthly' },
+  { url: '/privacy-policy', priority: 0.3, changeFrequency: 'yearly' },
+  { url: '/terms', priority: 0.3, changeFrequency: 'yearly' },
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const entries: MetadataRoute.Sitemap = [];
-  
-  // Add static pages
-  STATIC_PAGES.forEach(page => {
+
+  for (const page of STATIC_PAGES) {
     entries.push({
       url: `${SITE_URL}${page.url}`,
-      lastModified: new Date(),
       changeFrequency: page.changeFrequency,
       priority: page.priority,
     });
-  });
-
-  // Load station data
-  try {
-    const dataDir = path.join(process.cwd(), 'data');
-    const stationsPath = path.join(dataDir, 'stations-normalized.json');
-    const stationsData: Station[] = JSON.parse(fs.readFileSync(stationsPath, 'utf8'));
-    
-    // Add all station pages
-    stationsData.forEach((station: Station) => {
-      entries.push({
-        url: `${SITE_URL}/station/${station.slug}`,
-        lastModified: new Date(),
-        changeFrequency: 'daily',
-        priority: 0.7,
-      });
-    });
-  } catch (error) {
-    console.error('Error loading station data for sitemap:', error);
   }
 
-  // Add all line pages
-  SUBWAY_LINES.forEach(line => {
+  // Station pages: slug URLs only (matches the canonical set in app/station/[id]/page.tsx)
+  for (const station of stationsData as { slug: string }[]) {
+    if (!station.slug) continue;
+    entries.push({
+      url: `${SITE_URL}/station/${station.slug}`,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    });
+  }
+
+  for (const line of SUBWAY_LINES) {
     entries.push({
       url: `${SITE_URL}/line/${line.toLowerCase()}`,
-      lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,
     });
-  });
+  }
 
-  // Add borough-specific pages
-  const boroughs = ['manhattan', 'brooklyn', 'queens', 'bronx', 'staten-island'];
-  boroughs.forEach(borough => {
+  for (const neighborhood of (neighborhoodsData as { neighborhoods: { slug: string }[] }).neighborhoods) {
     entries.push({
-      url: `${SITE_URL}/stations?borough=${borough}`,
-      lastModified: new Date(),
+      url: `${SITE_URL}/neighborhood/${neighborhood.slug}`,
       changeFrequency: 'weekly',
-      priority: 0.6,
+      priority: 0.7,
     });
-  });
+  }
 
-  // Add published blog posts
+  // Published blog posts (DB may be unavailable at build time — don't fail the sitemap)
   try {
     const posts = await prisma.post.findMany({
       where: { status: 'PUBLISHED' },
       select: { slug: true, updatedAt: true },
     });
-    posts.forEach((post) => {
+    for (const post of posts) {
       entries.push({
         url: `${SITE_URL}/blog/${post.slug}`,
         lastModified: post.updatedAt,
         changeFrequency: 'weekly',
         priority: 0.7,
       });
-    });
+    }
   } catch {
-    // DB may not be available during build
+    // ignore
   }
-
-  // Add blog index page
-  entries.push({
-    url: `${SITE_URL}/blog`,
-    lastModified: new Date(),
-    changeFrequency: 'daily',
-    priority: 0.8,
-  });
 
   return entries;
 }

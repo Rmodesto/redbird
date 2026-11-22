@@ -44,6 +44,35 @@ const nextConfig = {
             key: 'Referrer-Policy',
             value: 'strict-origin-when-cross-origin'
           },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains'
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), payment=(), usb=()'
+          },
+          // Report-only while tuning: watch the browser console for violations,
+          // then promote to Content-Security-Policy once clean.
+          {
+            key: 'Content-Security-Policy-Report-Only',
+            value: [
+              "default-src 'self'",
+              // 'unsafe-inline'/'unsafe-eval' needed by GTM, AdSense, and Next.js inline scripts
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://pagead2.googlesyndication.com https://www.google.com https://*.clerk.accounts.dev https://*.clerk.com",
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+              "font-src 'self' https://fonts.gstatic.com data:",
+              "img-src 'self' data: blob: https:",
+              "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://pagead2.googlesyndication.com https://basemaps.cartocdn.com https://demotiles.maplibre.org https://data.cityofnewyork.us https://nominatim.openstreetmap.org https://*.clerk.accounts.dev https://*.clerk.com https://img.clerk.com",
+              "frame-src https://www.youtube.com https://www.youtube-nocookie.com https://www.googletagmanager.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com",
+              // MapLibre GL uses blob: web workers
+              "worker-src 'self' blob:",
+              "object-src 'none'",
+              "base-uri 'self'",
+              "form-action 'self'",
+              "frame-ancestors 'self'",
+            ].join('; ')
+          },
         ],
       },
       // Note: Individual API routes set their own cache headers via the response.
@@ -66,6 +95,12 @@ const nextConfig = {
       // Redirect common misspellings and variations
       {
         source: '/map',
+        destination: '/subway-map',
+        permanent: true,
+      },
+      // SEO keyword-optimized URL redirect
+      {
+        source: '/nyc-subway-map',
         destination: '/subway-map',
         permanent: true,
       },

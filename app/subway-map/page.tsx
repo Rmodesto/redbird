@@ -22,9 +22,13 @@ const SubwayMap = dynamic(
 );
 
 export const metadata: Metadata = generatePageMetadata(
-  "NYC Subway Map - Interactive Real-Time Transit Map | Subway Sounds",
-  "Navigate NYC with our interactive subway map featuring all lines, stations, real-time arrivals, and service alerts. Plan your journey with the most comprehensive NYC subway map.",
+  "NYC Subway Map (Interactive) - Real-Time Train Tracker | SubwaySounds",
+  "Free interactive NYC subway map with real-time train positions. Find any of 445+ stations, plan routes, and track arrivals. Updated live with MTA data.",
   [
+    "nyc subway map",
+    "new york subway map",
+    "subway map nyc",
+    "mta map",
     "NYC subway map interactive",
     "MTA map real-time",
     "New York metro map",
@@ -35,6 +39,8 @@ export const metadata: Metadata = generatePageMetadata(
     "Queens train map",
     "Bronx metro map",
     "live subway map",
+    "nyc train map",
+    "mta subway map",
   ]
 );
 
@@ -63,16 +69,17 @@ export default function SubwayMapPage() {
         <section className="bg-black text-white py-12">
           <div className="max-w-7xl mx-auto px-4">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              NYC Subway Map - Interactive Real-Time Transit Guide
+              NYC Subway Map (Interactive)
             </h1>
             <p className="text-xl text-gray-300 mb-6">
-              Explore New York City's complete subway system with our interactive map. 
-              View all 472 stations, 27 lines, real-time train arrivals, and service updates.
+              Explore New York City's subway system with our interactive real-time map.
+              Track 445+ stations across 27 lines, view live train positions, and plan your route.
+              Click any station marker for arrivals, accessibility info, and authentic subway sounds.
             </p>
-            <div className="flex flex-wrap gap-4">
-              <button className="bg-white text-black px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
-                View Full Screen Map
-              </button>
+            <div className="flex gap-4 text-sm">
+              <a href="/stations" className="text-blue-400 hover:underline">Browse All Stations</a>
+              <a href="/lines" className="text-blue-400 hover:underline">View All Lines</a>
+              <a href="/subway-sounds" className="text-blue-400 hover:underline">Subway Sounds</a>
             </div>
           </div>
         </section>

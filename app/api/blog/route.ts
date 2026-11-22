@@ -41,7 +41,8 @@ export async function GET(req: NextRequest) {
     return apiSuccess(data);
   } catch (e) {
     console.error('GET /api/blog error:', e);
-    return serverError();
+    const message = e instanceof Error ? e.message : 'Unknown error';
+    return serverError(message);
   }
 }
 

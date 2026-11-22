@@ -1,11 +1,14 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import type { BlogPost } from '@/lib/types';
+import type { ContentBlock } from '@/lib/blog/block-types';
+import { generateBlockId } from '@/lib/blog/block-types';
+import { blocksToHtml } from '@/lib/blog/blocks-to-html';
 
-const PostEditor = dynamic(() => import('./PostEditor'), { ssr: false });
+const BlockEditor = dynamic(() => import('./BlockEditor'), { ssr: false });
 
 const CATEGORIES = [
   { value: '', label: 'Select Category' },
@@ -14,6 +17,20 @@ const CATEGORIES = [
   { value: 'CULTURE', label: 'Culture' },
   { value: 'HISTORY', label: 'History' },
 ];
+
+function initBlocks(post?: BlogPost): ContentBlock[] {
+  if (post?.contentBlocks) {
+    try {
+      return JSON.parse(post.contentBlocks);
+    } catch {
+      // fall through to legacy conversion
+    }
+  }
+  if (post?.content) {
+    return [{ id: generateBlockId(), type: 'text', html: post.content }];
+  }
+  return [];
+}
 
 interface PostFormProps {
   post?: BlogPost;
@@ -26,7 +43,7 @@ export default function PostForm({ post }: PostFormProps) {
 
   const [title, setTitle] = useState(post?.title || '');
   const [excerpt, setExcerpt] = useState(post?.excerpt || '');
-  const [content, setContent] = useState(post?.content || '');
+  const [blocks, setBlocks] = useState<ContentBlock[]>(() => initBlocks(post));
   const [featuredImage, setFeaturedImage] = useState(post?.featuredImage || '');
   const [featuredImageAlt, setFeaturedImageAlt] = useState(post?.featuredImageAlt || '');
   const [metaTitle, setMetaTitle] = useState(post?.metaTitle || '');
@@ -38,6 +55,8 @@ export default function PostForm({ post }: PostFormProps) {
   const [authorImage, setAuthorImage] = useState(post?.authorImage || '');
   const [authorRole, setAuthorRole] = useState(post?.authorRole || 'Contributing Writer');
 
+  const contentHtml = useMemo(() => blocksToHtml(blocks), [blocks]);
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSaving(true);
@@ -46,7 +65,8 @@ export default function PostForm({ post }: PostFormProps) {
     const body = {
       title,
       excerpt,
-      content,
+      content: contentHtml,
+      contentBlocks: JSON.stringify(blocks),
       featuredImage: featuredImage || null,
       featuredImageAlt: featuredImageAlt || null,
       metaTitle: metaTitle || null,
@@ -177,7 +197,7 @@ export default function PostForm({ post }: PostFormProps) {
 
       <div>
         <label className="block text-sm font-medium text-gray-300 mb-1">Content</label>
-        <PostEditor content={content} onChange={setContent} />
+        <BlockEditor blocks={blocks} onChange={setBlocks} />
       </div>
 
       <div>

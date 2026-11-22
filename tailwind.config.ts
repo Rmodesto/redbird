@@ -12,6 +12,23 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            figure: {
+              marginTop: '0',
+              marginBottom: '0',
+            },
+            'figure img': {
+              marginTop: '0',
+              marginBottom: '0',
+            },
+            figcaption: {
+              marginTop: '0.5rem',
+            },
+          },
+        },
+      },
     },
   },
   plugins: [require('@tailwindcss/typography')],

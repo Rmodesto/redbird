@@ -23,11 +23,13 @@ export function sanitizeHtml(html: string): string {
       'table', 'thead', 'tbody', 'tr', 'th', 'td',
       'div', 'span',
       'iframe', 'video', 'source',
+      'figure', 'figcaption',
     ],
     ALLOWED_ATTR: [
       'href', 'src', 'alt', 'title', 'target', 'rel', 'class',
       'width', 'height', 'frameborder', 'allowfullscreen', 'allow',
       'autoplay', 'controls', 'type', 'data-youtube-video',
+      'data-type', 'data-alignment', 'data-size', 'data-columns', 'style',
     ],
   });
 }

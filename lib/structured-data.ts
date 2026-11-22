@@ -1,4 +1,4 @@
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://subwaysounds.net';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.subwaysounds.net';
 const SITE_NAME = 'Subway Sounds NYC';
 
 interface StationData {
@@ -283,6 +283,34 @@ export function generateFAQSchema(faqs: Array<{ question: string; answer: string
         text: faq.answer,
       },
     })),
+  };
+}
+
+// Generate VideoObject schema for YouTube videos
+export function generateVideoObjectSchema(video: {
+  name: string;
+  description: string;
+  thumbnailUrl: string;
+  uploadDate: string;
+  duration: string;  // ISO 8601 format: "PT30M"
+  embedUrl: string;
+  transcript?: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name: video.name,
+    description: video.description,
+    thumbnailUrl: video.thumbnailUrl,
+    uploadDate: video.uploadDate,
+    duration: video.duration,
+    embedUrl: video.embedUrl,
+    transcript: video.transcript,
+    publisher: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
   };
 }
 

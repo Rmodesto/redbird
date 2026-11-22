@@ -3,6 +3,7 @@ import { z } from 'zod';
 export const createPostSchema = z.object({
   title: z.string().min(1, 'Title is required').max(200),
   content: z.string().min(1, 'Content is required'),
+  contentBlocks: z.string().nullable().optional(),
   excerpt: z.string().max(500).default(''),
   featuredImage: z.string().url().nullable().optional(),
   featuredImageAlt: z.string().max(200).nullable().optional(),

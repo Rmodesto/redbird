@@ -3,7 +3,9 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { generateBlogPostMetadata, generateBlogPostJsonLd } from '@/lib/blog/seo.service';
 import * as postService from '@/lib/blog/post.service';
+import { sanitizeHtml } from '@/lib/blog/utils';
 import ViewTracker from '@/components/blog/ViewTracker';
+import AdSlot from '@/components/blog/AdSlot';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -86,13 +88,6 @@ export default async function BlogPostPage({ params }: Props) {
               </svg>
               {post.readingTimeMinutes} min read
             </span>
-            <span className="flex items-center gap-1.5">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-              </svg>
-              {post.views} views
-            </span>
           </div>
 
           {/* Share button placeholder */}
@@ -103,6 +98,9 @@ export default async function BlogPostPage({ params }: Props) {
             Share
           </button>
         </div>
+
+        {/* Ad: header */}
+        <AdSlot placement="blog-header" className="mb-6" />
 
         {/* Divider */}
         <hr className="border-gray-200 mb-8" />
@@ -135,11 +133,15 @@ export default async function BlogPostPage({ params }: Props) {
           />
         )}
 
-        {/* Content */}
+        {/* Content — sanitized again at render as a backstop for write paths
+            that bypass the API (e.g. scripts writing via Prisma directly) */}
         <div
           className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-blue-600 prose-img:rounded-xl"
-          dangerouslySetInnerHTML={{ __html: post.content }}
+          dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.content) }}
         />
+
+        {/* Ad: inline (after content) */}
+        <AdSlot placement="blog-inline" className="my-10" />
 
         {/* Tags */}
         {post.tags.length > 0 && (
@@ -154,6 +156,8 @@ export default async function BlogPostPage({ params }: Props) {
             ))}
           </div>
         )}
+        {/* Ad: footer */}
+        <AdSlot placement="blog-footer" className="mt-10" />
       </article>
     </div>
   );

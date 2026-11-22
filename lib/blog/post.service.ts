@@ -33,6 +33,7 @@ export async function createPost(
     slug,
     excerpt: input.excerpt || '',
     content,
+    contentBlocks: input.contentBlocks ?? null,
     featuredImage: input.featuredImage ?? null,
     featuredImageAlt: input.featuredImageAlt ?? null,
     status: 'DRAFT',
@@ -67,6 +68,7 @@ export async function updatePost(id: string, input: UpdatePostInput): Promise<Bl
     data.content = sanitizeHtml(input.content);
     data.readingTimeMinutes = calculateReadingTime(data.content as string);
   }
+  if (input.contentBlocks !== undefined) data.contentBlocks = input.contentBlocks;
   if (input.excerpt !== undefined) data.excerpt = input.excerpt;
   if (input.featuredImage !== undefined) data.featuredImage = input.featuredImage;
   if (input.featuredImageAlt !== undefined) data.featuredImageAlt = input.featuredImageAlt;

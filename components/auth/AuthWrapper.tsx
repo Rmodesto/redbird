@@ -15,7 +15,7 @@ export default function AuthWrapper({
   children,
   requireAuth = false,
   requireAdmin = false,
-  fallbackUrl = '/sign-in',
+  fallbackUrl = '/login',
 }: AuthWrapperProps) {
   const { user, isLoaded } = useUser();
   const router = useRouter();
