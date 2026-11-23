@@ -12,8 +12,11 @@ const nextConfig = {
   },
   
   // Image optimization
+  // The optimizer is disabled: nothing in this app uses next/image (all images
+  // are plain <img> tags), but /_next/image stays reachable while it is on, and
+  // Next 14 has unpatched RCE advisories in that endpoint's AVIF/SVG paths.
   images: {
-    formats: ['image/avif', 'image/webp'],
+    unoptimized: true,
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
