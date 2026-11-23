@@ -54,3 +54,39 @@ model Post {
   @@index([status, publishedAt])
   @@index([authorId])
 }
+
+model Video {
+  id            String         @id @default(cuid())
+  youtubeId     String         @unique
+  title         String
+  description   String         @default("")
+  thumbnailUrl  String         @default("")
+  channelId     String         @default("")
+  channelTitle  String         @default("")
+  publishedAt   DateTime?
+  duration      String?
+  tags          String         @default("[]")
+  status        String         @default("ACTIVE")
+  syncedAt      DateTime       @default(now())
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  stations      VideoStation[]
+
+  @@index([status])
+  @@index([channelId])
+  @@index([publishedAt])
+}
+
+model VideoStation {
+  id          String   @id @default(cuid())
+  videoId     String
+  stationSlug String
+  matchType   String   @default("AUTO")
+  confidence  Float    @default(1.0)
+  createdAt   DateTime @default(now())
+  video       Video    @relation(fields: [videoId], references: [id], onDelete: Cascade)
+
+  @@unique([videoId, stationSlug])
+  @@index([stationSlug])
+  @@index([videoId])
+}

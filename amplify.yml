@@ -38,7 +38,7 @@ frontend:
         # Site URL (different for prod vs staging)
         - |
           if [ "$AWS_BRANCH" = "main" ]; then
-            echo "NEXT_PUBLIC_SITE_URL=https://subwaysounds.net" >> .env.production
+            echo "NEXT_PUBLIC_SITE_URL=https://www.subwaysounds.net" >> .env.production
           else
             echo "NEXT_PUBLIC_SITE_URL=https://staging.subwaysounds.net" >> .env.production
           fi
@@ -53,14 +53,14 @@ frontend:
         - 'echo "R2_BUCKET_NAME=subway-sounds-images" >> .env.production'
         - 'echo "R2_PUBLIC_URL=https://pub-e840d0273cf34b648e38bac3383b2fa1.r2.dev" >> .env.production'
 
-        # Debug - show what was written
-        - 'echo "=== .env.production contents ==="'
-        - cat .env.production
+        # Debug - list variable NAMES only (never print values; they end up in build logs)
+        - 'echo "=== .env.production keys ==="'
+        - grep -v "^#" .env.production | cut -d= -f1
         - 'echo "=== END ==="'
 
         # Verify critical variables
-        - 'grep "CLERK_SECRET_KEY" .env.production || echo "❌ CLERK_SECRET_KEY not found!"'
-        - 'grep "DATABASE_URL" .env.production || echo "❌ DATABASE_URL not found!"'
+        - 'grep -q "^CLERK_SECRET_KEY=." .env.production || echo "❌ CLERK_SECRET_KEY not found!"'
+        - 'grep -q "^DATABASE_URL=." .env.production || echo "❌ DATABASE_URL not found!"'
 
         # Generate Prisma client
         - npx prisma generate

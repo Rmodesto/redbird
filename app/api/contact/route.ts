@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { contactForm } from '@/lib/api/schemas';
 import { validationError } from '@/lib/api/responses';
+import { rateLimit } from '@/lib/api/rate-limit';
 
 export const dynamic = "force-dynamic";
 
 export async function POST(request: NextRequest) {
+  const limited = rateLimit(request, 'contact', 5, 60 * 60 * 1000); // 5/hour per IP
+  if (limited) return limited;
+
   try {
     const body = await request.json();
     const parsed = contactForm.safeParse(body);

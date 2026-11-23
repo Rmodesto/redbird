@@ -1,27 +1,21 @@
 import { MetadataRoute } from 'next';
 
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.subwaysounds.net').replace(/\/$/, '');
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/admin/', '/_next/'],
-      },
-      {
-        userAgent: 'Googlebot',
-        allow: '/',
-      },
-      {
-        userAgent: 'Bingbot',
-        allow: '/',
+        disallow: ['/api/', '/admin/'],
       },
       {
         userAgent: 'AhrefsBot',
         disallow: '/',
       },
     ],
-    sitemap: 'https://subwaysounds.net/sitemap.xml',
-    host: 'https://subwaysounds.net',
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL,
   };
 }
