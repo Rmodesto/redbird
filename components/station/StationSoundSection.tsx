@@ -52,17 +52,17 @@ function metaFor(v: VideoItem): string | null {
 
 function SectionHead({ count }: { count: number | null }) {
   return (
-    <div className="flex items-end justify-between gap-[34px] border-b border-station-ink pb-[21px]">
+    <div className="flex items-end justify-between gap-[34px] border-b border-ink pb-[21px]">
       <div className="flex flex-col gap-[8px]">
-        <span className="text-[13px] font-bold uppercase leading-[21px] tracking-[.08em] text-station-muted">
+        <span className="text-[13px] font-bold uppercase leading-[21px] tracking-[.08em] text-muted">
           &ldquo;Sound&rdquo;
         </span>
-        <h2 className="m-0 text-[34px] font-bold leading-[42px] tracking-[-.01em] text-station-ink">
+        <h2 className="m-0 text-[34px] font-bold leading-[42px] tracking-[-.01em] text-ink">
           Recorded at this station
         </h2>
       </div>
       {count !== null && (
-        <span className="whitespace-nowrap text-[13px] font-bold uppercase leading-[21px] tracking-[.08em] text-station-muted">
+        <span className="whitespace-nowrap text-[13px] font-bold uppercase leading-[21px] tracking-[.08em] text-muted">
           {count} {count === 1 ? 'Recording' : 'Recordings'}
         </span>
       )}
@@ -99,10 +99,10 @@ export default function StationSoundSection({
     return (
       <section className="flex flex-col gap-[55px]">
         <SectionHead count={null} />
-        <div className="aspect-video w-full animate-pulse bg-station-rule" />
+        <div className="aspect-video w-full animate-pulse bg-seam" />
         <div className="grid grid-cols-2 gap-[34px]">
-          <div className="aspect-video animate-pulse bg-station-rule" />
-          <div className="aspect-video animate-pulse bg-station-rule" />
+          <div className="aspect-video animate-pulse bg-seam" />
+          <div className="aspect-video animate-pulse bg-seam" />
         </div>
       </section>
     );
@@ -112,8 +112,8 @@ export default function StationSoundSection({
     return (
       <section className="flex flex-col gap-[55px]">
         <SectionHead count={0} />
-        <div className="border border-dashed border-station-rule p-[55px] text-center">
-          <p className="m-0 text-[18px] leading-[29px] text-station-muted">
+        <div className="border border-dashed border-seam p-[55px] text-center">
+          <p className="m-0 text-[18px] leading-[29px] text-muted">
             No recordings from {stationName} yet.
           </p>
         </div>
@@ -134,7 +134,7 @@ export default function StationSoundSection({
 
       {playing ? (
         <div className="relative w-full">
-          <div className="aspect-video w-full border border-station-ink bg-station-ground">
+          <div className="aspect-video w-full border border-ink bg-jet">
             <iframe
               src={`https://www.youtube-nocookie.com/embed/${playing}?autoplay=1&rel=0`}
               title="Station recording"
@@ -146,7 +146,7 @@ export default function StationSoundSection({
           <button
             type="button"
             onClick={() => setPlaying(null)}
-            className="mt-[13px] border border-station-ink px-[21px] py-[8px] text-[13px] font-bold uppercase tracking-[.08em] text-station-ink transition-colors hover:bg-station-ink hover:text-white"
+            className="mt-[13px] border border-ink px-[21px] py-[8px] text-[13px] font-bold uppercase tracking-[.08em] text-ink transition-colors hover:bg-ink hover:text-white"
           >
             Close player
           </button>

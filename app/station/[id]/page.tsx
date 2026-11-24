@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { mtaDataService } from '@/lib/services/mta-data-service';
 import SubwayLinesBadges from '@/components/subway/SubwayLinesBadges';
-import Navigation from '@/components/Navigation';
+import SiteHeader from '@/components/site/SiteHeader';
 import AdSlot from '@/components/AdSlot';
 import StationSoundSection from '@/components/station/StationSoundSection';
 import StationArrivalsPanel from '@/components/station/StationArrivalsPanel';
@@ -205,29 +205,21 @@ export default async function StationPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
       />
-      <Navigation />
+      <SiteHeader active="stations" />
 
-      <div className="min-w-0 bg-station-ground font-sans text-station-ink">
+      <div className="min-w-0 bg-jet font-sans text-ink">
         {/* ── Masthead ─────────────────────────────────────────────── */}
-        <section
-          className="text-white"
-          style={{
-            backgroundColor: '#0B0B0B',
-            backgroundImage:
-              'linear-gradient(#262626 1px,transparent 1px),linear-gradient(90deg,#262626 1px,transparent 1px),linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px)',
-            backgroundSize: '21px 21px,21px 21px,5px 5px,5px 5px',
-          }}
-        >
+        <section className="surface-ripstop text-paper">
           <div className="mx-auto flex max-w-[1440px] flex-col gap-[34px] px-[21px] pb-[34px] pt-[34px] md:gap-[55px] md:px-[55px] md:pb-[55px]">
             <nav
               aria-label="Breadcrumb"
-              className={`flex flex-wrap items-center gap-[13px] ${LABEL} text-station-dim`}
+              className={`flex flex-wrap items-center gap-[13px] ${LABEL} text-graphite`}
             >
-              <Link href="/" className="text-station-dim no-underline hover:text-white">
+              <Link href="/" className="text-graphite no-underline hover:text-white">
                 Home
               </Link>
               <span aria-hidden="true">/</span>
-              <Link href="/stations" className="text-station-dim no-underline hover:text-white">
+              <Link href="/stations" className="text-graphite no-underline hover:text-white">
                 Stations
               </Link>
               <span aria-hidden="true">/</span>
@@ -236,13 +228,13 @@ export default async function StationPage({ params }: Props) {
 
             <div className="flex flex-col items-start justify-between gap-[34px] lg:flex-row lg:items-end lg:gap-[55px]">
               <div className="flex min-w-0 flex-col gap-[21px]">
-                <span className={`${LABEL} text-station-dim`}>&ldquo;Station&rdquo;</span>
+                <span className={`${LABEL} text-graphite`}>&ldquo;Station&rdquo;</span>
                 <h1 className="m-0 text-[clamp(40px,7vw,89px)] font-bold uppercase leading-[1] tracking-[-.03em]">
                   {station.name}
                 </h1>
                 <div className="flex flex-wrap items-center gap-[21px]">
                   <SubwayLinesBadges lines={station.lines} size="md" />
-                  <span className={`${LABEL} text-station-dim`}>
+                  <span className={`${LABEL} text-graphite`}>
                     {station.borough}
                     {station.ada ? ' · ADA Accessible' : ''}
                   </span>
@@ -258,7 +250,7 @@ export default async function StationPage({ params }: Props) {
                 </Link>
                 <a
                   href="#sound"
-                  className={`flex h-[55px] items-center bg-white px-[34px] text-station-ground no-underline transition-colors hover:bg-[#E5E5E5] ${LABEL}`}
+                  className={`flex h-[55px] items-center bg-white px-[34px] text-jet no-underline transition-colors hover:bg-[#E5E5E5] ${LABEL}`}
                 >
                   Play latest
                 </a>
@@ -269,11 +261,11 @@ export default async function StationPage({ params }: Props) {
 
         {/* ── Paper panel ──────────────────────────────────────────── */}
         <div className="mx-auto max-w-[1440px] px-[21px] pb-[55px] md:px-[55px] md:pb-[89px]">
-          <main className="relative grid grid-cols-1 gap-[55px] bg-station-paper p-[21px] outline-dashed outline-1 -outline-offset-8 outline-[#CFCFCF] md:p-[55px] lg:grid-cols-[minmax(0,1.618fr)_minmax(0,1fr)] lg:gap-[89px] lg:p-[89px]">
+          <main className="relative grid grid-cols-1 gap-[55px] bg-paper p-[21px] outline-dashed outline-1 -outline-offset-8 outline-[#CFCFCF] md:p-[55px] lg:grid-cols-[minmax(0,1.618fr)_minmax(0,1fr)] lg:gap-[89px] lg:p-[89px]">
             {/* Index tab, like a filed document */}
             <span
               aria-hidden="true"
-              className="absolute -left-[13px] top-[55px] hidden h-[21px] w-[55px] bg-station-accent lg:block"
+              className="absolute -left-[13px] top-[55px] hidden h-[21px] w-[55px] bg-tag lg:block"
             />
 
             <div className="flex min-w-0 flex-col gap-[55px]">
@@ -293,11 +285,11 @@ export default async function StationPage({ params }: Props) {
               />
 
               <section className="flex max-w-[610px] flex-col gap-[21px]">
-                <span className={`${LABEL} text-station-muted`}>&ldquo;Details&rdquo;</span>
+                <span className={`${LABEL} text-muted`}>&ldquo;Details&rdquo;</span>
                 <h2 className="m-0 text-[34px] font-bold leading-[42px] tracking-[-.01em]">
                   About the station
                 </h2>
-                <p className="m-0 text-[18px] leading-[29px] text-station-ink [text-wrap:pretty]">
+                <p className="m-0 text-[18px] leading-[29px] text-ink [text-wrap:pretty]">
                   {station.name} is in {station.borough} and is served by{' '}
                   {serviceCount} {serviceCount === 1 ? 'service' : 'services'} across{' '}
                   {trunks.length} {trunks.length === 1 ? 'trunk line' : 'trunk lines'}
@@ -306,7 +298,7 @@ export default async function StationPage({ params }: Props) {
                     : ''}
                   .
                 </p>
-                <p className="m-0 text-[18px] leading-[29px] text-station-ink [text-wrap:pretty]">
+                <p className="m-0 text-[18px] leading-[29px] text-ink [text-wrap:pretty]">
                   {station.ada
                     ? 'The station is ADA accessible.'
                     : 'The station is not ADA accessible.'}{' '}
@@ -318,21 +310,21 @@ export default async function StationPage({ params }: Props) {
 
             {/* ── Aside ──────────────────────────────────────────── */}
             <aside className="flex min-w-0 flex-col gap-[34px]">
-              <div className="border border-station-ink">
-                <div className="flex h-[34px] items-center justify-between bg-station-panel px-[13px] text-white">
+              <div className="border border-ink">
+                <div className="flex h-[34px] items-center justify-between bg-suede px-[13px] text-white">
                   <span className="text-[13px] font-bold tracking-[.08em]">
                     &ldquo;Lines served&rdquo;
                   </span>
-                  <span className="text-[13px] font-bold text-station-dim">{serviceCount}</span>
+                  <span className="text-[13px] font-bold text-graphite">{serviceCount}</span>
                 </div>
                 {trunks.map((t) => (
                   <div
                     key={t.name}
-                    className="flex items-center justify-between gap-[13px] border-t border-station-rule p-[13px]"
+                    className="flex items-center justify-between gap-[13px] border-t border-seam p-[13px]"
                   >
                     <span className="flex min-w-0 flex-col gap-[3px]">
                       <span className="text-[16px] font-bold leading-[21px]">{t.name}</span>
-                      <span className="text-[13px] leading-[21px] text-station-muted">{t.note}</span>
+                      <span className="text-[13px] leading-[21px] text-muted">{t.note}</span>
                     </span>
                     <SubwayLinesBadges lines={t.lines} size="md" className="justify-end" />
                   </div>
@@ -341,8 +333,8 @@ export default async function StationPage({ params }: Props) {
 
               <StationArrivalsPanel stationId={station.id} />
 
-              <div className="border border-station-ink">
-                <div className="flex h-[34px] items-center bg-station-panel px-[13px] text-white">
+              <div className="border border-ink">
+                <div className="flex h-[34px] items-center bg-suede px-[13px] text-white">
                   <span className="text-[13px] font-bold tracking-[.08em]">
                     &ldquo;Accessibility&rdquo;
                   </span>
@@ -350,13 +342,13 @@ export default async function StationPage({ params }: Props) {
                 {accessRows.map((row) => (
                   <div
                     key={row.k}
-                    className="flex justify-between gap-[13px] border-t border-station-rule p-[13px] text-[16px] leading-[21px]"
+                    className="flex justify-between gap-[13px] border-t border-seam p-[13px] text-[16px] leading-[21px]"
                   >
-                    <span className="text-station-muted">{row.k}</span>
+                    <span className="text-muted">{row.k}</span>
                     <span className="font-bold">{row.v}</span>
                   </div>
                 ))}
-                <div className="border-t border-station-rule px-[13px] py-[8px] text-[13px] leading-[21px] text-station-muted">
+                <div className="border-t border-seam px-[13px] py-[8px] text-[13px] leading-[21px] text-muted">
                   Data: MTA Accessibility · Static GTFS
                 </div>
               </div>

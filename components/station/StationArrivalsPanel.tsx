@@ -78,28 +78,28 @@ export default function StationArrivalsPanel({ stationId }: StationArrivalsPanel
     .slice(0, 5);
 
   return (
-    <div className="border border-station-ink">
-      <div className="flex h-[34px] items-center justify-between bg-station-panel px-[13px] text-white">
+    <div className="border border-ink">
+      <div className="flex h-[34px] items-center justify-between bg-suede px-[13px] text-white">
         <span className="text-[13px] font-bold tracking-[.08em]">&ldquo;Live&rdquo; Arrivals</span>
-        <span className="text-[10px] font-bold uppercase tracking-[.08em] text-station-dim">
+        <span className="text-[10px] font-bold uppercase tracking-[.08em] text-graphite">
           {error ? 'Unavailable' : agoLabel(updated)}
         </span>
       </div>
 
       {loading && (
-        <div className="border-t border-station-rule p-[13px] text-[13px] leading-[21px] text-station-muted">
+        <div className="border-t border-seam p-[13px] text-[13px] leading-[21px] text-muted">
           Loading arrivals…
         </div>
       )}
 
       {!loading && error && (
-        <div className="border-t border-station-rule p-[13px] text-[13px] leading-[21px] text-station-muted">
+        <div className="border-t border-seam p-[13px] text-[13px] leading-[21px] text-muted">
           Arrival data is unavailable right now.
         </div>
       )}
 
       {!loading && !error && next.length === 0 && (
-        <div className="border-t border-station-rule p-[13px] text-[13px] leading-[21px] text-station-muted">
+        <div className="border-t border-seam p-[13px] text-[13px] leading-[21px] text-muted">
           No trains currently scheduled.
         </div>
       )}
@@ -107,29 +107,29 @@ export default function StationArrivalsPanel({ stationId }: StationArrivalsPanel
       {next.map(({ a, mins }, i) => (
         <div
           key={`${a.line}-${a.destination}-${i}`}
-          className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-[13px] border-t border-station-rule p-[13px]"
+          className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-[13px] border-t border-seam p-[13px]"
         >
           <SubwayLineBadge line={a.line} size="md" />
           <span className="flex min-w-0 flex-col gap-[3px]">
-            <span className="truncate text-[16px] font-bold leading-[21px] text-station-ink">
+            <span className="truncate text-[16px] font-bold leading-[21px] text-ink">
               {a.destination}
             </span>
-            <span className="text-[13px] leading-[21px] text-station-muted">{a.direction}</span>
+            <span className="text-[13px] leading-[21px] text-muted">{a.direction}</span>
           </span>
           {mins === 0 ? (
-            <span className="text-[16px] font-bold uppercase leading-[34px] tracking-[.08em] text-station-ink">
+            <span className="text-[16px] font-bold uppercase leading-[34px] tracking-[.08em] text-ink">
               Due
             </span>
           ) : (
-            <span className="text-[26px] font-bold leading-[34px] tabular-nums text-station-ink">
+            <span className="text-[26px] font-bold leading-[34px] tabular-nums text-ink">
               {mins}
-              <span className="text-[13px] text-station-muted"> min</span>
+              <span className="text-[13px] text-muted"> min</span>
             </span>
           )}
         </div>
       ))}
 
-      <div className="border-t border-station-rule px-[13px] py-[8px] text-[13px] leading-[21px] text-station-muted">
+      <div className="border-t border-seam px-[13px] py-[8px] text-[13px] leading-[21px] text-muted">
         Data: MTA GTFS-Realtime
       </div>
     </div>
