@@ -162,6 +162,78 @@ export function matchVideoToStations(
     .sort((a, b) => b.confidence - a.confidence);
 }
 
+/**
+ * Match a video to stations using every signal we have.
+ *
+ * Title and tags are the strong signal and keep their full confidence.
+ * The description is weighted down: channels routinely list a whole route or a
+ * standing footer of every line they cover, so a station named there is far
+ * weaker evidence than one in the title.
+ *
+ * Geotags are a bonus, not a basis — YouTube only exposes
+ * `recordingDetails.location` when the uploader set it, which most never do.
+ */
+export function matchVideo(input: {
+  title: string;
+  tags?: string[];
+  description?: string;
+  /** From YouTube `recordingDetails.location`, when present. */
+  location?: { latitude: number; longitude: number } | null;
+}): MatchResult[] {
+  const merged = new Map<string, MatchResult>();
+
+  const absorb = (results: MatchResult[], weight = 1) => {
+    for (const r of results) {
+      const scored = { ...r, confidence: r.confidence * weight };
+      const existing = merged.get(scored.stationSlug);
+      if (!existing || scored.confidence > existing.confidence) {
+        merged.set(scored.stationSlug, scored);
+      }
+    }
+  };
+
+  absorb(matchVideoToStations(input.title, input.tags ?? []));
+
+  if (input.description?.trim()) {
+    absorb(matchVideoToStations(input.description, []), DESCRIPTION_WEIGHT);
+  }
+
+  if (input.location) {
+    absorb(matchVideoByLocation(input.location.latitude, input.location.longitude));
+  }
+
+  return Array.from(merged.values())
+    .filter((r) => r.confidence >= 0.5)
+    .sort((a, b) => b.confidence - a.confidence);
+}
+
+/** Description mentions are real evidence, but much weaker than a title match. */
+const DESCRIPTION_WEIGHT = 0.7;
+
+/**
+ * Match a geotagged video to the stations nearest its recording coordinates.
+ *
+ * 250 m is deliberately tight: NYC station entrances are dense, and a loose
+ * radius in Midtown would tag a video to half a dozen unrelated complexes.
+ */
+export function matchVideoByLocation(
+  latitude: number,
+  longitude: number,
+  radiusKm = 0.25,
+): MatchResult[] {
+  if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) return [];
+
+  const nearby = mtaDataService.getNearbyStations(latitude, longitude, radiusKm);
+
+  // getNearbyStations returns nearest-first. Only the closest few are credible;
+  // confidence decays with rank so a title match still outranks a loose geotag.
+  return nearby.slice(0, 3).map((station, rank) => ({
+    stationSlug: station.slug,
+    stationName: station.name,
+    confidence: rank === 0 ? 0.88 : 0.78 - rank * 0.1,
+  }));
+}
+
 function normalizeStationName(name: string): string {
   return name
     .toLowerCase()

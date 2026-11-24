@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Footer from "./Footer";
+import SiteFooter from "@/components/site/SiteFooter";
 import CookieConsent from "./CookieConsent";
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
@@ -18,7 +18,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   return (
     <>
       {children}
-      <Footer onOpenCookieSettings={handleOpenCookieSettings} />
+      <SiteFooter onOpenCookieSettings={handleOpenCookieSettings} />
       <CookieConsent isOpen={showCookieSettings} onClose={handleCloseCookieSettings} />
     </>
   );

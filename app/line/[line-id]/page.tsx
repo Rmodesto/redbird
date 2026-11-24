@@ -1,349 +1,364 @@
-"use client";
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import Link from 'next/link';
+import { mtaDataService, type Station } from '@/lib/services/mta-data-service';
+import { getLineRoute, getAllLineIds } from '@/lib/map/subwayLineRoutes';
+import { generateLineMetadata } from '@/lib/seo';
+import { generateLineSchema } from '@/lib/structured-data';
+import SiteHeader from '@/components/site/SiteHeader';
+import SubwayLinesBadges from '@/components/subway/SubwayLinesBadges';
+import AdSlot from '@/components/AdSlot';
+import LineRecordingsPanel from '@/components/line/LineRecordingsPanel';
 
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import Navigation from "../../../components/Navigation";
-import SubwayBadge from "../../../components/SubwayBadge";
-import CultureCard from "../../../components/CultureCard";
-import AdSlot from "../../../components/AdSlot";
-import { getLineRoute, type LineRoute } from "../../../lib/map/subwayLineRoutes";
+interface Props {
+  params: Promise<{ 'line-id': string }>;
+}
 
-// Helper function to format station names
-const formatStationName = (slug: string): string => {
-  return slug
-    .split('-')
-    .map(word => {
-      // Handle special cases
-      if (word === 'st') return 'St';
-      if (word === 'av') return 'Ave';
-      if (word === 'ave') return 'Ave';
-      if (word === 'blvd') return 'Blvd';
-      if (word === 'pkwy') return 'Pkwy';
-      if (word === 'sq') return 'Sq';
-      if (word === 'pl') return 'Pl';
-      if (word === 'rd') return 'Rd';
-      if (word === 'hts') return 'Heights';
-      if (word === 'jfk') return 'JFK';
-      // Capitalize first letter
-      return word.charAt(0).toUpperCase() + word.slice(1);
-    })
-    .join(' ');
+/** The boroughs the subway reaches, in the order the MTA lists them. */
+const BOROUGH_ORDER = ['Manhattan', 'Bronx', 'Brooklyn', 'Queens', 'Staten Island'];
+
+const DIVISION_NAME: Record<string, string> = {
+  IRT: 'Interborough Rapid Transit',
+  BMT: 'Brooklyn–Manhattan Transit',
+  IND: 'Independent Subway System',
+  SIR: 'Staten Island Railway',
 };
 
-// Helper function to determine borough from station slug
-const getBoroughFromStation = (slug: string): string => {
-  // This is a simplified mapping - in production, you'd use actual station data
-  if (slug.includes('bronx') || slug.includes('woodlawn') || slug.includes('pelham') || 
-      slug.includes('fordham') || slug.includes('138') || slug.includes('149') || 
-      slug.includes('161') || slug.includes('167') || slug.includes('170') || 
-      slug.includes('176') || slug.includes('183')) {
-    return 'Bronx';
-  }
-  if (slug.includes('queens') || slug.includes('jamaica') || slug.includes('flushing') || 
-      slug.includes('astoria') || slug.includes('forest') || slug.includes('jackson') ||
-      slug.includes('corona') || slug.includes('elmhurst') || slug.includes('woodside')) {
-    return 'Queens';
-  }
-  if (slug.includes('brooklyn') || slug.includes('atlantic') || slug.includes('jay') || 
-      slug.includes('hoyt') || slug.includes('nevins') || slug.includes('bergen') ||
-      slug.includes('prospect') || slug.includes('coney') || slug.includes('brighton')) {
-    return 'Brooklyn';
-  }
-  if (slug.includes('staten')) {
-    return 'Staten Island';
-  }
-  // Default to Manhattan for most stations
-  return 'Manhattan';
-};
+export async function generateStaticParams() {
+  return getAllLineIds()
+    .filter((id) => id !== 'TEST')
+    .map((id) => ({ 'line-id': id.toLowerCase() }));
+}
 
-// Map line colors
-const lineColors: Record<string, { bg: string; text: string }> = {
-  '1': { bg: 'bg-red-600', text: 'text-white' },
-  '2': { bg: 'bg-red-600', text: 'text-white' },
-  '3': { bg: 'bg-red-600', text: 'text-white' },
-  '4': { bg: 'bg-green-600', text: 'text-white' },
-  '5': { bg: 'bg-green-600', text: 'text-white' },
-  '6': { bg: 'bg-green-600', text: 'text-white' },
-  '7': { bg: 'bg-purple-600', text: 'text-white' },
-  'A': { bg: 'bg-blue-600', text: 'text-white' },
-  'C': { bg: 'bg-blue-600', text: 'text-white' },
-  'E': { bg: 'bg-blue-600', text: 'text-white' },
-  'B': { bg: 'bg-orange-500', text: 'text-white' },
-  'D': { bg: 'bg-orange-500', text: 'text-white' },
-  'F': { bg: 'bg-orange-500', text: 'text-white' },
-  'M': { bg: 'bg-orange-500', text: 'text-white' },
-  'G': { bg: 'bg-green-500', text: 'text-white' },
-  'J': { bg: 'bg-amber-600', text: 'text-white' },
-  'Z': { bg: 'bg-amber-600', text: 'text-white' },
-  'L': { bg: 'bg-gray-500', text: 'text-white' },
-  'N': { bg: 'bg-yellow-500', text: 'text-black' },
-  'Q': { bg: 'bg-yellow-500', text: 'text-black' },
-  'R': { bg: 'bg-yellow-500', text: 'text-black' },
-  'W': { bg: 'bg-yellow-500', text: 'text-black' },
-  'S': { bg: 'bg-gray-600', text: 'text-white' },
-};
+function resolveLine(raw: string) {
+  const lineId = decodeURIComponent(raw).toUpperCase();
+  if (lineId === 'TEST') return null;
 
-export default function LinePage() {
-  const params = useParams();
-  const lineId = (params['line-id'] as string).toUpperCase();
-  const [lineRoute, setLineRoute] = useState<LineRoute | null>(null);
-  const [loading, setLoading] = useState(true);
+  const info = mtaDataService.getLineInfo(lineId);
+  const stations = mtaDataService.getStationsByLine(lineId);
+  if (!info || stations.length === 0) return null;
 
-  // Load line data asynchronously
-  useEffect(() => {
-    const loadLineData = async () => {
-      try {
-        const route = await getLineRoute(lineId);
-        setLineRoute(route || null);
-      } catch (error) {
-        console.error('Error loading line data:', error);
-        setLineRoute(null);
-      } finally {
-        setLoading(false);
-      }
+  const route = getLineRoute(lineId);
+  // "1 - Broadway-7th Avenue Local" → "Broadway-7th Avenue Local"
+  const title = route?.name.split(' - ').slice(1).join(' - ') || `${lineId} Train`;
+
+  return { lineId, info, stations, title };
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { 'line-id': raw } = await params;
+  const line = resolveLine(raw);
+
+  if (!line) {
+    return {
+      title: 'Line Not Found',
+      description: 'The requested subway line could not be found.',
     };
-
-    loadLineData();
-  }, [lineId]);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-white">
-        <Navigation />
-        <div className="max-w-4xl mx-auto px-4 py-20 text-center">
-          <h1 className="text-4xl font-bold mb-4">Loading...</h1>
-          <p className="text-gray-600">Loading subway line information...</p>
-        </div>
-      </div>
-    );
   }
 
-  if (!lineRoute) {
-    return (
-      <div className="min-h-screen bg-white">
-        <Navigation />
-        <div className="max-w-4xl mx-auto px-4 py-20 text-center">
-          <h1 className="text-4xl font-bold mb-4">Line Not Found</h1>
-          <p className="text-gray-600">The subway line you're looking for doesn't exist.</p>
-        </div>
-      </div>
-    );
-  }
-
-  // Transform line route data to match component structure
-  const line = {
-    id: lineRoute.id,
-    name: lineRoute.id,
-    color: lineColors[lineRoute.id]?.bg || 'bg-gray-600',
-    textColor: lineColors[lineRoute.id]?.text || 'text-white',
-    fullName: lineRoute.name.split(' - ')[1] || lineRoute.name,
-    description: `Service from ${formatStationName(lineRoute.terminals.north || lineRoute.terminals.west || '')} to ${formatStationName(lineRoute.terminals.south || lineRoute.terminals.east || '')}`,
-    stations: lineRoute.stations.map(slug => ({
-      name: formatStationName(slug),
-      borough: getBoroughFromStation(slug),
-      transfers: [], // We don't have transfer data in the route file
-      slug: slug
-    })),
-    culturalSpots: [
-      {
-        category: "LANDMARK",
-        title: "Explore NYC",
-        description: `Discover landmarks along the ${lineRoute.id} line`,
-        image: "🏢"
-      },
-      {
-        category: "CULTURE",
-        title: "Local Culture", 
-        description: `Experience the neighborhoods of the ${lineRoute.id} train`,
-        image: "🎭"
-      },
-      {
-        category: "FOOD",
-        title: "Food & Dining",
-        description: `Find great eats near ${lineRoute.id} train stations`,
-        image: "🍕"
-      }
-    ]
+  const base = generateLineMetadata(line.lineId);
+  return {
+    ...base,
+    title: `${line.lineId} Train — ${line.title} | NYC Subway Sounds`,
+    description: `The ${line.lineId} train, ${line.title}. All ${line.stations.length} stations, transfers, accessibility and platform recordings from the ${line.lineId} line.`,
   };
+}
 
-  // Console log all stops for this line
-  console.log(`🚇 LINE ${line.name.toUpperCase()} - ${line.fullName}`);
-  console.log(`📊 Total Stops: ${line.stations.length}`);
-  console.log(`🗺️ All Stops:`);
-  line.stations.forEach((station, index) => {
-    console.log(`  ${index + 1}. ${station.name} (${station.borough})`);
-  });
-  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+/** Groups the line's stations by borough, keeping the MTA's borough order. */
+function groupByBorough(stations: Station[]) {
+  const map = new Map<string, Station[]>();
+  for (const station of stations) {
+    const list = map.get(station.borough) ?? [];
+    list.push(station);
+    map.set(station.borough, list);
+  }
+  return BOROUGH_ORDER.filter((b) => map.has(b)).map((borough) => ({
+    borough,
+    // Alphabetical, not route order: the station dataset carries no running
+    // order for a service, and a guessed sequence would be a fabricated one.
+    stations: (map.get(borough) ?? []).slice().sort((a, b) => a.name.localeCompare(b.name)),
+  }));
+}
+
+const TABS = [
+  { label: 'Stations', href: '#stations', quoted: false, active: true },
+  { label: 'Sounds', href: '#sounds', quoted: true, active: false },
+  { label: 'Map', href: '/subway-map', quoted: false, active: false },
+];
+
+export default async function LinePage({ params }: Props) {
+  const { 'line-id': raw } = await params;
+  const line = resolveLine(raw);
+
+  if (!line) {
+    notFound();
+  }
+
+  const { lineId, info, stations, title } = line;
+
+  const groups = groupByBorough(stations);
+  const adaCount = stations.filter((s) => s.ada).length;
+  const transferCount = stations.filter((s) => s.lines.length > 1).length;
+
+  const terminals = info.terminals
+    ? `${info.terminals.south} to ${info.terminals.north}`
+    : info.routes?.length
+      ? `${info.routes.join(' · ')} shuttles`
+      : `${stations.length} stations across New York City`;
+
+  const facts = [
+    { v: String(stations.length), k: 'Stations' },
+    { v: String(groups.length), k: groups.length === 1 ? 'Borough' : 'Boroughs' },
+    { v: String(adaCount), k: 'ADA Stops' },
+  ];
+
+  const schema = generateLineSchema(
+    lineId,
+    stations.map((s) => ({
+      id: s.id,
+      name: s.name,
+      slug: s.slug,
+      latitude: s.latitude,
+      longitude: s.longitude,
+      borough: s.borough,
+      lines: s.lines,
+    })),
+  );
+
+  const stationRefs = stations.map((s) => ({
+    slug: s.slug,
+    name: s.name,
+    borough: s.borough,
+  }));
 
   return (
-    <div className="min-h-screen bg-white pb-20 md:pb-0">
-      <Navigation />
-      
-      {/* Hero Section */}
-      <section className="py-12" style={{background: `linear-gradient(135deg, ${line.color.includes('blue') ? '#1e40af' : line.color.includes('red') ? '#dc2626' : line.color.includes('green') ? '#16a34a' : '#000'} 0%, #374151 100%)`}}>
-        <div className="max-w-4xl mx-auto px-4 text-white">
-          <div className="flex items-center space-x-6 mb-6">
-            <SubwayBadge line={line} size="lg" clickable={false} />
-            <div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-2">{line.fullName}</h1>
-              <p className="text-xl text-gray-200">{line.description}</p>
-            </div>
-          </div>
-        </div>
-      </section>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+      <SiteHeader active="lines" />
 
-      {/* Route Map Visualization */}
-      <section className="py-8 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-2xl font-bold mb-6">ROUTE MAP</h2>
-          <div className="bg-white rounded-lg p-6 border">
-            <div className="relative">
-              {/* Vertical line representing the route */}
-              <div 
-                className={`absolute left-6 top-2 w-1 ${line.color}`}
-                style={{height: `calc(100% - 16px)`}}
-              ></div>
-              
-              {/* Station stops */}
-              <div className="space-y-4 relative">
-                {line.stations.map((station, index) => (
-                  <div key={index} className="flex items-center space-x-4 relative">
-                    {/* Station dot */}
-                    <div className={`w-4 h-4 rounded-full ${line.color} border-2 border-white relative z-10`}></div>
-                    
-                    {/* Station info */}
-                    <div className="flex-1">
-                      <Link 
-                        href={`/station/${station.slug}`}
-                        className="block hover:bg-gray-50/50 rounded-r p-2 pl-4 -my-2 transition-colors"
-                      >
-                        <div className="flex justify-between items-center">
-                          <div>
-                            <h3 className="font-medium text-lg">{station.name}</h3>
-                            <p className="text-sm text-gray-600">{station.borough}</p>
-                          </div>
-                          <div className="flex items-center space-x-1">
-                            {station.transfers.map((transfer, tIndex) => (
-                              <div 
-                                key={tIndex}
-                                className={`w-6 h-6 rounded text-xs font-bold flex items-center justify-center ${
-                                  transfer === '1' || transfer === '2' || transfer === '3' ? 'bg-red-600 text-white' :
-                                  transfer === '4' || transfer === '5' || transfer === '6' ? 'bg-green-600 text-white' :
-                                  transfer === '7' ? 'bg-purple-600 text-white' :
-                                  transfer === 'N' || transfer === 'Q' || transfer === 'R' || transfer === 'W' ? 'bg-yellow-500 text-black' :
-                                  transfer === 'B' || transfer === 'D' || transfer === 'F' || transfer === 'M' ? 'bg-orange-500 text-white' :
-                                  transfer === 'A' || transfer === 'C' || transfer === 'E' ? 'bg-blue-600 text-white' :
-                                  transfer === 'G' ? 'bg-green-500 text-white' :
-                                  transfer === 'J' || transfer === 'Z' ? 'bg-amber-600 text-white' :
-                                  transfer === 'L' ? 'bg-gray-500 text-white' :
-                                  'bg-gray-600 text-white'
-                                }`}
-                              >
-                                {transfer}
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </Link>
-                    </div>
+      <div className="min-w-0 bg-jet font-sans text-ink">
+        {/* ── Masthead ─────────────────────────────────────────────── */}
+        <section className="surface-ripstop text-paper">
+          <div className="mx-auto flex max-w-[1440px] flex-col gap-f34 px-f21 pb-f34 pt-f21 md:px-f55 md:pb-f55 md:pt-f34 lg:gap-f55">
+            <nav
+              aria-label="Breadcrumb"
+              className="flex flex-wrap items-center gap-f13 text-label font-bold uppercase text-graphite"
+            >
+              <Link href="/" className="text-graphite no-underline hover:text-paper">
+                Home
+              </Link>
+              <span aria-hidden="true">/</span>
+              <Link href="/lines" className="text-graphite no-underline hover:text-paper">
+                Lines
+              </Link>
+              <span aria-hidden="true">/</span>
+              <span className="text-paper">{lineId}</span>
+            </nav>
+
+            <div className="flex flex-col items-start gap-f34 lg:flex-row lg:items-center lg:gap-f55">
+              <span
+                aria-hidden="true"
+                className="flex h-f89 w-f89 shrink-0 items-center justify-center rounded-full text-[55px] font-bold leading-none md:h-f144 md:w-f144 md:text-[89px]"
+                style={{ backgroundColor: info.color, color: info.textColor }}
+              >
+                {lineId}
+              </span>
+
+              <div className="flex min-w-0 flex-1 flex-col gap-f13 lg:gap-f21">
+                <span className="quoted text-label font-bold uppercase text-graphite">Line</span>
+                <h1 className="m-0 text-[clamp(34px,6vw,68px)] font-bold uppercase leading-[1] tracking-[-.02em]">
+                  {title}
+                </h1>
+                <p className="m-0 text-body-lg text-paper [text-wrap:pretty]">{terminals}</p>
+              </div>
+
+              <div className="grid w-full shrink-0 grid-cols-3 gap-px border border-ripstop bg-ripstop lg:w-auto">
+                {facts.map((f) => (
+                  <div
+                    key={f.k}
+                    className="flex flex-col gap-f5 bg-suede px-f13 py-f13 md:px-f34 md:py-f21"
+                  >
+                    <span className="text-h3 font-bold tabular-nums md:text-h2">{f.v}</span>
+                    <span className="text-label font-bold uppercase text-graphite">{f.k}</span>
                   </div>
                 ))}
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Ad Slot */}
-      <section className="py-6">
-        <div className="max-w-4xl mx-auto px-4">
-          <AdSlot size="leaderboard" />
-        </div>
-      </section>
+        {/* ── Paper panel ──────────────────────────────────────────── */}
+        <div className="mx-auto max-w-[1440px] px-f8 pb-f55 md:px-f55 md:pb-f89">
+          <main className="panel relative flex flex-col gap-f34 p-f21 md:gap-f55 md:p-f55 lg:p-f89 lg:pt-f55">
+            <span aria-hidden="true" className="panel-tag hidden lg:block" />
+            <span aria-hidden="true" className="panel-tag-thread hidden lg:block" />
 
-      {/* Things to Do Along This Line */}
-      <section className="py-8">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-2xl font-bold mb-8">THINGS TO DO ALONG THE {line.name} LINE</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {line.culturalSpots.map((spot, index) => (
-              <CultureCard
-                key={index}
-                category={spot.category}
-                title={spot.title}
-                description={spot.description}
-                image={spot.image}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Service Information */}
-      <section className="py-8 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-2xl font-bold mb-6">SERVICE INFORMATION</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-white rounded-lg p-6 border">
-              <h3 className="text-xl font-bold mb-4">🕒 HOURS</h3>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span>Weekdays:</span>
-                  <span className="font-medium">24/7 Service</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Weekends:</span>
-                  <span className="font-medium">24/7 Service</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Late Night:</span>
-                  <span className="font-medium">Local Service Only</span>
-                </div>
-              </div>
+            {/* Tabs */}
+            <div className="flex gap-f21 overflow-x-auto border-b border-seam md:gap-f34">
+              {TABS.map((t) => (
+                <Link
+                  key={t.label}
+                  href={t.href}
+                  className={`relative flex h-f55 shrink-0 items-center whitespace-nowrap text-label font-bold uppercase no-underline transition-colors ${
+                    t.active ? 'text-ink' : 'text-muted hover:text-ink'
+                  }`}
+                >
+                  <span className={t.quoted ? 'quoted' : undefined}>{t.label}</span>
+                  {t.active && (
+                    <span
+                      aria-hidden="true"
+                      className="surface-lace absolute -bottom-px left-0 right-0 h-f5"
+                    />
+                  )}
+                </Link>
+              ))}
             </div>
-            
-            <div className="bg-white rounded-lg p-6 border">
-              <h3 className="text-xl font-bold mb-4">⚡ EXPRESS STOPS</h3>
-              <div className="text-sm space-y-1">
-                <p>• 145 St</p>
-                <p>• 125 St</p>
-                <p>• 59 St-Columbus Circle</p>
-                <p>• 42 St-Port Authority</p>
-                <p>• 14 St</p>
-                <p>• W 4 St</p>
-                <p>• Fulton St</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Mobile Navigation */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2">
-        <div className="flex justify-around">
-          <Link href="/" className="flex flex-col items-center py-2 text-xs font-medium text-gray-700">
-            <span className="text-lg mb-1">🏠</span>
-            HOME
-          </Link>
-          <button className="flex flex-col items-center py-2 text-xs font-medium text-black">
-            <span className="text-lg mb-1">🚇</span>
-            LINES
-          </button>
-          <Link href="/stations" className="flex flex-col items-center py-2 text-xs font-medium text-gray-700">
-            <span className="text-lg mb-1">📍</span>
-            STATIONS
-          </Link>
-          <Link href="/map" className="flex flex-col items-center py-2 text-xs font-medium text-gray-700">
-            <span className="text-lg mb-1">🗺️</span>
-            MAP
-          </Link>
-          <Link href="/culture" className="flex flex-col items-center py-2 text-xs font-medium text-gray-700">
-            <span className="text-lg mb-1">🎨</span>
-            CULTURE
-          </Link>
+            <div className="grid grid-cols-1 gap-f55 lg:grid-cols-golden lg:gap-f89">
+              {/* ── Stations ─────────────────────────────────────── */}
+              <div className="flex min-w-0 flex-col gap-f34">
+                <div
+                  id="stations"
+                  className="flex scroll-mt-f89 flex-col items-start justify-between gap-f13 md:flex-row md:items-end md:gap-f34"
+                >
+                  <div className="flex min-w-0 flex-col gap-f8">
+                    <span className="quoted text-label font-bold uppercase text-muted">
+                      Stations
+                    </span>
+                    <h2 className="m-0 text-h3 font-bold tracking-[-.01em] md:text-h2">
+                      {stations.length} stations, A–Z by borough
+                    </h2>
+                  </div>
+                  <div className="flex shrink-0 flex-wrap gap-f13 text-label normal-case tracking-normal text-muted md:gap-f21">
+                    <span className="flex items-center gap-f8">
+                      <span
+                        aria-hidden="true"
+                        className="box-border h-f13 w-f13 rounded-full border-[3px] border-ink bg-paper"
+                      />
+                      Transfer
+                    </span>
+                    <span className="flex items-center gap-f8">
+                      <span aria-hidden="true" className="h-f8 w-f8 rounded-full bg-ink" />
+                      {lineId} train only
+                    </span>
+                  </div>
+                </div>
+
+                {groups.map((group) => (
+                  <div key={group.borough} className="flex flex-col">
+                    <div className="flex items-center gap-f13 border-b border-ink pb-f13">
+                      <span className="quoted text-label font-bold uppercase">
+                        {group.borough}
+                      </span>
+                      <span className="text-label normal-case tracking-normal text-muted">
+                        {group.stations.length}{' '}
+                        {group.stations.length === 1 ? 'station' : 'stations'}
+                      </span>
+                    </div>
+
+                    {group.stations.map((station) => {
+                      const transfers = station.lines
+                        .map((l) => l.toUpperCase())
+                        .filter((l) => l !== lineId);
+
+                      return (
+                        <Link
+                          key={station.id}
+                          href={`/station/${station.slug}`}
+                          className="flex min-h-f55 items-stretch gap-f13 border-b border-seam text-ink no-underline transition-colors hover:bg-[#FAFAFA] md:gap-f21"
+                        >
+                          {/* Rail + stop */}
+                          <span className="relative flex w-f21 shrink-0 items-center justify-center md:w-f34">
+                            <span
+                              aria-hidden="true"
+                              className="absolute left-1/2 top-0 -ml-[2px] w-f5"
+                              style={{ backgroundColor: info.color, bottom: '-1px' }}
+                            />
+                            {transfers.length > 0 ? (
+                              <span
+                                aria-hidden="true"
+                                className="relative box-border h-f13 w-f13 rounded-full border-[3px] border-ink bg-paper"
+                              />
+                            ) : (
+                              <span
+                                aria-hidden="true"
+                                className="relative h-f8 w-f8 rounded-full bg-ink"
+                              />
+                            )}
+                          </span>
+
+                          <span className="flex min-w-0 flex-1 flex-col justify-center gap-f5 py-f8 md:flex-row md:items-center md:justify-between md:gap-f21">
+                            <span className="text-body font-bold leading-[21px]">
+                              {station.name}
+                            </span>
+                            <span className="flex items-center justify-between gap-f13 md:justify-end md:gap-f21">
+                              {transfers.length > 0 ? (
+                                <SubwayLinesBadges
+                                  lines={transfers}
+                                  size="sm"
+                                  className="justify-end"
+                                />
+                              ) : (
+                                <span />
+                              )}
+                              <span className="w-f55 shrink-0 text-right text-label normal-case tracking-normal text-muted md:w-f89">
+                                {station.ada ? 'ADA' : ''}
+                              </span>
+                            </span>
+                          </span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                ))}
+
+                {/* Zigzag rule */}
+                <div
+                  aria-hidden="true"
+                  className="bg-stitch-ink h-f8 bg-repeat-x"
+                  style={{ backgroundSize: '8px 8px' }}
+                />
+
+                <section className="flex max-w-f610 flex-col gap-f13">
+                  <span className="quoted text-label font-bold uppercase text-muted">Details</span>
+                  <h2 className="m-0 text-h3 font-bold tracking-[-.01em]">
+                    About the {lineId} train
+                  </h2>
+                  <p className="m-0 text-body text-ink [text-wrap:pretty]">
+                    The {lineId} runs as the {title} on the {info.division} division
+                    {DIVISION_NAME[info.division] ? ` (${DIVISION_NAME[info.division]})` : ''}. It
+                    serves {stations.length} {stations.length === 1 ? 'station' : 'stations'} across{' '}
+                    {groups.length} {groups.length === 1 ? 'borough' : 'boroughs'}
+                    {groups.length > 0 ? `: ${groups.map((g) => g.borough).join(', ')}` : ''}.
+                  </p>
+                  <p className="m-0 text-body text-ink [text-wrap:pretty]">
+                    {transferCount} of those stops offer a transfer to another service, and{' '}
+                    {adaCount} {adaCount === 1 ? 'is' : 'are'} ADA accessible. Station data comes
+                    from the MTA&rsquo;s static GTFS feed and accessibility listings.
+                  </p>
+                </section>
+              </div>
+
+              {/* ── Aside ────────────────────────────────────────── */}
+              <aside id="sounds" className="flex min-w-0 scroll-mt-f89 flex-col gap-f34">
+                <LineRecordingsPanel lineId={lineId} stations={stationRefs} />
+
+                <Link
+                  href="/subway-sounds"
+                  className="flex h-f55 items-center justify-center border border-ink text-label font-bold uppercase text-ink no-underline transition-colors hover:bg-ink hover:text-paper"
+                >
+                  All {lineId} train recordings
+                </Link>
+
+                <AdSlot size="square" />
+              </aside>
+            </div>
+          </main>
         </div>
       </div>
-    </div>
+    </>
   );
 }
