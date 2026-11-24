@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Navigation from "../../components/Navigation";
-import AdSlot from "../../components/AdSlot";
 
 interface LineInfo {
   id: string;
@@ -453,13 +452,6 @@ export default function LinesPage() {
               </button>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Ad Slot */}
-      <section className="py-6">
-        <div className="max-w-7xl mx-auto px-4">
-          <AdSlot size="leaderboard" />
         </div>
       </section>
 

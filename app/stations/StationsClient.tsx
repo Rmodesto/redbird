@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Navigation from "../../components/Navigation";
-import AdSlot from "../../components/AdSlot";
 
 interface Station {
   id: string;
@@ -208,13 +207,6 @@ export default function StationsClient({ initialStations }: StationsClientProps)
           <div className="mt-4 text-sm text-gray-600">
             Showing {indexOfFirstStation + 1}-{Math.min(indexOfLastStation, filteredStations.length)} of {filteredStations.length} stations
           </div>
-        </div>
-      </section>
-
-      {/* Ad Slot */}
-      <section className="py-6">
-        <div className="max-w-7xl mx-auto px-4">
-          <AdSlot size="leaderboard" />
         </div>
       </section>
 
