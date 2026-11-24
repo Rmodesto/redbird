@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Logo from './Logo';
 
 interface SiteFooterProps {
   onOpenCookieSettings?: () => void;
@@ -62,9 +63,7 @@ export default function SiteFooter({ onOpenCookieSettings }: SiteFooterProps) {
   const brand = (
     <div className="flex max-w-f377 flex-col gap-f21">
       <Link href="/" className="flex items-center gap-f13 text-paper no-underline">
-        <span className="flex h-f34 w-f34 items-center justify-center bg-paper text-label font-bold text-jet">
-          SS
-        </span>
+        <Logo size={34} />
         <span className="text-body font-bold tracking-[.08em]">SUBWAY SOUNDS</span>
       </Link>
       <p className="m-0 text-body text-graphite">
@@ -116,9 +115,7 @@ export default function SiteFooter({ onOpenCookieSettings }: SiteFooterProps) {
       <div className="flex flex-col gap-f34 px-f21 pb-f34 pt-f55 lg:hidden">
         <div className="flex flex-col gap-f13">
           <Link href="/" className="flex items-center gap-f8 text-paper no-underline">
-            <span className="flex h-f34 w-f34 items-center justify-center bg-paper text-label font-bold text-jet">
-              SS
-            </span>
+            <Logo size={34} />
             <span className="text-label font-bold tracking-[.08em]">SUBWAY SOUNDS</span>
           </Link>
           <p className="m-0 text-body text-graphite">

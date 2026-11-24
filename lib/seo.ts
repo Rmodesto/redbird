@@ -95,12 +95,16 @@ export function generateSEOMetadata(config: SEOConfig): Metadata {
     manifest: '/manifest.json',
     icons: {
       icon: [
-        { url: '/favicon.ico' },
+        // SVG first — browsers that support it get the crisp mark at any size.
+        { url: '/favicon.svg', type: 'image/svg+xml' },
+        { url: '/favicon.ico', sizes: '48x48' },
         { url: '/icon-16.png', sizes: '16x16', type: 'image/png' },
         { url: '/icon-32.png', sizes: '32x32', type: 'image/png' },
+        { url: '/icon-48.png', sizes: '48x48', type: 'image/png' },
+        { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
       ],
       apple: [
-        { url: '/apple-touch-icon.png' },
+        { url: '/apple-touch-icon.png', sizes: '180x180' },
       ],
     },
     robots: noIndex ? {

@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import Logo from './Logo';
 
 export type NavKey = '' | 'stations' | 'lines' | 'map' | 'sounds' | 'blog' | 'history' | 'culture';
 
@@ -26,9 +27,7 @@ function Wordmark({ compact = false }: { compact?: boolean }) {
       href="/"
       className={`flex shrink-0 items-center text-paper no-underline ${compact ? 'gap-f8' : 'gap-f13'}`}
     >
-      <span className="flex h-f34 w-f34 items-center justify-center bg-paper text-label font-bold tracking-[.02em] text-jet">
-        SS
-      </span>
+      <Logo size={34} />
       <span className={`font-bold tracking-[.08em] ${compact ? 'text-label' : 'text-body'}`}>
         SUBWAY SOUNDS
       </span>
