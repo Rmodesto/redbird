@@ -188,47 +188,75 @@ export async function syncFromYouTube(channelId: string, apiKey: string): Promis
   return result;
 }
 
+/**
+ * Resolve a channel's uploads playlist.
+ *
+ * Every channel has one; its id is the channel id with the second character
+ * switched from C to U, but we ask the API rather than relying on that.
+ * Costs 1 unit.
+ */
+async function fetchUploadsPlaylistId(channelId: string, apiKey: string): Promise<string> {
+  const url = new URL('https://www.googleapis.com/youtube/v3/channels');
+  url.searchParams.set('part', 'contentDetails');
+  url.searchParams.set('id', channelId);
+  url.searchParams.set('key', apiKey);
+
+  const res = await fetch(url.toString());
+  if (!res.ok) {
+    throw new Error(`YouTube channels API ${res.status}: ${await res.text()}`);
+  }
+  const json = await res.json();
+  const uploads = json?.items?.[0]?.contentDetails?.relatedPlaylists?.uploads;
+  if (!uploads) throw new Error(`No uploads playlist for channel ${channelId}`);
+  return uploads;
+}
+
+/**
+ * Every video on a channel, with the detail the matcher needs.
+ *
+ * Pages the uploads playlist rather than calling search.list. search.list bills
+ * **100 units per page of 50**; playlistItems.list bills 1. On a 1,500-video
+ * channel that is the difference between ~3,100 units and ~60 — a third of the
+ * default 10,000/day quota versus a rounding error.
+ */
 async function fetchChannelVideos(channelId: string, apiKey: string): Promise<YouTubeVideoData[]> {
   const videos: YouTubeVideoData[] = [];
+  const uploadsPlaylistId = await fetchUploadsPlaylistId(channelId, apiKey);
   let nextPageToken: string | undefined;
 
   do {
-    // Step 1: Search for channel videos
-    const searchUrl = new URL('https://www.googleapis.com/youtube/v3/search');
-    searchUrl.searchParams.set('part', 'snippet');
-    searchUrl.searchParams.set('channelId', channelId);
-    searchUrl.searchParams.set('type', 'video');
-    searchUrl.searchParams.set('order', 'date');
-    searchUrl.searchParams.set('maxResults', '50');
-    searchUrl.searchParams.set('key', apiKey);
-    if (nextPageToken) searchUrl.searchParams.set('pageToken', nextPageToken);
+    // Step 1: page the uploads playlist for ids (1 unit)
+    const listUrl = new URL('https://www.googleapis.com/youtube/v3/playlistItems');
+    listUrl.searchParams.set('part', 'contentDetails');
+    listUrl.searchParams.set('playlistId', uploadsPlaylistId);
+    listUrl.searchParams.set('maxResults', '50');
+    listUrl.searchParams.set('key', apiKey);
+    if (nextPageToken) listUrl.searchParams.set('pageToken', nextPageToken);
 
-    const searchRes = await fetch(searchUrl.toString());
-    if (!searchRes.ok) {
-      const body = await searchRes.text();
-      throw new Error(`YouTube search API ${searchRes.status}: ${body}`);
+    const listRes = await fetch(listUrl.toString());
+    if (!listRes.ok) {
+      throw new Error(`YouTube playlistItems API ${listRes.status}: ${await listRes.text()}`);
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const searchData: any = await searchRes.json();
+    const listData: any = await listRes.json();
 
-    const videoIds = searchData.items
+    const videoIds: string[] = (listData.items || [])
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ?.map((item: any) => item.id?.videoId)
-      .filter(Boolean) as string[];
+      .map((item: any) => item.contentDetails?.videoId)
+      .filter(Boolean);
 
-    if (videoIds?.length) {
-      // Step 2: Fetch full video details
-      const detailsUrl = new URL('https://www.googleapis.com/youtube/v3/videos');
-      // recordingDetails carries the uploader's geotag when they set one — it is the
+    if (videoIds.length) {
+      // Step 2: full detail for those ids (1 unit).
+      // recordingDetails carries the uploader's geotag when they set one — the
       // only location signal YouTube exposes, and most videos have none.
+      const detailsUrl = new URL('https://www.googleapis.com/youtube/v3/videos');
       detailsUrl.searchParams.set('part', 'snippet,contentDetails,recordingDetails');
       detailsUrl.searchParams.set('id', videoIds.join(','));
       detailsUrl.searchParams.set('key', apiKey);
 
       const detailsRes = await fetch(detailsUrl.toString());
       if (!detailsRes.ok) {
-        const body = await detailsRes.text();
-        throw new Error(`YouTube videos API ${detailsRes.status}: ${body}`);
+        throw new Error(`YouTube videos API ${detailsRes.status}: ${await detailsRes.text()}`);
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const detailsData: any = await detailsRes.json();
@@ -240,6 +268,7 @@ async function fetchChannelVideos(channelId: string, apiKey: string): Promise<Yo
           title: item.snippet.title,
           description: item.snippet.description || '',
           thumbnailUrl:
+            item.snippet.thumbnails?.maxres?.url ||
             item.snippet.thumbnails?.high?.url ||
             item.snippet.thumbnails?.medium?.url ||
             item.snippet.thumbnails?.default?.url ||
@@ -258,7 +287,7 @@ async function fetchChannelVideos(channelId: string, apiKey: string): Promise<Yo
       }
     }
 
-    nextPageToken = searchData.nextPageToken;
+    nextPageToken = listData.nextPageToken;
   } while (nextPageToken);
 
   return videos;

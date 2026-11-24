@@ -66,7 +66,7 @@ export function matchVideoToStations(
 
   // Check each unique station name for a match in the title
   for (const [nameLower, stationsWithName] of Array.from(nameMap.entries())) {
-    if (!combinedText.includes(nameLower)) continue;
+    if (!containsWord(combinedText, nameLower)) continue;
 
     const isUnique = stationsWithName.length === 1;
 
@@ -106,7 +106,7 @@ export function matchVideoToStations(
 
         // Strategy 3: avenue context
         for (const [aveName, aveLines] of Object.entries(AVENUE_LINE_MAP)) {
-          if (!combinedText.includes(aveName)) continue;
+          if (!containsWord(combinedText, aveName)) continue;
           const stationHasAveLine = station.lines.some((l) => aveLines.includes(l));
           if (stationHasAveLine) {
             results.push({
@@ -139,7 +139,7 @@ export function matchVideoToStations(
     if (matchedSlugs.has(station.slug)) continue;
 
     const normalizedName = normalizeStationName(station.name);
-    if (normalizedName.length > 3 && combinedText.includes(normalizedName)) {
+    if (isDistinctiveEnough(normalizedName) && containsWord(combinedText, normalizedName)) {
       results.push({
         stationSlug: station.slug,
         stationName: station.name,
@@ -216,12 +216,47 @@ const DESCRIPTION_WEIGHT = 0.7;
  * 250 m is deliberately tight: NYC station entrances are dense, and a loose
  * radius in Midtown would tag a video to half a dozen unrelated complexes.
  */
+/**
+ * Coordinates that mean "somewhere in New York", not "at this spot".
+ *
+ * These are the canonical city and borough centroids — the pin a tool drops
+ * when an uploader picks a place name instead of a location. On the Subway
+ * Sounds channel, 563 of 816 geotagged videos carry the NYC centroid alone,
+ * which sits between Chambers St, City Hall and York St; matching on it tagged
+ * roughly half the library to those three stations and produced more false
+ * associations than every other signal combined.
+ *
+ * A geotag only means something here if it is precise enough to identify a
+ * platform, so these are rejected outright.
+ */
+const PLACEHOLDER_COORDS: [number, number][] = [
+  [40.7128, -74.006],   // New York City
+  [40.6782, -73.9442],  // Brooklyn
+  [40.7282, -73.7949],  // Queens
+  [40.8448, -73.8648],  // The Bronx
+  [40.5795, -74.1502],  // Staten Island
+  [40.7831, -73.9712],  // Manhattan
+];
+
+/** ~150 m at NYC latitudes — tight enough that a real platform pin survives. */
+const PLACEHOLDER_TOLERANCE_DEG = 0.0015;
+
+function isPlaceholderCoordinate(lat: number, lon: number): boolean {
+  return PLACEHOLDER_COORDS.some(
+    ([pLat, pLon]) =>
+      Math.abs(lat - pLat) < PLACEHOLDER_TOLERANCE_DEG &&
+      Math.abs(lon - pLon) < PLACEHOLDER_TOLERANCE_DEG,
+  );
+}
+
 export function matchVideoByLocation(
   latitude: number,
   longitude: number,
   radiusKm = 0.25,
 ): MatchResult[] {
   if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) return [];
+  // A city centroid says nothing about which platform this was recorded on.
+  if (isPlaceholderCoordinate(latitude, longitude)) return [];
 
   const nearby = mtaDataService.getNearbyStations(latitude, longitude, radiusKm);
 
@@ -232,6 +267,32 @@ export function matchVideoByLocation(
     stationName: station.name,
     confidence: rank === 0 ? 0.88 : 0.78 - rank * 0.1,
   }));
+}
+
+/**
+ * Whether a normalized station name is specific enough to match on.
+ *
+ * normalizeStationName strips the street-type suffix, which collapses many
+ * stations to a single generic word: "York St" becomes "york", "23 St" becomes
+ * "23", "Canal St" becomes "canal". Matched loosely, "york" tagged York St to
+ * every video whose description said "New York" — 568 of 1,541, more false
+ * positives than any other rule produced.
+ *
+ * A single bare token is never enough. The full name is still matched by the
+ * primary pass above, so "York St" itself still resolves correctly.
+ */
+function isDistinctiveEnough(normalized: string): boolean {
+  const tokens = normalized.split(' ').filter(Boolean);
+  if (tokens.length >= 2) return true;
+  // One token only survives if it is long and not a bare number.
+  const [only = ''] = tokens;
+  return only.length >= 8 && !/^\d+$/.test(only);
+}
+
+/** Substring matching caught "avenue i" inside "avenue is". Require word edges. */
+function containsWord(haystack: string, needle: string): boolean {
+  const escaped = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp(`(?:^|[^a-z0-9])${escaped}(?:[^a-z0-9]|$)`).test(haystack);
 }
 
 function normalizeStationName(name: string): string {
