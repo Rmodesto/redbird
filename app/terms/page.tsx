@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { generatePageMetadata } from "@/lib/seo";
 import LegalLayout from "@/components/ui/LegalLayout";
-import Navigation from "@/components/Navigation";
+import SiteHeader from '@/components/site/SiteHeader';
 
 export const metadata: Metadata = generatePageMetadata(
   "Terms of Service - Subway Sounds",
@@ -12,7 +12,7 @@ export const metadata: Metadata = generatePageMetadata(
 export default function TermsPage() {
   return (
     <>
-      <Navigation />
+      <SiteHeader />
       <LegalLayout title="Terms of Service" lastUpdated="October 22, 2025">
         <h2>1. Agreement to Terms</h2>
         <p>

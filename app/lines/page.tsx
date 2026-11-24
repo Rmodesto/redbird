@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Navigation from "../../components/Navigation";
+import SiteHeader from '@/components/site/SiteHeader';
 
 interface LineInfo {
   id: string;
@@ -392,7 +392,7 @@ export default function LinesPage() {
 
   return (
     <div className="min-h-screen bg-white pb-20 md:pb-0">
-      <Navigation />
+      <SiteHeader active="lines" />
       
       {/* Hero Section */}
       <section className="bg-black text-white py-12">

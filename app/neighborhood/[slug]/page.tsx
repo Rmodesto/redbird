@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { generateSEOMetadata } from "@/lib/seo";
 import { generateBreadcrumbSchema, generateStructuredDataScript } from "@/lib/structured-data";
-import Navigation from "@/components/Navigation";
+import SiteHeader from '@/components/site/SiteHeader';
 import NeighborhoodService, { Neighborhood } from "@/lib/services/neighborhood-service";
 import { mtaDataService, Station } from "@/lib/services/mta-data-service";
 import Link from "next/link";
@@ -117,7 +117,7 @@ export default async function NeighborhoodPage({ params }: PageProps) {
       />
 
       <div className="min-h-screen bg-white">
-        <Navigation />
+        <SiteHeader />
 
         {/* Hero Section */}
         <section className="bg-black text-white py-16">

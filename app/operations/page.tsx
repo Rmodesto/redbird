@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { generateSEOMetadata } from "@/lib/seo";
 import { generateBreadcrumbSchema, generateStructuredDataScript } from "@/lib/structured-data";
-import Navigation from "@/components/Navigation";
+import SiteHeader from '@/components/site/SiteHeader';
 
 export const metadata: Metadata = generateSEOMetadata({
   title: 'How NYC Subway Works - Operations, Signals & Technology',
@@ -152,7 +152,7 @@ export default function OperationsPage() {
       />
 
       <div className="min-h-screen bg-white">
-        <Navigation />
+        <SiteHeader />
 
         {/* Hero Section */}
         <section className="bg-black text-white py-16">
