@@ -11,6 +11,19 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        // Station page palette. Signage-derived: a near-black ground with a
+        // white paper panel inset into it.
+        station: {
+          ground: "#0B0B0B",
+          panel: "#161616",
+          grid: "#262626",
+          paper: "#FFFFFF",
+          ink: "#111111",
+          muted: "#5C5C5C",
+          dim: "#8A8A8A",
+          rule: "#E5E5E5",
+          accent: "#F7931E",
+        },
       },
       typography: {
         DEFAULT: {
