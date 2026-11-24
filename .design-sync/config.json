@@ -1,0 +1,88 @@
+{
+  "projectId": "9bfbb58a-252b-4507-afe1-d66514e5a64a",
+  "shape": "package",
+  "pkg": "redbird",
+  "globalName": "SubwaySounds",
+  "tsconfig": "./tsconfig.ds-sync.json",
+  "srcDir": "components",
+  "buildCmd": "node node_modules/tailwindcss/lib/cli.js -c .design-sync/ds-tailwind.config.ts -i .design-sync/ds-tailwind.css -o .design-sync/.cache/ds-styles.css",
+  "cssEntry": ".design-sync/.cache/ds-styles.css",
+  "componentSrcMap": {
+    "Badge": "components/ui/Badge.tsx",
+    "Button": "components/ui/Button.tsx",
+    "Card": "components/ui/Card.tsx",
+    "Section": "components/ui/Section.tsx",
+    "StatCard": "components/ui/StatCard.tsx",
+    "SubwayLineBadge": "components/ui/SubwayLineBadge.tsx",
+    "GlassmorphicTooltip": "components/ui/GlassmorphicTooltip.tsx",
+    "LegalLayout": "components/ui/LegalLayout.tsx",
+    "SubwayLinesBadges": "components/subway/SubwayLinesBadges.tsx",
+    "SubwayBadge": "components/SubwayBadge.tsx",
+    "ServiceAlert": "components/ServiceAlert.tsx",
+    "CultureCard": "components/CultureCard.tsx",
+    "AdSlot": "components/AdSlot.tsx",
+    "Footer": "components/Footer.tsx",
+    "PostCard": "components/blog/PostCard.tsx",
+    "Pagination": "components/blog/Pagination.tsx",
+    "AmenitiesCard": "components/station/AmenitiesCard.tsx",
+    "LiveArrivalsCard": "components/station/LiveArrivalsCard.tsx",
+    "CrimeStatsCard": "components/station/CrimeStatsCard.tsx",
+    "StationDetailsCard": "components/station/StationDetailsCard.tsx"
+  },
+  "dtsPropsFor": {
+    "Badge": "children: React.ReactNode;\n  className?: string;\n  /** Tonal colour. Default 'default'. */\n  variant?: 'default' | 'success' | 'warning' | 'error' | 'info';\n  /** Default 'sm'. */\n  size?: 'sm' | 'md' | 'lg';",
+    "Button": "children: React.ReactNode;\n  /** Default 'primary' \u2014 solid black, the site's main action. */\n  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';\n  /** Default 'md'. */\n  size?: 'sm' | 'md' | 'lg';\n  fullWidth?: boolean;\n  /** Merge styling onto a single child (e.g. an anchor) instead of rendering a <button>. */\n  asChild?: boolean;\n  className?: string;\n  disabled?: boolean;\n  type?: 'button' | 'submit' | 'reset';\n  onClick?: React.MouseEventHandler<HTMLButtonElement>;",
+    "Card": "children: React.ReactNode;\n  className?: string;\n  /** 'elevated' is the house card: white, shadow-lg, grey border. Default 'default'. */\n  variant?: 'default' | 'outlined' | 'elevated';\n  /** Default 'md' (p-6). Use 'none' when the child supplies its own padding. */\n  padding?: 'none' | 'sm' | 'md' | 'lg';\n  /** Adds hover elevation and a pointer cursor. */\n  hover?: boolean;\n  asChild?: boolean;",
+    "Section": "children: React.ReactNode;\n  title?: string;\n  subtitle?: string;\n  /** Emoji used as the section icon \u2014 this library's icon convention. */\n  icon?: string;\n  className?: string;\n  titleClassName?: string;\n  contentClassName?: string;",
+    "StatCard": "title: string;\n  value: string | number;\n  subtitle?: string;\n  icon?: React.ReactNode;\n  trend?: 'up' | 'down' | 'neutral';\n  trendValue?: string;\n  /** Colours the value. Default 'default' (near-black). */\n  valueColor?: 'default' | 'success' | 'warning' | 'error';\n  className?: string;",
+    "SubwayLineBadge": "/** Line designation, e.g. '1', 'A', 'Q'. Case-insensitive. */\n  line: string;\n  /** 24 / 32 / 40px. Default 'md'. */\n  size?: 'sm' | 'md' | 'lg';\n  className?: string;",
+    "GlassmorphicTooltip": "/** Tooltip body. */\n  content: React.ReactNode;\n  /** Trigger element. */\n  children: React.ReactNode;\n  /** Hover delay in ms. Default 300. */\n  delay?: number;\n  /** Offset from the cursor. Default { x: 10, y: -10 }. */\n  offset?: { x: number; y: number };\n  className?: string;",
+    "LegalLayout": "title: string;\n  /** Rendered as the 'Last updated' line. */\n  lastUpdated?: string;\n  children: React.ReactNode;",
+    "SubwayLinesBadges": "/** Line designations. Deduped and sorted (numbers before letters). */\n  lines: string[];\n  /** Default 'md'. */\n  size?: 'sm' | 'md' | 'lg';\n  /** 'default' renders round bullets; 'compact' renders small square pills. */\n  variant?: 'default' | 'compact';\n  showCount?: boolean;\n  className?: string;",
+    "SubwayBadge": "/** Caller supplies the colour classes \u2014 unlike SubwayLineBadge, which looks them up.\n   * `name` is the SHORT DESIGNATION DRAWN INSIDE the badge (e.g. 'A', '7'), not the\n   * route name \u2014 the only call site passes the line id. A long route name overflows\n   * the badge. `color`/`textColor` are Tailwind class strings, e.g. 'bg-blue-600'. */\n  line: { id: string; name: string; color: string; textColor: string };\n  /** 32 / 48 / 64px \u2014 a larger scale than the other badges. Default 'md'. */\n  size?: 'sm' | 'md' | 'lg';\n  /** Wraps in a link to /line/<id> and adds hover scaling. Default true. */\n  clickable?: boolean;",
+    "ServiceAlert": "type: 'delay' | 'service_change' | 'good_service';\n  message: string;\n  /** Overrides the emoji chosen for the type. */\n  icon?: string;",
+    "CultureCard": "category: string;\n  title: string;\n  description: string;\n  /** Emoji shown in the media area. Default '\\ud83d\\udcf7'. */\n  image?: string;\n  href?: string;",
+    "AdSlot": "/** Placeholder dimensions. Default 'banner'. */\n  size?: 'banner' | 'square' | 'leaderboard' | 'mobile_banner';\n  className?: string;",
+    "Footer": "/** Invoked by the 'Cookie Preferences' link. */\n  onOpenCookieSettings?: () => void;",
+    "PostCard": "post: {\n    title: string;\n    slug: string;\n    excerpt: string;\n    category: string;\n    tags: string[];\n    featuredImage: string | null;\n    featuredImageAlt: string | null;\n    authorName: string;\n    authorImage: string | null;\n    publishedAt: string | null;\n    readingTimeMinutes: number;\n    views: number;\n  };",
+    "Pagination": "currentPage: number;\n  totalPages: number;\n  /** Link prefix, e.g. '/blog'. */\n  basePath: string;",
+    "AmenitiesCard": "amenities: {\n    ada: boolean;\n    elevators: boolean;\n    restrooms: boolean;\n    policePresence: boolean;\n    wifi: boolean;\n    yearBuilt: number;\n  };\n  className?: string;",
+    "LiveArrivalsCard": "arrivals: {\n    arrivals: Array<{\n      line: string;\n      direction: 'uptown' | 'downtown' | 'north' | 'south' | 'east' | 'west';\n      destination: string;\n      minutesAway: number;\n      platform?: string;\n    }>;\n    lastUpdated: Date;\n    dataSource: string;\n  };\n  className?: string;",
+    "CrimeStatsCard": "crimeStats: {\n    felonies: number;\n    misdemeanors: number;\n    violations: number;\n    year: number;\n    radius: number;\n  };\n  className?: string;",
+    "StationDetailsCard": "station: { borough: string; lines: string[]; platforms: unknown[] };\n  amenities: { stationType: 'underground' | 'elevated' | 'at-grade' };\n  className?: string;"
+  },
+  "overrides": {
+    "CultureCard": {
+      "cardMode": "column"
+    },
+    "Footer": {
+      "cardMode": "column"
+    },
+    "ServiceAlert": {
+      "cardMode": "column"
+    },
+    "StatCard": {
+      "cardMode": "column"
+    },
+    "SubwayBadge": {
+      "cardMode": "column"
+    },
+    "SubwayLineBadge": {
+      "cardMode": "column"
+    },
+    "AmenitiesCard": {
+      "cardMode": "column"
+    },
+    "CrimeStatsCard": {
+      "cardMode": "column"
+    },
+    "StationDetailsCard": {
+      "cardMode": "column"
+    },
+    "GlassmorphicTooltip": {
+      "cardMode": "single",
+      "primaryStory": "StationHover"
+    }
+  },
+  "readmeHeader": ".design-sync/conventions.md"
+}
