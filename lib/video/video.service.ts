@@ -123,6 +123,15 @@ interface YouTubeVideoData {
   location: { latitude: number; longitude: number } | null;
 }
 
+/**
+ * Minimum confidence for an automatic station association.
+ *
+ * Measured on the Subway Sounds channel: dropping from 0.5 to 0.7 cuts 820
+ * tags to 534 and removes the ambiguous-duplicate-name noise without losing
+ * any geotag or title match.
+ */
+export const AUTO_TAG_MIN_CONFIDENCE = 0.7;
+
 export async function syncFromYouTube(channelId: string, apiKey: string): Promise<VideoSyncResult> {
   const result: VideoSyncResult = {
     newVideos: 0,
@@ -157,13 +166,18 @@ export async function syncFromYouTube(channelId: string, apiKey: string): Promis
           result.newVideos++;
         }
 
-        // Run station matching
+        // Run station matching. Only confident matches become associations:
+        // below this, hits are mostly name ambiguity — "Broadway" is two
+        // different stations, so every mention tags both, and most of those
+        // videos mean the Broadway line or street rather than the G-train stop.
+        // The video row is still written either way; it just shows no station.
         const matches = matchVideo({
           title: ytVideo.title,
           tags: ytVideo.tags,
           description: ytVideo.description,
           location: ytVideo.location,
-        });
+        }).filter((m) => m.confidence >= AUTO_TAG_MIN_CONFIDENCE);
+
         if (matches.length > 0) {
           await repo.setStationAssociations(
             video.id,

@@ -101,6 +101,7 @@ let matched = 0,
 const byStation = new Map();
 const byConfidence = { '0.90+': 0, '0.80-0.89': 0, '0.70-0.79': 0, '0.50-0.69': 0 };
 const unmatchedSamples = [];
+const detail = [];
 
 for (const v of videos) {
   if (v.location) geotagged++;
@@ -113,10 +114,18 @@ for (const v of videos) {
   if (!res.length) {
     unmatched++;
     if (unmatchedSamples.length < 15) unmatchedSamples.push(v.title);
+    detail.push({ id: v.youtubeId, title: v.title, duration: v.duration, matches: [] });
     continue;
   }
   matched++;
   totalTags += res.length;
+  detail.push({
+    id: v.youtubeId,
+    title: v.title,
+    duration: v.duration,
+    geotagged: !!v.location,
+    matches: res.map((m) => ({ slug: m.stationSlug, name: m.stationName, confidence: Number(m.confidence.toFixed(3)) })),
+  });
   for (const m of res) {
     byStation.set(m.stationName, (byStation.get(m.stationName) || 0) + 1);
     const c = m.confidence;
@@ -156,7 +165,7 @@ for (const t of unmatchedSamples) console.log(`  · ${t.slice(0, 90)}`);
 writeFileSync(
   'scripts/match-dryrun.json',
   JSON.stringify(
-    { channel: CHANNEL, videos: videos.length, matched, unmatched, geotagged, totalTags, byConfidence, stations: Object.fromEntries(byStation) },
+    { channel: CHANNEL, videos: videos.length, matched, unmatched, geotagged, totalTags, byConfidence, stations: Object.fromEntries(byStation), detail },
     null,
     2
   )

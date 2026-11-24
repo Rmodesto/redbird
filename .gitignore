@@ -65,3 +65,4 @@ ds-bundle/
 .design-sync/learnings/
 .design-sync/node_modules
 scripts/match-dryrun.json
+scripts/.sync-bundle.mjs
