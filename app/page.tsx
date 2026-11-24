@@ -2,16 +2,14 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { generateSEOMetadata, generateFAQSchema } from "@/lib/seo";
 import { generateCollectionPageSchema, generateStructuredDataScript } from "@/lib/structured-data";
-import Navigation from "@/components/Navigation";
-import {
-  HeroSection,
-  ServiceAlertsSection,
-  SubwayLinesGrid,
-  FeaturedStationsGrid,
-  FeatureCards,
-  SystemStats,
-  SEOContentSection
-} from "@/components/home";
+import SiteHeader from "@/components/site/SiteHeader";
+import SubwayLinesBadges from "@/components/subway/SubwayLinesBadges";
+import AdSlot from "@/components/AdSlot";
+import { mtaDataService } from "@/lib/services/mta-data-service";
+import { getVideos, type VideoItem } from "@/lib/video/video.service";
+import * as postService from "@/lib/blog/post.service";
+import HomeHero, { type HeroVideo } from "@/components/home/HomeHero";
+import HomeVideoSections, { type HomeVideo } from "@/components/home/HomeVideoSections";
 
 export const metadata: Metadata = generateSEOMetadata({
   title: "Subway Sounds NYC - Real-Time NYC Subway Directory, Map & Train Arrivals",
@@ -31,32 +29,9 @@ export const metadata: Metadata = generateSEOMetadata({
   canonical: "/",
 });
 
-// MTA line colors mapping
-const subwayLines = [
-  { id: "1", name: "1", color: "bg-red-600", textColor: "text-white" },
-  { id: "2", name: "2", color: "bg-red-600", textColor: "text-white" },
-  { id: "3", name: "3", color: "bg-red-600", textColor: "text-white" },
-  { id: "4", name: "4", color: "bg-green-600", textColor: "text-white" },
-  { id: "5", name: "5", color: "bg-green-600", textColor: "text-white" },
-  { id: "6", name: "6", color: "bg-green-600", textColor: "text-white" },
-  { id: "7", name: "7", color: "bg-purple-600", textColor: "text-white" },
-  { id: "A", name: "A", color: "bg-blue-600", textColor: "text-white" },
-  { id: "B", name: "B", color: "bg-orange-500", textColor: "text-white" },
-  { id: "C", name: "C", color: "bg-blue-600", textColor: "text-white" },
-  { id: "D", name: "D", color: "bg-orange-500", textColor: "text-white" },
-  { id: "E", name: "E", color: "bg-blue-600", textColor: "text-white" },
-  { id: "F", name: "F", color: "bg-orange-500", textColor: "text-white" },
-  { id: "G", name: "G", color: "bg-green-500", textColor: "text-white" },
-  { id: "J", name: "J", color: "bg-amber-600", textColor: "text-white" },
-  { id: "L", name: "L", color: "bg-gray-500", textColor: "text-white" },
-  { id: "M", name: "M", color: "bg-orange-500", textColor: "text-white" },
-  { id: "N", name: "N", color: "bg-yellow-500", textColor: "text-black" },
-  { id: "Q", name: "Q", color: "bg-yellow-500", textColor: "text-black" },
-  { id: "R", name: "R", color: "bg-yellow-500", textColor: "text-black" },
-  { id: "S", name: "S", color: "bg-gray-600", textColor: "text-white" },
-  { id: "W", name: "W", color: "bg-yellow-500", textColor: "text-black" },
-  { id: "Z", name: "Z", color: "bg-amber-600", textColor: "text-white" },
-];
+// The library and the blog both live in Postgres; refresh the shell every
+// five minutes rather than baking the newest upload into the build.
+export const revalidate = 300;
 
 // Generate structured data
 const collectionSchema = generateCollectionPageSchema(
@@ -85,82 +60,141 @@ const faqSchema = generateFAQSchema([
   }
 ]);
 
-export default function HomePage() {
-  const serviceAlerts = [
-    {
-      type: "delay" as const,
-      icon: "🕐",
-      color: "text-yellow-600 bg-yellow-50 border-yellow-200",
-      message: "DELAYS on 5 Train - Signal Problems at 125 St"
-    },
-    {
-      type: "service_change" as const,
-      icon: "⚠️",
-      color: "text-red-600 bg-red-50 border-red-200",
-      message: "Weekend Service: 2 Train running on 5 line in Brooklyn"
-    },
-  ];
+// ── Formatting helpers ──────────────────────────────────────────────────────
+// Everything below reads from a real record. Nothing is synthesised: when a
+// field is missing the element is dropped rather than filled with a guess.
 
-  const popularStations = [
-    { name: "Times Square-42 St", lines: ["N", "Q", "R", "W", "S", "1", "2", "3", "7"], slug: "times-sq-42-st" },
-    { name: "Grand Central-42 St", lines: ["4", "5", "6", "7", "S"], slug: "grand-central-42-st" },
-    { name: "Union Square-14 St", lines: ["4", "5", "6", "N", "Q", "R", "W", "L"], slug: "14-st-union-sq" },
-    { name: "34 St-Herald Sq", lines: ["B", "D", "F", "M", "N", "Q", "R", "W"], slug: "34-st-herald-sq" },
-    { name: "Fulton St", lines: ["2", "3", "4", "5", "A", "C", "J", "Z"], slug: "fulton-st-2345acjz" },
-    { name: "Atlantic Av-Barclays Ctr", lines: ["B", "Q", "D", "N", "R", "W", "2", "3", "4", "5"], slug: "atlantic-av-barclays-ctr" },
-  ];
+/** ISO 8601 duration → "4:12". Null when the feed gave us nothing usable. */
+function formatDuration(iso: string | null): string | null {
+  if (!iso) return null;
+  const m = iso.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+  if (!m) return null;
+  const [, h, min, s] = m;
+  const mm = min ?? "0";
+  const ss = (s ?? "0").padStart(2, "0");
+  return h ? `${h}:${mm.padStart(2, "0")}:${ss}` : `${mm}:${ss}`;
+}
 
-  const featureCards = [
-    {
-      href: "/subway-map",
-      icon: "🗺️",
-      title: "Interactive Subway Map",
-      description: "Navigate all 27 lines with our real-time interactive map showing live train positions and service alerts.",
-      linkText: "Open Map",
-      gradient: "bg-gradient-to-br from-green-50 to-green-100",
-      textColor: "text-green-700 hover:text-green-900"
-    },
-    {
-      href: "/subway-sounds",
-      icon: "🔊", 
-      title: "Subway Sounds Archive",
-      description: "Listen to authentic NYC subway sounds including announcements, door chimes, and station ambiance.",
-      linkText: "Listen Now",
-      gradient: "bg-gradient-to-br from-yellow-50 to-yellow-100",
-      textColor: "text-yellow-700 hover:text-yellow-900"
-    },
-    {
-      href: "/real-time",
-      icon: "⏱️",
-      title: "Real-Time Arrivals", 
-      description: "Track live train arrivals at any station with updates every 30 seconds from official MTA feeds.",
-      linkText: "Track Trains",
-      gradient: "bg-gradient-to-br from-green-50 to-green-100",
-      textColor: "text-green-700 hover:text-green-900"
+function durationSeconds(iso: string | null): number {
+  if (!iso) return 0;
+  const m = iso.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+  if (!m) return 0;
+  return Number(m[1] ?? 0) * 3600 + Number(m[2] ?? 0) * 60 + Number(m[3] ?? 0);
+}
+
+/** The station a recording is filed under, when one was matched. */
+function stationFor(video: VideoItem) {
+  const slug = video.stations[0]?.stationSlug;
+  return slug ? mtaDataService.getStationBySlug(slug) : null;
+}
+
+function labelFor(video: VideoItem, isShort: boolean): string {
+  const tag = video.tags?.[0];
+  if (tag) return tag.toUpperCase();
+  return isShort ? "SHORT" : "RECORDING";
+}
+
+function metaFor(video: VideoItem): string | null {
+  const parts: string[] = [];
+  const station = stationFor(video);
+  if (station) {
+    parts.push(station.name);
+    if (station.borough) parts.push(station.borough);
+  }
+  if (video.publishedAt) {
+    const d = new Date(video.publishedAt);
+    if (!Number.isNaN(d.getTime())) {
+      parts.push(
+        `Uploaded ${d.toLocaleDateString("en-US", { month: "short", day: "numeric" })}`
+      );
     }
-  ];
+  }
+  return parts.length ? parts.join(" · ") : null;
+}
 
-  const systemStats = [
-    { value: "472", label: "Stations" },
-    { value: "27", label: "Lines" },
-    { value: "5M+", label: "Daily Riders" },
-    { value: "24/7", label: "Service" }
-  ];
+function toHomeVideo(video: VideoItem, isShort: boolean): HomeVideo {
+  return {
+    id: video.id,
+    youtubeId: video.youtubeId,
+    title: video.title,
+    label: labelFor(video, isShort),
+    duration: formatDuration(video.duration),
+    meta: metaFor(video),
+  };
+}
 
-  const seoContent = [
-    {
-      title: "Real-Time Train Tracking",
-      content: "Our platform provides live train arrivals updated every 30 seconds directly from MTA data feeds. Track any train, view platform-specific arrivals, and get instant service alerts for delays and changes."
-    },
-    {
-      title: "Authentic Subway Sounds", 
-      content: "Experience the unique acoustic signature of NYC&apos;s underground with our extensive subway sounds archive. From the iconic &quot;stand clear of the closing doors&quot; announcement to the rumble of approaching trains, we&apos;ve captured the authentic sounds that define New York&apos;s transit experience."
-    },
-    {
-      title: "Interactive Subway Map",
-      content: "Our interactive map makes journey planning simple. Click any station for detailed information, view real-time train positions, check accessibility features, and discover nearby attractions. Whether you&apos;re a daily commuter or first-time visitor, our map helps you navigate NYC like a local."
-    }
-  ];
+function formatPostDate(iso: string | null): string | null {
+  if (!iso) return null;
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return null;
+  return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+}
+
+// ── Data loading ────────────────────────────────────────────────────────────
+// Both sources are optional: a missing database must degrade to an empty
+// section, never to a build failure or to invented content.
+
+async function loadVideos(): Promise<VideoItem[]> {
+  try {
+    const { videos } = await getVideos(1, 24, "ACTIVE");
+    return videos;
+  } catch {
+    return [];
+  }
+}
+
+async function loadPosts() {
+  try {
+    const { posts } = await postService.getPublicPosts(1, 3);
+    return posts;
+  } catch {
+    return [];
+  }
+}
+
+export default async function HomePage() {
+  const stations = mtaDataService.getAllStations();
+  const stationCount = stations.length;
+
+  // Every service that actually calls at a station in the MTA dataset, sorted
+  // MTA-style: numbered trunks first, then the letters.
+  const lines = Array.from(new Set(stations.flatMap((s) => s.lines)))
+    .sort((a, b) => {
+      const an = /^\d+$/.test(a);
+      const bn = /^\d+$/.test(b);
+      if (an && !bn) return -1;
+      if (!an && bn) return 1;
+      return a.localeCompare(b);
+    });
+
+  // "Most connected" is derived, not claimed: it is simply the stations that
+  // carry the most services in the MTA dataset. No listen or ridership figure
+  // exists in this app, so none is shown.
+  const connected = [...stations]
+    .sort((a, b) => b.lines.length - a.lines.length || a.name.localeCompare(b.name))
+    .slice(0, 5);
+
+  const [videos, posts] = await Promise.all([loadVideos(), loadPosts()]);
+
+  const shortsSource = videos.filter((v) => {
+    const s = durationSeconds(v.duration);
+    return s > 0 && s <= 60;
+  });
+  const longform = videos.filter((v) => !shortsSource.includes(v));
+
+  const featuredVideo = longform[0] ?? null;
+  const restVideos = longform.slice(1, 3).map((v) => toHomeVideo(v, false));
+  const shorts = shortsSource.slice(0, 5).map((v) => toHomeVideo(v, true));
+
+  const heroSource = featuredVideo ?? videos[0] ?? null;
+  const heroVideo: HeroVideo | null = heroSource
+    ? {
+        youtubeId: heroSource.youtubeId,
+        title: heroSource.title,
+        duration: formatDuration(heroSource.duration),
+        lines: stationFor(heroSource)?.lines ?? [],
+      }
+    : null;
 
   return (
     <>
@@ -172,56 +206,140 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={generateStructuredDataScript(faqSchema)}
       />
-      
-      <div className="min-h-screen bg-white">
-        <Navigation />
-        
-        <HeroSection />
-        
-        <ServiceAlertsSection alerts={serviceAlerts} />
-        
-        <SubwayLinesGrid lines={subwayLines} />
-        
-        <FeaturedStationsGrid stations={popularStations} />
-        
-        <FeatureCards features={featureCards} />
-        
-        <SEOContentSection
-          content={[
-            {
-              title: "",
-              content: "Navigate the New York City Subway system with confidence using our comprehensive directory. With 472 stations across 27 lines spanning Manhattan, Brooklyn, Queens, and the Bronx, the NYC subway is one of the world's largest rapid transit systems."
-            },
-            ...seoContent
-          ]}
-        />
-        
-        <SystemStats stats={systemStats} />
 
-        {/* Mobile Navigation */}
-        <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2 z-50">
-          <div className="flex justify-around">
-            <Link href="/" className="flex flex-col items-center py-2 text-xs font-medium text-black">
-              <span className="text-lg mb-1">🏠</span>
-              HOME
-            </Link>
-            <Link href="/lines" className="flex flex-col items-center py-2 text-xs font-medium text-gray-700">
-              <span className="text-lg mb-1">L</span>
-              LINES
-            </Link>
-            <Link href="/stations" className="flex flex-col items-center py-2 text-xs font-medium text-gray-700">
-              <span className="text-lg mb-1">📍</span>
-              STATIONS
-            </Link>
-            <Link href="/subway-map" className="flex flex-col items-center py-2 text-xs font-medium text-gray-700">
-              <span className="text-lg mb-1">🗺️</span>
-              MAP
-            </Link>
-            <Link href="/subway-sounds" className="flex flex-col items-center py-2 text-xs font-medium text-gray-700">
-              <span className="text-lg mb-1">🔊</span>
-              SOUNDS
-            </Link>
-          </div>
+      <SiteHeader active="" />
+
+      <div className="min-w-0 bg-jet font-sans text-ink">
+        <HomeHero stationCount={stationCount} video={heroVideo} />
+
+        {/* ── Paper panel ────────────────────────────────────────── */}
+        <div className="mx-auto max-w-[1440px] px-f8 pb-f34 lg:px-f55 lg:pb-f89">
+          <main className="panel relative flex flex-col gap-f55 px-f21 pb-f55 pt-f34 lg:gap-f89 lg:p-f89">
+            {/* ── Browse by line ───────────────────────────────── */}
+            <section className="grid grid-cols-1 items-end gap-f21 lg:grid-cols-golden-r lg:gap-f55">
+              <div className="flex flex-col gap-f5 lg:gap-f13">
+                <span className="quoted text-label font-bold text-muted">LINE</span>
+                <h2 className="m-0 text-h3 font-bold lg:text-h2 lg:tracking-[-.01em]">
+                  Browse by line
+                </h2>
+                <p className="m-0 hidden max-w-f377 text-body text-muted lg:block">
+                  Every station and every recording, line by line.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-f8">
+                {lines.map((line) => (
+                  <Link
+                    key={line}
+                    href={`/line/${line.toLowerCase()}`}
+                    aria-label={`${line} line`}
+                    className="no-underline"
+                  >
+                    <SubwayLinesBadges lines={[line]} size="lg" />
+                  </Link>
+                ))}
+              </div>
+            </section>
+
+            {/* ── New uploads + Shorts ─────────────────────────── */}
+            <HomeVideoSections
+              featured={featuredVideo ? toHomeVideo(featuredVideo, false) : null}
+              rest={restVideos}
+              shorts={shorts}
+            />
+
+            <AdSlot size="leaderboard" className="hidden lg:flex" />
+            <AdSlot size="mobile_banner" className="lg:hidden" />
+
+            {/* ── Stations + blog ──────────────────────────────── */}
+            <section className="grid grid-cols-1 gap-f34 lg:grid-cols-golden lg:gap-f89">
+              <div className="flex min-w-0 flex-col gap-f13 lg:gap-f21">
+                <div className="flex flex-col gap-f5 lg:gap-f8">
+                  <span className="quoted text-label font-bold text-muted">STATION</span>
+                  <h2 className="m-0 text-h3 font-bold lg:text-h2 lg:tracking-[-.01em]">
+                    Most connected stations
+                  </h2>
+                  <p className="m-0 hidden text-label normal-case tracking-normal text-muted lg:block">
+                    Ranked by the number of services that call at the platform.
+                  </p>
+                </div>
+                <div className="border-t border-ink">
+                  {connected.map((station, i) => (
+                    <Link
+                      key={station.id}
+                      href={`/station/${station.slug}`}
+                      className="flex flex-col gap-f8 border-b border-seam py-f13 text-ink no-underline transition-colors hover:bg-[#FAFAFA] lg:grid lg:grid-cols-[34px_minmax(0,1fr)_auto] lg:items-center lg:gap-f21 lg:py-f21"
+                    >
+                      <span className="hidden text-label font-bold tabular-nums text-muted lg:block">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="flex items-baseline justify-between gap-f8 lg:flex-col lg:items-start lg:gap-f3">
+                        <span className="text-body font-bold leading-[21px] lg:text-h4">
+                          {station.name}
+                        </span>
+                        <span className="whitespace-nowrap text-label normal-case tracking-normal text-muted">
+                          {station.borough}
+                        </span>
+                      </span>
+                      <SubwayLinesBadges
+                        lines={station.lines}
+                        size="sm"
+                        className="lg:justify-end"
+                      />
+                    </Link>
+                  ))}
+                </div>
+                <Link
+                  href="/stations"
+                  className="text-label font-bold text-ink no-underline transition-colors hover:text-muted"
+                >
+                  ALL {stationCount} STATIONS &rarr;
+                </Link>
+              </div>
+
+              {posts.length > 0 && (
+                <div className="flex min-w-0 flex-col gap-f13 lg:gap-f21">
+                  <div className="flex flex-col gap-f5 lg:gap-f8">
+                    <span className="quoted text-label font-bold text-muted">BLOG</span>
+                    <h2 className="m-0 text-h3 font-bold lg:text-h2 lg:tracking-[-.01em]">
+                      From the blog
+                    </h2>
+                  </div>
+                  <div className="border-t border-ink">
+                    {posts.map((post) => {
+                      const date = formatPostDate(post.publishedAt ?? post.createdAt);
+                      return (
+                        <Link
+                          key={post.id}
+                          href={`/blog/${post.slug}`}
+                          className="flex flex-col gap-f8 border-b border-seam py-f13 text-ink no-underline transition-colors hover:bg-[#FAFAFA] lg:py-f21"
+                        >
+                          {post.category && (
+                            <span className="quoted text-label font-bold uppercase text-muted">
+                              {post.category}
+                            </span>
+                          )}
+                          <span className="text-body font-bold leading-[21px] [text-wrap:pretty] lg:text-h4">
+                            {post.title}
+                          </span>
+                          <span className="text-label normal-case tracking-normal text-muted">
+                            {[date, post.readingTimeMinutes ? `${post.readingTimeMinutes} min read` : null]
+                              .filter(Boolean)
+                              .join(" · ")}
+                          </span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                  <Link
+                    href="/blog"
+                    className="text-label font-bold text-ink no-underline transition-colors hover:text-muted"
+                  >
+                    READ THE BLOG &rarr;
+                  </Link>
+                </div>
+              )}
+            </section>
+          </main>
         </div>
       </div>
     </>

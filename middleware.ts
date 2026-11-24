@@ -54,7 +54,11 @@ export default function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    // `js(?!on)` deliberately lets .json through to the auth middleware, but
+    // that also swallowed the static web manifest — Clerk rewrote it and
+    // /manifest.json 404'd. Exempt that one path by name rather than opening
+    // up every .json, which API responses still need to pass through.
+    '/((?!_next|manifest\\.json|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
     '/(api|trpc)(.*)',
   ],
 };

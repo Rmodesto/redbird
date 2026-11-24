@@ -16,6 +16,15 @@ const MTA_COLORS = {
   'S': '#808183',
 } as const;
 
+// The yellow (N/Q/R/W) and lime (G) bullets need dark text — white on #FCCC0A is
+// about 1.5:1, far below the 4.5:1 minimum. This mirrors the pairing in
+// lib/constants MTA_TAILWIND_COLORS, which SubwayLineBadge already uses.
+const DARK_TEXT_LINES = new Set(['N', 'Q', 'R', 'W', 'G']);
+
+function textClassFor(line: string): string {
+  return DARK_TEXT_LINES.has(line.toUpperCase()) ? 'text-black' : 'text-white';
+}
+
 interface SubwayLinesBadgesProps {
   lines: string[];
   size?: 'sm' | 'md' | 'lg';
@@ -70,7 +79,8 @@ export const SubwayLinesBadges = ({
           <span
             key={line}
             className={cn(
-              'inline-flex items-center justify-center rounded text-white font-bold',
+              'inline-flex items-center justify-center rounded font-bold',
+              textClassFor(line),
               compactSizeClasses[size]
             )}
             style={{ 
@@ -95,7 +105,8 @@ export const SubwayLinesBadges = ({
         <span
           key={line}
           className={cn(
-            'inline-flex items-center justify-center rounded-full text-white font-bold',
+            'inline-flex items-center justify-center rounded-full font-bold',
+            textClassFor(line),
             sizeClasses[size]
           )}
           style={{ 

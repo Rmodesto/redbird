@@ -1,5 +1,5 @@
 import * as repo from './video.repository';
-import { matchVideoToStations } from './station-matcher';
+import { matchVideo } from './station-matcher';
 
 // ─── API Types ───────────────────────────────────────────────────────────────
 
@@ -120,6 +120,7 @@ interface YouTubeVideoData {
   publishedAt: string;
   duration: string | null;
   tags: string[];
+  location: { latitude: number; longitude: number } | null;
 }
 
 export async function syncFromYouTube(channelId: string, apiKey: string): Promise<VideoSyncResult> {
@@ -157,7 +158,12 @@ export async function syncFromYouTube(channelId: string, apiKey: string): Promis
         }
 
         // Run station matching
-        const matches = matchVideoToStations(ytVideo.title, ytVideo.tags);
+        const matches = matchVideo({
+          title: ytVideo.title,
+          tags: ytVideo.tags,
+          description: ytVideo.description,
+          location: ytVideo.location,
+        });
         if (matches.length > 0) {
           await repo.setStationAssociations(
             video.id,
@@ -213,7 +219,9 @@ async function fetchChannelVideos(channelId: string, apiKey: string): Promise<Yo
     if (videoIds?.length) {
       // Step 2: Fetch full video details
       const detailsUrl = new URL('https://www.googleapis.com/youtube/v3/videos');
-      detailsUrl.searchParams.set('part', 'snippet,contentDetails');
+      // recordingDetails carries the uploader's geotag when they set one — it is the
+      // only location signal YouTube exposes, and most videos have none.
+      detailsUrl.searchParams.set('part', 'snippet,contentDetails,recordingDetails');
       detailsUrl.searchParams.set('id', videoIds.join(','));
       detailsUrl.searchParams.set('key', apiKey);
 
@@ -240,6 +248,12 @@ async function fetchChannelVideos(channelId: string, apiKey: string): Promise<Yo
           publishedAt: item.snippet.publishedAt || '',
           duration: item.contentDetails?.duration || null,
           tags: item.snippet.tags || [],
+          location: item.recordingDetails?.location
+            ? {
+                latitude: item.recordingDetails.location.latitude,
+                longitude: item.recordingDetails.location.longitude,
+              }
+            : null,
         });
       }
     }
