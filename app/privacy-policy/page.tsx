@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { generatePageMetadata } from "@/lib/seo";
 import LegalLayout from "@/components/ui/LegalLayout";
-import Navigation from "@/components/Navigation";
+import SiteHeader from '@/components/site/SiteHeader';
 
 export const metadata: Metadata = generatePageMetadata(
   "Privacy Policy - Subway Sounds",
@@ -12,7 +12,7 @@ export const metadata: Metadata = generatePageMetadata(
 export default function PrivacyPolicyPage() {
   return (
     <>
-      <Navigation />
+      <SiteHeader />
       <LegalLayout title="Privacy Policy" lastUpdated="October 22, 2025">
         <h2>1. Introduction</h2>
         <p>

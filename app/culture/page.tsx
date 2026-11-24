@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { generatePageMetadata } from "@/lib/seo";
 import { generateCollectionPageSchema, generateBreadcrumbSchema, generateStructuredDataScript } from "@/lib/structured-data";
-import Navigation from "@/components/Navigation";
+import SiteHeader from '@/components/site/SiteHeader';
 import CultureCard from "@/components/CultureCard";
 
 export const metadata: Metadata = generatePageMetadata(
@@ -240,7 +240,7 @@ export default function CulturePage() {
       />
       
       <div className="min-h-screen bg-white">
-        <Navigation />
+        <SiteHeader active="culture" />
         
         {/* Hero Section */}
         <section className="bg-black text-white py-16">

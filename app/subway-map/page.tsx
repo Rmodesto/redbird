@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { generatePageMetadata } from "@/lib/seo";
 import { generateMapSchema, generateBreadcrumbSchema, generateStructuredDataScript } from "@/lib/structured-data";
-import Navigation from "@/components/Navigation";
+import SiteHeader from '@/components/site/SiteHeader';
 import dynamic from 'next/dynamic';
 
 // Dynamically import the working map component to avoid SSR issues
@@ -63,7 +63,7 @@ export default function SubwayMapPage() {
       />
       
       <div className="min-h-screen bg-white">
-        <Navigation />
+        <SiteHeader active="map" />
         
         {/* Hero Section with SEO-optimized content */}
         <section className="bg-black text-white py-12">

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Navigation from "@/components/Navigation";
+import SiteHeader from '@/components/site/SiteHeader';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -49,7 +49,7 @@ export default function ContactPage() {
 
   return (
     <>
-      <Navigation />
+      <SiteHeader />
       <div className="min-h-screen bg-gray-50 py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}

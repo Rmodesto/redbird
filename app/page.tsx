@@ -9,6 +9,7 @@ import { mtaDataService } from "@/lib/services/mta-data-service";
 import { getVideos, type VideoItem } from "@/lib/video/video.service";
 import * as postService from "@/lib/blog/post.service";
 import HomeHero, { type HeroVideo } from "@/components/home/HomeHero";
+import { getFeaturedVideo } from "@/lib/video/featured";
 import HomeVideoSections, { type HomeVideo } from "@/components/home/HomeVideoSections";
 
 export const metadata: Metadata = generateSEOMetadata({
@@ -186,15 +187,11 @@ export default async function HomePage() {
   const restVideos = longform.slice(1, 3).map((v) => toHomeVideo(v, false));
   const shorts = shortsSource.slice(0, 5).map((v) => toHomeVideo(v, true));
 
-  const heroSource = featuredVideo ?? videos[0] ?? null;
-  const heroVideo: HeroVideo | null = heroSource
-    ? {
-        youtubeId: heroSource.youtubeId,
-        title: heroSource.title,
-        duration: formatDuration(heroSource.duration),
-        lines: stationFor(heroSource)?.lines ?? [],
-      }
-    : null;
+  // The hero leads with a pinned recording rather than whatever synced last,
+  // so the front door does not change under us. getFeaturedVideo resolves it
+  // from our own library first (which carries the station association, and so
+  // the line badges), then YouTube, then the bare id.
+  const heroVideo: HeroVideo | null = await getFeaturedVideo();
 
   return (
     <>

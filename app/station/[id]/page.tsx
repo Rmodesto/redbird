@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { mtaDataService } from '@/lib/services/mta-data-service';
 import SubwayLinesBadges from '@/components/subway/SubwayLinesBadges';
 import SiteHeader from '@/components/site/SiteHeader';
-import AdSlot from '@/components/AdSlot';
 import StationSoundSection from '@/components/station/StationSoundSection';
 import StationArrivalsPanel from '@/components/station/StationArrivalsPanel';
 import {
@@ -353,7 +352,6 @@ export default async function StationPage({ params }: Props) {
                 </div>
               </div>
 
-              <AdSlot size="square" />
             </aside>
           </main>
         </div>
