@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { generateSEOMetadata } from "@/lib/seo";
 import { generateBreadcrumbSchema, generateStructuredDataScript } from "@/lib/structured-data";
-import Navigation from "@/components/Navigation";
+import SiteHeader from '@/components/site/SiteHeader';
 
 export const metadata: Metadata = generateSEOMetadata({
   title: 'NYC Subway History - Abandoned Stations & Hidden Tracks',
@@ -143,7 +143,7 @@ export default function HistoryPage() {
       />
 
       <div className="min-h-screen bg-white">
-        <Navigation />
+        <SiteHeader active="history" />
 
         {/* Hero Section */}
         <section className="bg-black text-white py-16">
