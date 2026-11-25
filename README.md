@@ -2,6 +2,10 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+This project uses **pnpm** (pinned in `package.json` → `packageManager`). Install
+deps with `pnpm install --frozen-lockfile`. The legacy `cdk/` subproject keeps
+its own npm setup.
+
 First, run the development server:
 
 ```bash
