@@ -15,8 +15,16 @@ const nextConfig = {
   // The optimizer is disabled: nothing in this app uses next/image (all images
   // are plain <img> tags), but /_next/image stays reachable while it is on, and
   // Next 14 has unpatched RCE advisories in that endpoint's AVIF/SVG paths.
+  // With unoptimized:true the optimizer never runs, so the 2026-10 Image
+  // Optimization RCE and the remotePatterns DoS are not reachable here. The
+  // settings below are explicit defense-in-depth in case unoptimized is ever
+  // flipped back: no SVG passthrough, no wildcard remote hosts.
   images: {
     unoptimized: true,
+    dangerouslyAllowSVG: false,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    remotePatterns: [],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
