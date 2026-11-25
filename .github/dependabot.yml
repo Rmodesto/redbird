@@ -1,0 +1,39 @@
+version: 2
+updates:
+  # Root Next.js app. The npm ecosystem covers the pnpm lockfile too.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      # Keep the noisy, low-risk dev tooling in one PR.
+      dev-dependencies:
+        dependency-type: development
+    labels:
+      - dependencies
+
+  # Cloudflare worker (deployed separately via wrangler).
+  - package-ecosystem: npm
+    directory: /cloudflare-worker
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 3
+    labels:
+      - dependencies
+
+  # Blog-drafting agent.
+  - package-ecosystem: npm
+    directory: /red-claw
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 3
+    labels:
+      - dependencies
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    labels:
+      - dependencies
