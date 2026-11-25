@@ -66,3 +66,9 @@ ds-bundle/
 .design-sync/node_modules
 scripts/match-dryrun.json
 scripts/.sync-bundle.mjs
+
+# Harden secret coverage (Phase 4 audit)
+scripts/token*.json
+scripts/*credential*.json
+scripts/*.key
+*.pem
