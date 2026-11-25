@@ -178,23 +178,22 @@ const nextConfig = {
   // trailingSlash: true,
   // distDir: 'out',
   
-  // Experimental features for better performance
-  experimental: {
-    // optimizeCss: true, // Disabled - causing critters dependency issues
-    // Exclude protobuf packages from bundling - fixes MTA GTFS decode issues in AWS Lambda
-    // These packages rely on global state and dynamic property access that gets mangled by bundling
-    //
-    // isomorphic-dompurify/jsdom read data files (jsdom's default-stylesheet.css)
-    // relative to their own location at runtime. Bundling them into the server
-    // output breaks that path under pnpm's non-hoisted node_modules, so they are
-    // loaded from node_modules instead. Behavior is unchanged.
-    serverComponentsExternalPackages: [
-      'protobufjs',
-      'gtfs-realtime-bindings',
-      'isomorphic-dompurify',
-      'jsdom',
-    ],
-  },
+  // Exclude protobuf packages from bundling - fixes MTA GTFS decode issues in AWS Lambda
+  // These packages rely on global state and dynamic property access that gets mangled by bundling
+  //
+  // isomorphic-dompurify/jsdom read data files (jsdom's default-stylesheet.css)
+  // relative to their own location at runtime. Bundling them into the server
+  // output breaks that path under pnpm's non-hoisted node_modules, so they are
+  // loaded from node_modules instead. Behavior is unchanged.
+  //
+  // Renamed from experimental.serverComponentsExternalPackages — stable as
+  // serverExternalPackages since Next 15.
+  serverExternalPackages: [
+    'protobufjs',
+    'gtfs-realtime-bindings',
+    'isomorphic-dompurify',
+    'jsdom',
+  ],
 };
 
 export default nextConfig;
