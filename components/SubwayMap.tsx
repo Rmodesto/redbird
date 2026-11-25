@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { SubwayStation } from '@/app/api/subway-stations/route';
 import { SubwayTrain } from '@/app/api/subway-trains/route';
-import maplibregl from 'maplibre-gl';
+import * as maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { SubwayLineAnimator } from '@/lib/map/lineAnimator';
 import { StationTooltipManager } from '@/lib/map/stationTooltip';
