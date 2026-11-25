@@ -43,7 +43,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(({
   if (asChild) {
     if (isValidElement(children)) {
       return cloneElement(children, {
-        className: cn(classes, children.props.className),
+        className: cn(classes, (children.props as { className?: string }).className),
         ref,
         ...props,
       } as any);

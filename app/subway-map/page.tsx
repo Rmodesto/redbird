@@ -2,24 +2,7 @@ import { Metadata } from "next";
 import { generatePageMetadata } from "@/lib/seo";
 import { generateMapSchema, generateBreadcrumbSchema, generateStructuredDataScript } from "@/lib/structured-data";
 import SiteHeader from '@/components/site/SiteHeader';
-import dynamic from 'next/dynamic';
-
-// Dynamically import the working map component to avoid SSR issues
-const SubwayMap = dynamic(
-  () => import('@/components/WorkingSubwayMap'),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="w-full h-full flex items-center justify-center bg-gray-900">
-        <div className="text-center text-white">
-          <div className="text-4xl mb-4 animate-pulse">🗽</div>
-          <div className="text-xl font-bold mb-2">Loading NYC Subway Map...</div>
-          <div className="text-sm text-gray-400">Initializing real-time data</div>
-        </div>
-      </div>
-    )
-  }
-);
+import SubwayMap from '@/components/map/WorkingSubwayMapClient';
 
 export const metadata: Metadata = generatePageMetadata(
   "NYC Subway Map (Interactive) - Real-Time Train Tracker | SubwaySounds",

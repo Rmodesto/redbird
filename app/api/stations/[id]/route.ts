@@ -5,10 +5,8 @@ import { rateLimit } from '@/lib/api/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function GET(request: NextRequest, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const limited = rateLimit(request, 'station-lookup', 120, 60 * 1000); // 120/min per IP
   if (limited) return limited;
 

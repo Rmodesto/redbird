@@ -4,10 +4,8 @@ import * as videoService from '@/lib/video/video.service';
 
 export const dynamic = 'force-dynamic';
 
-export async function GET(
-  _req: NextRequest,
-  { params }: { params: { stationSlug: string } },
-) {
+export async function GET(_req: NextRequest, props: { params: Promise<{ stationSlug: string }> }) {
+  const params = await props.params;
   try {
     const { stationSlug } = params;
     const data = await videoService.getVideosForStation(stationSlug);

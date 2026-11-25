@@ -1,27 +1,10 @@
 import { Metadata } from "next";
 import { generatePageMetadata } from "@/lib/seo";
 import { generateMapSchema, generateBreadcrumbSchema, generateStructuredDataScript } from "@/lib/structured-data";
-import dynamicImport from 'next/dynamic';
+import SubwayMap from '@/components/map/SubwayMapFixedClient';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
-
-// Dynamically import the fixed map component to avoid SSR issues
-const SubwayMap = dynamicImport(
-  () => import('@/components/SubwayMapFixed'),
-  { 
-    ssr: false,
-    loading: () => (
-      <div className="w-full h-full flex items-center justify-center bg-gray-900">
-        <div className="text-center text-white">
-          <div className="text-4xl mb-4 animate-pulse">🗽</div>
-          <div className="text-xl font-bold mb-2">Loading NYC Subway Map...</div>
-          <div className="text-sm text-gray-400">Initializing real-time data</div>
-        </div>
-      </div>
-    )
-  }
-);
 
 export const metadata: Metadata = generatePageMetadata(
   "Real-Time 3D NYC Subway Map - Live Train Tracker | Subway Sounds",

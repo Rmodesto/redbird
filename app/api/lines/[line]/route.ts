@@ -5,10 +5,8 @@ import { lineId } from '@/lib/api/schemas';
 
 export const dynamic = 'force-dynamic';
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { line: string } }
-) {
+export async function GET(request: NextRequest, props: { params: Promise<{ line: string }> }) {
+  const params = await props.params;
   try {
     const { line } = params;
     const lineUpper = line.toUpperCase();
