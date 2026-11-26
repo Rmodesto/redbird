@@ -96,6 +96,12 @@ export default function LineRecordingsPanel({
 
   const shown = videos.slice(0, limit);
 
+  // No recordings for this line is a valid state — hide the whole panel rather
+  // than showing an empty "Recorded on the {line}" heading.
+  if (!loading && shown.length === 0) {
+    return null;
+  }
+
   return (
     <section className="flex flex-col gap-f34">
       <div className="flex items-end justify-between gap-f21 border-b border-ink pb-f21">
@@ -114,14 +120,6 @@ export default function LineRecordingsPanel({
         <div className="flex flex-col gap-f34">
           <div className="aspect-video w-full animate-pulse bg-seam" />
           <div className="aspect-video w-full animate-pulse bg-seam" />
-        </div>
-      )}
-
-      {!loading && shown.length === 0 && (
-        <div className="border border-dashed border-seam p-f34 text-center">
-          <p className="m-0 text-body leading-[26px] text-muted">
-            No recordings tagged to {lineId} train stations yet.
-          </p>
         </div>
       )}
 

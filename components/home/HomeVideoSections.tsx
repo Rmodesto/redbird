@@ -59,20 +59,13 @@ function SectionHead({
   );
 }
 
-function EmptyBlock({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="border border-dashed border-seam p-f34 text-center lg:p-f55">
-      <p className="m-0 text-body text-muted lg:text-body-lg">{children}</p>
-    </div>
-  );
-}
-
 export default function HomeVideoSections({ featured, rest, shorts }: HomeVideoSectionsProps) {
   const [playing, setPlaying] = useState<string | null>(null);
 
   return (
     <>
-      {/* ── New uploads ─────────────────────────────────────────── */}
+      {/* ── New uploads (hidden entirely when there are no recordings) ── */}
+      {featured && (
       <section className="flex flex-col gap-f21 lg:gap-f34">
         <SectionHead
           eyebrow="LATEST"
@@ -102,7 +95,7 @@ export default function HomeVideoSections({ featured, rest, shorts }: HomeVideoS
               CLOSE PLAYER
             </button>
           </div>
-        ) : featured ? (
+        ) : (
           <div className="grid grid-cols-1 gap-f21 lg:grid-cols-golden lg:gap-f55">
             <VideoCard
               variant="featured"
@@ -129,10 +122,9 @@ export default function HomeVideoSections({ featured, rest, shorts }: HomeVideoS
               </div>
             )}
           </div>
-        ) : (
-          <EmptyBlock>No recordings published yet.</EmptyBlock>
         )}
       </section>
+      )}
 
       {/* ── Shorts ──────────────────────────────────────────────── */}
       {shorts.length > 0 && (
