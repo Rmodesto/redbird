@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import Logo from './Logo';
+import { STATION_COUNT } from '@/lib/constants/site';
 
 export type NavKey = '' | 'stations' | 'lines' | 'map' | 'sounds' | 'blog' | 'history' | 'culture';
 
@@ -68,7 +69,7 @@ export default function SiteHeader({ active = '' }: SiteHeaderProps) {
           className="flex h-f34 w-f233 shrink-0 items-center justify-between gap-f8 border border-ripstop bg-suede pl-f13 pr-f8 no-underline"
         >
           <span className="text-label normal-case tracking-normal text-graphite">
-            Search 445 stations
+            Search {STATION_COUNT} stations
           </span>
           <span className="flex h-f21 w-f21 items-center justify-center border border-ripstop text-micro font-bold text-graphite">
             /

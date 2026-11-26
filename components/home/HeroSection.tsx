@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui';
 import StationSearch from '@/components/StationSearch';
+import { STATION_COUNT } from '@/lib/constants/site';
 
 interface HeroSectionProps {
   title?: string;
@@ -13,7 +14,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ 
   title = "NYC Subway Sounds & Real-Time Directory",
-  subtitle = "Track trains in real-time, explore subway sounds, and navigate all 472 stations across New York City",
+  subtitle = `Track trains in real-time, explore subway sounds, and navigate all ${STATION_COUNT} stations across New York City`,
   className = ""
 }: HeroSectionProps) {
   const [showSearch, setShowSearch] = useState(false);

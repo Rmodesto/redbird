@@ -11,10 +11,11 @@ import * as postService from "@/lib/blog/post.service";
 import HomeHero, { type HeroVideo } from "@/components/home/HomeHero";
 import { getFeaturedVideo } from "@/lib/video/featured";
 import HomeVideoSections, { type HomeVideo } from "@/components/home/HomeVideoSections";
+import { STATION_COUNT } from "@/lib/constants/site";
 
 export const metadata: Metadata = generateSEOMetadata({
   title: "Subway Sounds NYC - Real-Time NYC Subway Directory, Map & Train Arrivals",
-  description: "Navigate NYC subway with real-time train arrivals, interactive subway map, station sounds, and comprehensive directory. Track all 27 lines across 472 stations in Manhattan, Brooklyn, Queens & Bronx.",
+  description: `Navigate NYC subway with real-time train arrivals, interactive subway map, station sounds, and comprehensive directory. Track all 27 lines across ${STATION_COUNT} stations in Manhattan, Brooklyn, Queens & Bronx.`,
   keywords: [
     "NYC subway real-time",
     "subway sounds New York",
@@ -39,7 +40,7 @@ const collectionSchema = generateCollectionPageSchema(
   "NYC Subway Directory",
   "Complete directory of New York City subway stations with real-time arrivals",
   "stations",
-  472
+  STATION_COUNT
 );
 
 const faqSchema = generateFAQSchema([
@@ -49,11 +50,11 @@ const faqSchema = generateFAQSchema([
   },
   {
     question: "What are NYC subway sounds?",
-    answer: "NYC subway sounds include platform announcements, door chimes, train arrivals, and station ambiance. Our archive features authentic recordings from all 472 stations."
+    answer: `NYC subway sounds include platform announcements, door chimes, train arrivals, and station ambiance. Our archive features authentic recordings from all ${STATION_COUNT} stations.`
   },
   {
     question: "How many subway lines are in NYC?",
-    answer: "The NYC subway system has 27 lines (including shuttles) operating across 472 stations in Manhattan, Brooklyn, Queens, and the Bronx."
+    answer: `The NYC subway system has 27 lines (including shuttles) operating across ${STATION_COUNT} stations in Manhattan, Brooklyn, Queens, and the Bronx.`
   },
   {
     question: "Where can I find an interactive NYC subway map?",
