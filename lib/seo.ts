@@ -12,6 +12,8 @@ interface SEOConfig {
   ogType?: string;
   canonical?: string;
   noIndex?: boolean;
+  /** Content author(s). Defaults to the site name when omitted. */
+  authors?: string[];
   alternates?: {
     canonical?: string;
     languages?: Record<string, string>;
@@ -27,6 +29,7 @@ export function generateSEOMetadata(config: SEOConfig): Metadata {
     ogType = 'website',
     canonical,
     noIndex = false,
+    authors,
     alternates,
   } = config;
 
@@ -55,7 +58,9 @@ export function generateSEOMetadata(config: SEOConfig): Metadata {
     },
     description,
     keywords: allKeywords.join(', '),
-    authors: [{ name: 'Subway Sounds NYC' }],
+    authors: authors && authors.length
+      ? authors.map((name) => ({ name }))
+      : [{ name: 'Subway Sounds NYC' }],
     creator: 'Subway Sounds NYC',
     publisher: 'Subway Sounds NYC',
     formatDetection: {

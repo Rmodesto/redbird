@@ -12,6 +12,7 @@ export function generateBlogPostMetadata(post: BlogPost): Metadata {
     ogImage: post.ogImage || post.featuredImage || undefined,
     ogType: 'article',
     canonical: post.canonicalUrl || `/blog/${post.slug}`,
+    authors: post.authorName ? [post.authorName] : undefined,
   });
 }
 

@@ -445,6 +445,73 @@ export default function CulturePage() {
           </div>
         </section>
 
+        {/* Literature Section */}
+        <section className="py-12 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-3xl font-bold flex items-center gap-2">
+                📚 Literature
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {culturalContent
+                .filter(item => item.mediaType === 'book')
+                .map((item) => (
+                  <CultureCard
+                    key={item.id}
+                    category={item.category}
+                    title={item.title}
+                    description={item.description}
+                    image={item.image}
+                  />
+                ))}
+            </div>
+
+            <div className="mt-8 prose prose-lg text-gray-700">
+              <p>
+                Writers have long used the subway as a setting and a subject — a shared
+                underground where the whole city crosses paths. From novels to essays and
+                poetry, the system&apos;s rhythms, crowds, and quiet moments turn up again and
+                again on the page.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Video Games Section */}
+        <section className="py-12">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-3xl font-bold flex items-center gap-2">
+                🎮 Video Games
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {culturalContent
+                .filter(item => item.mediaType === 'game')
+                .map((item) => (
+                  <CultureCard
+                    key={item.id}
+                    category={item.category}
+                    title={item.title}
+                    description={item.description}
+                    image={item.image}
+                  />
+                ))}
+            </div>
+
+            <div className="mt-8 prose prose-lg text-gray-700">
+              <p>
+                Game designers recreate the subway for both atmosphere and navigation — as a
+                fast-travel network, a backdrop for city streets, or a set piece in its own
+                right. Its stations and tunnels give virtual New York much of its texture.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Timeline Section */}
         <section className="py-12 bg-black text-white">
           <div className="max-w-7xl mx-auto px-4">
