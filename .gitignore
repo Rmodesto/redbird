@@ -66,3 +66,6 @@ ds-bundle/
 .design-sync/node_modules
 scripts/match-dryrun.json
 scripts/.sync-bundle.mjs
+
+# generated video list for the labeling tool
+scripts/videos-for-labeling.json
