@@ -41,7 +41,12 @@ export default function BlogListingClient({
       );
     }
 
-    return posts.filter((p) => p.id !== featuredPost?.id);
+    // The featured card is only shown when no category/search filter is active
+    // (see the Featured Article block below). Only then should we drop it from
+    // the grid to avoid duplicating it — otherwise the grid would hide the post
+    // entirely, which with a single post leaves an empty "0 articles" state.
+    const featuredShown = !activeCategory && !searchQuery;
+    return featuredShown ? posts.filter((p) => p.id !== featuredPost?.id) : posts;
   }, [initialPosts, activeCategory, searchQuery, featuredPost]);
 
   return (
@@ -184,26 +189,29 @@ export default function BlogListingClient({
         </section>
       )}
 
-      {/* Article Grid */}
-      <section className="bg-white py-12">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-sm text-gray-500 mb-6">
-            Showing {filteredPosts.length} article{filteredPosts.length !== 1 ? 's' : ''}
-          </div>
+      {/* Article Grid — hidden entirely when the only post is already shown
+          as the featured article (no empty "0 articles" state in that case). */}
+      {!(filteredPosts.length === 0 && !activeCategory && !searchQuery) && (
+        <section className="bg-white py-12">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="text-sm text-gray-500 mb-6">
+              Showing {filteredPosts.length} article{filteredPosts.length !== 1 ? 's' : ''}
+            </div>
 
-          {filteredPosts.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="text-gray-500">No articles found matching your criteria.</p>
-            </div>
-          ) : (
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {filteredPosts.map((post) => (
-                <PostCard key={post.id} post={post} />
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
+            {filteredPosts.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-gray-500">No articles found matching your criteria.</p>
+              </div>
+            ) : (
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {filteredPosts.map((post) => (
+                  <PostCard key={post.id} post={post} />
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
     </>
   );
 }
