@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import SiteHeader from '@/components/site/SiteHeader';
+import SiteFooter from '@/components/site/SiteFooter';
+import SubwayLinesBadges from '@/components/subway/SubwayLinesBadges';
 
 interface LineInfo {
   id: string;
@@ -53,35 +55,31 @@ const subwayLinesData: LineInfo[] = [
   { id: "S", name: "S", color: "bg-gray-600", textColor: "text-white", fullName: "42nd Street Shuttle", description: "Shuttle service between Times Square and Grand Central", boroughs: ["Manhattan"], stationCount: 3, terminals: ["Times Square", "Grand Central"], serviceType: "Shuttle" },
 ];
 
+// Trunk groups. `swatch` carries the official MTA trunk colour used by the
+// filter-button chip (also the bullet colour in SubwayLinesBadges).
 const lineGroups = [
-  { name: "IRT Broadway-7th Avenue", lines: ["1", "2", "3"], color: "border-red-600" },
-  { name: "IRT Lexington Avenue", lines: ["4", "5", "6"], color: "border-green-600" },
-  { name: "IRT Flushing", lines: ["7"], color: "border-purple-600" },
-  { name: "IND 8th Avenue", lines: ["A", "C", "E"], color: "border-blue-600" },
-  { name: "IND 6th Avenue", lines: ["B", "D", "F", "M"], color: "border-orange-500" },
-  { name: "BMT Broadway", lines: ["N", "Q", "R", "W"], color: "border-yellow-500" },
-  { name: "IND Crosstown", lines: ["G"], color: "border-green-500" },
-  { name: "BMT Nassau Street", lines: ["J", "Z"], color: "border-amber-600" },
-  { name: "BMT Canarsie", lines: ["L"], color: "border-gray-500" },
-  { name: "Shuttles", lines: ["S"], color: "border-gray-600" },
+  { name: "IRT Broadway-7th Avenue", lines: ["1", "2", "3"], swatch: "#EE352E" },
+  { name: "IRT Lexington Avenue", lines: ["4", "5", "6"], swatch: "#00933C" },
+  { name: "IRT Flushing", lines: ["7"], swatch: "#B933AD" },
+  { name: "IND 8th Avenue", lines: ["A", "C", "E"], swatch: "#0039A6" },
+  { name: "IND 6th Avenue", lines: ["B", "D", "F", "M"], swatch: "#FF6319" },
+  { name: "BMT Broadway", lines: ["N", "Q", "R", "W"], swatch: "#FCCC0A" },
+  { name: "IND Crosstown", lines: ["G"], swatch: "#6CBE45" },
+  { name: "BMT Nassau Street", lines: ["J", "Z"], swatch: "#996633" },
+  { name: "BMT Canarsie", lines: ["L"], swatch: "#A7A9AC" },
+  { name: "Shuttles", lines: ["S"], swatch: "#808183" },
 ];
 
-const LABEL = "text-[13px] font-bold uppercase leading-[21px] tracking-[.08em]";
-const ZIGZAG =
-  "url(data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%278%27%20height=%278%27%3E%3Cpath%20d=%27M0%207L4%201L8%207%27%20fill=%27none%27%20stroke=%27%23262626%27%20stroke-width=%271.3%27/%3E%3C/svg%3E)";
+// id → trunk name, for the per-row eyebrow.
+const trunkForLine: Record<string, string> = {};
+lineGroups.forEach((g) => g.lines.forEach((id) => (trunkForLine[id] = g.name)));
 
-function FactCell({ value, label, accent, br, bb }: { value: string; label: string; accent?: boolean; br?: boolean; bb?: boolean }) {
-  return (
-    <div className={`flex flex-col gap-f5 p-f21 ${br ? 'border-r border-ripstop' : ''} ${bb ? 'border-b border-ripstop' : ''}`}>
-      <span className={`text-[34px] font-bold leading-[42px] ${accent ? 'text-tag' : 'text-paper'}`}>{value}</span>
-      <span className={`${LABEL} text-graphite`}>{label}</span>
-    </div>
-  );
-}
+const allLines = ["1", "2", "3", "4", "5", "6", "7", "A", "C", "E", "B", "D", "F", "M", "G", "J", "Z", "L", "N", "Q", "R", "W", "S"];
+
+const EYEBROW = "text-[11px] font-bold uppercase leading-[16px] tracking-[.08em]";
 
 export default function LinesPage() {
   const [selectedGroup, setSelectedGroup] = useState<string | null>(null);
-  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   const filteredLines = selectedGroup
     ? subwayLinesData.filter((line) => lineGroups.find((g) => g.name === selectedGroup)?.lines.includes(line.id))
@@ -91,130 +89,101 @@ export default function LinesPage() {
     <div className="min-h-screen bg-jet font-sans text-paper">
       <SiteHeader active="lines" />
 
-      {/* ── Masthead ─────────────────────────────────────────── */}
+      {/* ── Dark grid masthead ───────────────────────────────── */}
       <section className="surface-ripstop text-paper">
-        <div className="mx-auto max-w-[1440px] px-f21 pb-f34 pt-f34 md:px-f55 md:pb-f55 md:pt-f55">
-          <div className="flex flex-col gap-f34 lg:flex-row lg:items-end lg:justify-between lg:gap-f55">
-            <div className="flex min-w-0 max-w-f610 flex-col gap-f21">
-              <span className={`quoted ${LABEL} text-graphite`}>Lines</span>
-              <h1 className="m-0 text-[clamp(40px,8vw,89px)] font-bold uppercase leading-[1] tracking-[-.03em]">
-                Subway Lines
+        <div className="mx-auto max-w-[1440px] box-border px-f21 py-f34 md:px-f55 md:py-f89">
+          <div className="grid grid-cols-1 items-end gap-f34 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.618fr)] lg:gap-f89">
+            <div className="flex flex-col gap-f21">
+              <span className={`quoted text-[13px] font-bold uppercase leading-[21px] tracking-[.08em] text-graphite`}>Line</span>
+              <h1 className="m-0 text-[clamp(40px,8vw,68px)] font-bold uppercase leading-[1] tracking-[-.02em] text-paper">
+                Subway lines
               </h1>
-              <p className="m-0 text-[18px] leading-[29px] text-graphite [text-wrap:pretty]">
-                Every service in the system, grouped by trunk line. Open any line for its stations,
-                real-time arrivals and the sounds recorded along it.
+              <p className="m-0 max-w-[440px] text-[18px] leading-[29px] text-paper [text-wrap:pretty]">
+                Every route in the system. Pick a line to see its stops, the cars that run it,
+                and every recording we&apos;ve made along it.
               </p>
             </div>
 
-            <div className="grid shrink-0 grid-cols-2 border border-ripstop">
-              <FactCell value="445" label="Stations" br bb />
-              <FactCell value="27" label="Lines" bb />
-              <FactCell value="4" label="Boroughs" br />
-              <FactCell value="3" label="Divisions" accent />
+            <div className="lg:justify-self-end">
+              <SubwayLinesBadges lines={allLines} size="lg" />
             </div>
           </div>
         </div>
       </section>
 
-      <div aria-hidden="true" className="h-[8px]" style={{ backgroundImage: ZIGZAG, backgroundRepeat: "repeat-x" }} />
+      {/* ── White paper body ─────────────────────────────────── */}
+      <div className="mx-auto max-w-[1440px] box-border px-f21 pb-f34 md:px-f55 md:pb-f89">
+        <main className="panel flex flex-col gap-f34 bg-paper p-f21 text-ink md:gap-f55 md:p-f89">
 
-      {/* ── Filter bar ───────────────────────────────────────── */}
-      <section className="border-b border-ripstop bg-suede">
-        <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-f13 px-f21 py-f21 md:px-f55">
-          <div className="flex flex-wrap gap-f8">
-            <button
-              onClick={() => setSelectedGroup(null)}
-              className={`${LABEL} rounded-seam border px-f13 py-f8 transition-colors ${
-                !selectedGroup ? "border-paper bg-paper text-ink" : "border-ripstop bg-jet text-graphite hover:text-paper"
-              }`}
-            >
-              All Lines
-            </button>
-            {lineGroups.map((group) => (
+          {/* Filter row */}
+          <div className="flex flex-wrap items-end justify-between gap-f34 border-b border-ink pb-f21">
+            <div className="flex flex-wrap gap-f8">
               <button
-                key={group.name}
-                onClick={() => setSelectedGroup(group.name)}
-                className={`${LABEL} rounded-seam border border-l-4 px-f13 py-f8 transition-colors ${group.color} ${
-                  selectedGroup === group.name ? "bg-paper text-ink" : "bg-jet text-graphite hover:text-paper"
+                onClick={() => setSelectedGroup(null)}
+                className={`flex h-[34px] items-center gap-f8 border border-ink px-f13 ${EYEBROW} transition-colors ${
+                  !selectedGroup ? "bg-jet text-paper" : "bg-paper text-ink"
                 }`}
               >
-                {group.name}
+                <span aria-hidden className="h-[8px] w-[8px] shrink-0" style={{ background: "#111111" }} />
+                All lines
               </button>
-            ))}
+              {lineGroups.map((group) => (
+                <button
+                  key={group.name}
+                  onClick={() => setSelectedGroup(group.name)}
+                  className={`flex h-[34px] items-center gap-f8 border border-ink px-f13 ${EYEBROW} transition-colors ${
+                    selectedGroup === group.name ? "bg-jet text-paper" : "bg-paper text-ink"
+                  }`}
+                >
+                  <span aria-hidden className="h-[8px] w-[8px] shrink-0" style={{ background: group.swatch }} />
+                  {group.name}
+                </button>
+              ))}
+            </div>
+            <span className="text-[13px] font-bold uppercase tracking-[.08em] text-muted">
+              {filteredLines.length} {filteredLines.length === 1 ? "line" : "lines"}
+            </span>
           </div>
 
-          <div className="flex items-center gap-f5">
-            {(["grid", "list"] as const).map((m) => (
-              <button
-                key={m}
-                onClick={() => setViewMode(m)}
-                className={`${LABEL} rounded-seam border px-f13 py-f8 ${
-                  viewMode === m ? "border-paper bg-paper text-ink" : "border-ripstop text-graphite hover:text-paper"
-                }`}
-              >
-                {m}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Lines ────────────────────────────────────────────── */}
-      <section className="mx-auto max-w-[1440px] px-f21 py-f34 md:px-f55 md:py-f55">
-        {viewMode === "grid" ? (
-          <div className="grid grid-cols-1 gap-f21 md:grid-cols-2 lg:grid-cols-3">
+          {/* Line list */}
+          <div className="border-t border-ink">
             {filteredLines.map((line) => (
               <Link
                 key={line.id}
                 href={`/line/${line.id.toLowerCase()}`}
-                className="group flex flex-col border border-ripstop bg-suede no-underline transition-colors hover:border-graphite"
+                className="flex flex-col gap-f13 border-b border-seam py-f34 no-underline text-ink transition-colors hover:bg-[#FAFAFA] md:grid md:grid-cols-[89px_minmax(0,1.618fr)_minmax(0,1fr)_144px] md:items-center md:gap-f34"
               >
-                <div className={`h-[8px] ${line.color}`} />
-                <div className="flex flex-col gap-f13 p-f21">
-                  <div className="flex items-center justify-between">
-                    <span className={`${line.color} ${line.textColor} flex h-[55px] w-[55px] items-center justify-center rounded-full text-[26px] font-bold`}>
-                      {line.name}
-                    </span>
-                    <span className={`${LABEL} text-graphite`}>{line.serviceType}</span>
-                  </div>
-                  <h3 className="m-0 text-[18px] font-bold leading-[24px] text-paper">{line.fullName}</h3>
-                  <p className="m-0 text-[14px] leading-[21px] text-graphite">{line.description}</p>
-                  <div className="flex flex-col gap-f5 text-[13px] leading-[21px] text-graphite">
-                    <span>{line.boroughs.join(" · ")}</span>
-                    <span>{line.stationCount} stations</span>
-                    <span className="text-muted">{line.terminals.join(" ↔ ")}</span>
-                  </div>
+                <div className="shrink-0">
+                  <SubwayLinesBadges lines={[line.id]} size="lg" />
                 </div>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <div className="border border-ripstop">
-            {filteredLines.map((line) => (
-              <Link
-                key={line.id}
-                href={`/line/${line.id.toLowerCase()}`}
-                className="flex items-center gap-f21 border-b border-ripstop bg-suede p-f21 no-underline transition-colors last:border-b-0 hover:bg-ripstop"
-              >
-                <span className={`${line.color} ${line.textColor} flex h-[42px] w-[42px] shrink-0 items-center justify-center rounded-full text-[21px] font-bold`}>
-                  {line.name}
+
+                <span className="flex flex-col gap-f8">
+                  <span className={`${EYEBROW} text-muted`}>
+                    {trunkForLine[line.id]} · {line.serviceType}
+                  </span>
+                  <span className="text-[26px] font-bold leading-[34px]">{line.fullName}</span>
+                  <span className="text-[13px] leading-[21px] text-muted">
+                    {line.terminals.join(" ↔ ")}
+                  </span>
                 </span>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center justify-between gap-f13">
-                    <h3 className="m-0 text-[16px] font-bold leading-[21px] text-paper">{line.fullName}</h3>
-                    <span className={`${LABEL} shrink-0 text-graphite`}>{line.serviceType}</span>
-                  </div>
-                  <p className="m-0 mt-[3px] text-[13px] leading-[21px] text-graphite">{line.description}</p>
-                  <div className="mt-[5px] flex flex-wrap gap-f13 text-[13px] text-muted">
-                    <span>{line.boroughs.join(" · ")}</span>
-                    <span>{line.stationCount} stations</span>
-                  </div>
-                </div>
+
+                <span className="flex flex-col gap-f3 text-[13px] leading-[21px] text-muted">
+                  <span>
+                    <b className="font-bold tabular-nums text-ink">{line.stationCount}</b> stations
+                  </span>
+                  <span>{line.boroughs.join(", ")}</span>
+                </span>
+
+                <span className="flex flex-col gap-f3 md:items-end">
+                  <span className={`${EYEBROW} text-muted`}>Recordings →</span>
+                </span>
               </Link>
             ))}
           </div>
-        )}
-      </section>
+        </main>
+      </div>
+
+      <SiteFooter />
     </div>
   );
 }

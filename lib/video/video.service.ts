@@ -122,6 +122,19 @@ export async function getStats(): Promise<VideoStats> {
   };
 }
 
+/**
+ * Distinct stations with at least one public recording, for the map's stat
+ * panel. Degrades to 0 when the database is unreachable (e.g. no DATABASE_URL
+ * at build) so it never breaks the build.
+ */
+export async function getStationsWithSoundCount(): Promise<number> {
+  try {
+    return await repo.countStationsWithSound();
+  } catch {
+    return 0;
+  }
+}
+
 /** Confirm a video's station set (the tagger's SAVE TAGS). */
 export async function saveStationTags(videoId: string, stationSlugs: string[]): Promise<void> {
   await repo.saveStationTags(videoId, stationSlugs);
@@ -146,6 +159,11 @@ export async function unpinVideoFromPost(videoId: string, postId: string): Promi
 
 export async function getVideoById(id: string): Promise<VideoItem | null> {
   const video = await repo.findById(id);
+  return video ? toApiVideo(video) : null;
+}
+
+export async function getVideoByYoutubeId(youtubeId: string): Promise<VideoItem | null> {
+  const video = await repo.findByYoutubeId(youtubeId);
   return video ? toApiVideo(video) : null;
 }
 

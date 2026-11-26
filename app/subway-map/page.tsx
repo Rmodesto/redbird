@@ -3,8 +3,14 @@ import Link from "next/link";
 import { generatePageMetadata } from "@/lib/seo";
 import { generateMapSchema, generateBreadcrumbSchema, generateStructuredDataScript } from "@/lib/structured-data";
 import SiteHeader from '@/components/site/SiteHeader';
-import { STATION_COUNT, LINE_COUNT, BOROUGH_COUNT } from "@/lib/constants/site";
+import { STATION_COUNT, LINE_COUNT } from "@/lib/constants/site";
+import { getStationsWithSoundCount } from "@/lib/video/video.service";
 import dynamic from 'next/dynamic';
+
+// Re-render hourly so the "Stations with Sound" figure tracks newly tagged
+// recordings instead of freezing at build time. (Can't use `export const
+// dynamic` here — `dynamic` is the next/dynamic import above.)
+export const revalidate = 3600;
 
 // Dynamically import the working map component to avoid SSR issues.
 const SubwayMap = dynamic(() => import('@/components/WorkingSubwayMap'), {
@@ -55,7 +61,8 @@ function Stat({ value, label, accent, br, bb }: { value: string; label: string; 
   );
 }
 
-export default function SubwayMapPage() {
+export default async function SubwayMapPage() {
+  const stationsWithSound = await getStationsWithSoundCount();
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={generateStructuredDataScript(mapSchema)} />
@@ -82,7 +89,7 @@ export default function SubwayMapPage() {
               <div className="grid shrink-0 grid-cols-2 border border-ripstop">
                 <Stat value={String(STATION_COUNT)} label="Stations" br bb />
                 <Stat value={String(LINE_COUNT)} label="Lines" bb />
-                <Stat value={String(BOROUGH_COUNT)} label="Boroughs" br />
+                <Stat value={String(stationsWithSound)} label="Stations with Sound" br />
                 <Stat value="24/7" label="Service" accent />
               </div>
             </div>

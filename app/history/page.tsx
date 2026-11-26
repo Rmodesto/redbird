@@ -27,8 +27,6 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 ]);
 
 const LABEL = "text-[13px] font-bold uppercase leading-[21px] tracking-[.08em]";
-const ZIGZAG =
-  "url(data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%278%27%20height=%278%27%3E%3Cpath%20d=%27M0%207L4%201L8%207%27%20fill=%27none%27%20stroke=%27%23262626%27%20stroke-width=%271.3%27/%3E%3C/svg%3E)";
 
 function Stat({ value, label, accent, br, bb }: { value: string; label: string; accent?: boolean; br?: boolean; bb?: boolean }) {
   return (
@@ -113,6 +111,27 @@ const historicalMilestones = [
   { year: "2024", event: "Congestion Pricing", description: "First-in-nation congestion pricing implemented to fund transit improvements." },
 ];
 
+const originalSystems = [
+  {
+    tag: "IRT",
+    title: "Interborough Rapid Transit",
+    body: "The original 1904 subway. Built smaller tunnels resulting in narrower cars. Lines: 1, 2, 3, 4, 5, 6, 7",
+    opened: "Opened: October 27, 1904",
+  },
+  {
+    tag: "BMT",
+    title: "Brooklyn-Manhattan Transit",
+    body: "Built with wider tunnels for larger cars. Known for Art Deco station designs. Lines: B, D, F, M, N, Q, R, W, J, Z",
+    opened: "Opened: June 22, 1908",
+  },
+  {
+    tag: "IND",
+    title: "Independent Subway System",
+    body: "City-built system with the largest stations and most modern initial design. Lines: A, C, E, G",
+    opened: "Opened: September 10, 1932",
+  },
+];
+
 const faqItems = [
   {
     question: "Can you visit the abandoned City Hall station?",
@@ -131,6 +150,22 @@ const faqItems = [
     answer: "The 28 original IRT stations from 1904 are the oldest. City Hall (abandoned) and stations like Astor Place, 28th Street, and Brooklyn Bridge retain much of their original architecture."
   },
 ];
+
+const relatedLinks = [
+  { href: "/operations", tag: "Operations", title: "How It Works", body: "Learn about signals, dispatching, and subway operations" },
+  { href: "/culture", tag: "Culture", title: "Subway Culture", body: "Movies, music, and art inspired by the subway" },
+  { href: "/subway-map", tag: "Map", title: "Interactive Map", body: "Explore today's subway system in real-time" },
+];
+
+/* Section header: quoted eyebrow + mega-sub h2, the body's recurring opener. */
+function SectionHead({ eyebrow, title }: { eyebrow: string; title: string }) {
+  return (
+    <div className="flex flex-col gap-f8">
+      <span className={`quoted ${LABEL} text-muted`}>{eyebrow}</span>
+      <h2 className="m-0 text-[34px] font-bold leading-[42px] tracking-[-.01em] text-ink">{title}</h2>
+    </div>
+  );
+}
 
 export default function HistoryPage() {
   return (
@@ -160,14 +195,14 @@ export default function HistoryPage() {
 
         {/* ── Masthead ─────────────────────────────────────────── */}
         <section className="surface-ripstop text-paper">
-          <div className="mx-auto max-w-[1440px] px-f21 pb-f34 pt-f34 md:px-f55 md:pb-f55 md:pt-f55">
-            <div className="flex flex-col gap-f34 lg:flex-row lg:items-end lg:justify-between lg:gap-f55">
-              <div className="flex min-w-0 max-w-f610 flex-col gap-f21">
+          <div className="mx-auto max-w-[1440px] px-f21 py-f34 md:px-f55 md:py-f89">
+            <div className="grid items-end gap-f34 lg:grid-cols-golden lg:gap-f89">
+              <div className="flex min-w-0 flex-col gap-f21">
                 <span className={`quoted ${LABEL} text-graphite`}>History</span>
                 <h1 className="m-0 text-[clamp(40px,8vw,89px)] font-bold uppercase leading-[1] tracking-[-.03em]">
                   Underground History
                 </h1>
-                <p className="m-0 text-[18px] leading-[29px] text-graphite [text-wrap:pretty]">
+                <p className="m-0 max-w-f610 text-[18px] leading-[29px] text-paper [text-wrap:pretty]">
                   From the first underground train in 1904 to abandoned stations and ghost platforms,
                   explore 120 years of NYC subway history. Discover hidden tracks, closed stations,
                   and the stories buried beneath the city.
@@ -185,168 +220,112 @@ export default function HistoryPage() {
                 </div>
               </div>
 
-              <div className="grid shrink-0 grid-cols-2 border border-ripstop">
-                <Stat value="1904" label="First Line Opened" br bb />
-                <Stat value="~40" label="Abandoned Stations" bb />
-                <Stat value="120" label="Years of Service" br />
-                <Stat value="3" label="Original Systems" accent />
-              </div>
+              <a
+                href="#abandoned"
+                className="flex flex-col gap-f8 border border-[rgba(255,255,255,0.18)] bg-smoke p-f21 text-paper no-underline backdrop-blur-smoke lg:justify-self-end lg:self-end"
+              >
+                <span className={`quoted ${LABEL}`}>Rare Topic</span>
+                <span className="text-[21px] font-bold leading-[26px]">Abandoned subway stations of NYC</span>
+                <span className={`${LABEL}`}>Read &rarr;</span>
+              </a>
             </div>
           </div>
         </section>
 
-        {/* zigzag rule */}
-        <div aria-hidden="true" className="h-[8px]" style={{ backgroundImage: ZIGZAG, backgroundRepeat: "repeat-x" }} />
+        {/* ── Body: white paper card ───────────────────────────── */}
+        <div className="mx-auto max-w-[1440px] px-f21 pb-f55 md:px-f55 md:pb-f89">
+          <main className="panel flex flex-col gap-f55 bg-paper p-f21 text-ink md:gap-f89 md:p-f55 lg:p-f89">
 
-        {/* ── Abandoned Stations ───────────────────────────────── */}
-        <section id="abandoned" className="mx-auto max-w-[1440px] px-f21 py-f34 md:px-f55 md:py-f55">
-          <div className="flex flex-col gap-f21">
-            <span className={`quoted ${LABEL} text-graphite`}>Ghost Stations</span>
-            <h2 className="m-0 text-[34px] font-bold leading-[42px] tracking-[-.01em] text-paper">Abandoned Stations</h2>
-            <p className="m-0 max-w-f610 text-[18px] leading-[29px] text-graphite">
-              Ghost stations scattered throughout the system tell stories of changing times,
-              evolving technology, and the city&apos;s constant transformation.
-            </p>
-          </div>
-
-          <div className="mt-f34 grid gap-f21 md:grid-cols-2">
-            {abandonedStations.map((station) => (
-              <div key={station.name} className="flex flex-col gap-f13 border border-ripstop bg-suede p-f21 text-paper transition-colors hover:border-graphite">
-                <div className="flex items-start justify-between gap-f13">
-                  <div>
-                    <h3 className="m-0 text-[18px] font-bold leading-[24px] text-paper">{station.name}</h3>
-                    <p className={`m-0 mt-[3px] ${LABEL} text-graphite`}>{station.line}</p>
+            {/* Timeline */}
+            <section id="timeline" className="flex flex-col gap-f34">
+              <SectionHead eyebrow="Timeline" title="The subway, decade by decade" />
+              <div className="border-t border-ink">
+                {historicalMilestones.map((m) => (
+                  <div
+                    key={m.year}
+                    className="grid grid-cols-1 gap-f8 border-b border-seam py-f21 md:grid-cols-[144px_minmax(0,1fr)] md:items-baseline md:gap-f34 md:py-f34"
+                  >
+                    <span className="text-[34px] font-bold leading-[42px] text-ink [font-variant-numeric:tabular-nums]">{m.year}</span>
+                    <div className="flex flex-col gap-f8">
+                      <span className="text-[21px] font-bold leading-[26px] text-ink">{m.event}</span>
+                      <span className="text-[16px] leading-[26px] text-muted">{m.description}</span>
+                    </div>
                   </div>
-                  <span className={`${LABEL} shrink-0 rounded-seam border border-ripstop bg-jet px-f13 py-f5 text-muted`}>
-                    Closed {station.closedYear}
-                  </span>
-                </div>
-                <p className="m-0 text-[14px] leading-[21px] text-graphite">{station.description}</p>
-                <div className="mt-auto flex items-center justify-between gap-f13 pt-f5">
-                  <span className="text-[13px] leading-[21px] text-muted">
-                    <span className="font-bold text-graphite">Reason:</span> {station.reason}
-                  </span>
-                  {station.canVisit && (
-                    <span className={`${LABEL} shrink-0 rounded-seam bg-tag px-f13 py-f5 text-ink`}>
-                      Visitable
+                ))}
+              </div>
+            </section>
+
+            {/* Abandoned Stations */}
+            <section id="abandoned" className="flex flex-col gap-f34">
+              <SectionHead eyebrow="Ghost Stations" title="Abandoned Stations" />
+              <div className="grid gap-x-f34 gap-y-f55 md:grid-cols-2 lg:grid-cols-3">
+                {abandonedStations.map((station) => (
+                  <div key={station.name} className="flex flex-col gap-f13 border-t-[3px] border-ink pt-f21">
+                    <div className="flex items-start justify-between gap-f13">
+                      <span className={`quoted ${LABEL} text-muted`}>{station.line}</span>
+                      <span className={`${LABEL} shrink-0 text-muted`}>Closed {station.closedYear}</span>
+                    </div>
+                    <span className="text-[26px] font-bold leading-[34px] text-ink">{station.name}</span>
+                    <span className="text-[16px] leading-[26px] text-muted">{station.description}</span>
+                    <span className="text-[13px] leading-[21px] text-muted">
+                      <span className="font-bold text-ink">Reason:</span> {station.reason}
                     </span>
-                  )}
-                </div>
+                    {station.canVisit && (
+                      <span className={`${LABEL} w-fit bg-tag px-f13 py-f5 text-ink`}>Visitable</span>
+                    )}
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </section>
+            </section>
 
-        {/* ── The Three Systems ────────────────────────────────── */}
-        <section className="border-t border-ripstop bg-suede">
-          <div className="mx-auto max-w-[1440px] px-f21 py-f34 md:px-f55 md:py-f55">
-            <div className="flex flex-col gap-f13">
-              <span className={`quoted ${LABEL} text-graphite`}>Divisions</span>
-              <h2 className="m-0 text-[34px] font-bold leading-[42px] tracking-[-.01em] text-paper">The Three Original Systems</h2>
-            </div>
-            <div className="mt-f34 grid gap-f21 md:grid-cols-3">
-              <div className="flex flex-col gap-f13 border border-ripstop bg-jet p-f21">
-                <div className="flex h-[48px] w-[48px] items-center justify-center rounded-full bg-red-600 text-[16px] font-bold text-white">
-                  IRT
-                </div>
-                <h3 className="m-0 text-[18px] font-bold leading-[24px] text-paper">Interborough Rapid Transit</h3>
-                <p className="m-0 text-[14px] leading-[21px] text-graphite">
-                  The original 1904 subway. Built smaller tunnels resulting in narrower cars.
-                  Lines: 1, 2, 3, 4, 5, 6, 7
-                </p>
-                <p className={`m-0 mt-auto pt-f5 ${LABEL} text-muted`}>Opened: October 27, 1904</p>
+            {/* The Three Original Systems */}
+            <section className="flex flex-col gap-f34">
+              <SectionHead eyebrow="Divisions" title="The Three Original Systems" />
+              <div className="grid gap-x-f34 gap-y-f55 md:grid-cols-3">
+                {originalSystems.map((sys) => (
+                  <div key={sys.tag} className="flex flex-col gap-f13 border-t-[3px] border-ink pt-f21">
+                    <span className={`quoted ${LABEL} text-muted`}>{sys.tag}</span>
+                    <span className="text-[26px] font-bold leading-[34px] text-ink">{sys.title}</span>
+                    <span className="text-[16px] leading-[26px] text-muted">{sys.body}</span>
+                    <span className={`mt-auto pt-f5 ${LABEL} text-muted`}>{sys.opened}</span>
+                  </div>
+                ))}
               </div>
+            </section>
 
-              <div className="flex flex-col gap-f13 border border-ripstop bg-jet p-f21">
-                <div className="flex h-[48px] w-[48px] items-center justify-center rounded-full bg-yellow-500 text-[16px] font-bold text-black">
-                  BMT
-                </div>
-                <h3 className="m-0 text-[18px] font-bold leading-[24px] text-paper">Brooklyn-Manhattan Transit</h3>
-                <p className="m-0 text-[14px] leading-[21px] text-graphite">
-                  Built with wider tunnels for larger cars. Known for Art Deco station designs.
-                  Lines: B, D, F, M, N, Q, R, W, J, Z
-                </p>
-                <p className={`m-0 mt-auto pt-f5 ${LABEL} text-muted`}>Opened: June 22, 1908</p>
+            {/* FAQ */}
+            <section id="faq" className="flex flex-col gap-f34">
+              <SectionHead eyebrow="FAQ" title="Frequently Asked Questions" />
+              <div className="border-t border-ink">
+                {faqItems.map((faq) => (
+                  <div key={faq.question} className="flex flex-col gap-f8 border-b border-seam py-f21 md:py-f34">
+                    <h3 className="m-0 text-[21px] font-bold leading-[26px] text-ink">{faq.question}</h3>
+                    <p className="m-0 text-[16px] leading-[26px] text-muted">{faq.answer}</p>
+                  </div>
+                ))}
               </div>
+            </section>
 
-              <div className="flex flex-col gap-f13 border border-ripstop bg-jet p-f21">
-                <div className="flex h-[48px] w-[48px] items-center justify-center rounded-full bg-blue-600 text-[16px] font-bold text-white">
-                  IND
-                </div>
-                <h3 className="m-0 text-[18px] font-bold leading-[24px] text-paper">Independent Subway System</h3>
-                <p className="m-0 text-[14px] leading-[21px] text-graphite">
-                  City-built system with the largest stations and most modern initial design.
-                  Lines: A, C, E, G
-                </p>
-                <p className={`m-0 mt-auto pt-f5 ${LABEL} text-muted`}>Opened: September 10, 1932</p>
+            {/* Explore More */}
+            <section className="flex flex-col gap-f34">
+              <SectionHead eyebrow="Explore" title="Explore More" />
+              <div className="grid gap-x-f34 gap-y-f55 md:grid-cols-3">
+                {relatedLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="group flex flex-col gap-f13 border-t-[3px] border-ink pt-f21 text-ink no-underline"
+                  >
+                    <span className={`quoted ${LABEL} text-muted`}>{link.tag}</span>
+                    <span className="text-[26px] font-bold leading-[34px] text-ink transition-colors group-hover:text-muted">{link.title}</span>
+                    <span className="text-[16px] leading-[26px] text-muted">{link.body}</span>
+                  </a>
+                ))}
               </div>
-            </div>
-          </div>
-        </section>
+            </section>
 
-        {/* ── Timeline ─────────────────────────────────────────── */}
-        <section id="timeline" className="mx-auto max-w-f610 px-f21 py-f34 md:px-f55 md:py-f55">
-          <div className="flex flex-col gap-f13">
-            <span className={`quoted ${LABEL} text-graphite`}>Timeline</span>
-            <h2 className="m-0 text-[34px] font-bold leading-[42px] tracking-[-.01em] text-paper">Historical Timeline</h2>
-          </div>
-          <div className="mt-f34 flex flex-col gap-f21">
-            {historicalMilestones.map((milestone) => (
-              <div key={milestone.year} className="flex items-start gap-f21">
-                <div className={`${LABEL} w-[72px] shrink-0 rounded-seam border border-ripstop bg-suede px-f8 py-f8 text-center text-paper`}>
-                  {milestone.year}
-                </div>
-                <div className="border-l border-ripstop pb-f13 pl-f21">
-                  <h3 className="m-0 text-[18px] font-bold leading-[24px] text-paper">{milestone.event}</h3>
-                  <p className="m-0 mt-[3px] text-[14px] leading-[21px] text-graphite">{milestone.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ── FAQ ──────────────────────────────────────────────── */}
-        <section id="faq" className="border-t border-ripstop bg-suede">
-          <div className="mx-auto max-w-f610 px-f21 py-f34 md:px-f55 md:py-f55">
-            <div className="flex flex-col gap-f13">
-              <span className={`quoted ${LABEL} text-graphite`}>FAQ</span>
-              <h2 className="m-0 text-[34px] font-bold leading-[42px] tracking-[-.01em] text-paper">Frequently Asked Questions</h2>
-            </div>
-            <div className="mt-f34 flex flex-col gap-f13">
-              {faqItems.map((faq, index) => (
-                <div key={index} className="border border-ripstop bg-jet p-f21">
-                  <h3 className="m-0 text-[18px] font-bold leading-[24px] text-paper">{faq.question}</h3>
-                  <p className="m-0 mt-f8 text-[14px] leading-[21px] text-graphite">{faq.answer}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── Related Links ────────────────────────────────────── */}
-        <section className="mx-auto max-w-[1440px] px-f21 py-f34 md:px-f55 md:py-f55">
-          <div className="flex flex-col gap-f13">
-            <span className={`quoted ${LABEL} text-graphite`}>Explore</span>
-            <h2 className="m-0 text-[34px] font-bold leading-[42px] tracking-[-.01em] text-paper">Explore More</h2>
-          </div>
-          <div className="mt-f34 grid gap-f21 md:grid-cols-3">
-            <a href="/operations" className="group flex flex-col gap-f8 border border-ripstop bg-suede p-f21 no-underline transition-colors hover:border-graphite">
-              <span className={`quoted ${LABEL} text-graphite`}>Operations</span>
-              <h3 className="m-0 text-[18px] font-bold leading-[24px] text-paper">How It Works</h3>
-              <p className="m-0 text-[14px] leading-[21px] text-graphite">Learn about signals, dispatching, and subway operations</p>
-            </a>
-            <a href="/culture" className="group flex flex-col gap-f8 border border-ripstop bg-suede p-f21 no-underline transition-colors hover:border-graphite">
-              <span className={`quoted ${LABEL} text-graphite`}>Culture</span>
-              <h3 className="m-0 text-[18px] font-bold leading-[24px] text-paper">Subway Culture</h3>
-              <p className="m-0 text-[14px] leading-[21px] text-graphite">Movies, music, and art inspired by the subway</p>
-            </a>
-            <a href="/subway-map" className="group flex flex-col gap-f8 border border-ripstop bg-suede p-f21 no-underline transition-colors hover:border-graphite">
-              <span className={`quoted ${LABEL} text-graphite`}>Map</span>
-              <h3 className="m-0 text-[18px] font-bold leading-[24px] text-paper">Interactive Map</h3>
-              <p className="m-0 text-[14px] leading-[21px] text-graphite">Explore today&apos;s subway system in real-time</p>
-            </a>
-          </div>
-        </section>
+          </main>
+        </div>
       </div>
     </>
   );

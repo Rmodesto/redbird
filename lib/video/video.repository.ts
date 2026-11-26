@@ -89,6 +89,19 @@ export async function getStats() {
 }
 
 /**
+ * Count distinct stations that have at least one publicly listenable (ACTIVE)
+ * recording — the "stations with sound" figure on the map. One grouped query,
+ * no N+1.
+ */
+export async function countStationsWithSound(): Promise<number> {
+  const groups = await prisma.videoStation.groupBy({
+    by: ['stationSlug'],
+    where: { video: { status: 'ACTIVE' } },
+  });
+  return groups.length;
+}
+
+/**
  * Replace a video's station tags with the given set as MANUAL and mark it
  * reviewed. One transaction (deleteMany + createMany + update) — not a write
  * per station.

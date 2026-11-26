@@ -1,12 +1,10 @@
+import type { ReactNode } from "react";
 import { Metadata } from "next";
 import { generatePageMetadata } from "@/lib/seo";
 import { generateCollectionPageSchema, generateBreadcrumbSchema, generateStructuredDataScript } from "@/lib/structured-data";
 import SiteHeader from '@/components/site/SiteHeader';
-import CultureCard from "@/components/CultureCard";
 
 const LABEL = "text-[13px] font-bold uppercase leading-[21px] tracking-[.08em]";
-const ZIGZAG =
-  "url(data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%278%27%20height=%278%27%3E%3Cpath%20d=%27M0%207L4%201L8%207%27%20fill=%27none%27%20stroke=%27%23262626%27%20stroke-width=%271.3%27/%3E%3C/svg%3E)";
 
 export const metadata: Metadata = generatePageMetadata(
   "NYC Subway Culture - Movies, Music, Art & Popular Culture",
@@ -63,7 +61,7 @@ const culturalContent: CultureItem[] = [
   },
   {
     id: "spider-man-2",
-    category: "Movies", 
+    category: "Movies",
     title: "Spider-Man 2 (2004)",
     description: "Epic train fight sequence filmed on the R train and elevated tracks in Queens.",
     year: 2004,
@@ -211,7 +209,7 @@ const culturalContent: CultureItem[] = [
   },
   {
     id: "a-train-games",
-    category: "Games", 
+    category: "Games",
     title: "A-Train Series",
     description: "City-building games inspired by NYC transit planning and subway system management.",
     year: 1985,
@@ -230,6 +228,44 @@ const categories = [
 ];
 
 const featuredItems = culturalContent.filter(item => item.featured);
+const featuredLead = featuredItems[0];
+
+const timeline = [
+  { decade: "1940s", highlight: "Duke Ellington's 'Take the A Train' becomes subway anthem", icon: "🎷" },
+  { decade: "1970s", highlight: "Graffiti culture transforms trains into moving art galleries", icon: "🎨" },
+  { decade: "1990s", highlight: "Hollywood discovers the subway: Money Train, French Connection", icon: "🎬" },
+  { decade: "2000s", highlight: "Spider-Man brings superhero action to the rails", icon: "🕷️" },
+  { decade: "2010s", highlight: "Social media era: Showtime dancers and viral moments", icon: "📱" },
+  { decade: "2020s", highlight: "TikTok culture and pandemic-era subway stories", icon: "📹" },
+];
+
+/* Section header on the white paper: quoted eyebrow + h2, optionally a seam
+   divider with a right-aligned meta label. Mirrors the reference "WATCH" block. */
+function SectionHead({ eyebrow, title, meta }: { eyebrow: string; title: ReactNode; meta?: string }) {
+  return (
+    <div className="flex items-end justify-between gap-f21 border-b border-ink pb-f21">
+      <div className="flex flex-col gap-f8">
+        <span className={`quoted ${LABEL} text-muted`}>{eyebrow}</span>
+        <h2 className="m-0 text-[clamp(26px,4vw,34px)] font-bold leading-[1.2] tracking-[-.01em] text-ink">
+          {title}
+        </h2>
+      </div>
+      {meta ? <span className={`shrink-0 ${LABEL} text-ink`}>{meta}</span> : null}
+    </div>
+  );
+}
+
+/* Reference card: 3px ink top rule, category tag, title, body. Dark-on-white. */
+function MediaCard({ item }: { item: CultureItem }) {
+  return (
+    <article className="flex flex-col gap-f13 border-t-[3px] border-ink pt-f21">
+      <span className="text-[26px] leading-none" aria-hidden="true">{item.image}</span>
+      <span className={`${LABEL} text-muted`}>{item.category}</span>
+      <span className="text-[clamp(21px,3vw,26px)] font-bold leading-[1.25] text-ink">{item.title}</span>
+      <span className="text-[16px] leading-[26px] text-muted">{item.description}</span>
+    </article>
+  );
+}
 
 export default function CulturePage() {
   return (
@@ -242,228 +278,176 @@ export default function CulturePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={generateStructuredDataScript(breadcrumbSchema)}
       />
-      
-      <div className="min-h-screen bg-jet font-sans text-paper">
+
+      <div className="min-h-screen bg-jet font-sans text-ink">
         <SiteHeader active="culture" />
 
-        {/* ── Masthead ─────────────────────────────────────────── */}
+        {/* ── Masthead: dark ripstop frame, golden two-column split ─────── */}
         <section className="surface-ripstop text-paper">
-          <div className="mx-auto max-w-[1440px] px-f21 pb-f34 pt-f34 md:px-f55 md:pb-f55 md:pt-f55">
-            <div className="flex max-w-f610 flex-col gap-f21">
+          <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-center gap-f34 px-f21 pb-f55 pt-f34 md:px-f55 lg:grid-cols-golden-r lg:gap-f89 lg:pb-f144 lg:pt-f89">
+            <div className="flex flex-col gap-f21">
               <span className={`quoted ${LABEL} text-graphite`}>Culture</span>
-              <h1 className="m-0 text-[clamp(40px,8vw,89px)] font-bold uppercase leading-[1] tracking-[-.03em]">
+              <h1 className="m-0 text-[clamp(40px,8vw,68px)] font-bold uppercase leading-[1] tracking-[-.03em]">
                 Subway Culture
               </h1>
-              <p className="m-0 text-[18px] leading-[29px] text-graphite [text-wrap:pretty]">
+              <p className="m-0 max-w-f610 text-[18px] leading-[29px] text-paper [text-wrap:pretty]">
                 From iconic movie chase scenes to viral internet memes, the NYC subway has shaped popular
                 culture for over a century. Explore how the world&apos;s busiest transit system became a
                 cultural phenomenon.
               </p>
             </div>
-          </div>
-        </section>
 
-        {/* zigzag rule */}
-        <div aria-hidden="true" className="h-[8px]" style={{ backgroundImage: ZIGZAG, backgroundRepeat: "repeat-x" }} />
-
-        {/* ── Culture stats ────────────────────────────────────── */}
-        <section className="mx-auto max-w-[1440px] px-f21 py-f34 md:px-f55 md:py-f55">
-          <span className={`quoted ${LABEL} text-graphite`}>By category</span>
-          <div className="mt-f21 grid grid-cols-2 border border-ripstop md:grid-cols-3 lg:grid-cols-6">
-            {categories.map((category) => (
-              <div
-                key={category.name}
-                className="flex flex-col gap-f5 border-b border-r border-ripstop bg-suede p-f21"
-              >
-                <span className="text-[26px] leading-none" aria-hidden="true">{category.icon}</span>
-                <span className="text-[34px] font-bold leading-[42px] text-paper">{category.count}</span>
-                <span className={`${LABEL} text-graphite`}>{category.name}</span>
+            {/* Diagonal gradient feature panel with stitched tag + glass card */}
+            <div
+              className="relative aspect-[16/9] border border-ripstop"
+              style={{ backgroundImage: "linear-gradient(160deg,#5A5A5A 0%,#262626 45%,#0B0B0B 100%)" }}
+            >
+              <span className="absolute left-f21 top-f21 text-[10px] font-bold uppercase tracking-[.08em] text-graphite">
+                Feature Image · 16:9
+              </span>
+              <span className="pointer-events-none absolute inset-0 flex items-center justify-center text-[clamp(48px,9vw,89px)] opacity-80" aria-hidden="true">
+                {featuredLead?.image}
+              </span>
+              <span className="absolute -right-[13px] top-f55 hidden h-f21 w-f55 bg-tag lg:block" aria-hidden="true" />
+              <div className="absolute bottom-f21 left-f21 flex w-[min(100%,377px)] flex-col gap-f8 border border-white/20 bg-smoke p-f21 text-paper backdrop-blur-md lg:-bottom-f34 lg:-left-f34">
+                <span className={`quoted ${LABEL}`}>Featured</span>
+                <span className="text-[21px] font-bold leading-[26px]">{featuredLead?.title}</span>
+                <span className={`${LABEL} text-paper`}>Read the story →</span>
               </div>
-            ))}
+            </div>
           </div>
         </section>
 
-        {/* ── Featured Cultural Moments ────────────────────────── */}
-        <section className="mx-auto max-w-[1440px] px-f21 pb-f55 md:px-f55">
-          <div className="flex flex-col gap-f21">
-            <span className={`quoted ${LABEL} text-graphite`}>Featured</span>
-            <h2 className="m-0 text-[34px] font-bold leading-[42px] tracking-[-.01em] text-paper">
-              Featured Cultural Moments
-            </h2>
-          </div>
-          <div className="mt-f34 grid gap-f21 md:grid-cols-2 lg:grid-cols-4">
-            {featuredItems.map((item) => (
-              <CultureCard
-                key={item.id}
-                category={item.category}
-                title={item.title}
-                description={item.description}
-                image={item.image}
-              />
-            ))}
-          </div>
-        </section>
+        {/* ── Body: white paper card inset into the dark frame ──────────── */}
+        <div className="mx-auto max-w-[1440px] px-f21 pb-f55 md:px-f55 md:pb-f89">
+          <main className="panel flex flex-col gap-f55 p-f21 md:gap-f89 md:p-f89">
 
-        {/* ── Movies & TV ──────────────────────────────────────── */}
-        <section className="mx-auto max-w-[1440px] px-f21 pb-f55 md:px-f55">
-          <div className="flex flex-col gap-f21">
-            <span className={`quoted ${LABEL} text-graphite`}>Movies &amp; TV</span>
-            <h2 className="m-0 flex items-center gap-f8 text-[34px] font-bold leading-[42px] tracking-[-.01em] text-paper">
-              <span aria-hidden="true">🎬</span> Movies &amp; Television
-            </h2>
-          </div>
-          <div className="mt-f34 grid gap-f21 md:grid-cols-2 lg:grid-cols-3">
-            {culturalContent
-              .filter(item => ['movie', 'tv'].includes(item.mediaType))
-              .slice(0, 6)
-              .map((item) => (
-                <CultureCard
-                  key={item.id}
-                  category={item.category}
-                  title={item.title}
-                  description={item.description}
-                  image={item.image}
-                />
-              ))}
-          </div>
-          <p className="m-0 mt-f34 max-w-f610 text-[18px] leading-[29px] text-graphite">
-            The NYC subway has been the backdrop for countless memorable film and TV moments.
-            From high-octane chase scenes to intimate character moments, the subway&apos;s unique
-            atmosphere has made it a favorite location for storytellers worldwide.
-          </p>
-        </section>
-
-        {/* ── Music ────────────────────────────────────────────── */}
-        <section className="mx-auto max-w-[1440px] px-f21 pb-f55 md:px-f55">
-          <div className="flex flex-col gap-f21">
-            <span className={`quoted ${LABEL} text-graphite`}>Music</span>
-            <h2 className="m-0 flex items-center gap-f8 text-[34px] font-bold leading-[42px] tracking-[-.01em] text-paper">
-              <span aria-hidden="true">🎵</span> Music &amp; Songs
-            </h2>
-          </div>
-          <div className="mt-f34 grid gap-f21 md:grid-cols-2 lg:grid-cols-3">
-            {culturalContent
-              .filter(item => item.mediaType === 'song')
-              .map((item) => (
-                <CultureCard
-                  key={item.id}
-                  category={item.category}
-                  title={item.title}
-                  description={item.description}
-                  image={item.image}
-                />
-              ))}
-          </div>
-          <p className="m-0 mt-f34 max-w-f610 text-[18px] leading-[29px] text-graphite">
-            Music and the subway have been intertwined since Duke Ellington&apos;s &quot;Take the &apos;A&apos; Train&quot; became
-            an unofficial anthem. Street performers, subway musicians, and countless songs celebrating
-            or lamenting subway life have created a rich musical heritage.
-          </p>
-        </section>
-
-        {/* ── Art & Photography ────────────────────────────────── */}
-        <section className="mx-auto max-w-[1440px] px-f21 pb-f55 md:px-f55">
-          <div className="flex flex-col gap-f21">
-            <span className={`quoted ${LABEL} text-graphite`}>Art</span>
-            <h2 className="m-0 flex items-center gap-f8 text-[34px] font-bold leading-[42px] tracking-[-.01em] text-paper">
-              <span aria-hidden="true">🎨</span> Art &amp; Photography
-            </h2>
-          </div>
-          <div className="mt-f34 grid gap-f21 md:grid-cols-2 lg:grid-cols-3">
-            {culturalContent
-              .filter(item => item.mediaType === 'art')
-              .map((item) => (
-                <CultureCard
-                  key={item.id}
-                  category={item.category}
-                  title={item.title}
-                  description={item.description}
-                  image={item.image}
-                />
-              ))}
-          </div>
-          <p className="m-0 mt-f34 max-w-f610 text-[18px] leading-[29px] text-graphite">
-            From the MTA&apos;s Arts &amp; Design program transforming stations into galleries, to the underground
-            graffiti movement of the 1970s-80s, the subway has been both canvas and subject for
-            countless artists and photographers documenting urban life.
-          </p>
-        </section>
-
-        {/* ── Internet Culture & Memes ─────────────────────────── */}
-        <section className="mx-auto max-w-[1440px] px-f21 pb-f55 md:px-f55">
-          <div className="flex flex-col gap-f21">
-            <span className={`quoted ${LABEL} text-graphite`}>Internet</span>
-            <h2 className="m-0 flex items-center gap-f8 text-[34px] font-bold leading-[42px] tracking-[-.01em] text-paper">
-              <span aria-hidden="true">💻</span> Internet Culture &amp; Memes
-            </h2>
-          </div>
-          <div className="mt-f34 grid gap-f21 md:grid-cols-2 lg:grid-cols-3">
-            {culturalContent
-              .filter(item => item.mediaType === 'meme')
-              .map((item) => (
-                <CultureCard
-                  key={item.id}
-                  category={item.category}
-                  title={item.title}
-                  description={item.description}
-                  image={item.image}
-                />
-              ))}
-          </div>
-          <p className="m-0 mt-f34 max-w-f610 text-[18px] leading-[29px] text-graphite">
-            The digital age has transformed subway culture, with viral moments like Pizza Rat becoming
-            global phenomena. Social media has amplified both the quirky and serious aspects of subway life,
-            creating new forms of urban folklore.
-          </p>
-        </section>
-
-        <div aria-hidden="true" className="h-[8px]" style={{ backgroundImage: ZIGZAG, backgroundRepeat: "repeat-x" }} />
-
-        {/* ── Timeline ─────────────────────────────────────────── */}
-        <section className="mx-auto max-w-[1440px] px-f21 py-f55 md:px-f55">
-          <div className="flex flex-col gap-f21">
-            <span className={`quoted ${LABEL} text-graphite`}>Timeline</span>
-            <h2 className="m-0 text-[34px] font-bold leading-[42px] tracking-[-.01em] text-paper">
-              NYC Subway Through the Decades
-            </h2>
-          </div>
-
-          <div className="mt-f34 border border-ripstop">
-            {[
-              { decade: "1940s", highlight: "Duke Ellington's 'Take the A Train' becomes subway anthem", icon: "🎷" },
-              { decade: "1970s", highlight: "Graffiti culture transforms trains into moving art galleries", icon: "🎨" },
-              { decade: "1990s", highlight: "Hollywood discovers the subway: Money Train, French Connection", icon: "🎬" },
-              { decade: "2000s", highlight: "Spider-Man brings superhero action to the rails", icon: "🕷️" },
-              { decade: "2010s", highlight: "Social media era: Showtime dancers and viral moments", icon: "📱" },
-              { decade: "2020s", highlight: "TikTok culture and pandemic-era subway stories", icon: "📹" },
-            ].map((period) => (
-              <div
-                key={period.decade}
-                className="flex items-center gap-f21 border-b border-ripstop bg-suede p-f21 last:border-b-0"
-              >
-                <span className="text-[34px] leading-none" aria-hidden="true">{period.icon}</span>
-                <div className="min-w-0">
-                  <h3 className="m-0 text-[21px] font-bold leading-[26px] text-tag">{period.decade}</h3>
-                  <p className="m-0 mt-[3px] text-[16px] leading-[24px] text-graphite">{period.highlight}</p>
-                </div>
+            {/* Featured Cultural Moments */}
+            <section className="flex flex-col gap-f34">
+              <SectionHead eyebrow="Featured" title="Featured Cultural Moments" />
+              <div className="grid grid-cols-1 gap-f34 md:grid-cols-2 lg:grid-cols-4">
+                {featuredItems.map((item) => (
+                  <MediaCard key={item.id} item={item} />
+                ))}
               </div>
-            ))}
-          </div>
-        </section>
+            </section>
 
-        {/* ── Community ────────────────────────────────────────── */}
-        <section className="mx-auto max-w-f610 px-f21 pb-f89 md:px-f55">
-          <div className="flex flex-col gap-f21">
-            <span className={`quoted ${LABEL} text-graphite`}>Community</span>
-            <h2 className="m-0 text-[34px] font-bold leading-[42px] tracking-[-.01em] text-paper">
-              Share Your Subway Culture
-            </h2>
-            <p className="m-0 text-[18px] leading-[29px] text-graphite [text-wrap:pretty]">
-              Have a favorite subway movie scene, song, or viral moment? Help us build the most comprehensive
-              archive of NYC subway culture by sharing your discoveries.
-            </p>
-          </div>
-        </section>
+            {/* By category */}
+            <section className="flex flex-col gap-f34">
+              <SectionHead eyebrow="By category" title="Culture by the numbers" />
+              <div className="grid grid-cols-2 border-l border-t border-seam md:grid-cols-3 lg:grid-cols-6">
+                {categories.map((category) => (
+                  <div key={category.name} className="flex flex-col gap-f5 border-b border-r border-seam p-f21">
+                    <span className="text-[26px] leading-none" aria-hidden="true">{category.icon}</span>
+                    <span className="text-[34px] font-bold leading-[42px] text-ink">{category.count}</span>
+                    <span className={`${LABEL} text-muted`}>{category.name}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Movies & TV */}
+            <section className="flex flex-col gap-f34">
+              <SectionHead eyebrow="Watch" title={<><span aria-hidden="true">🎬</span> Movies &amp; Television</>} meta="On Screen" />
+              <div className="grid grid-cols-1 gap-f34 md:grid-cols-2 lg:grid-cols-3">
+                {culturalContent
+                  .filter(item => ['movie', 'tv'].includes(item.mediaType))
+                  .slice(0, 6)
+                  .map((item) => (
+                    <MediaCard key={item.id} item={item} />
+                  ))}
+              </div>
+              <p className="m-0 max-w-f610 text-[18px] leading-[29px] text-muted">
+                The NYC subway has been the backdrop for countless memorable film and TV moments.
+                From high-octane chase scenes to intimate character moments, the subway&apos;s unique
+                atmosphere has made it a favorite location for storytellers worldwide.
+              </p>
+            </section>
+
+            {/* Music */}
+            <section className="flex flex-col gap-f34">
+              <SectionHead eyebrow="Listen" title={<><span aria-hidden="true">🎵</span> Music &amp; Songs</>} meta="On Record" />
+              <div className="grid grid-cols-1 gap-f34 md:grid-cols-2 lg:grid-cols-3">
+                {culturalContent
+                  .filter(item => item.mediaType === 'song')
+                  .map((item) => (
+                    <MediaCard key={item.id} item={item} />
+                  ))}
+              </div>
+              <p className="m-0 max-w-f610 text-[18px] leading-[29px] text-muted">
+                Music and the subway have been intertwined since Duke Ellington&apos;s &quot;Take the &apos;A&apos; Train&quot; became
+                an unofficial anthem. Street performers, subway musicians, and countless songs celebrating
+                or lamenting subway life have created a rich musical heritage.
+              </p>
+            </section>
+
+            {/* Art & Photography */}
+            <section className="flex flex-col gap-f34">
+              <SectionHead eyebrow="Look" title={<><span aria-hidden="true">🎨</span> Art &amp; Photography</>} meta="On Walls" />
+              <div className="grid grid-cols-1 gap-f34 md:grid-cols-2 lg:grid-cols-3">
+                {culturalContent
+                  .filter(item => item.mediaType === 'art')
+                  .map((item) => (
+                    <MediaCard key={item.id} item={item} />
+                  ))}
+              </div>
+              <p className="m-0 max-w-f610 text-[18px] leading-[29px] text-muted">
+                From the MTA&apos;s Arts &amp; Design program transforming stations into galleries, to the underground
+                graffiti movement of the 1970s-80s, the subway has been both canvas and subject for
+                countless artists and photographers documenting urban life.
+              </p>
+            </section>
+
+            {/* Internet Culture & Memes */}
+            <section className="flex flex-col gap-f34">
+              <SectionHead eyebrow="Scroll" title={<><span aria-hidden="true">💻</span> Internet Culture &amp; Memes</>} meta="On Feed" />
+              <div className="grid grid-cols-1 gap-f34 md:grid-cols-2 lg:grid-cols-3">
+                {culturalContent
+                  .filter(item => item.mediaType === 'meme')
+                  .map((item) => (
+                    <MediaCard key={item.id} item={item} />
+                  ))}
+              </div>
+              <p className="m-0 max-w-f610 text-[18px] leading-[29px] text-muted">
+                The digital age has transformed subway culture, with viral moments like Pizza Rat becoming
+                global phenomena. Social media has amplified both the quirky and serious aspects of subway life,
+                creating new forms of urban folklore.
+              </p>
+            </section>
+
+            {/* Timeline — list rows, reference "READ" block cadence */}
+            <section className="flex flex-col gap-f34">
+              <SectionHead eyebrow="Timeline" title="NYC Subway Through the Decades" />
+              <div className="border-t border-ink">
+                {timeline.map((period) => (
+                  <div
+                    key={period.decade}
+                    className="flex items-center gap-f21 border-b border-seam py-f21"
+                  >
+                    <span className="text-[34px] leading-none" aria-hidden="true">{period.icon}</span>
+                    <div className="min-w-0">
+                      <h3 className="m-0 text-[21px] font-bold leading-[26px] text-ink">{period.decade}</h3>
+                      <p className="m-0 mt-[3px] text-[16px] leading-[24px] text-muted">{period.highlight}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Community closing block */}
+            <section className="flex max-w-f610 flex-col gap-f21">
+              <span className={`quoted ${LABEL} text-muted`}>Community</span>
+              <h2 className="m-0 text-[clamp(26px,4vw,34px)] font-bold leading-[1.2] tracking-[-.01em] text-ink">
+                Share Your Subway Culture
+              </h2>
+              <p className="m-0 text-[18px] leading-[29px] text-muted [text-wrap:pretty]">
+                Have a favorite subway movie scene, song, or viral moment? Help us build the most comprehensive
+                archive of NYC subway culture by sharing your discoveries.
+              </p>
+            </section>
+
+          </main>
+        </div>
       </div>
     </>
   );
