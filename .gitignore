@@ -70,3 +70,9 @@ scripts/.sync-bundle.mjs
 # generated video list for the labeling tool
 scripts/videos-for-labeling.json
 scripts/labeler-data.json
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
