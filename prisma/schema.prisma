@@ -50,6 +50,7 @@ model Post {
   authorRole         String    @default("Contributing Writer")
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
+  videos             VideoPost[]
 
   @@index([status, publishedAt])
   @@index([authorId])
@@ -67,14 +68,22 @@ model Video {
   duration      String?
   tags          String         @default("[]")
   status        String         @default("ACTIVE")
+  // Tagging review state (admin video tagger). reviewed = a human has either
+  // confirmed station tags or explicitly skipped this video, so it leaves the
+  // "needs review" queue. SKIP = reviewed with no station tags.
+  reviewed      Boolean        @default(false)
+  reviewedAt    DateTime?
+  reviewNote    String?
   syncedAt      DateTime       @default(now())
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   stations      VideoStation[]
+  posts         VideoPost[]
 
   @@index([status])
   @@index([channelId])
   @@index([publishedAt])
+  @@index([reviewed])
 }
 
 model VideoStation {
@@ -88,5 +97,21 @@ model VideoStation {
 
   @@unique([videoId, stationSlug])
   @@index([stationSlug])
+  @@index([videoId])
+}
+
+// Manual pin of a video onto a specific blog post (the tagger's "pin to a post").
+// Posts that merely reference a tagged station are derived, not stored here.
+model VideoPost {
+  id        String   @id @default(cuid())
+  videoId   String
+  postId    String
+  position  Int      @default(0)
+  createdAt DateTime @default(now())
+  video     Video    @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([videoId, postId])
+  @@index([postId])
   @@index([videoId])
 }

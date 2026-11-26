@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import SiteHeader from '@/components/site/SiteHeader';
+import SubwayLinesBadges from '@/components/subway/SubwayLinesBadges';
 
 interface Station {
   id: string;
@@ -17,35 +18,18 @@ interface Station {
 const BOROUGHS = ["All", "Manhattan", "Brooklyn", "Queens", "Bronx", "Staten Island"];
 const LINES = ["All", "1", "2", "3", "4", "5", "6", "7", "A", "B", "C", "D", "E", "F", "G", "J", "L", "M", "N", "Q", "R", "S", "W", "Z"];
 
-const getLineColors = (lineId: string) => {
-  const colorMap: Record<string, {color: string, textColor: string}> = {
-    '1': { color: 'bg-red-600', textColor: 'text-white' },
-    '2': { color: 'bg-red-600', textColor: 'text-white' },
-    '3': { color: 'bg-red-600', textColor: 'text-white' },
-    '4': { color: 'bg-green-600', textColor: 'text-white' },
-    '5': { color: 'bg-green-600', textColor: 'text-white' },
-    '6': { color: 'bg-green-600', textColor: 'text-white' },
-    '7': { color: 'bg-purple-600', textColor: 'text-white' },
-    'A': { color: 'bg-blue-600', textColor: 'text-white' },
-    'C': { color: 'bg-blue-600', textColor: 'text-white' },
-    'E': { color: 'bg-blue-600', textColor: 'text-white' },
-    'B': { color: 'bg-orange-500', textColor: 'text-white' },
-    'D': { color: 'bg-orange-500', textColor: 'text-white' },
-    'F': { color: 'bg-orange-500', textColor: 'text-white' },
-    'M': { color: 'bg-orange-500', textColor: 'text-white' },
-    'N': { color: 'bg-yellow-500', textColor: 'text-black' },
-    'Q': { color: 'bg-yellow-500', textColor: 'text-black' },
-    'R': { color: 'bg-yellow-500', textColor: 'text-black' },
-    'W': { color: 'bg-yellow-500', textColor: 'text-black' },
-    'G': { color: 'bg-green-500', textColor: 'text-white' },
-    'J': { color: 'bg-amber-600', textColor: 'text-white' },
-    'Z': { color: 'bg-amber-600', textColor: 'text-white' },
-    'L': { color: 'bg-gray-500', textColor: 'text-white' },
-    'S': { color: 'bg-gray-600', textColor: 'text-white' },
-  };
-  
-  return colorMap[lineId] || { color: 'bg-gray-600', textColor: 'text-white' };
-};
+const LABEL = "text-[13px] font-bold uppercase leading-[21px] tracking-[.08em]";
+
+// Editorial pill, on white. Matches the reference control style:
+// active = jet fill / white text, inactive = white fill / ink text, ink border.
+const PILL_BASE =
+  "inline-flex h-[34px] items-center px-f13 text-[11px] font-bold uppercase leading-none tracking-[.08em] border border-ink no-underline transition-colors";
+const pill = (active: boolean) =>
+  `${PILL_BASE} ${active ? "bg-jet text-paper" : "bg-paper text-ink hover:bg-[#FAFAFA]"}`;
+
+function groupIdFor(letter: string) {
+  return letter === "#" ? "stations-num" : `stations-${letter}`;
+}
 
 interface StationsClientProps {
   initialStations: Station[];
@@ -56,320 +40,185 @@ export default function StationsClient({ initialStations }: StationsClientProps)
   const [filteredStations, setFilteredStations] = useState<Station[]>(initialStations);
   const [selectedBorough, setSelectedBorough] = useState("All");
   const [selectedLine, setSelectedLine] = useState("All");
-  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [searchQuery, setSearchQuery] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const stationsPerPage = 24;
 
   useEffect(() => {
-    console.log('Filtering stations...', { 
-      stationsCount: stations.length, 
-      selectedBorough, 
-      selectedLine, 
-      searchQuery 
-    });
-    
     let filtered = [...stations];
-    console.log('Starting with', filtered.length, 'stations');
 
     // Filter by borough
     if (selectedBorough !== "All") {
       filtered = filtered.filter(s => s.borough === selectedBorough);
-      console.log('After borough filter:', filtered.length, 'stations');
     }
 
     // Filter by line
     if (selectedLine !== "All") {
       filtered = filtered.filter(s => s.lines.includes(selectedLine));
-      console.log('After line filter:', filtered.length, 'stations');
     }
 
     // Filter by search
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(s => 
+      filtered = filtered.filter(s =>
         s.name.toLowerCase().includes(query) ||
         s.borough.toLowerCase().includes(query)
       );
-      console.log('After search filter:', filtered.length, 'stations');
     }
 
-    console.log('Setting filtered stations:', filtered.length);
     setFilteredStations(filtered);
-    setCurrentPage(1);
   }, [stations, selectedBorough, selectedLine, searchQuery]);
 
-  // Pagination
-  const indexOfLastStation = currentPage * stationsPerPage;
-  const indexOfFirstStation = indexOfLastStation - stationsPerPage;
-  const currentStations = filteredStations.slice(indexOfFirstStation, indexOfLastStation);
-  const totalPages = Math.ceil(filteredStations.length / stationsPerPage);
+  // Group filtered stations A–Z (numbers collapse into a leading "#" group).
+  const groups = useMemo(() => {
+    const by: Record<string, Station[]> = {};
+    const sorted = [...filteredStations].sort((a, b) =>
+      a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" })
+    );
+    sorted.forEach((s) => {
+      const first = (s.name.trim().charAt(0) || "#").toUpperCase();
+      const key = /[A-Z]/.test(first) ? first : "#";
+      (by[key] = by[key] || []).push(s);
+    });
+    return Object.keys(by)
+      .sort((a, b) => (a === "#" ? -1 : b === "#" ? 1 : a.localeCompare(b)))
+      .map((letter) => ({ letter, items: by[letter] }));
+  }, [filteredStations]);
 
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-
-  // Count stations by borough
-  const boroughCounts = BOROUGHS.reduce((acc, borough) => {
-    if (borough === "All") {
-      acc[borough] = stations.length;
-    } else {
-      acc[borough] = stations.filter(s => s.borough === borough).length;
-    }
-    return acc;
-  }, {} as Record<string, number>);
+  const presentLetters = useMemo(() => new Set(groups.map((g) => g.letter)), [groups]);
+  const jumpLetters = ["#", ..."ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("")];
 
   return (
-    <div className="min-h-screen bg-white pb-20 md:pb-0">
+    <div className="min-h-screen bg-paper font-sans text-ink">
       <SiteHeader active="stations" />
-      
-      {/* Hero Section */}
-      <section className="bg-black text-white py-12">
-        <div className="max-w-7xl mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">ALL STATIONS</h1>
-          <p className="text-xl text-gray-300">
-            Explore all {stations.length} subway stations across NYC's five boroughs
-          </p>
-          {/* Debug info */}
-          <div className="text-sm text-gray-400 mt-2">
-            Debug: Stations={stations.length}, Filtered={filteredStations.length}, Server-side loaded ✅
+
+      {/* ── Dark grid masthead ───────────────────────────────── */}
+      <section className="surface-ripstop text-paper">
+        <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-end gap-f34 px-f21 py-f55 md:px-f55 md:py-f89 lg:grid-cols-golden lg:gap-f89">
+          <div className="flex min-w-0 flex-col gap-f21">
+            <span className={`quoted ${LABEL} text-graphite`}>Station</span>
+            <h1 className="m-0 text-[clamp(40px,8vw,68px)] font-bold uppercase leading-[1.02] tracking-[-.02em] text-paper">
+              NYC Subway Stations
+            </h1>
+            <p className="m-0 max-w-[440px] text-[18px] leading-[29px] text-paper [text-wrap:pretty]">
+              All {stations.length} stations, A to Z. Search by name, filter by borough and line,
+              and open any stop for live arrivals and the sound of its platform.
+            </p>
           </div>
+
+          {/* Right column — search, mirroring the reference masthead */}
+          <label className="flex h-[55px] items-center gap-f13 border border-ripstop bg-suede px-f21">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#8A8A8A" strokeWidth="1.6" aria-hidden="true">
+              <circle cx="7" cy="7" r="5" />
+              <path d="M11 11l4 4" />
+            </svg>
+            <input
+              aria-label="Search stations"
+              type="text"
+              placeholder={`Search ${stations.length} stations`}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="min-w-0 flex-1 border-0 bg-transparent text-[16px] text-paper outline-none placeholder:text-graphite"
+            />
+          </label>
         </div>
       </section>
 
-      {/* Filters Bar */}
-      <section className="bg-gray-50 border-b sticky top-16 z-40">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex flex-wrap gap-4 items-center justify-between">
-            <div className="flex flex-wrap gap-4 items-center">
-              {/* Borough Filter */}
-              <div>
-                <label className="text-sm font-medium text-gray-700 mr-2">Borough:</label>
-                <select
-                  value={selectedBorough}
-                  onChange={(e) => setSelectedBorough(e.target.value)}
-                  className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-black"
+      {/* ── White paper body ─────────────────────────────────── */}
+      <div className="mx-auto max-w-[1440px] px-f21 pb-f34 md:px-f55 md:pb-f89">
+        <main className="flex flex-col gap-f34 bg-paper p-f21 [outline:1px_dashed_#CFCFCF] [outline-offset:-8px] md:p-f89">
+
+          {/* Filter controls */}
+          <div className="flex flex-col gap-f13 border-b border-ink pb-f21">
+            <div className="flex flex-wrap gap-f8">
+              {BOROUGHS.map((borough) => (
+                <button
+                  key={borough}
+                  onClick={() => setSelectedBorough(borough)}
+                  className={pill(selectedBorough === borough)}
                 >
-                  {BOROUGHS.map(borough => (
-                    <option key={borough} value={borough}>
-                      {borough} ({boroughCounts[borough] || 0})
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Line Filter */}
-              <div>
-                <label className="text-sm font-medium text-gray-700 mr-2">Line:</label>
-                <select
-                  value={selectedLine}
-                  onChange={(e) => setSelectedLine(e.target.value)}
-                  className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-black"
-                >
-                  {LINES.map(line => (
-                    <option key={line} value={line}>{line}</option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Search */}
-              <input
-                type="text"
-                placeholder="Search stations..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-black"
-              />
-            </div>
-
-            {/* View Toggle */}
-            <div className="flex items-center space-x-2">
-              <button
-                onClick={() => setViewMode("grid")}
-                className={`p-2 rounded ${viewMode === "grid" ? "bg-black text-white" : "bg-gray-200 text-gray-700"}`}
-                title="Grid view"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM13 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2h-2z" />
-                </svg>
-              </button>
-              <button
-                onClick={() => setViewMode("list")}
-                className={`p-2 rounded ${viewMode === "list" ? "bg-black text-white" : "bg-gray-200 text-gray-700"}`}
-                title="List view"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          {/* Results Count */}
-          <div className="mt-4 text-sm text-gray-600">
-            Showing {indexOfFirstStation + 1}-{Math.min(indexOfLastStation, filteredStations.length)} of {filteredStations.length} stations
-          </div>
-        </div>
-      </section>
-
-      {/* Stations Grid/List */}
-      <section className="py-8">
-        <div className="max-w-7xl mx-auto px-4">
-          {currentStations.length === 0 ? (
-            <div className="text-center py-20">
-              <p className="text-gray-600">No stations found matching your filters.</p>
-            </div>
-          ) : viewMode === "grid" ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {currentStations.map((station) => (
-                <Link
-                  key={station.id}
-                  href={`/station/${station.slug}`}
-                  className="bg-white rounded-lg border hover:shadow-lg transition-shadow p-6"
-                >
-                  <h3 className="text-xl font-bold mb-2">{station.name}</h3>
-                  <p className="text-sm text-gray-600 mb-4">{station.borough}</p>
-                  <div className="flex flex-wrap gap-1">
-                    {station.lines.map((lineId) => {
-                      // For display, just show the base line number without "Express"
-                      const displayLine = lineId.replace(' Express', '');
-                      const colors = getLineColors(displayLine);
-                      return (
-                        <div
-                          key={lineId}
-                          className={`${colors.color} ${colors.textColor} w-8 h-8 rounded text-xs font-bold flex items-center justify-center`}
-                        >
-                          {displayLine}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </Link>
+                  {borough}
+                </button>
               ))}
             </div>
-          ) : (
-            <div className="bg-white rounded-lg border divide-y">
-              {currentStations.map((station) => (
-                <Link
-                  key={station.id}
-                  href={`/station/${station.slug}`}
-                  className="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors"
+
+            <div className="flex flex-wrap items-center gap-f8">
+              <span className={`${LABEL} mr-f5 text-muted`}>Line</span>
+              {LINES.map((line) => (
+                <button
+                  key={line}
+                  onClick={() => setSelectedLine(line)}
+                  className={pill(selectedLine === line)}
                 >
-                  <div className="flex-1">
-                    <h3 className="text-lg font-bold">{station.name}</h3>
-                    <p className="text-sm text-gray-600">{station.borough}</p>
+                  {line}
+                </button>
+              ))}
+              <span className="flex-1" />
+              <span className="text-[13px] font-bold uppercase tracking-[.08em] tabular-nums text-muted">
+                {filteredStations.length} Stations
+              </span>
+            </div>
+          </div>
+
+          {/* A–Z jump nav */}
+          <nav aria-label="Jump to letter" className="flex flex-wrap gap-[3px]">
+            {jumpLetters.map((ch) => {
+              const active = presentLetters.has(ch);
+              return active ? (
+                <a
+                  key={ch}
+                  href={`#${groupIdFor(ch)}`}
+                  className="flex h-[34px] w-[34px] items-center justify-center border border-seam text-[13px] font-bold text-ink no-underline transition-colors hover:bg-[#FAFAFA]"
+                >
+                  {ch}
+                </a>
+              ) : (
+                <span
+                  key={ch}
+                  aria-hidden="true"
+                  className="flex h-[34px] w-[34px] items-center justify-center border border-seam text-[13px] font-bold text-[#CFCFCF]"
+                >
+                  {ch}
+                </span>
+              );
+            })}
+          </nav>
+
+          {/* Station list, grouped A–Z */}
+          {groups.length === 0 ? (
+            <div className="flex flex-col items-center gap-f8 py-f89 text-center">
+              <span className={`${LABEL} text-muted`}>No results</span>
+              <p className="m-0 text-[18px] leading-[29px] text-muted">
+                No stations found matching your filters.
+              </p>
+            </div>
+          ) : (
+            <div className="flex flex-col gap-f34">
+              {groups.map((g) => (
+                <section
+                  key={g.letter}
+                  id={groupIdFor(g.letter)}
+                  className="grid scroll-mt-f21 grid-cols-1 gap-f8 md:grid-cols-[89px_minmax(0,1fr)] md:gap-f34"
+                >
+                  <span className="text-[34px] font-bold leading-none md:text-[55px]">{g.letter}</span>
+                  <div className="border-t border-ink">
+                    {g.items.map((station) => (
+                      <Link
+                        key={station.id}
+                        href={`/station/${station.slug}`}
+                        className="flex items-center justify-between gap-f21 border-b border-seam py-f21 no-underline text-ink transition-colors hover:bg-[#FAFAFA]"
+                      >
+                        <span className="flex min-w-0 flex-col gap-[3px]">
+                          <span className="text-[21px] font-bold leading-[26px]">{station.name}</span>
+                          <span className="text-[13px] leading-[21px] text-muted">{station.borough}</span>
+                        </span>
+                        <SubwayLinesBadges lines={station.lines} size="sm" className="shrink-0 justify-end" />
+                      </Link>
+                    ))}
                   </div>
-                  <div className="flex items-center space-x-1">
-                    {station.lines.map((lineId) => {
-                      // For display, just show the base line number without "Express"
-                      const displayLine = lineId.replace(' Express', '');
-                      const colors = getLineColors(displayLine);
-                      return (
-                        <div
-                          key={lineId}
-                          className={`${colors.color} ${colors.textColor} w-6 h-6 rounded text-xs font-bold flex items-center justify-center`}
-                        >
-                          {displayLine}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </Link>
+                </section>
               ))}
             </div>
           )}
-        </div>
-      </section>
-
-      {/* Pagination */}
-      {totalPages > 1 && (
-        <section className="py-8 border-t">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="flex items-center justify-center space-x-2">
-              <button
-                onClick={() => paginate(currentPage - 1)}
-                disabled={currentPage === 1}
-                className={`px-4 py-2 rounded ${
-                  currentPage === 1 
-                    ? "bg-gray-200 text-gray-400 cursor-not-allowed" 
-                    : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
-                }`}
-              >
-                Previous
-              </button>
-              
-              {/* Page numbers */}
-              <div className="hidden md:flex space-x-1">
-                {[...Array(Math.min(5, totalPages))].map((_, index) => {
-                  let pageNumber;
-                  if (totalPages <= 5) {
-                    pageNumber = index + 1;
-                  } else if (currentPage <= 3) {
-                    pageNumber = index + 1;
-                  } else if (currentPage >= totalPages - 2) {
-                    pageNumber = totalPages - 4 + index;
-                  } else {
-                    pageNumber = currentPage - 2 + index;
-                  }
-                  
-                  return (
-                    <button
-                      key={pageNumber}
-                      onClick={() => paginate(pageNumber)}
-                      className={`w-10 h-10 rounded ${
-                        currentPage === pageNumber 
-                          ? "bg-black text-white" 
-                          : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
-                      }`}
-                    >
-                      {pageNumber}
-                    </button>
-                  );
-                })}
-              </div>
-
-              <span className="md:hidden text-sm text-gray-600">
-                Page {currentPage} of {totalPages}
-              </span>
-
-              <button
-                onClick={() => paginate(currentPage + 1)}
-                disabled={currentPage === totalPages}
-                className={`px-4 py-2 rounded ${
-                  currentPage === totalPages 
-                    ? "bg-gray-200 text-gray-400 cursor-not-allowed" 
-                    : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
-                }`}
-              >
-                Next
-              </button>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Mobile Navigation */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2">
-        <div className="flex justify-around">
-          <Link href="/" className="flex flex-col items-center py-2 text-xs font-medium text-gray-700">
-            <span className="text-lg mb-1">🏠</span>
-            HOME
-          </Link>
-          <Link href="/lines" className="flex flex-col items-center py-2 text-xs font-medium text-gray-700">
-            <span className="text-lg mb-1">🚇</span>
-            LINES
-          </Link>
-          <Link href="/stations" className="flex flex-col items-center py-2 text-xs font-medium text-black">
-            <span className="text-lg mb-1">📍</span>
-            STATIONS
-          </Link>
-          <Link href="/map" className="flex flex-col items-center py-2 text-xs font-medium text-gray-700">
-            <span className="text-lg mb-1">🗺️</span>
-            MAP
-          </Link>
-          <Link href="/culture" className="flex flex-col items-center py-2 text-xs font-medium text-gray-700">
-            <span className="text-lg mb-1">🎨</span>
-            CULTURE
-          </Link>
-        </div>
+        </main>
       </div>
     </div>
   );

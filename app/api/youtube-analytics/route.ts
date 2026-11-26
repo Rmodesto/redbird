@@ -35,7 +35,9 @@ function parseDuration(iso: string): number {
 export async function GET() {
   try {
     await requireAdmin();
-  } catch {
+  } catch (e: unknown) {
+    const msg = e instanceof Error ? e.message : '';
+    if (msg === 'FORBIDDEN') return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -147,8 +149,15 @@ export async function GET() {
       videos: allVideos,
     };
 
-    // Update cache
-    fs.writeFileSync(CACHE_PATH, JSON.stringify(data, null, 2));
+    // Best-effort cache update. On a read-only runtime filesystem (e.g. the
+    // Amplify SSR Lambda) writeFileSync throws EROFS — swallow it so we still
+    // return the live data we just fetched instead of falling through to the
+    // stale-cache catch below.
+    try {
+      fs.writeFileSync(CACHE_PATH, JSON.stringify(data, null, 2));
+    } catch {
+      /* cache persistence is optional; ignore write failures */
+    }
 
     return NextResponse.json(data);
   } catch (err: any) {
