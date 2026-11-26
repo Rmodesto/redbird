@@ -7,6 +7,7 @@ import { generateLineMetadata } from '@/lib/seo';
 import { generateLineSchema } from '@/lib/structured-data';
 import SiteHeader from '@/components/site/SiteHeader';
 import SubwayLinesBadges from '@/components/subway/SubwayLinesBadges';
+import AdSlot from '@/components/AdSlot';
 import LineRecordingsPanel from '@/components/line/LineRecordingsPanel';
 
 interface Props {
@@ -352,6 +353,7 @@ export default async function LinePage({ params }: Props) {
                   All {lineId} train recordings
                 </Link>
 
+                <AdSlot size="square" />
               </aside>
             </div>
           </main>
