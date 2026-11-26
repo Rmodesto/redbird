@@ -11,8 +11,8 @@ export async function GET(req: NextRequest) {
     const parsed = videoListQuery.safeParse(params);
     if (!parsed.success) return validationError(parsed.error);
 
-    const { page, limit, status, search } = parsed.data;
-    const data = await videoService.getVideos(page, limit, status, search);
+    const { page, limit, status, search, tagState } = parsed.data;
+    const data = await videoService.getVideos(page, limit, status, search, tagState);
     return apiSuccess(data);
   } catch (error) {
     console.error('[API /videos] Error:', error);

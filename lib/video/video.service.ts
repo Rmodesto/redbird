@@ -15,9 +15,20 @@ export interface VideoItem {
   duration: string | null;
   tags: string[];
   status: string;
+  reviewed: boolean;
+  reviewedAt: string | null;
   stations: { stationSlug: string; matchType: string; confidence: number }[];
+  posts: { postId: string; position: number }[];
   createdAt: string;
   updatedAt: string;
+}
+
+export interface VideoStats {
+  total: number;
+  untagged: number;
+  needsReview: number;
+  tagged: number;
+  lastSyncedAt: string | null;
 }
 
 export interface VideoListResponse {
@@ -59,11 +70,14 @@ function toApiVideo(video: VideoWithStations): VideoItem {
     duration: video.duration,
     tags: JSON.parse(video.tags),
     status: video.status,
+    reviewed: video.reviewed,
+    reviewedAt: video.reviewedAt?.toISOString() ?? null,
     stations: video.stations.map((s) => ({
       stationSlug: s.stationSlug,
       matchType: s.matchType,
       confidence: s.confidence,
     })),
+    posts: video.posts.map((p) => ({ postId: p.postId, position: p.position })),
     createdAt: video.createdAt.toISOString(),
     updatedAt: video.updatedAt.toISOString(),
   };
@@ -85,8 +99,9 @@ export async function getVideos(
   limit: number,
   status?: string,
   search?: string,
+  tagState?: repo.TagState,
 ): Promise<VideoListResponse> {
-  const { videos, total } = await repo.findMany({ page, limit, status, search });
+  const { videos, total } = await repo.findMany({ page, limit, status, search, tagState });
   return {
     videos: videos.map(toApiVideo),
     total,
@@ -94,6 +109,39 @@ export async function getVideos(
     limit,
     totalPages: Math.ceil(total / limit),
   };
+}
+
+export async function getStats(): Promise<VideoStats> {
+  const s = await repo.getStats();
+  return {
+    total: s.total,
+    untagged: s.untagged,
+    needsReview: s.needsReview,
+    tagged: s.tagged,
+    lastSyncedAt: s.lastSyncedAt ? s.lastSyncedAt.toISOString() : null,
+  };
+}
+
+/** Confirm a video's station set (the tagger's SAVE TAGS). */
+export async function saveStationTags(videoId: string, stationSlugs: string[]): Promise<void> {
+  await repo.saveStationTags(videoId, stationSlugs);
+}
+
+/** Mark reviewed with no stations (SKIP). */
+export async function skipVideo(videoId: string, note?: string): Promise<void> {
+  await repo.skipVideo(videoId, note);
+}
+
+export async function resetReview(videoId: string): Promise<void> {
+  await repo.resetReview(videoId);
+}
+
+export async function pinVideoToPost(videoId: string, postId: string): Promise<void> {
+  await repo.pinToPost(videoId, postId);
+}
+
+export async function unpinVideoFromPost(videoId: string, postId: string): Promise<void> {
+  await repo.unpinFromPost(videoId, postId);
 }
 
 export async function getVideoById(id: string): Promise<VideoItem | null> {
