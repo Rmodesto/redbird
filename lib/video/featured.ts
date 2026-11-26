@@ -70,8 +70,10 @@ export async function getFeaturedVideo(): Promise<FeaturedVideo | null> {
   if (!HERO_VIDEO_ID) return null;
 
   try {
-    const { videos } = await videoService.getVideos(1, 200, 'ACTIVE');
-    const own = videos.find((v) => v.youtubeId === HERO_VIDEO_ID);
+    // Direct lookup by id — the hero is pinned, so scanning a 200-row page was
+    // both redundant with the homepage's own video fetch and could miss a
+    // pinned video outside the newest 200.
+    const own = await videoService.getVideoByYoutubeId(HERO_VIDEO_ID);
 
     if (own) {
       const slug = own.stations[0]?.stationSlug;

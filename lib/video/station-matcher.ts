@@ -82,17 +82,22 @@ export function matchVideoToStations(
       let disambiguated = false;
 
       for (const station of stationsWithName) {
-        // Strategy 2: look for line identifiers
-        const hasLineMatch = station.lines.some((line) => {
-          const l = line.toLowerCase();
-          return (
-            combinedText.includes(` ${l} train`) ||
-            combinedText.includes(` ${l} line`) ||
-            combinedText.includes(`(${l})`) ||
-            combinedText.includes(`/${l}/`) ||
-            combinedText.includes(`${l}/${station.lines.join('/').toLowerCase()}`)
-          );
-        });
+        // Strategy 2: look for line identifiers. The slashed line-group (e.g.
+        // "4/5/6") is matched once as a whole; only when the station has 2+
+        // lines, so a single-line group can't loosely match a bare digit.
+        const lineGroup =
+          station.lines.length > 1 ? station.lines.join('/').toLowerCase() : null;
+        const hasLineMatch =
+          (lineGroup !== null && combinedText.includes(lineGroup)) ||
+          station.lines.some((line) => {
+            const l = line.toLowerCase();
+            return (
+              combinedText.includes(` ${l} train`) ||
+              combinedText.includes(` ${l} line`) ||
+              combinedText.includes(`(${l})`) ||
+              combinedText.includes(`/${l}/`)
+            );
+          });
 
         if (hasLineMatch) {
           results.push({

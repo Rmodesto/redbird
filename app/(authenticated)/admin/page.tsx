@@ -17,6 +17,15 @@ export default function AdminDashboard() {
         </Link>
 
         <Link
+          href="/admin/videos"
+          className="bg-gray-900 hover:bg-gray-800 border border-gray-700 rounded-lg p-6 transition-colors"
+        >
+          <div className="text-3xl mb-3">&#x1F3A5;</div>
+          <h3 className="text-lg font-semibold text-white">Videos</h3>
+          <p className="text-gray-400 text-sm mt-1">Sync &amp; tag recordings to stations</p>
+        </Link>
+
+        <Link
           href="/admin/analytics"
           className="bg-gray-900 hover:bg-gray-800 border border-gray-700 rounded-lg p-6 transition-colors"
         >
