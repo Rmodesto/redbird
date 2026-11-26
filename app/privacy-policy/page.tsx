@@ -13,7 +13,7 @@ export default function PrivacyPolicyPage() {
   return (
     <>
       <SiteHeader />
-      <LegalLayout title="Privacy Policy" lastUpdated="October 22, 2025">
+      <LegalLayout title="Privacy Policy" lastUpdated="November 26, 2026">
         <h2>1. Introduction</h2>
         <p>
           Welcome to Subway Sounds ("we," "our," or "us"). This Privacy Policy explains how Subway
@@ -100,6 +100,18 @@ export default function PrivacyPolicyPage() {
             www.aboutads.info
           </a>
           .
+        </p>
+        <p>
+          <strong>
+            Consent for visitors in the EEA, United Kingdom, and Switzerland.
+          </strong>{" "}
+          If you are located in the European Economic Area, the United Kingdom, or
+          Switzerland, we present a consent banner before serving personalized
+          advertising, using Google's certified Consent Management Platform (CMP). You may
+          grant or decline consent for advertising and analytics cookies, and you can change
+          your choice at any time using the "Cookie Preferences" control in the footer of
+          our Site. Where you do not consent, Google and its partners serve only
+          non-personalized ads to the extent permitted by applicable law.
         </p>
 
         <h2>4. How We Use Your Information</h2>
@@ -199,8 +211,11 @@ export default function PrivacyPolicyPage() {
           </li>
         </ul>
 
-        <h3>9.2 CCPA Rights (California Users)</h3>
-        <p>If you are a California resident, you have the following rights under the CCPA:</p>
+        <h3>9.2 California Rights (CCPA/CPRA)</h3>
+        <p>
+          If you are a California resident, you have the following rights under the California
+          Consumer Privacy Act, as amended by the California Privacy Rights Act (CPRA):
+        </p>
         <ul>
           <li>
             <strong>Right to Know:</strong> Request disclosure of personal information collected
@@ -209,16 +224,41 @@ export default function PrivacyPolicyPage() {
             <strong>Right to Delete:</strong> Request deletion of personal information
           </li>
           <li>
-            <strong>Right to Opt-Out:</strong> Opt-out of the sale of personal information (we do
-            not sell personal information)
+            <strong>Right to Correct:</strong> Request correction of inaccurate personal
+            information
+          </li>
+          <li>
+            <strong>Right to Opt-Out of Sale or Sharing:</strong> Opt out of the "sale" or
+            "sharing" of personal information
           </li>
           <li>
             <strong>Right to Non-Discrimination:</strong> Not be discriminated against for
             exercising your rights
           </li>
         </ul>
+        <p>
+          We do not sell your personal information for money. However, our use of advertising
+          cookies to serve personalized ads may be considered "sharing" of personal information
+          for cross-context behavioral advertising under the CPRA. You can opt out of this by
+          declining advertising cookies in the "Cookie Preferences" control in the footer, and by
+          using{" "}
+          <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer">
+            Google Ads Settings
+          </a>
+          . Where supported, we also honor Global Privacy Control (GPC) browser signals as a valid
+          opt-out request.
+        </p>
 
-        <h3>9.3 Cookie Preferences</h3>
+        <h3>9.3 Other U.S. State Privacy Rights</h3>
+        <p>
+          Residents of other U.S. states with comprehensive privacy laws (including Colorado,
+          Connecticut, Virginia, Utah, and Texas, among others) may have similar rights to access,
+          correct, delete, and obtain a portable copy of their personal data, and to opt out of
+          targeted advertising. To exercise any of these rights, contact us using the details in
+          the "Contact Us" section below.
+        </p>
+
+        <h3>9.4 Cookie Preferences</h3>
         <p>
           You can manage your cookie preferences at any time by clicking "Cookie Preferences" in
           the footer of our Site. You can also configure your browser to refuse all cookies or to
