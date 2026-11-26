@@ -10,7 +10,9 @@ const UNLISTED_PATH = path.join(process.cwd(), 'scripts', 'unlisted-videos.json'
 export async function GET() {
   try {
     await requireAdmin();
-  } catch {
+  } catch (e: unknown) {
+    const msg = e instanceof Error ? e.message : '';
+    if (msg === 'FORBIDDEN') return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 

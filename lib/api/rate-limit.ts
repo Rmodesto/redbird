@@ -10,6 +10,9 @@ import { NextResponse } from 'next/server';
 
 interface Bucket {
   timestamps: number[];
+  // Each bucket remembers its own scope's window so cleanup prunes it against
+  // the right span — never against whichever window happened to trigger it.
+  windowMs: number;
 }
 
 const buckets = new Map<string, Bucket>();
@@ -18,13 +21,13 @@ const buckets = new Map<string, Bucket>();
 const CLEANUP_INTERVAL_MS = 10 * 60 * 1000;
 let lastCleanup = Date.now();
 
-function cleanup(windowMs: number) {
+function cleanup() {
   const now = Date.now();
   if (now - lastCleanup < CLEANUP_INTERVAL_MS) return;
   lastCleanup = now;
   const entries = Array.from(buckets.entries());
   for (const [key, bucket] of entries) {
-    bucket.timestamps = bucket.timestamps.filter((t) => now - t < windowMs);
+    bucket.timestamps = bucket.timestamps.filter((t) => now - t < bucket.windowMs);
     if (bucket.timestamps.length === 0) {
       buckets.delete(key);
     }
@@ -34,7 +37,14 @@ function cleanup(windowMs: number) {
 export function getClientIp(req: Request): string {
   const forwarded = req.headers.get('x-forwarded-for');
   if (forwarded) {
-    return forwarded.split(',')[0].trim();
+    // X-Forwarded-For is client-appended on the left and proxy-appended on the
+    // right. Behind a trusted proxy (Amplify/CloudFront) the rightmost entry is
+    // the one the proxy observed; the leftmost is attacker-controlled and must
+    // not be used as a rate-limit key.
+    const parts = forwarded.split(',').map((p) => p.trim()).filter(Boolean);
+    if (parts.length > 0) {
+      return parts[parts.length - 1];
+    }
   }
   return req.headers.get('x-real-ip') ?? 'unknown';
 }
@@ -49,15 +59,17 @@ export function rateLimit(
   max: number,
   windowMs: number
 ): NextResponse | null {
-  cleanup(windowMs);
+  cleanup();
 
   const key = `${scope}:${getClientIp(req)}`;
   const now = Date.now();
 
   let bucket = buckets.get(key);
   if (!bucket) {
-    bucket = { timestamps: [] };
+    bucket = { timestamps: [], windowMs };
     buckets.set(key, bucket);
+  } else {
+    bucket.windowMs = windowMs;
   }
 
   bucket.timestamps = bucket.timestamps.filter((t) => now - t < windowMs);

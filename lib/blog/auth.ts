@@ -20,3 +20,16 @@ export async function requireAdmin() {
 
   return { userId: user.id, sessionClaims };
 }
+
+/**
+ * Non-throwing admin check for routes that serve both public and admin callers
+ * (e.g. the shared video list). Returns false for anonymous or non-admin users.
+ */
+export async function isAdmin(): Promise<boolean> {
+  try {
+    await requireAdmin();
+    return true;
+  } catch {
+    return false;
+  }
+}
