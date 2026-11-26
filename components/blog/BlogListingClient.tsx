@@ -12,6 +12,7 @@ interface BlogListingClientProps {
 }
 
 const CATEGORIES = ['GUIDES', 'CULTURE', 'HISTORY', 'TIPS'];
+const LABEL = 'text-[13px] font-bold uppercase leading-[21px] tracking-[.08em]';
 
 export default function BlogListingClient({
   initialPosts,
@@ -35,65 +36,44 @@ export default function BlogListingClient({
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       posts = posts.filter(
-        (p) =>
-          p.title.toLowerCase().includes(query) ||
-          p.excerpt.toLowerCase().includes(query)
+        (p) => p.title.toLowerCase().includes(query) || p.excerpt.toLowerCase().includes(query)
       );
     }
 
-    return posts.filter((p) => p.id !== featuredPost?.id);
+    // The featured card is only shown with no filter/search active; only then
+    // drop it from the grid to avoid duplicating it (otherwise a single post
+    // would vanish from the grid entirely).
+    const featuredShown = !activeCategory && !searchQuery;
+    return featuredShown ? posts.filter((p) => p.id !== featuredPost?.id) : posts;
   }, [initialPosts, activeCategory, searchQuery, featuredPost]);
+
+  const pillClass = (active: boolean) =>
+    `${LABEL} rounded-full px-f13 py-f8 transition-colors ${
+      active ? 'bg-paper text-ink' : 'border border-ripstop text-graphite hover:text-paper'
+    }`;
 
   return (
     <>
       {/* Search & Filters */}
-      <section className="bg-white py-8 border-b border-gray-200">
-        <div className="max-w-6xl mx-auto px-4">
-          {/* Search */}
-          <div className="relative max-w-md mb-6">
-            <svg
-              className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-            <input
-              type="text"
-              placeholder="Search articles..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
+      <section className="border-b border-ripstop">
+        <div className="mx-auto max-w-[1440px] px-f21 py-f34 md:px-f55">
+          <input
+            type="text"
+            placeholder="Search articles…"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="mb-f21 w-full max-w-f377 rounded-seam border border-ripstop bg-suede px-f13 py-f8 text-paper placeholder:text-muted focus:border-graphite focus:outline-none"
+          />
 
-          {/* Category Pills */}
-          <div className="flex flex-wrap gap-2">
-            <button
-              onClick={() => setActiveCategory(null)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                activeCategory === null
-                  ? 'bg-gray-900 text-white'
-                  : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-              }`}
-            >
+          <div className="flex flex-wrap gap-f8">
+            <button onClick={() => setActiveCategory(null)} className={pillClass(activeCategory === null)}>
               All Posts ({totalPosts})
             </button>
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat === activeCategory ? null : cat)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                  activeCategory === cat
-                    ? 'bg-gray-900 text-white'
-                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-                }`}
+                className={pillClass(activeCategory === cat)}
               >
                 {cat.charAt(0) + cat.slice(1).toLowerCase()} ({categoryCounts[cat] || 0})
               </button>
@@ -104,106 +84,90 @@ export default function BlogListingClient({
 
       {/* Featured Article */}
       {featuredPost && !activeCategory && !searchQuery && (
-        <section className="bg-white py-12">
-          <div className="max-w-6xl mx-auto px-4">
-            <div className="flex items-center gap-2 text-gray-600 mb-6">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
-                <path d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
-              </svg>
-              <span className="font-medium">Featured Article</span>
-            </div>
+        <section className="mx-auto max-w-[1440px] px-f21 py-f34 md:px-f55 md:py-f55">
+          <span className={`quoted ${LABEL} mb-f21 block text-graphite`}>Featured</span>
 
-            <div className="grid md:grid-cols-5 gap-8 bg-gray-50 rounded-2xl overflow-hidden">
-              {featuredPost.featuredImage && (
-                <div className="md:col-span-3 relative">
-                  <img
-                    src={featuredPost.featuredImage}
-                    alt={featuredPost.featuredImageAlt || featuredPost.title}
-                    className="w-full h-full min-h-[300px] object-cover"
-                  />
-                  {featuredPost.category && (
-                    <span className="absolute top-4 left-4 px-3 py-1 bg-gray-900 text-white text-xs font-medium rounded-full">
-                      {featuredPost.category}
-                    </span>
-                  )}
-                </div>
-              )}
-              <div className="md:col-span-2 p-8 flex flex-col justify-center">
-                <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
-                  <span className="flex items-center gap-1">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    {featuredPost.publishedAt && new Date(featuredPost.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+          <div className="grid overflow-hidden border border-ripstop bg-suede md:grid-cols-5">
+            {featuredPost.featuredImage && (
+              <div className="relative md:col-span-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={featuredPost.featuredImage}
+                  alt={featuredPost.featuredImageAlt || featuredPost.title}
+                  className="h-full min-h-[300px] w-full object-cover"
+                />
+                {featuredPost.category && (
+                  <span className={`absolute left-f13 top-f13 ${LABEL} bg-tag px-f8 py-f5 text-ink`}>
+                    {featuredPost.category}
                   </span>
-                  <span>{featuredPost.readingTimeMinutes} min read</span>
-                  <span>{featuredPost.views} views</span>
-                </div>
-
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                  {featuredPost.title}
-                </h2>
-
-                {featuredPost.excerpt && (
-                  <p className="text-gray-600 mb-6 line-clamp-3">
-                    {featuredPost.excerpt}
-                  </p>
                 )}
-
-                <div className="flex items-center gap-3 mb-6">
-                  {featuredPost.authorImage ? (
-                    <img
-                      src={featuredPost.authorImage}
-                      alt={featuredPost.authorName}
-                      className="w-10 h-10 rounded-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-600 font-medium">
-                      {featuredPost.authorName.charAt(0)}
-                    </div>
-                  )}
-                  <div>
-                    <div className="font-medium text-gray-900">{featuredPost.authorName}</div>
-                    <div className="text-sm text-gray-500">{featuredPost.authorRole}</div>
-                  </div>
-                </div>
-
-                <Link
-                  href={`/blog/${featuredPost.slug}`}
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 transition-colors w-fit"
-                >
-                  Read Article
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </Link>
               </div>
+            )}
+            <div className="flex flex-col justify-center gap-f13 p-f34 md:col-span-2">
+              <div className={`flex flex-wrap items-center gap-f13 ${LABEL} text-muted`}>
+                {featuredPost.publishedAt && (
+                  <span>
+                    {new Date(featuredPost.publishedAt).toLocaleDateString('en-US', {
+                      month: 'short',
+                      day: 'numeric',
+                      year: 'numeric',
+                    })}
+                  </span>
+                )}
+                <span>{featuredPost.readingTimeMinutes} min read</span>
+                <span>{featuredPost.views} views</span>
+              </div>
+
+              <h2 className="m-0 text-[26px] font-bold leading-[32px] text-paper">{featuredPost.title}</h2>
+
+              {featuredPost.excerpt && (
+                <p className="m-0 line-clamp-3 text-[16px] leading-[24px] text-graphite">{featuredPost.excerpt}</p>
+              )}
+
+              <div className="flex items-center gap-f13">
+                {featuredPost.authorImage ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={featuredPost.authorImage} alt={featuredPost.authorName} className="h-[40px] w-[40px] rounded-full object-cover" />
+                ) : (
+                  <div className="flex h-[40px] w-[40px] items-center justify-center rounded-full bg-ripstop font-bold text-paper">
+                    {featuredPost.authorName.charAt(0)}
+                  </div>
+                )}
+                <div>
+                  <div className="text-[14px] font-bold text-paper">{featuredPost.authorName}</div>
+                  <div className={`${LABEL} text-muted`}>{featuredPost.authorRole}</div>
+                </div>
+              </div>
+
+              <Link
+                href={`/blog/${featuredPost.slug}`}
+                className={`${LABEL} mt-f8 inline-flex w-fit items-center gap-f8 bg-paper px-f21 py-f13 text-ink no-underline transition-colors hover:bg-seam`}
+              >
+                Read article &rarr;
+              </Link>
             </div>
           </div>
         </section>
       )}
 
-      {/* Article Grid */}
-      <section className="bg-white py-12">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-sm text-gray-500 mb-6">
+      {/* Article Grid — hidden when the only post is already the featured one */}
+      {!(filteredPosts.length === 0 && !activeCategory && !searchQuery) && (
+        <section className="mx-auto max-w-[1440px] px-f21 pb-f89 md:px-f55">
+          <div className={`mb-f21 ${LABEL} text-graphite`}>
             Showing {filteredPosts.length} article{filteredPosts.length !== 1 ? 's' : ''}
           </div>
 
           {filteredPosts.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="text-gray-500">No articles found matching your criteria.</p>
-            </div>
+            <div className="py-f55 text-center text-graphite">No articles found matching your criteria.</div>
           ) : (
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-f21 md:grid-cols-2 lg:grid-cols-3">
               {filteredPosts.map((post) => (
                 <PostCard key={post.id} post={post} />
               ))}
             </div>
           )}
-        </div>
-      </section>
+        </section>
+      )}
     </>
   );
 }
