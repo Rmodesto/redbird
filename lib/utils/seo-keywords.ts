@@ -133,28 +133,22 @@ export function getDescription(
  * Combines high-priority keywords with station-specific keywords
  */
 export function getMetadataKeywords(station: Station): string[] {
-  const highPriority = getHighPriorityKeywords()
-    .slice(0, 10)
-    .map(k => k.phrase);
-
-  const stationSpecific = [
+  // Keep the keyword set tight and relevant to THIS station and its lines.
+  // Google ignores the meta keywords tag, so there is nothing to gain from the
+  // old site-wide stuffing (generic questions, crime/ridership, duplicates) —
+  // and a stuffed, off-topic tag reads as low quality.
+  const keywords = [
     `${station.name} station`,
-    `${station.name} subway`,
+    `${station.name} subway station`,
+    `${station.name} ${station.borough}`,
     `${station.borough} subway`,
+    ...station.lines.map(line => `${station.name} ${line} train`),
     ...station.lines.map(line => `${line} train`),
-    ...station.lines.map(line => `${line} train stations`),
+    `${station.name} arrivals`,
+    `${station.name} subway sounds`,
   ];
 
-  // Add category keywords
-  const realTimeKeywords = getKeywordsByCategory('realTime').keywords.slice(0, 5);
-  const safetyKeywords = getKeywordsByCategory('safety').keywords.slice(0, 3);
-
-  return [
-    ...stationSpecific,
-    ...highPriority,
-    ...realTimeKeywords,
-    ...safetyKeywords,
-  ];
+  return Array.from(new Set(keywords));
 }
 
 /**
@@ -202,12 +196,14 @@ export function getSeasonalKeywords(season?: 'summer' | 'winter' | 'tourist'): s
  * Includes unique token for AdSense approval (avoid duplicate content)
  */
 export function buildMetaDescription(station: Station): string {
+  // Built entirely from real station fields, so every one of the 445 pages is
+  // naturally unique — no artificial token needed (the old one produced garbage
+  // like "Station #-ST"). No placeholders.
   const lines = station.lines.join(', ');
-  const accessibility = station.ada ? ' ADA accessible with elevators.' : '';
-  // Unique token derived from station slug for content uniqueness
-  const uniqueToken = `Station #${station.slug.slice(-3).toUpperCase()}`;
+  const lineWord = station.lines.length === 1 ? 'line' : 'lines';
+  const access = station.ada ? ' The station is ADA accessible.' : '';
 
-  return `Live arrivals at ${station.name} in ${station.borough}. Lines: ${lines}.${accessibility} Transfers, exits, platform info, and station sounds. ${uniqueToken}`;
+  return `${station.name} subway station in ${station.borough} serves the ${lines} ${lineWord}. Real-time arrivals, platform and transfer details, accessibility info, and station sound recordings.${access}`;
 }
 
 /**

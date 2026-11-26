@@ -223,10 +223,13 @@ export default function ContactPage() {
                   real-time arrival information, station details, interactive maps, and cultural
                   content celebrating New York's iconic transit network.
                 </p>
-                <p className="text-gray-600">
+                <p className="text-gray-600 mb-4">
                   We're passionate about helping New Yorkers and visitors navigate the city's
                   subway system with ease and style.
                 </p>
+                <a href="/about" className="text-blue-600 hover:underline font-medium">
+                  Learn more about us →
+                </a>
               </div>
 
               <div className="bg-white rounded-lg shadow-sm p-8">

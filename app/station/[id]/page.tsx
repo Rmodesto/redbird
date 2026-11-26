@@ -6,6 +6,7 @@ import SubwayLinesBadges from '@/components/subway/SubwayLinesBadges';
 import SiteHeader from '@/components/site/SiteHeader';
 import StationSoundSection from '@/components/station/StationSoundSection';
 import StationArrivalsPanel from '@/components/station/StationArrivalsPanel';
+import { getStationIntro } from '@/lib/station/station-intro';
 import {
   buildPageTitle,
   buildMetaDescription,
@@ -148,12 +149,18 @@ export default async function StationPage({ params }: Props) {
 
   const trunks = groupByTrunk(station.lines);
 
+  const intro = getStationIntro(station.slug);
+
   const accessRows: { k: string; v: string }[] = [
     { k: 'ADA accessible', v: station.ada ? 'Yes' : 'No' },
     { k: 'Elevators', v: station.amenities?.elevators ? 'Yes' : 'No' },
     { k: 'Restrooms', v: station.amenities?.restrooms ? 'Yes' : 'No' },
+    ...(station.amenities?.wifi ? [{ k: 'Wi-Fi', v: 'Yes' }] : []),
     { k: 'Borough', v: station.borough },
     { k: 'Platforms', v: String(station.platforms?.length ?? 0) },
+    ...(station.amenities?.yearBuilt
+      ? [{ k: 'Opened', v: String(station.amenities.yearBuilt) }]
+      : []),
   ];
 
   const schemaKeywords = getSchemaKeywords();
@@ -288,6 +295,14 @@ export default async function StationPage({ params }: Props) {
                 <h2 className="m-0 text-[34px] font-bold leading-[42px] tracking-[-.01em]">
                   About the station
                 </h2>
+                {intro?.map((para, i) => (
+                  <p
+                    key={i}
+                    className="m-0 text-[18px] leading-[29px] text-ink [text-wrap:pretty]"
+                  >
+                    {para}
+                  </p>
+                ))}
                 <p className="m-0 text-[18px] leading-[29px] text-ink [text-wrap:pretty]">
                   {station.name} is in {station.borough} and is served by{' '}
                   {serviceCount} {serviceCount === 1 ? 'service' : 'services'} across{' '}

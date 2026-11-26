@@ -108,17 +108,10 @@ export default function StationSoundSection({
     );
   }
 
+  // No recordings is a valid state — hide the section entirely rather than
+  // showing an empty "Recorded at this station" heading.
   if (videos.length === 0) {
-    return (
-      <section className="flex flex-col gap-[55px]">
-        <SectionHead count={0} />
-        <div className="border border-dashed border-seam p-[55px] text-center">
-          <p className="m-0 text-[18px] leading-[29px] text-muted">
-            No recordings from {stationName} yet.
-          </p>
-        </div>
-      </section>
-    );
+    return null;
   }
 
   const shorts = videos.filter((v) => durationSeconds(v.duration) > 0 && durationSeconds(v.duration) <= 60);

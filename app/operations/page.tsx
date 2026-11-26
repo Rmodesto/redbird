@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { generateSEOMetadata } from "@/lib/seo";
 import { generateBreadcrumbSchema, generateStructuredDataScript } from "@/lib/structured-data";
+import { STATION_COUNT } from "@/lib/constants/site";
 import SiteHeader from '@/components/site/SiteHeader';
 
 export const metadata: Metadata = generateSEOMetadata({
@@ -38,7 +39,7 @@ const operationsTopics: OperationsTopic[] = [
   {
     id: "dispatching",
     title: "Train Dispatching",
-    description: "How trains are controlled and coordinated across 472 stations.",
+    description: `How trains are controlled and coordinated across ${STATION_COUNT} stations.`,
     icon: "🎮",
     details: [
       "Rail Control Center monitors all train movements 24/7",

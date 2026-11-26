@@ -20,20 +20,27 @@ const geistMono = localFont({
   display: "swap",
 });
 
-export const metadata: Metadata = generateSEOMetadata({
-  title: "Subway Sounds NYC - Real-Time NYC Subway Map, Arrivals & Station Directory",
-  description: "Navigate NYC subway with real-time arrivals, interactive subway map, station sounds archive, and comprehensive station information. Your complete NYC transit guide.",
-  keywords: [
-    "NYC subway real-time",
-    "subway platform sounds",
-    "MTA train arrivals",
-    "New York metro guide",
-    "subway station directory",
-    "NYC transit map interactive",
-    "subway accessibility info",
-    "train service alerts NYC",
-  ],
-});
+// AdSense publisher id (ca-pub-XXXXXXXXXXXXXXXX). Unset → no ads, no verification tag.
+const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
+
+export const metadata: Metadata = {
+  ...generateSEOMetadata({
+    title: "Subway Sounds NYC - Real-Time NYC Subway Map, Arrivals & Station Directory",
+    description: "Navigate NYC subway with real-time arrivals, interactive subway map, station sounds archive, and comprehensive station information. Your complete NYC transit guide.",
+    keywords: [
+      "NYC subway real-time",
+      "subway platform sounds",
+      "MTA train arrivals",
+      "New York metro guide",
+      "subway station directory",
+      "NYC transit map interactive",
+      "subway accessibility info",
+      "train service alerts NYC",
+    ],
+  }),
+  // AdSense site-verification tag, only when a publisher id is configured.
+  ...(ADSENSE_CLIENT ? { other: { "google-adsense-account": ADSENSE_CLIENT } } : {}),
+};
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -84,10 +91,10 @@ export default function RootLayout({
           {children}
         </ClientLayout>
 
-        {/* Google AdSense */}
-        {process.env.NEXT_PUBLIC_ADSENSE_ENABLED === 'true' && process.env.NEXT_PUBLIC_ADSENSE_PUB_ID && (
+        {/* Google AdSense — loaded once, only when a publisher id is configured. */}
+        {ADSENSE_CLIENT && (
           <Script
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_PUB_ID}`}
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
             crossOrigin="anonymous"
             strategy="afterInteractive"
           />

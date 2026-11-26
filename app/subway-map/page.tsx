@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { generatePageMetadata } from "@/lib/seo";
 import { generateMapSchema, generateBreadcrumbSchema, generateStructuredDataScript } from "@/lib/structured-data";
+import { STATION_COUNT } from "@/lib/constants/site";
 import SiteHeader from '@/components/site/SiteHeader';
 import dynamic from 'next/dynamic';
 
@@ -23,7 +24,7 @@ const SubwayMap = dynamic(
 
 export const metadata: Metadata = generatePageMetadata(
   "NYC Subway Map (Interactive) - Real-Time Train Tracker | SubwaySounds",
-  "Free interactive NYC subway map with real-time train positions. Find any of 445+ stations, plan routes, and track arrivals. Updated live with MTA data.",
+  `Free interactive NYC subway map with real-time train positions. Find any of ${STATION_COUNT} stations, plan routes, and track arrivals. Updated live with MTA data.`,
   [
     "nyc subway map",
     "new york subway map",
@@ -73,7 +74,7 @@ export default function SubwayMapPage() {
             </h1>
             <p className="text-xl text-gray-300 mb-6">
               Explore New York City's subway system with our interactive real-time map.
-              Track 445+ stations across 27 lines, view live train positions, and plan your route.
+              Track {STATION_COUNT} stations across 27 lines, view live train positions, and plan your route.
               Click any station marker for arrivals, accessibility info, and authentic subway sounds.
             </p>
             <div className="flex gap-4 text-sm">
@@ -89,7 +90,7 @@ export default function SubwayMapPage() {
           <div className="max-w-7xl mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
               <div className="bg-white p-4 rounded-lg shadow-sm">
-                <div className="text-3xl font-bold text-black">472</div>
+                <div className="text-3xl font-bold text-black">{STATION_COUNT}</div>
                 <div className="text-sm text-gray-600">Stations</div>
               </div>
               <div className="bg-white p-4 rounded-lg shadow-sm">

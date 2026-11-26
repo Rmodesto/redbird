@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import SiteHeader from '@/components/site/SiteHeader';
+import { STATION_COUNT } from "@/lib/constants/site";
 
 interface LineInfo {
   id: string;
@@ -546,7 +547,7 @@ export default function LinesPage() {
           <h2 className="text-2xl font-bold mb-8">QUICK FACTS</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="bg-white rounded-lg p-6 text-center">
-              <div className="text-3xl font-bold text-black mb-2">472</div>
+              <div className="text-3xl font-bold text-black mb-2">{STATION_COUNT}</div>
               <div className="text-sm text-gray-600">Total Stations</div>
             </div>
             <div className="bg-white rounded-lg p-6 text-center">

@@ -88,7 +88,8 @@ export default function StationArrivalsPanel({ stationId }: StationArrivalsPanel
 
       {loading && (
         <div className="border-t border-seam p-[13px] text-[13px] leading-[21px] text-muted">
-          Loading arrivals…
+          Live train arrivals load here and refresh every 30 seconds from the MTA
+          realtime feed.
         </div>
       )}
 

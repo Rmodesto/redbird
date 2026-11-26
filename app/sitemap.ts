@@ -24,6 +24,7 @@ const STATIC_PAGES: { url: string; priority: number; changeFrequency: MetadataRo
   { url: '/subway-sounds', priority: 0.8, changeFrequency: 'weekly' },
   { url: '/blog', priority: 0.8, changeFrequency: 'daily' },
   { url: '/culture', priority: 0.7, changeFrequency: 'monthly' },
+  { url: '/about', priority: 0.5, changeFrequency: 'monthly' },
   { url: '/operations', priority: 0.7, changeFrequency: 'monthly' },
   { url: '/history', priority: 0.7, changeFrequency: 'monthly' },
   { url: '/contact', priority: 0.5, changeFrequency: 'monthly' },

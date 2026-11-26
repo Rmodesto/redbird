@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Card } from '@/components/ui';
 import { SubwayLineBadge } from '@/components/ui';
+import { STATION_COUNT } from '@/lib/constants/site';
 
 interface Station {
   name: string;
@@ -58,7 +59,7 @@ export function FeaturedStationsGrid({
               href={viewAllLink} 
               className="text-blue-600 hover:text-blue-800 font-semibold"
             >
-              View All 472 Stations →
+              View All {STATION_COUNT} Stations →
             </Link>
           </div>
         )}

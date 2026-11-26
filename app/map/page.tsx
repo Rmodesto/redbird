@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { generatePageMetadata } from "@/lib/seo";
 import { generateMapSchema, generateBreadcrumbSchema, generateStructuredDataScript } from "@/lib/structured-data";
+import { STATION_COUNT } from "@/lib/constants/site";
 import dynamicImport from 'next/dynamic';
 
 export const runtime = 'nodejs';
@@ -25,7 +26,7 @@ const SubwayMap = dynamicImport(
 
 export const metadata: Metadata = generatePageMetadata(
   "Real-Time 3D NYC Subway Map - Live Train Tracker | Subway Sounds",
-  "Experience NYC's subway system in real-time 3D! Track live trains, explore all 472 stations, and navigate with our interactive 3D subway map featuring authentic MTA data and stunning visuals.",
+  `Experience NYC's subway system in real-time 3D! Track live trains, explore all ${STATION_COUNT} stations, and navigate with our interactive 3D subway map featuring authentic MTA data and stunning visuals.`,
   [
     "NYC subway map 3D",
     "real-time train tracker",
