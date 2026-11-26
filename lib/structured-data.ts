@@ -270,6 +270,44 @@ export function generateBreadcrumbSchema(items: Array<{ name: string; url: strin
   };
 }
 
+// Organization schema for the business behind the site (About/contact pages).
+export function generateOrganizationSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Subway Sounds Media LLC',
+    alternateName: SITE_NAME,
+    url: SITE_URL,
+    logo: `${SITE_URL}/icon-512.png`,
+    email: 'info@subwaysounds.net',
+    foundingLocation: {
+      '@type': 'Place',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'New York',
+        addressRegion: 'NY',
+        addressCountry: 'US',
+      },
+    },
+    sameAs: ['https://www.youtube.com/@SubwaySounds'],
+  };
+}
+
+// Person schema for the site's author/operator.
+export function generatePersonSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Rafael Modesto',
+    url: `${SITE_URL}/about`,
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Subway Sounds Media LLC',
+    },
+    sameAs: ['https://www.youtube.com/@SubwaySounds'],
+  };
+}
+
 // Helper function for FAQ schema
 export function generateFAQSchema(faqs: Array<{ question: string; answer: string }>) {
   return {
