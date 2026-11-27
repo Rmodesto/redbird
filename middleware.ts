@@ -8,6 +8,7 @@ const isPublicRoute = createRouteMatcher([
   '/login(.*)',
   '/sign-in(.*)',
   '/sign-up(.*)',
+  '/sso-callback(.*)',  // Clerk OAuth return handler for the custom login flow
   // Public API routes, listed explicitly. Admin-only APIs (upload, videos/sync,
   // videos/tag, youtube-analytics, unlisted-videos, auth/sync) are NOT listed,
   // so Clerk requires a session at the middleware layer before the route's own

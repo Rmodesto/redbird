@@ -1,14 +1,18 @@
+import { Suspense } from 'react';
 import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
-import { SignIn } from '@clerk/nextjs';
+import LoginForm from '@/components/auth/LoginForm';
+
+export const dynamic = 'force-dynamic';
 
 export default async function LoginPage() {
   const { userId } = await auth();
   if (userId) redirect('/admin');
 
+  // LoginForm reads redirect_url via useSearchParams → needs a Suspense boundary.
   return (
-    <div className="min-h-screen bg-gray-950 flex items-center justify-center">
-      <SignIn />
-    </div>
+    <Suspense fallback={<div className="min-h-screen bg-jet" />}>
+      <LoginForm />
+    </Suspense>
   );
 }
