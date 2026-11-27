@@ -31,30 +31,31 @@ export async function PUT() {
   const lastName = clerkUser.lastName;
   const imageUrl = clerkUser.imageUrl;
 
-  const user = await prisma.user.upsert({
-    where: { clerkUserId: userId },
-    create: {
-      clerkUserId: userId,
-      email,
-      firstName,
-      lastName,
-      imageUrl,
-      role,
-    },
-    update: {
-      email,
-      firstName,
-      lastName,
-      imageUrl,
-      role,
-    },
+  // Match on clerkUserId OR email. If the Clerk instance is ever rebuilt the
+  // user gets a new clerkUserId while the email stays the same; keying the
+  // upsert on clerkUserId alone would then try to INSERT a duplicate email and
+  // fail the unique constraint (P2002). Find the existing row by either unique
+  // field and relink it, otherwise create.
+  const existing = await prisma.user.findFirst({
+    where: { OR: [{ clerkUserId: userId }, { email }] },
+    select: { id: true },
   });
 
-  // Set Clerk public metadata for role
+  const data = { clerkUserId: userId, email, firstName, lastName, imageUrl, role };
+  const user = existing
+    ? await prisma.user.update({ where: { id: existing.id }, data })
+    : await prisma.user.create({ data });
+
+  // Set Clerk public metadata for role. Best-effort — a metadata failure must
+  // not 500 the sync after the user row is already persisted.
   if (role === 'ADMIN') {
-    await clerk.users.updateUserMetadata(userId, {
-      publicMetadata: { role: 'admin' },
-    });
+    try {
+      await clerk.users.updateUserMetadata(userId, {
+        publicMetadata: { role: 'admin' },
+      });
+    } catch (e) {
+      console.error('[auth/sync] updateUserMetadata failed:', e);
+    }
   }
 
   return NextResponse.json({ user });
