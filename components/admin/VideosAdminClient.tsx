@@ -112,7 +112,11 @@ export default function VideosAdminClient({ stations, defaultChannelId }: Props)
   const loadStats = useCallback(async () => {
     try {
       const res = await fetch('/api/videos/stats');
-      if (res.ok) setStats((await res.json()).data ?? null);
+      // apiSuccess() returns the payload directly; tolerate a {data} envelope too.
+      if (res.ok) {
+        const j = await res.json();
+        setStats(j?.data ?? j ?? null);
+      }
     } catch {
       /* non-fatal */
     }
@@ -127,7 +131,8 @@ export default function VideosAdminClient({ stations, defaultChannelId }: Props)
       if (search.trim()) qs.set('search', search.trim());
       const res = await fetch(`/api/videos?${qs.toString()}`);
       if (!res.ok) throw new Error(`List failed (${res.status})`);
-      const data = (await res.json()).data ?? {};
+      const json = await res.json();
+      const data = json?.data ?? json ?? {};
       const list: AdminVideo[] = data.videos ?? [];
       setVideos(list);
       setTotalPages(data.totalPages ?? 1);
